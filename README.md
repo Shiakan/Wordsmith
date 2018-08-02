@@ -1,2 +1,2 @@
 # Wordsmith
-un projet super!
+un projet super génial!
