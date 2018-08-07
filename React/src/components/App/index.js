@@ -18,7 +18,10 @@ const App = () => (
   <div id="app">
     <h1 id="app-title">Modèle React</h1>
     <p id="app-content">Hello Invaders</p>
+<<<<<<< HEAD
     <p>testgitflow2</p>
+=======
+>>>>>>> parent of 5f01670... test git flow
   </div>
 );
 
