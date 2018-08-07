@@ -18,6 +18,7 @@ const App = () => (
   <div id="app">
     <h1 id="app-title">Modèle React</h1>
     <p id="app-content">Hello Invaders</p>
+    <p>testgitflow</p>
   </div>
 );
 
