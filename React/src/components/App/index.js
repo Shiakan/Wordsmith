@@ -10,18 +10,25 @@ import React from 'react';
 
 // Styles et assets
 import './app.sass';
+import GameScreen from 'src/components/GameScreen';
+import Chat from 'src/components/Chat';
+import Panel from 'src/components/Panel';
+import Logo from 'src/components/Logo';
+import ActionBar from 'src/components/ActionBar';
+import Footer from 'src/components/Footer';
+
 
 /**
  * Code
  */
 const App = () => (
   <div id="app">
-    <h1 id="app-title">Modèle React</h1>
-    <p id="app-content">Hello Invaders</p>
-<<<<<<< HEAD
-    <p>testgitflow2</p>
-=======
->>>>>>> parent of 5f01670... test git flow
+    <GameScreen />
+    <Panel />
+    <Chat />
+    <Logo />
+    <ActionBar />
+    <Footer />
   </div>
 );
 

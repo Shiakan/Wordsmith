@@ -7,18 +7,21 @@
  * Styles
  */
 #app
-  padding: 3em
-  width: 500px
-  text-align: center
-  margin: 3em auto
-  border: 1px solid $border-color
+  background-color: white
+  width: 100vw
+  height: 100vh
+  border: 1px solid black
+  display: grid
+  grid-template-areas: "g g g p" "c c l a" "f f f f"
+  grid-template-columns: 60% 1fr 20%
+  grid-template-rows: 65% auto 5%
+  grid-gap: .5em
 
   &-title
     font-weight: 700
     font-size: 2em
 
   &-content
-    margin: .6em 0
     color: #55b1f3
     font-style: italic
     font-size: 1.2em
