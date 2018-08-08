@@ -18,11 +18,20 @@ class GameScreen extends React.Component {
   state = {
     board: false,
     map: true,
-    grid: false,
+    grid: true,
   }
 
   componentDidMount() {
     console.log('gameScreen loaded');
+  }
+
+  handleChange = () => {
+    const { grid } = this.state;
+    console.log('checked');
+
+    this.setState({
+      grid: !grid,
+    });
   }
 
   handleClick = () => {
@@ -54,8 +63,9 @@ class GameScreen extends React.Component {
                 type="checkbox"
                 name="check"
                 className="screen-switch-checkbox"
+                defaultChecked
+                onChange={this.handleChange}
               />
-              <p>test</p>
               <p>Grid</p>
             </form>
             ) }
@@ -70,7 +80,11 @@ class GameScreen extends React.Component {
             </button>
             ) }
         </div>
-        {map && <div className="screen-map"></div> }
+        {map && (
+        <div className="screen-map">
+          {grid && <div className="screen-map-grid" />}
+        </div>
+        ) }
         {board && <div className="screen-board">THIS IS THE BOARD</div> }
       </div>
     );
