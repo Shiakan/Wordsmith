@@ -2,15 +2,21 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
 * @ORM\Table(name="app_user")
 * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+*@UniqueEntity(
+     * fields={"email", "username"},
+     * message={"Cet email est déjà pris", "Ce nom de personnage est déjà pris"})
 */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -26,11 +32,12 @@ class User
 
     /**
      * @ORM\Column(type="string", length=128)
+     * @Assert\Email()
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=16)
+     * @ORM\Column(type="string", length=256)
      */
     private $password;
 
@@ -58,19 +65,7 @@ class User
      * @ORM\ManyToOne(targetEntity="App\Entity\Role", inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $roles;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Charactersheet", inversedBy="user", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $charactersheet;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\CharacterProfile", inversedBy="user", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $characterprofile;
+    private $role;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="author", orphanRemoval=true)
@@ -102,6 +97,16 @@ class User
      */
     private $myrooms;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Charactersheet", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $charactersheet;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\CharacterProfile", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $characterProfile;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -110,6 +115,41 @@ class User
         $this->threads = new ArrayCollection();
         $this->rooms = new ArrayCollection();
         $this->myrooms = new ArrayCollection();
+        $this->isActive = 1;
+        $this->dateInserted = new \DateTime();
+        $this->dateUpdated = new \DateTime();
+    }
+
+    public function getSalt()
+    {
+        // you *may* need a real salt depending on your encoder
+        // see section on salt below
+        return null;
+    }
+    public function eraseCredentials()
+    {
+    }
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+        ) = unserialize($serialized, array('allowed_classes' => false));
     }
 
     public function getId()
@@ -141,10 +181,10 @@ class User
         return $this;
     }
 
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
+    public function getPassword()
+   {
+       return $this->password;
+   }
 
     public function setPassword(string $password): self
     {
@@ -201,38 +241,19 @@ class User
         return $this;
     }
 
-    public function getRoles(): ?Role
+    public function getRoles()
+   {
+       return array($this->getRole()->getCode());
+   }
+
+    public function getRole()
     {
-        return $this->roles;
+        return $this->role;
     }
 
-    public function setRoles(?Role $roles): self
+    public function setRole(?Role $role): self
     {
-        $this->roles = $roles;
-
-        return $this;
-    }
-
-    public function getCharactersheet(): ?Charactersheet
-    {
-        return $this->charactersheet;
-    }
-
-    public function setCharactersheet(Charactersheet $charactersheet): self
-    {
-        $this->charactersheet = $charactersheet;
-
-        return $this;
-    }
-
-    public function getCharacterprofile(): ?CharacterProfile
-    {
-        return $this->characterprofile;
-    }
-
-    public function setCharacterprofile(CharacterProfile $characterprofile): self
-    {
-        $this->characterprofile = $characterprofile;
+        $this->role = $role;
 
         return $this;
     }
@@ -420,4 +441,44 @@ class User
         return $this;
     }
 
+<<<<<<< HEAD
+=======
+    public function getCharactersheet(): ?Charactersheet
+    {
+        return $this->charactersheet;
+    }
+
+    public function setCharactersheet(Charactersheet $charactersheet): self
+    {
+        $this->charactersheet = $charactersheet;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $charactersheet->getUser()) {
+            $charactersheet->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function getCharacterProfile(): ?CharacterProfile
+    {
+        return $this->characterProfile;
+    }
+
+    public function setCharacterProfile(CharacterProfile $characterProfile): self
+    {
+        $this->characterProfile = $characterProfile;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $characterProfile->getUser()) {
+            $characterProfile->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function __toString(){
+        return $this->username;
+        }
+>>>>>>> e7e5bf25650b6aa5aebfb764b35d37ad1239512e
 }
