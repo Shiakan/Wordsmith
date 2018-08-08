@@ -2,14 +2,19 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
 * @ORM\Table(name="app_user")
 * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+*@UniqueEntity(
+     * fields={"email", "username"},
+     * message={"Cet email est déjà pris", "Ce nom de personnage est déjà pris"})
 */
 class User implements UserInterface
 {
@@ -27,6 +32,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=128)
+     * @Assert\Email()
      */
     private $email;
 
