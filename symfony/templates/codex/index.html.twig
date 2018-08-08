@@ -4,9 +4,14 @@
                     <li>
                         <a href="{{path('homepage')}}">Revenir à l'acceuil</a>
                     </li>
-                    <li>
-                        <a href="{{path('search')}}">Liste des articles</a>
-                    </li>
                 </ul>
+                     {% for article in articles %}
+                    <div>
+                        <h3>{{article.title}}</h3>
+                        <p>{{article.content}}</p>
+                        <span>Ecrit le {{article.dateInserted|date("d/m/Y")}} à {{article.dateInserted| date("H:i")}}</span>
+                        <a href="{{ path('show',{'id':article.id}) }}">Acceder à la vue</a>
+                    </div>
+                    {% endfor %}
         {% endblock %}
 

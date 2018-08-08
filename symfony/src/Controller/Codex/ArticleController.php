@@ -17,17 +17,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class ArticleController extends Controller
 {
     /**
-     * @Route("/codex/find", name="find")
-     */
-    public function find()
-    {
-        $repository= $this->getDoctrine()->getRepository(Article::class);
-        $articles = $repository->findBy(array(),array("dateInserted"=>"desc"));
-        return $this->render('article/index.html.twig', [
-            'articles' => $articles,
-        ]);
-    }
-    /**
      * @Route("/codex/show/{id}", name="show")
      */
     public function show(Article $article, Request $request, ObjectManager $manager)
