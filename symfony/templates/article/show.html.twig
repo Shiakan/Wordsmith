@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %} {% block body %}
+    <div>
+        <h3>{{article.title}}</h3>
+        <p>{{article.content}}</p>
+        <span>Ecrit le {{article.dateInserted|date("d/m/Y")}} à {{article.dateInserted| date("H:i")}}</span>
+    </div>
+    <div>
+        <h2>Les commentaires:</h2>
+        {% for comment in comments %}
+            <div>
+                <p>Le commentaire</p>
+                <span>Date et heure</span>
+                <small>le user</small>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
