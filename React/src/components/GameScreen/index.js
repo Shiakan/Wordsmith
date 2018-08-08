@@ -18,20 +18,55 @@ class GameScreen extends React.Component {
   state = {
     board: false,
     map: true,
+    grid: false,
   }
 
   componentDidMount() {
     console.log('gameScreen loaded');
   }
 
-  render() {
+  handleClick = () => {
     const { board, map } = this.state;
+    console.log(this.state);
+
+    this.setState({
+      board: !board,
+      map: !map,
+    });
+  }
+
+  render() {
+    const { board, map, grid } = this.state;
     return (
       <div className="screen">
         <div className="screen-switch">
-          {map && <button type="button" className="screen-switch-button">Switch to Board</button> }
-          {board && <button type="button" className="screen-switch-button">Switch to Map</button> }
+          {map
+            && (
+            <form className="screen-switch-map">
+              <button
+                type="button"
+                className="screen-switch-button"
+                onClick={this.handleClick}
+              >
+              Switch to Board
+              </button>
+              <input type="checkbox" name="check" className="screen-switch-checkbox" />
+              <p>Grid</p>
+            </form>
+            ) }
+          {board
+            && (
+            <button
+              type="button"
+              className="screen-switch-button"
+              onClick={this.handleClick}
+            >
+            Switch to Map
+            </button>
+            ) }
         </div>
+        {map && <div className="screen-map"></div> }
+        {board && <div className="screen-board">THIS IS THE BOARD</div> }
       </div>
     );
   }
