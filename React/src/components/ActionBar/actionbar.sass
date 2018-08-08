@@ -7,9 +7,47 @@
  * Styles
  */
 .actionBar
-    // height: 60%
-    width: 100%
-    border: 1px solid black
-    padding: 3em
-    text-align: center
-    grid-area: a
+  // height: 60%
+  width: 100%
+  // border: 1px solid black
+  text-align: center
+  grid-area: a
+  display: grid
+  grid-template-areas: "mj mj mj mj mj" "table table table table table " "p1 p2 p3 p4 ."
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr
+  grid-template-rows: 25% auto 25%
+  grid-gap: .5em
+
+  &-mj
+    grid-area: mj
+    background-color: pink
+    grid-column: 3
+  &-table
+    margin: 0 auto
+    grid-area: table
+    background-color: brown
+    width: 80%
+    &-dice
+      grid-area: dice
+    &-sheet
+      grid-area: sheet
+    &-help
+      grid-area: help
+  &-player1
+    padding: auto
+    background-color: red
+    border-radius: 50%
+    grid-area: p1
+    transform: translateX(50%)
+  &-player2
+    grid-area: p2
+    transform: translateX(50%)
+    background-color: green
+  &-player3
+    grid-area: p3
+    transform: translateX(50%)
+    background-color: blue
+  &-player4
+    grid-area: p4
+    transform: translateX(50%)
+    background-color: yellow
