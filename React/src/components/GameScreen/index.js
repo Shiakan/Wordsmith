@@ -50,7 +50,12 @@ class GameScreen extends React.Component {
               >
               Switch to Board
               </button>
-              <input type="checkbox" name="check" className="screen-switch-checkbox" />
+              <input
+                type="checkbox"
+                name="check"
+                className="screen-switch-checkbox"
+              />
+              <p>test</p>
               <p>Grid</p>
             </form>
             ) }
