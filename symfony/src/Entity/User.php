@@ -441,8 +441,10 @@ class User implements UserInterface
         return $this;
     }
 
-<<<<<<< HEAD
-=======
+    public function __toString(){
+        return $this->username;
+        }
+
     public function getCharactersheet(): ?Charactersheet
     {
         return $this->charactersheet;
@@ -476,9 +478,4 @@ class User implements UserInterface
 
         return $this;
     }
-
-    public function __toString(){
-        return $this->username;
-        }
->>>>>>> e7e5bf25650b6aa5aebfb764b35d37ad1239512e
 }

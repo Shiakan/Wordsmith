@@ -77,6 +77,7 @@ class CharacterProfile
      */
     private $user;
 
+
     public function getId()
     {
         return $this->id;
@@ -225,4 +226,5 @@ class CharacterProfile
 
         return $this;
     }
+
 }
