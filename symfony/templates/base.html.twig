@@ -16,6 +16,20 @@
             <li>
                 <a href="{{path('about')}}">CGU</a>
             </li>
+            <li>
+                <a href="{{path('security_registration')}}">Inscription</a>
+            </li>
+            <li>
+                <a href="{{path('security_login')}}">Connexion</a>
+            </li>
+            <li>
+                <a href="{{path('security_logout')}}">Déconnexion</a>
+            </li>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <li>
+                <a href="{{path('user_profile', {'id': app.user.id })}}">Mon profil</a>
+            </li>
+            {% endif %}
         </ul>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}

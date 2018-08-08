@@ -27,7 +27,7 @@ class ArticleController extends Controller
         return $this->render('article/show.html.twig', [
             'article'=> $article,
             'comments'=>$comments
-        ]);
+        ]); 
     }
     
 }
