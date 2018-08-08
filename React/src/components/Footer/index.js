@@ -16,7 +16,7 @@ import './footer.sass';
  */
 const Footer = () => (
   <div className="footer">
-    footer
+    <p className="footer-text">Wordsmith - 2018</p>
   </div>
 );
 
