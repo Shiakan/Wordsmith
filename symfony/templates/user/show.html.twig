@@ -4,6 +4,8 @@
 
 {% block body %}
 {{ user.username }}
-{{user.email}}
+{{ user.email}}
 {{ user.birthdate|date("d-m-Y")}}
+
+ <a href="{{path('user_profile_edit', {'id': user.id }) }}">Modifier le profil</a>
 {% endblock %}
