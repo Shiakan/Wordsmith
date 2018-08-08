@@ -15,9 +15,7 @@ import './logo.sass';
  * Code
  */
 const Logo = () => (
-  <div className="logo">
-    <p>Logo</p>
-  </div>
+  <div className="logo" />
 );
 
 /**
