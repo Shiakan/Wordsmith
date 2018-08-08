@@ -6,6 +6,18 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+        <ul>
+            <li>
+                <a href="{{path('homepage')}}">Home</a>
+            </li>
+            <li>
+                <a href="{{path('CGU')}}">About</a>
+            </li>
+            <li>
+                <a href="{{path('about')}}">CGU</a>
+            </li>
+
+        </ul>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
