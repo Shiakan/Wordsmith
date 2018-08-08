@@ -61,6 +61,21 @@ class CharacterProfile
      */
     private $link2;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="characterprofile", cascade={"persist", "remove"})
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Group", inversedBy="characters")
+     */
+    private $groupForum;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Rank", inversedBy="characters")
+     */
+    private $rank;
+
     public function getId()
     {
         return $this->id;
@@ -170,6 +185,47 @@ class CharacterProfile
     public function setLink2(?string $link2): self
     {
         $this->link2 = $link2;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $user->getCharacterprofile()) {
+            $user->setCharacterprofile($this);
+        }
+
+        return $this;
+    }
+
+    public function getGroupForum(): ?Group
+    {
+        return $this->groupForum;
+    }
+
+    public function setGroupForum(?Group $groupForum): self
+    {
+        $this->groupForum = $groupForum;
+
+        return $this;
+    }
+
+    public function getRank(): ?Rank
+    {
+        return $this->rank;
+    }
+
+    public function setRank(?Rank $rank): self
+    {
+        $this->rank = $rank;
 
         return $this;
     }

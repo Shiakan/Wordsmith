@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -25,6 +27,22 @@ class Room
      * @ORM\Column(type="string", length=64)
      */
     private $code;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="rooms")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $dungeonmaster;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="myrooms")
+     */
+    private $participants;
+
+    public function __construct()
+    {
+        $this->participants = new ArrayCollection();
+    }
 
     public function getId()
     {
@@ -51,6 +69,44 @@ class Room
     public function setCode(string $code): self
     {
         $this->code = $code;
+
+        return $this;
+    }
+
+    public function getDungeonmaster(): ?User
+    {
+        return $this->dungeonmaster;
+    }
+
+    public function setDungeonmaster(?User $dungeonmaster): self
+    {
+        $this->dungeonmaster = $dungeonmaster;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getParticipants(): Collection
+    {
+        return $this->participants;
+    }
+
+    public function addParticipant(User $participant): self
+    {
+        if (!$this->participants->contains($participant)) {
+            $this->participants[] = $participant;
+        }
+
+        return $this;
+    }
+
+    public function removeParticipant(User $participant): self
+    {
+        if ($this->participants->contains($participant)) {
+            $this->participants->removeElement($participant);
+        }
 
         return $this;
     }
