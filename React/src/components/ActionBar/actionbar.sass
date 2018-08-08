@@ -8,13 +8,13 @@
  */
 .actionBar
   // height: 60%
-  width: 100%
+  // width: 100%
   // border: 1px solid black
   text-align: center
   grid-area: a
   display: grid
   grid-template-areas: "mj mj mj mj mj" "table table table table table " "p1 p2 p3 p4 ."
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr
+  grid-template-columns: 20% 20% 20% 20% 20%
   grid-template-rows: 25% auto 25%
   grid-gap: .5em
 
@@ -23,16 +23,28 @@
     background-color: pink
     grid-column: 3
   &-table
-    margin: 0 auto
+    // margin: 0 auto
     grid-area: table
     background-color: brown
-    width: 80%
+    // width: 80%
+    // display: grid
+    // grid-template-areas: ". . . . ."". dice sheet help ."". . . . ."
+    // grid-template-columns: 20% 20% 20% 20% 20%
+    // grid-template-rows: 25% auto 25%
+    grid-gap: .5em
+    border-radius: .7em
     &-dice
       grid-area: dice
+      grid-column: 2
+      grid-row: 2
     &-sheet
       grid-area: sheet
+      grid-column: 3
+      grid-row: 2
     &-help
       grid-area: help
+      grid-column: 4
+      grid-row: 2
   &-player1
     padding: auto
     background-color: red
