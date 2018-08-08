@@ -53,19 +53,24 @@ class GameScreen extends React.Component {
             <form className="screen-switch-map">
               <button
                 type="button"
-                className="screen-switch-button"
+                className="screen-switch-map-button"
                 onClick={this.handleClick}
               >
               Switch to Board
               </button>
               <input
                 type="checkbox"
-                name="check"
-                className="screen-switch-checkbox"
+                id="check"
+                className="screen-switch-map-checkbox"
                 onChange={this.handleChange}
                 checked={grid}
               />
-              <p>Grid</p>
+              <label
+                className="screen-switch-map-label"
+                htmlFor="check"
+              >
+              Grid
+              </label>
             </form>
             ) }
           {board
