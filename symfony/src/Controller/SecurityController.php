@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Role;
 use App\Entity\User;
 
+use App\Form\LoginType;
 use App\Entity\Charactersheet;
 use App\Form\RegistrationType;
 use App\Entity\CharacterProfile;
@@ -51,14 +52,19 @@ class SecurityController extends Controller
      * @Route("/login", name="security_login")
      */
     public function login(Request $request, AuthenticationUtils $authenticationUtils)
-    {
+    {   
+
+        $form = $this->createForm(LoginType::class);
+        $form->handleRequest($request);
         // On récupère les erreurs s'il y en a
         $error = $authenticationUtils->getLastAuthenticationError();
         // On récupère le dernier username entré par l'utilisateur
         $lastUsername = $authenticationUtils->getLastUsername();
+        
         return $this->render('security/login.html.twig', array(
             'last_username' => $lastUsername,
             'error'         => $error,
+            'form' => $form->createView()
         ));
     }
     /**
