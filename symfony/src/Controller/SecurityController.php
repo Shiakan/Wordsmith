@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Role;
 use App\Entity\User;
 
+use App\Entity\Charactersheet;
 use App\Form\RegistrationType;
+use App\Entity\CharacterProfile;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,14 +24,21 @@ class SecurityController extends Controller
     {
         $user = new User();
 
+        // On récupère le rôle 'utilisateur'
+        $repository = $this->getDoctrine()->getRepository(Role::class);
+        $role = $repository->findAll();
+        $roleUser = $role[2];
+
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
+
         if($form->isSubmitted() && $form->isValid()){
             $hash = $encoder->encodePassword($user, $user->getPassword());
-
+            $user->setRoles($roleUser);
             $user->setPassword($hash);
             $manager->persist($user);
             $manager->flush();
+
             // On redirige vers le login
             // return $this->redirectToRoute('security_login');
         }
