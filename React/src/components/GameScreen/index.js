@@ -14,11 +14,28 @@ import './gamescreen.sass';
 /**
  * Code
  */
-const GameScreen = () => (
-  <div className="gameScreen">
-    <p>GameScreen</p>
-  </div>
-);
+class GameScreen extends React.Component {
+  state = {
+    board: false,
+    map: true,
+  }
+
+  componentDidMount() {
+    console.log('gameScreen loaded');
+  }
+
+  render() {
+    const { board, map } = this.state;
+    return (
+      <div className="screen">
+        <div className="screen-switch">
+          {map && <button type="button" className="screen-switch-button">Switch to Board</button> }
+          {board && <button type="button" className="screen-switch-button">Switch to Map</button> }
+        </div>
+      </div>
+    );
+  }
+}
 
 /**
  * Export
