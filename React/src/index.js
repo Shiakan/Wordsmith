@@ -23,4 +23,3 @@ const rootComponent = (
 );
 
 render(rootComponent, document.getElementById('root'));
-LOL 

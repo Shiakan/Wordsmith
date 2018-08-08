@@ -55,6 +55,7 @@ class GameScreen extends React.Component {
                 name="check"
                 className="screen-switch-checkbox"
               />
+              <p>test</p>
               <p>Grid</p>
             </form>
             ) }
