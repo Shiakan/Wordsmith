@@ -61,18 +61,6 @@ class User
     private $roles;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Charactersheet", inversedBy="user", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $charactersheet;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\CharacterProfile", inversedBy="user", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $characterprofile;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="author", orphanRemoval=true)
      */
     private $articles;
@@ -102,6 +90,16 @@ class User
      */
     private $myrooms;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Charactersheet", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $charactersheet;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\CharacterProfile", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $characterProfile;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -110,6 +108,7 @@ class User
         $this->threads = new ArrayCollection();
         $this->rooms = new ArrayCollection();
         $this->myrooms = new ArrayCollection();
+        $this->isActive = 1;
     }
 
     public function getId()
@@ -209,30 +208,6 @@ class User
     public function setRoles(?Role $roles): self
     {
         $this->roles = $roles;
-
-        return $this;
-    }
-
-    public function getCharactersheet(): ?Charactersheet
-    {
-        return $this->charactersheet;
-    }
-
-    public function setCharactersheet(Charactersheet $charactersheet): self
-    {
-        $this->charactersheet = $charactersheet;
-
-        return $this;
-    }
-
-    public function getCharacterprofile(): ?CharacterProfile
-    {
-        return $this->characterprofile;
-    }
-
-    public function setCharacterprofile(CharacterProfile $characterprofile): self
-    {
-        $this->characterprofile = $characterprofile;
 
         return $this;
     }
@@ -415,6 +390,40 @@ class User
         if ($this->myrooms->contains($myroom)) {
             $this->myrooms->removeElement($myroom);
             $myroom->removeParticipant($this);
+        }
+
+        return $this;
+    }
+
+    public function getCharactersheet(): ?Charactersheet
+    {
+        return $this->charactersheet;
+    }
+
+    public function setCharactersheet(Charactersheet $charactersheet): self
+    {
+        $this->charactersheet = $charactersheet;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $charactersheet->getUser()) {
+            $charactersheet->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function getCharacterProfile(): ?CharacterProfile
+    {
+        return $this->characterProfile;
+    }
+
+    public function setCharacterProfile(CharacterProfile $characterProfile): self
+    {
+        $this->characterProfile = $characterProfile;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $characterProfile->getUser()) {
+            $characterProfile->setUser($this);
         }
 
         return $this;

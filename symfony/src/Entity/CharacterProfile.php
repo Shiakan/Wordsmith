@@ -62,11 +62,6 @@ class CharacterProfile
     private $link2;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="characterprofile", cascade={"persist", "remove"})
-     */
-    private $user;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Group", inversedBy="characters")
      */
     private $groupForum;
@@ -75,6 +70,12 @@ class CharacterProfile
      * @ORM\ManyToOne(targetEntity="App\Entity\Rank", inversedBy="characters")
      */
     private $rank;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="characterProfile", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     public function getId()
     {
@@ -189,23 +190,6 @@ class CharacterProfile
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(User $user): self
-    {
-        $this->user = $user;
-
-        // set the owning side of the relation if necessary
-        if ($this !== $user->getCharacterprofile()) {
-            $user->setCharacterprofile($this);
-        }
-
-        return $this;
-    }
-
     public function getGroupForum(): ?Group
     {
         return $this->groupForum;
@@ -226,6 +210,18 @@ class CharacterProfile
     public function setRank(?Rank $rank): self
     {
         $this->rank = $rank;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

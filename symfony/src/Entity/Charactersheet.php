@@ -22,7 +22,8 @@ class Charactersheet
     private $content;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="charactersheet", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="charactersheet", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
@@ -52,11 +53,7 @@ class Charactersheet
     {
         $this->user = $user;
 
-        // set the owning side of the relation if necessary
-        if ($this !== $user->getCharactersheet()) {
-            $user->setCharactersheet($this);
-        }
-
         return $this;
     }
+
 }
