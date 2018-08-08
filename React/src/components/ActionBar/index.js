@@ -16,7 +16,16 @@ import './actionbar.sass';
  */
 const ActionBar = () => (
   <div className="actionBar">
-    <p>actionbar</p>
+    <div className="actionBar-mj">MJ</div>
+    <div className="actionBar-table">
+      <button type="button" className="actionBar-table-dice">DICE</button>
+      <button type="button" className="actionBar-table-sheet">FICHE</button>
+      <button type="button" className="actionBar-table-help">HELP</button>
+    </div>
+    <div className="actionBar-player1">P1</div>
+    <div className="actionBar-player2">P2</div>
+    <div className="actionBar-player3">P3</div>
+    <div className="actionBar-player4">P4</div>
   </div>
 );
 
