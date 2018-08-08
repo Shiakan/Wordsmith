@@ -27,7 +27,6 @@ class GameScreen extends React.Component {
 
   handleChange = () => {
     const { grid } = this.state;
-    console.log('checked');
 
     this.setState({
       grid: !grid,
@@ -63,8 +62,8 @@ class GameScreen extends React.Component {
                 type="checkbox"
                 name="check"
                 className="screen-switch-checkbox"
-                defaultChecked
                 onChange={this.handleChange}
+                checked={grid}
               />
               <p>Grid</p>
             </form>
