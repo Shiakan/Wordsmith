@@ -18,7 +18,7 @@ const ActionBar = () => (
   <div className="actionBar">
     <div className="actionBar-mj">MJ</div>
     <div className="actionBar-table">
-      <button type="button" className="actionBar-table-dice">DICE</button>
+      <button type="button" className="actionBar-table-dice">DICES</button>
       <button type="button" className="actionBar-table-sheet">FICHE</button>
       <button type="button" className="actionBar-table-help">HELP</button>
     </div>
