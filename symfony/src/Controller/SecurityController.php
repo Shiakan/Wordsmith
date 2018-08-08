@@ -35,13 +35,13 @@ class SecurityController extends Controller
 
         if($form->isSubmitted() && $form->isValid()){
             $hash = $encoder->encodePassword($user, $user->getPassword());
-            $user->setRoles($roleUser);
+            $user->setRole($roleUser);
             $user->setPassword($hash);
             $manager->persist($user);
             $manager->flush();
 
             // On redirige vers le login
-            // return $this->redirectToRoute('security_login');
+            return $this->redirectToRoute('security_login');
         }
         return $this->render('security/inscription.html.twig', [
             'form' => $form->createView()
@@ -54,17 +54,13 @@ class SecurityController extends Controller
     public function login(Request $request, AuthenticationUtils $authenticationUtils)
     {   
 
-        $form = $this->createForm(LoginType::class);
-        $form->handleRequest($request);
         // On récupère les erreurs s'il y en a
         $error = $authenticationUtils->getLastAuthenticationError();
         // On récupère le dernier username entré par l'utilisateur
         $lastUsername = $authenticationUtils->getLastUsername();
-        
         return $this->render('security/login.html.twig', array(
             'last_username' => $lastUsername,
             'error'         => $error,
-            'form' => $form->createView()
         ));
     }
     /**

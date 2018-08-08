@@ -59,7 +59,7 @@ class User implements UserInterface
      * @ORM\ManyToOne(targetEntity="App\Entity\Role", inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $roles;
+    private $role;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="author", orphanRemoval=true)
@@ -175,10 +175,10 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
+    public function getPassword()
+   {
+       return $this->password;
+   }
 
     public function setPassword(string $password): self
     {
@@ -235,14 +235,19 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getRoles(): ?Role
+    public function getRoles()
+   {
+       return array($this->getRole()->getCode());
+   }
+
+    public function getRole()
     {
-        return $this->roles;
+        return $this->role;
     }
 
-    public function setRoles(?Role $roles): self
+    public function setRole(?Role $role): self
     {
-        $this->roles = $roles;
+        $this->role = $role;
 
         return $this;
     }
