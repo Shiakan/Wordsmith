@@ -2,7 +2,7 @@
  * Import
  */
 import React from 'react';
-
+import { GithubPicker } from 'react-color';
 /**
  * Local import
  */
@@ -19,6 +19,8 @@ class GameScreen extends React.Component {
     board: false,
     map: true,
     grid: true,
+    color: '#b80000',
+    toggle: false,
   }
 
   componentDidMount() {
@@ -43,8 +45,28 @@ class GameScreen extends React.Component {
     });
   }
 
+  handleChangeComplete = (color) => {
+    this.setState({ color: color.hex });
+    console.log(this.state);
+    this.togglePicker();
+  };
+
+  togglePicker = () => {
+    const { toggle } = this.state;
+
+    this.setState({
+      toggle: !toggle,
+    });
+  }
+
   render() {
-    const { board, map, grid } = this.state;
+    const {
+      board,
+      map,
+      grid,
+      color,
+      toggle,
+    } = this.state;
     return (
       <div className="screen">
         <div className="screen-switch">
@@ -92,6 +114,24 @@ class GameScreen extends React.Component {
             alt="map"
             className="screen-map-image"
           />
+          <div className="screen-map-custom">
+            <form className="screen-map-custom-form">
+              <button
+                type="button"
+                style={{ backgroundColor: color }}
+                onClick={this.togglePicker}
+              >
+              &nbsp;
+              </button>
+              {toggle
+                && (
+                <GithubPicker
+                  color={color}
+                  onChangeComplete={this.handleChangeComplete}
+                />
+                )}
+            </form>
+          </div>
         </div>
         ) }
         {board && <div className="screen-board">THIS IS THE BOARD</div> }
