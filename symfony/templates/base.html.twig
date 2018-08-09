@@ -5,6 +5,7 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
     </head>
+    {% block body %}
     <body>
         <ul>
             <li>
@@ -31,7 +32,7 @@
             </li>
             {% endif %}
         </ul>
-        {% block body %}{% endblock %}
+    {% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>
