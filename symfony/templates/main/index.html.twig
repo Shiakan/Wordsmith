@@ -1,8 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    HOMEPAGE
+{% block main %}
+<div class="pickOne">
     <a href="{{path('codex')}}">Codex</a>
     <a href="{{path('backend_article_index')}}">Backend Article</a>
     <a href="{{path('backend_tag_index')}}">Backend Tag</a>
+</div>
 {% endblock %}

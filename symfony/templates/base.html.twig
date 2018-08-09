@@ -3,35 +3,47 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('codexcss/style.css') }}">
+        {% endblock %}
     </head>
-    {% block body %}
     <body>
-        <ul>
-            <li>
-                <a href="{{path('homepage')}}">Home</a>
-            </li>
-            <li>
-                <a href="{{path('CGU')}}">About</a>
-            </li>
-            <li>
-                <a href="{{path('about')}}">CGU</a>
-            </li>
-            <li>
-                <a href="{{path('security_registration')}}">Inscription</a>
-            </li>
-            <li>
-                <a href="{{path('security_login')}}">Connexion</a>
-            </li>
-            <li>
-                <a href="{{path('security_logout')}}">Déconnexion</a>
-            </li>
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <li>
-                <a href="{{path('user_profile', {'id': app.user.id })}}">Mon profil</a>
-            </li>
-            {% endif %}
-        </ul>
+    {% block body %}
+        <header>
+        {% block header %}
+
+            <ul class="navbar">
+                <li>
+                    <a href="{{path('homepage')}}">Home</a>
+                </li>
+                <li>
+                    <a href="{{path('CGU')}}">About</a>
+                </li>
+                <li>
+                    <a href="{{path('about')}}">CGU</a>
+                </li>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li>
+                        <a href="{{path('security_logout')}}">Déconnexion</a>
+                    </li>
+                <li>
+                    <a href="{{path('user_profile', {'id': app.user.id })}}">Mon profil</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{{path('security_registration')}}">Inscription</a>
+                </li>
+                <li>
+                    <a href="{{path('security_login')}}">Connexion</a>
+                </li>
+                 {% endif %}
+            </ul>
+        {% endblock %}
+        </header>
+        <main>
+        {% block main %}
+        {% endblock %}
+        </main>
     {% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
