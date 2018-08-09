@@ -22,10 +22,12 @@ const ActionBar = () => (
       <button type="button" className="actionBar-table-sheet">FICHE</button>
       <button type="button" className="actionBar-table-help">HELP</button>
     </div>
-    <div className="actionBar-player1">P1</div>
-    <div className="actionBar-player2">P2</div>
-    <div className="actionBar-player3">P3</div>
-    <div className="actionBar-player4">P4</div>
+    <div className="actionBar-player">
+      <div className="actionBar-player-1">P1</div>
+      <div className="actionBar-player-2">P2</div>
+      <div className="actionBar-player-3">P3</div>
+      <div className="actionBar-player-4">P4</div>
+    </div>
   </div>
 );
 
