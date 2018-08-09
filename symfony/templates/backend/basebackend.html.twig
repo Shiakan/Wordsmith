@@ -40,33 +40,33 @@
         </div>
     </nav>
     {% endblock %}
-    {# <div class="container">
-        <div class="container-fluid"> #}
-            <div class="row">
-                <div class="col-3 bg-primary">
-                <ul>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Utilisateurs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('backend_codex_index') }}">Codex</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Forum</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Room</a>
-                    </li>
-                </ul>
-                </div>
-                <div class="col">
-                    {% block main %}
-
-                    {% endblock %}
-                </div>
+    <div class="wrapper">
+        <div class="row">
+            <div class="col-3 bg-primary">
+            <ul class="mt-3">
+                <li class="nav-item">
+                    <a class="h1 text-light" href="{{ path('backend_user_index') }}">Utilisateurs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="h1 text-light" href="{{ path('backend_codex_index') }}">Codex</a>
+                </li>
+                <li class="nav-item">
+                    <a class="h1 text-light" href="#">Forum</a>
+                </li>
+                <li class="nav-item">
+                    <a class="h1 text-light" href="#">Room</a>
+                </li>
+            </ul>
+            <a class="btn btn-info m-3" href="{{ path('homepage') }}">Retour sur le site</a>
             </div>
-        {# </div>
-    </div> #}
+            <div class="col">
+                {% block main %}
+
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
 
     {% block footer %}
     {% endblock %}

@@ -3,16 +3,16 @@
 {% block title %}Article index{% endblock %}
 
 {% block main %}
-    <h1>Article index</h1>
-
+    <h1>Liste des articles</h1>
+    <a class="btn btn-info mb-2" href="{{ path('backend_article_new') }}">Créer un nouvel article</a>
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Title</th>
-                <th>DateInserted</th>
-                <th>Status</th>
-                <th>actions</th>
+                <th>Titre de l'article</th>
+                <th>Date de publication</th>
+                <th>Statut</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -35,5 +35,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('backend_article_new') }}">Create new</a>
+    
 {% endblock %}

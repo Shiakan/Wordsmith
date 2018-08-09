@@ -1,3 +1,11 @@
 .btn-delete {
     display:inline-block;
 }
+
+.row {
+    height: 100vh;
+}
+
+#article_content {
+    width:500px;
+}

@@ -1,0 +1,51 @@
+{% extends 'backend/basebackend.html.twig' %}
+
+
+{% block title %}User{% endblock %}
+
+{% block main %}
+    <h1>User</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td>{{ user.username }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ user.password }}</td>
+            </tr>
+            <tr>
+                <th>IsActive</th>
+                <td>{{ user.isActive ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Birthdate</th>
+                <td>{{ user.birthdate ? user.birthdate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateInserted</th>
+                <td>{{ user.dateInserted ? user.dateInserted|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateUpdated</th>
+                <td>{{ user.dateUpdated ? user.dateUpdated|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('backend_user_index') }}">back to list</a>
+
+    <a href="{{ path('backend_user_edit', {'id': user.id}) }}">edit</a>
+
+    {{ include('backend/user/_delete_form.html.twig') }}
+{% endblock %}
