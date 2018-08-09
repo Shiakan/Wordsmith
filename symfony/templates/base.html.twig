@@ -5,9 +5,9 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
     </head>
-    {% block body %}
+    
     <body>
-        <ul>
+    <ul>
             <li>
                 <a href="{{path('homepage')}}">Home</a>
             </li>
@@ -32,6 +32,7 @@
             </li>
             {% endif %}
         </ul>
+    {% block body %}   
     {% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

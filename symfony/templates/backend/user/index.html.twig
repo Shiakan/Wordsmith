@@ -11,12 +11,10 @@
                 <th>Id</th>
                 <th>Username</th>
                 <th>Email</th>
-                <th>Password</th>
-                <th>IsActive</th>
-                <th>Birthdate</th>
-                <th>DateInserted</th>
-                <th>DateUpdated</th>
-                <th>actions</th>
+                <th>Statut</th>
+                <th>Date de naissance</th>
+                <th>Date d'inscription</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -25,23 +23,20 @@
                 <td>{{ user.id }}</td>
                 <td>{{ user.username }}</td>
                 <td>{{ user.email }}</td>
-                <td>{{ user.password }}</td>
-                <td>{{ user.isActive ? 'Yes' : 'No' }}</td>
+                <td>{{ user.isActive ? 'Actif' : 'Désactivé' }}</td>
                 <td>{{ user.birthdate ? user.birthdate|date('Y-m-d') : '' }}</td>
                 <td>{{ user.dateInserted ? user.dateInserted|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ user.dateUpdated ? user.dateUpdated|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('backend_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('backend_user_edit', {'id': user.id}) }}">edit</a>
+                    <a class="btn btn-info" href="{{ path('backend_user_show', {'id': user.id}) }}">Afficher le profil de l'utilisateur</a>
+                    <a class="btn btn-success" href="{{ path('backend_user_edit', {'id': user.id}) }}">Modifier l'utilisateur</a>
+                    {{ include('backend/user/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="9">no records found</td>
+                <td colspan="9">Aucun utilisateur enregistré</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('backend_user_new') }}">Create new</a>
 {% endblock %}

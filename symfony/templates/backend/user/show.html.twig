@@ -5,8 +5,9 @@
 
 {% block main %}
     <h1>User</h1>
+    <a class="btn btn-primary mb-2" href="{{ path('backend_user_index') }}">Retour</a>
 
-    <table class="table">
+    <table class="table table-hover">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -21,31 +22,23 @@
                 <td>{{ user.email }}</td>
             </tr>
             <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
+                <th>Statut</th>
+                <td>{{ user.isActive ? 'Actif' : 'Désactivé' }}</td>
             </tr>
             <tr>
-                <th>IsActive</th>
-                <td>{{ user.isActive ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Birthdate</th>
+                <th>Date de naissance</th>
                 <td>{{ user.birthdate ? user.birthdate|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>DateInserted</th>
+                <th>Date d'inscription</th>
                 <td>{{ user.dateInserted ? user.dateInserted|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>DateUpdated</th>
-                <td>{{ user.dateUpdated ? user.dateUpdated|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('backend_user_index') }}">back to list</a>
+    
 
-    <a href="{{ path('backend_user_edit', {'id': user.id}) }}">edit</a>
+    <a class="btn btn-success" href="{{ path('backend_user_edit', {'id': user.id}) }}">Editer l'utilisateur</a>
 
     {{ include('backend/user/_delete_form.html.twig') }}
 {% endblock %}

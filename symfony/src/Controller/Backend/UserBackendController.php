@@ -24,29 +24,6 @@ class UserBackendController extends Controller
     }
 
     /**
-     * @Route("/new", name="backend_user_new", methods="GET|POST")
-     */
-    public function new(Request $request): Response
-    {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
-
-            return $this->redirectToRoute('backend_user_index');
-        }
-
-        return $this->render('backend/user/new.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
      * @Route("/{id}", name="backend_user_show", methods="GET")
      */
     public function show(User $user): Response

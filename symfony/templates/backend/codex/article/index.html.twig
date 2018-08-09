@@ -4,8 +4,8 @@
 
 {% block main %}
     <h1>Liste des articles</h1>
-    <a class="btn btn-info mb-2" href="{{ path('backend_article_new') }}">Créer un nouvel article</a>
-    <table class="table">
+    <a class="btn btn-success mb-2" href="{{ path('backend_article_new') }}">Créer un nouvel article</a>
+    <table class="table table-hover text-center">
         <thead>
             <tr>
                 <th>Id</th>
@@ -23,8 +23,9 @@
                 <td>{{ article.dateInserted ? article.dateInserted|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ article.status ? 'Visible' : 'Non visible' }}</td>
                 <td>
-                    <a class="btn btn-info" href="{{ path('backend_article_show', {'id': article.id}) }}">show</a>
-                    <a class="btn btn-primary" href="{{ path('backend_article_edit', {'id': article.id}) }}">edit</a>
+                    <a class="btn btn-info" href="{{ path('backend_article_show', {'id': article.id}) }}">Voir l'article</a>
+                    <a class="btn btn-primary" href="{{ path('backend_article_edit', {'id': article.id}) }}">Editer l'article</a>
+                    <a class="btn btn-warning" href="{{ path('backend_article_hide', {'id': article.id}) }}">Masquer l'article</a>
                 </td>
             </tr>
         {% else %}

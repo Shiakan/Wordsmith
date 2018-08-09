@@ -3,8 +3,8 @@
 {% block title %}Article{% endblock %}
 
 {% block main %}
-    <h1>Article</h1>
-
+    <a class="btn btn-primary mb-2 mt-2" href="{{ path('backend_article_index') }}">Retour</a>
+    <h1>{{ article.title }}</h1>
     <table class="table">
         <tbody>
             <tr>
@@ -34,7 +34,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('backend_article_index') }}">back to list</a>
-
-    <a href="{{ path('backend_article_edit', {'id': article.id}) }}">edit</a>
+    <a class="btn btn-success" href="{{ path('backend_article_edit', {'id': article.id}) }}">Editer l'article</a>
 {% endblock %}

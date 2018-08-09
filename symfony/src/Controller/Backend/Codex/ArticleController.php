@@ -73,4 +73,17 @@ class ArticleController extends Controller
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/{id}/hide", name="backend_article_hide")
+     */
+    public function hide(Article $article)
+    {   
+        $em = $this->getDoctrine()->getManager();
+        // On passe le statut à false pour que la réponse ne soit plus affichée
+        $article->setStatus(false);
+        $em->flush();
+        //On redirige ensuite sur la page de la question où l'on se trouvait
+        return $this->redirectToRoute('backend_article_index');
+    }
 }
