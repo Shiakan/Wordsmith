@@ -2,6 +2,7 @@
  * Import
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * Local import
@@ -15,19 +16,23 @@ import './panel.sass';
  * Code
  */
 class Panel extends React.Component {
-  state = {
-    display: 'Dice',
-  }
+  static propTypes = {
+    dice: PropTypes.bool.isRequired,
+    sheet: PropTypes.bool.isRequired,
+    help: PropTypes.bool.isRequired,
+  };
 
   componentDidMount() {
     console.log('Panel loaded');
   }
 
   render() {
-    const { display } = this.state;
+    const { dice, sheet, help } = this.props;
     return (
       <div className="panel">
-        <p>{display}</p>
+        {dice && <p>dice</p>}
+        {sheet && <p>sheet</p>}
+        {help && <p>help</p>}
       </div>
     );
   }

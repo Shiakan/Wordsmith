@@ -2,7 +2,9 @@
  * Initial State
  */
 const initialState = {
-  message: 'Hello',
+  dice: true,
+  sheet: false,
+  help: false,
 };
 
 /**
