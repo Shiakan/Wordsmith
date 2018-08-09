@@ -63,6 +63,9 @@ class Article
     {
         $this->tags = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->dateInserted= new \DateTime();
+        $this->status = 1;
+
     }
 
     public function getId()

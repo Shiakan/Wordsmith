@@ -43,6 +43,12 @@ class Comment
      */
     private $author;
 
+    public function __construct()
+    {
+        $this->dateInserted = new \DateTime();
+        $this->status = 1;
+    }
+
     public function getId()
     {
         return $this->id;

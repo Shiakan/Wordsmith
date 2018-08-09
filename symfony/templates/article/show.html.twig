@@ -6,12 +6,18 @@
     </div>
     <div>
         <h2>Les commentaires:</h2>
-        {% for comment in comments %}
+        {% for comment in article.comments %}
             <div>
-                <p>Le commentaire</p>
-                <span>Date et heure</span>
-                <small>{{comment.author.username}}</small>
+                <p>{{comment.content}}</p>
+                <span>Ecrit le {{comment.dateInserted|date("d/m/Y")}} à {{comment.dateInserted| date("H:i")}}</span>
+                <small>Par {{comment.author.username}}</small>
             </div>
         {% endfor %}
+         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            {{form_start(form)}}
+             {{ form_widget(form) }}
+             <button type="submit">Valider</button>
+            {{form_end(form)}}
+        {% endif %}
     </div>
 {% endblock %}
