@@ -21,8 +21,9 @@ class GameScreen extends React.Component {
     grid: true,
     color: '#b80000',
     toggle: false,
-    creating: false,
+    moving: false,
     created: false,
+    name: '',
     playerOne: {
       coordX: '',
       coordY: '',
@@ -33,12 +34,28 @@ class GameScreen extends React.Component {
     console.log('gameScreen loaded');
   }
 
-  handleChange = () => {
+  handleGrid = () => {
     const { grid } = this.state;
 
     this.setState({
       grid: !grid,
     });
+  }
+
+  handleChange = (e) => {
+    const { value } = e.target;
+    console.log(value);
+    this.setState({
+      name: value,
+    });
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    // const { typingName } = this.state;
+    // this.setState({
+    //   name: typingName,
+    // });
   }
 
   handleClick = () => {
@@ -57,6 +74,14 @@ class GameScreen extends React.Component {
     this.togglePicker();
   };
 
+  // handleSubmit = (e) => {
+  //   console.log(e.target);
+  //   const { name } = this.state.playerOne;
+  //   // this.setState({
+  //   //   name:
+  //   // });
+  // }
+
   togglePicker = () => {
     const { toggle } = this.state;
 
@@ -66,26 +91,21 @@ class GameScreen extends React.Component {
   }
 
   createPlayer = () => {
-    console.log('Player created, click on the map to make it appear !');
-    const { creating } = this.state;
     this.setState({
-      creating: true,
+      moving: true,
     });
   }
 
   displayPlayer = (e) => {
     console.log('coords :', e.pageX, e.pageY);
-    const { coordX, coordY } = this.state.playerOne;
-
     this.setState({
       playerOne: {
         coordX: e.pageX,
         coordY: e.pageY,
       },
-      // creating: false,
+      // moving: false,
       created: true,
     });
-    console.log(this.state.playerOne);
   }
 
   render() {
@@ -95,8 +115,9 @@ class GameScreen extends React.Component {
       grid,
       color,
       toggle,
-      creating,
+      moving,
       created,
+      name,
 
     } = this.state;
     const { coordX, coordY } = this.state.playerOne;
@@ -117,7 +138,7 @@ class GameScreen extends React.Component {
                 type="checkbox"
                 id="check"
                 className="screen-switch-map-checkbox"
-                onChange={this.handleChange}
+                onChange={this.handleGrid}
                 checked={grid}
               />
               <label
@@ -141,23 +162,35 @@ class GameScreen extends React.Component {
         </div>
         {map && (
         <div className="screen-map">
-          {grid && <div className="screen-map-grid" onClick={creating ? this.displayPlayer : undefined} />}
+          {grid && <div className="screen-map-grid" onClick={moving ? this.displayPlayer : undefined} />}
           <img
             src="http://medievalshop.com/parchemin/wp-content/uploads/2013/08/La-prison.jpg"
             alt="map"
             className="screen-map-image"
           />
           {created && (
-          <div
+          <div 
             className="screen-map-player"
             style={{
-              backgroundColor: color,
               position: 'absolute',
-              left: `${coordX - 30}px`,
-              top: `${coordY - 30}px`,
+              left: `${coordX - 25}px`,
+              top: `${coordY - 50}px`,
             }}
-
-          />
+          >
+            <h2
+              className="screen-map-player-nickname"
+              style={{
+                color,
+              }}
+            >{name}
+            </h2>
+            <div
+              className="screen-map-player-cursor"
+              style={{
+                backgroundColor: color,
+              }}
+            />
+          </div>
           ) }
           <div className="screen-map-custom">
             {toggle
@@ -169,7 +202,7 @@ class GameScreen extends React.Component {
                   triangle="hide"
                 />
                 )}
-            <form className="screen-map-custom-form">
+            <form className="screen-map-custom-form" onSubmit={this.handleSubmit}>
               <button
                 type="button"
                 style={{ backgroundColor: color }}
@@ -177,13 +210,18 @@ class GameScreen extends React.Component {
               >
               &nbsp;
               </button>
-              <input type="text" />
-              <button
-                type="button"
+              <input
+                type="text"
+                placeholder="Nom du personnage"
+                onChange={this.handleChange}
+                value={name}
+              />
+              <input
+                type="submit"
                 onClick={this.createPlayer}
-              >
-              +
-              </button>
+                value="+"
+              />
+
             </form>
           </div>
         </div>
