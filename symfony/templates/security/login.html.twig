@@ -4,23 +4,10 @@
 
 {% block body %}
 
-    {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-
-    <div class="container mt-3">
-        <h1>Se connecter</h1>
-        <form action="{{ path('security_login') }}" method="post">
-            <div class="form-group">
-                <label for="username">Username :</label>
-                <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" />
-
-                <label for="password">Password :</label>
-                <input class="form-control" type="password" id="password" name="_password" />
-
-            </div>
-            <button type="submit" class="btn btn-primary">login</button>       
-        </form>
-    </div>
+{{ form_start(form) }}
+  {{ form_row(form.username, {'full_name': '_username'}) }}
+  {{ form_row(form.password, {'full_name': '_password'}) }}
+  {{ form_errors(form) }}
+{{ form_end(form) }}
 
 {% endblock %}
