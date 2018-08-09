@@ -19,11 +19,12 @@ class GameScreen extends React.Component {
     board: false,
     map: true,
     grid: true,
-    color: '#b80000',
+    color: '#d4c4fb',
     toggle: false,
     moving: false,
     created: false,
     playerOne: {
+      typingName: '',
       name: '',
       coordX: '',
       coordY: '',
@@ -46,18 +47,18 @@ class GameScreen extends React.Component {
     const { value } = e.target;
     this.setState({
       playerOne: {
-        name: value,
+        typingName: value,
       },
     });
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { value } = e.target;
     const { playerOne } = this.state;
+    const { typingName } = this.state.playerOne;
     this.setState({
       playerOne: {
-        name: value,
+        name: typingName,
         ...playerOne,
       },
     });
@@ -78,14 +79,6 @@ class GameScreen extends React.Component {
     console.log(this.state);
     this.togglePicker();
   };
-
-  // handleSubmit = (e) => {
-  //   console.log(e.target);
-  //   const { name } = this.state.playerOne;
-  //   // this.setState({
-  //   //   name:
-  //   // });
-  // }
 
   togglePicker = () => {
     const { toggle } = this.state;
@@ -125,7 +118,7 @@ class GameScreen extends React.Component {
       created,
 
     } = this.state;
-    const { name, coordX, coordY } = this.state.playerOne;
+    const { typingName, name, coordX, coordY } = this.state.playerOne;
     return (
       <div className="screen">
         <div className="screen-switch">
@@ -182,13 +175,13 @@ class GameScreen extends React.Component {
               top: `${coordY - 50}px`,
             }}
           >
-            <h2
+            <span
               className="screen-map-player-nickname"
               style={{
                 color,
               }}
             >{name}
-            </h2>
+            </span>
             <div
               className="screen-map-player-cursor"
               style={{
@@ -216,10 +209,11 @@ class GameScreen extends React.Component {
               &nbsp;
               </button>
               <input
+                className="screen-map-custom-form-input"
                 type="text"
                 placeholder="Nom du personnage"
                 onChange={this.handleChange}
-                value={name}
+                value={typingName}
               />
               <input
                 type="submit"

@@ -11,7 +11,7 @@
     height: 100%
     grid-area: g
     // margin: auto .3em
-    border: .5em solid #5f2a2a
+    border: .5em solid #4a4745
     border-radius: .2em
     &-board
         border: .1em solid black
@@ -33,7 +33,7 @@
         &-player
             font-family: $name-font
             text-align: center
-            transition: 1s cubic-bezier(.42,-0.3,.78,1.25) 
+            transition: 1s cubic-bezier(.42,0,.78,1.25) 
             &-cursor
                 width: 2em
                 height: 2em
@@ -42,14 +42,18 @@
         &-custom
             margin: auto
             display: inline-block
+            padding: .3em
             position: relative
-            width: 5%
             border: 1px solid black
             border-radius: .2em
             z-index: 1
             background-color: #DDDDDD
             &-form
                 display: flex
+                &-input
+                    padding: .5em
+                    font-family: $test-font
+
         &-image
             width: 
             height: 100%
