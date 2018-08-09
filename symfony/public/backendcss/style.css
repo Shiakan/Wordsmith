@@ -3,9 +3,19 @@
 }
 
 .row {
-    height: 100vh;
+    height: 93vh;
 }
 
 #article_content {
     width:500px;
+}
+
+#dropdownMenuLink1 {
+    display:inline;
+}
+#dropdownMenuLink1:hover {
+    border:none;
+}
+#dropdownMenuLink1:active {
+    border:none;
 }
