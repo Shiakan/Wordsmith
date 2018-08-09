@@ -8,6 +8,9 @@ import PropTypes from 'prop-types';
  * Local import
  */
 // Composants
+import Dice from './Dice';
+import Sheet from './Sheet';
+import Help from './Help';
 
 // Styles et assets
 import './panel.sass';
@@ -30,9 +33,9 @@ class Panel extends React.Component {
     const { dice, sheet, help } = this.props;
     return (
       <div className="panel">
-        {dice && <p>dice</p>}
-        {sheet && <p>sheet</p>}
-        {help && <p>help</p>}
+        {dice && <Dice />}
+        {sheet && <Sheet />}
+        {help && <Help />}
       </div>
     );
   }
