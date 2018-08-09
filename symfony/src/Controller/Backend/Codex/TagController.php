@@ -16,34 +16,32 @@ use Symfony\Component\Routing\Annotation\Route;
 class TagController extends Controller
 {
     /**
-     * @Route("/", name="backend_tag_index", methods="GET")
+     * @Route("/", name="backend_tag_index", methods="GET|POST")
      */
-    public function index(TagRepository $tagRepository): Response
+    public function index(Request $request): Response
     {
-        return $this->render('backend/codex/tag/index.html.twig', ['tags' => $tagRepository->findAll()]);
-    }
+          //On récupère les tags
+          $repository = $this->getDoctrine()->getRepository(Tag::class);
+          $tags = $repository->findAll();
+          //On crée le form mappé sur Tag
+          $tag = new Tag();
+          $form = $this->createForm(TagType::class, $tag);
+          $form->handleRequest($request);
+          // On vérifie que le form a été submit et est valide
+          if($form->isSubmitted() && $form->isValid()){
+              //On insère en database
+              $em = $this->getDoctrine()->getManager();
+              $em->persist($tag);
+              $em->flush();
+              // On redirige vers la page de la liste des tags
+              return $this->redirectToRoute('backend_tag_index');
+          }
 
-    /**
-     * @Route("/new", name="backend_tag_new", methods="GET|POST")
-     */
-    public function new(Request $request): Response
-    {
-        $tag = new Tag();
-        $form = $this->createForm(TagType::class, $tag);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($tag);
-            $em->flush();
-
-            return $this->redirectToRoute('backend_tag_index');
-        }
-
-        return $this->render('backend/codex/tag/new.html.twig', [
-            'tag' => $tag,
-            'form' => $form->createView(),
-        ]);
+          return $this->render('backend/codex/tag/index.html.twig', [
+              'tags' => $tags,
+              'tag' => $tag,
+              'form' => $form->createView()
+          ]);
     }
 
     /**

@@ -1,35 +1,35 @@
-{% extends 'base.html.twig' %}
+{% extends 'backend/basebackend.html.twig' %}
 
 {% block title %}Tag index{% endblock %}
 
-{% block body %}
-    <h1>Tag index</h1>
+{% block main %}
+    <h1>Liste des tags</h1>
+    <h2>Créer un nouveau tag</h2>
+    {{ include('backend/codex/tag/_form.html.twig') }}
 
-    <table class="table">
+    <table class="table table-hover">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>actions</th>
+                <th scope="col">ID</th>
+                <th scope="col">Tag</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for tag in tags %}
-            <tr>
+            <tr class="table-light">
                 <td>{{ tag.id }}</td>
                 <td>{{ tag.name }}</td>
                 <td>
-                    <a href="{{ path('backend_tag_edit', {'id': tag.id}) }}">edit</a>
+                    <a class="btn btn-primary" href="{{ path('backend_tag_edit', {'id': tag.id}) }}">Editer</a>
                     {{ include('backend/codex/tag/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">Vous n'avez pas encore crée de tag</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('backend_tag_new') }}">Create new</a>
 {% endblock %}
