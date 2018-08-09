@@ -13,8 +13,9 @@ class CodexController extends Controller
      */
     public function index()
     {
+        
         $repository= $this->getDoctrine()->getRepository(Article::class);
-        $articles = $repository->findBy(array(),array("dateInserted"=>"desc"));
+        $articles = $repository->findLastFive();
         return $this->render('codex/index.html.twig', [
             'articles' => $articles,
         ]);
