@@ -25,7 +25,11 @@
                 <td>
                     <a class="btn btn-info" href="{{ path('backend_article_show', {'id': article.id}) }}">Voir l'article</a>
                     <a class="btn btn-primary" href="{{ path('backend_article_edit', {'id': article.id}) }}">Editer l'article</a>
-                    <a class="btn btn-warning" href="{{ path('backend_article_hide', {'id': article.id}) }}">Masquer l'article</a>
+                    {% if article.status == true %}
+                        <a class="btn btn-warning" href="{{ path('backend_article_hide', {'id': article.id}) }}">Masquer l'article</a>
+                    {% else %}
+                        <a class="btn btn-success" href="{{ path('backend_article_hide', {'id': article.id}) }}">Afficher l'article</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}

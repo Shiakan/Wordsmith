@@ -80,9 +80,16 @@ class ArticleController extends Controller
     public function hide(Article $article)
     {   
         $em = $this->getDoctrine()->getManager();
-        // On passe le statut à false pour que la réponse ne soit plus affichée
-        $article->setStatus(false);
-        $em->flush();
+
+        if($article->getStatus() === true) {
+            // On passe le statut à false pour que la réponse ne soit plus affichée
+            $article->setStatus(false);
+            $em->flush();
+        } else {
+            // On passe le statut à ftrue pour que la réponse soit affichée
+            $article->setStatus(true);
+            $em->flush();
+        }
         //On redirige ensuite sur la page de la question où l'on se trouvait
         return $this->redirectToRoute('backend_article_index');
     }
