@@ -47,14 +47,6 @@ class TagController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="backend_tag_show", methods="GET")
-     */
-    public function show(Tag $tag): Response
-    {
-        return $this->render('backend/codex/tag/show.html.twig', ['tag' => $tag]);
-    }
-
-    /**
      * @Route("/{id}/edit", name="backend_tag_edit", methods="GET|POST")
      */
     public function edit(Request $request, Tag $tag): Response
@@ -65,7 +57,7 @@ class TagController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('backend_tag_edit', ['id' => $tag->getId()]);
+            return $this->redirectToRoute('backend_tag_index');
         }
 
         return $this->render('backend/codex/tag/edit.html.twig', [
