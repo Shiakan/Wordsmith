@@ -14,11 +14,25 @@ import './panel.sass';
 /**
  * Code
  */
-const Panel = () => (
-  <div className="panel">
-    <p>Panel</p>
-  </div>
-);
+class Panel extends React.Component {
+  state = {
+    display: 'Dice',
+  }
+
+  componentDidMount() {
+    console.log('Panel loaded');
+  }
+
+  render() {
+    const { display } = this.state;
+    return (
+      <div className="panel">
+        <p>{display}</p>
+      </div>
+    );
+  }
+}
+
 
 /**
  * Export
