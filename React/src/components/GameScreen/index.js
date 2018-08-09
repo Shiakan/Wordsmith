@@ -21,6 +21,12 @@ class GameScreen extends React.Component {
     grid: true,
     color: '#b80000',
     toggle: false,
+    creating: false,
+    created: false,
+    playerOne: {
+      coordX: '',
+      coordY: '',
+    },
   }
 
   componentDidMount() {
@@ -59,6 +65,29 @@ class GameScreen extends React.Component {
     });
   }
 
+  createPlayer = () => {
+    console.log('Player created, click on the map to make it appear !');
+    const { creating } = this.state;
+    this.setState({
+      creating: true,
+    });
+  }
+
+  displayPlayer = (e) => {
+    console.log('coords :', e.pageX, e.pageY);
+    const { coordX, coordY } = this.state.playerOne;
+
+    this.setState({
+      playerOne: {
+        coordX: e.pageX,
+        coordY: e.pageY,
+      },
+      // creating: false,
+      created: true,
+    });
+    console.log(this.state.playerOne);
+  }
+
   render() {
     const {
       board,
@@ -66,7 +95,11 @@ class GameScreen extends React.Component {
       grid,
       color,
       toggle,
+      creating,
+      created,
+
     } = this.state;
+    const { coordX, coordY } = this.state.playerOne;
     return (
       <div className="screen">
         <div className="screen-switch">
@@ -108,12 +141,24 @@ class GameScreen extends React.Component {
         </div>
         {map && (
         <div className="screen-map">
-          {grid && <div className="screen-map-grid" />}
+          {grid && <div className="screen-map-grid" onClick={creating ? this.displayPlayer : undefined} />}
           <img
             src="http://medievalshop.com/parchemin/wp-content/uploads/2013/08/La-prison.jpg"
             alt="map"
             className="screen-map-image"
           />
+          {created && (
+          <div
+            className="screen-map-player"
+            style={{
+              backgroundColor: color,
+              position: 'absolute',
+              left: `${coordX - 30}px`,
+              top: `${coordY - 30}px`,
+            }}
+
+          />
+          ) }
           <div className="screen-map-custom">
             {toggle
                 && (
@@ -133,7 +178,12 @@ class GameScreen extends React.Component {
               &nbsp;
               </button>
               <input type="text" />
-              <button type="button">+</button>
+              <button
+                type="button"
+                onClick={this.createPlayer}
+              >
+              +
+              </button>
             </form>
           </div>
         </div>
