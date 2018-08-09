@@ -13,23 +13,29 @@
   // text-align: center
   grid-area: a
   display: grid
-  grid-template-areas: "mj mj mj mj mj" "table table table table table " "p1 p2 p3 p4 ."
-  grid-template-columns: 20% 20% 20% 20% 20%
+  grid-template-areas: "mj mj mj mj mj" "table table table table table" ". player player player ."
+  grid-template-columns: 5% 30% 30% 30% 5%
   grid-template-rows: 25% auto 25%
-  grid-gap: .5em
+  // grid-gap: .5em
 
   &-mj
     grid-area: mj
     background-color: pink
     grid-column: 3
-  &-table
+    border-radius: 40%
+    width: 50%
     margin: 0 auto
+  &-table
+    background: url(../../assets/img/woodtable.jpg) no-repeat center
+    background-size: cover
+    // margin: 0 auto
     grid-area: table
     background-color: brown
-    width: 80%
+    // width: 80%
     display: grid
+    grid-column: 2 / 5
     grid-template-areas: ". . . . ."". dice sheet help ."". . . . ."
-    grid-template-columns: 20% 20% 20% 20% 20%
+    grid-template-columns: repeat(5, 1/5)
     grid-template-rows: 25% auto 25%
     grid-gap: .5em
     border-radius: .7em
@@ -45,21 +51,33 @@
       grid-area: help
       grid-column: 4
       grid-row: 2
-  &-player1
-    padding: auto
-    background-color: red
-    border-radius: 50%
-    grid-area: p1
-    transform: translateX(50%)
-  &-player2
-    grid-area: p2
-    transform: translateX(50%)
-    background-color: green
-  &-player3
-    grid-area: p3
-    transform: translateX(50%)
-    background-color: blue
-  &-player4
-    grid-area: p4
-    transform: translateX(50%)
-    background-color: yellow
+  &-player
+    display: grid
+    grid-area: player
+    grid-template-areas: "p1 p2 p3 p4"
+    grid-template-columns: repeat(4, 1/4)
+    &-1
+      padding: auto
+      background-color: red
+      border-radius: 50%
+      width: 50%
+      margin: 0 auto
+      grid-area: p1
+    &-2
+      grid-area: p2
+      border-radius: 50%
+      width: 50%
+      margin: 0 auto
+      background-color: green
+    &-3
+      grid-area: p3
+      border-radius: 50%
+      width: 50%
+      margin: 0 auto
+      background-color: blue
+    &-4
+      grid-area: p4
+      border-radius: 50%
+      width: 50%
+      margin: 0 auto
+      background-color: yellow
