@@ -23,8 +23,8 @@ class GameScreen extends React.Component {
     toggle: false,
     moving: false,
     created: false,
-    name: '',
     playerOne: {
+      name: '',
       coordX: '',
       coordY: '',
     },
@@ -44,18 +44,23 @@ class GameScreen extends React.Component {
 
   handleChange = (e) => {
     const { value } = e.target;
-    console.log(value);
     this.setState({
-      name: value,
+      playerOne: {
+        name: value,
+      },
     });
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    // const { typingName } = this.state;
-    // this.setState({
-    //   name: typingName,
-    // });
+    const { value } = e.target;
+    const { playerOne } = this.state;
+    this.setState({
+      playerOne: {
+        name: value,
+        ...playerOne,
+      },
+    });
   }
 
   handleClick = () => {
@@ -97,9 +102,10 @@ class GameScreen extends React.Component {
   }
 
   displayPlayer = (e) => {
-    console.log('coords :', e.pageX, e.pageY);
+    const { playerOne } = this.state;
     this.setState({
       playerOne: {
+        ...playerOne,
         coordX: e.pageX,
         coordY: e.pageY,
       },
@@ -117,10 +123,9 @@ class GameScreen extends React.Component {
       toggle,
       moving,
       created,
-      name,
 
     } = this.state;
-    const { coordX, coordY } = this.state.playerOne;
+    const { name, coordX, coordY } = this.state.playerOne;
     return (
       <div className="screen">
         <div className="screen-switch">

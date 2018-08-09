@@ -33,6 +33,7 @@
         &-player
             font-family: $name-font
             text-align: center
+            transition: 1s cubic-bezier(.42,-0.3,.78,1.25) 
             &-cursor
                 width: 2em
                 height: 2em
@@ -63,6 +64,7 @@
         position: relative
         &-button
             position: absolute
+            font-family: $test-font
         &-map
             display: block
             border: 1px solid black
@@ -71,6 +73,8 @@
             z-index: 1
             background-color: #DDDDDD
             height: 4em
+            &-button
+                font-family: $test-font
             &-checkbox
                 display: block
             &-label
