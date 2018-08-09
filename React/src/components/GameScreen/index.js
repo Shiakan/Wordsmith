@@ -115,6 +115,15 @@ class GameScreen extends React.Component {
             className="screen-map-image"
           />
           <div className="screen-map-custom">
+            {toggle
+                && (
+                <GithubPicker
+                  class="screen-map-custom-picker"
+                  color={color}
+                  onChangeComplete={this.handleChangeComplete}
+                  triangle="hide"
+                />
+                )}
             <form className="screen-map-custom-form">
               <button
                 type="button"
@@ -123,13 +132,8 @@ class GameScreen extends React.Component {
               >
               &nbsp;
               </button>
-              {toggle
-                && (
-                <GithubPicker
-                  color={color}
-                  onChangeComplete={this.handleChangeComplete}
-                />
-                )}
+              <input type="text" />
+              <button type="button">+</button>
             </form>
           </div>
         </div>
