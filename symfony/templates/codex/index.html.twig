@@ -1,16 +1,26 @@
 {% extends 'base.html.twig' %}
         {% block body %}
                 <ul>
+                     {% for tag in tags %}
                     <li>
-                        <a href="{{path('homepage')}}">Revenir à l'acceuil</a>
+                        <a href="{{path('showByTag',{'id':tag.id})}}">{{tag.name}}</a>
                     </li>
+                    {% endfor %}
                 </ul>
                      {% for article in articles %}
                     <div>
                         <h3>{{article.title}}</h3>
+                        {% for tag in article.tags %}
+                        <small>{{tag.name}}</small>
+                        {% endfor %}
                         <span>Ecrit le {{article.dateInserted|date("d/m/Y")}} à {{article.dateInserted| date("H:i")}}</span>
                         <a href="{{ path('show',{'id':article.id}) }}">Acceder à la vue</a>
                     </div>
                     {% endfor %}
+                <ul>
+                    <li>
+                        <a href="{{path('homepage')}}">Revenir à l'acceuil</a>
+                     </li>
+                </ul>
         {% endblock %}
 

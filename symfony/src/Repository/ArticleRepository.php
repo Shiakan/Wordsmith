@@ -31,21 +31,20 @@ class ArticleRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-        /**
-     * @return Article[] Returns an array of Article objects
-     */
-    public function findByTag($tags)
+   //     /**
+    // * @return Article[] Returns an array of Article objects
+     //*/
+    /*public function findByTag($tags)
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.tags.id = :tags.id')
             ->setParameter('tags.id', $tags)
             ->orderBy('a.dateInserted', 'DESC')
-            ->setMaxResults(5)
             ->getQuery()
             ->getResult()
         ;
     }
-
+*/
     /*
     public function findOneBySomeField($value): ?Article
     {
