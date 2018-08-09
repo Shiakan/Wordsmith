@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ArticleController extends Controller
 {
     /**
-     * @Route("/", name="article_index", methods="GET")
+     * @Route("/", name="backend_article_index", methods="GET")
      */
     public function index(ArticleRepository $articleRepository): Response
     {
@@ -24,7 +24,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/new", name="article_new", methods="GET|POST")
+     * @Route("/new", name="backend_article_new", methods="GET|POST")
      */
     public function new(Request $request): Response
     {
@@ -37,7 +37,7 @@ class ArticleController extends Controller
             $em->persist($article);
             $em->flush();
 
-            return $this->redirectToRoute('article_index');
+            return $this->redirectToRoute('backend_article_index');
         }
 
         return $this->render('backend/codex/article/new.html.twig', [
@@ -47,7 +47,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="article_show", methods="GET")
+     * @Route("/{id}", name="backend_article_show", methods="GET")
      */
     public function show(Article $article): Response
     {
@@ -55,7 +55,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/{id}/edit", name="article_edit", methods="GET|POST")
+     * @Route("/{id}/edit", name="backend_article_edit", methods="GET|POST")
      */
     public function edit(Request $request, Article $article): Response
     {
@@ -65,7 +65,7 @@ class ArticleController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('article_edit', ['id' => $article->getId()]);
+            return $this->redirectToRoute('backend_article_edit', ['id' => $article->getId()]);
         }
 
         return $this->render('backend/codex/article/edit.html.twig', [
