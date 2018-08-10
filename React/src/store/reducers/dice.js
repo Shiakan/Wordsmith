@@ -19,6 +19,7 @@ const roll = (dice) => {
   let numberOfDice = dice[0];
   const numberOfSides = dice.slice(2);
   let total = 0;
+  console.log(numberOfSides);
   for (numberOfDice; numberOfDice > 0; numberOfDice--) {
     total += Math.floor(Math.random() * numberOfSides) + 1;
   }
