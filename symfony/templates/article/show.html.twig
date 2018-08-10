@@ -4,7 +4,7 @@
         {% for tag in article.tags %}
             <small>{{tag.name}}</small>
         {% endfor %}
-        <p>{{article.content}}</p>
+        <p>{{article.content|raw}}</p>
         <span>Ecrit le {{article.dateInserted|date("d/m/Y")}} à {{article.dateInserted| date("H:i")}}</span>
     </div>
     <div>
