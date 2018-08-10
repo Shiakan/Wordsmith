@@ -8,9 +8,6 @@
         <p>Maitre du jeu :{{room.dungeonmaster}}</p>
         <p>Liste des joueurs invité dans la partie:</p>
         <ul>
-        {% for user in room.participants %}
-         <li><small>{{ user.username }}</small></li>
-        {% endfor %}
         </ul>
     {% endfor %}
     

@@ -35,14 +35,24 @@ class Room
     private $dungeonmaster;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="myrooms")
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="playerOne", cascade={"persist", "remove"})
      */
-    private $participants;
+    private $playerOne;
 
-    public function __construct()
-    {
-        $this->participants = new ArrayCollection();
-    }
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="playerTwo", cascade={"persist", "remove"})
+     */
+    private $playerTwo;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="playerThree", cascade={"persist", "remove"})
+     */
+    private $playerThree;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="playerFour", cascade={"persist", "remove"})
+     */
+    private $playerFour;
 
     public function getId()
     {
@@ -85,28 +95,50 @@ class Room
         return $this;
     }
 
-    /**
-     * @return Collection|User[]
-     */
-    public function getParticipants(): Collection
+    public function getPlayerOne(): ?User
     {
-        return $this->participants;
+        return $this->playerOne;
     }
 
-    public function addParticipant(User $participant): self
+    public function setPlayerOne(?User $playerOne): self
     {
-        if (!$this->participants->contains($participant)) {
-            $this->participants[] = $participant;
-        }
+        $this->playerOne = $playerOne;
 
         return $this;
     }
 
-    public function removeParticipant(User $participant): self
+    public function getPlayerTwo(): ?User
     {
-        if ($this->participants->contains($participant)) {
-            $this->participants->removeElement($participant);
-        }
+        return $this->playerTwo;
+    }
+
+    public function setPlayerTwo(?User $playerTwo): self
+    {
+        $this->playerTwo = $playerTwo;
+
+        return $this;
+    }
+
+    public function getPlayerThree(): ?User
+    {
+        return $this->playerThree;
+    }
+
+    public function setPlayerThree(?User $playerThree): self
+    {
+        $this->playerThree = $playerThree;
+
+        return $this;
+    }
+
+    public function getPlayerFour(): ?User
+    {
+        return $this->playerFour;
+    }
+
+    public function setPlayerFour(?User $playerFour): self
+    {
+        $this->playerFour = $playerFour;
 
         return $this;
     }
