@@ -9,7 +9,12 @@ import { connect } from 'react-redux';
 import ActionBar from 'src/components/ActionBar';
 
 // Action Creators
-import { doSomething, showDice, showSheet, showHelp } from 'src/store/reducer';
+import {
+  doSomething,
+  showDice,
+  showSheet,
+  showHelp,
+} from 'src/store/reducers/actionBar';
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation
@@ -19,7 +24,7 @@ import { doSomething, showDice, showSheet, showHelp } from 'src/store/reducer';
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
 const mapStateToProps = state => ({
-  
+
 });
 
 /* === Actions ===
@@ -29,7 +34,7 @@ const mapStateToProps = state => ({
  *  - ownProps : les props passées au container
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   doSomething: () => {
     dispatch(doSomething());
   },
