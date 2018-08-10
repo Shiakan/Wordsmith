@@ -9,7 +9,9 @@
 }
 
 body {
-    background-color:#0D0D0D;
+    background-image: url('https://nsa39.casimages.com/img/2018/08/10//180810085758319448.png');
+    background-repeat:no-repeat;
+    background-attachment:fixed;
     color:#BDBDBD;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -71,7 +73,8 @@ small {
 }
 .navbar {
     font-family: 'Spectral SC', serif;
-    padding:1em;
+    font-size:1.2em;
+    padding:0.5em 1em 0 1em;
     background-color: #0B0B0B;
     display:flex;
     justify-content:space-between;
@@ -82,6 +85,7 @@ small {
 .navbar ul li {
     list-style:none;
     display:inline-block;
+    margin-top:1em;
 }
 
 .navbar-left ul li {
@@ -92,6 +96,9 @@ small {
     margin-left:0.8em;
 }
 
+.logo {
+    height:50px;
+}
 .tagbar {
     position:fixed;
     margin-top:5.2em;
@@ -188,9 +195,22 @@ small {
     color: #BDBDBD;
 }
 
-.author-icon {
-    width:100px;
-    height:100px;
-    border-radius:50%;
-    float:left;
+.comment {
+    background-color:#0b0b0b;
+}
+
+.comment-header {
+    display:flex;
+}
+
+.comment h4 {
+    font-family: 'Spectral SC', serif;
+    font-size:1.2em;
+    font-weight:400;
+    color: #A56E3A;
+}
+
+.comment small {
+    margin-left:1em;
+    margin-top:0.2em;
 }

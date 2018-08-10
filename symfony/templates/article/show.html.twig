@@ -13,7 +13,9 @@
             <h2>Commentaires</h2>
             {% for comment in article.comments %}
                 <div class="comment">
-                    <h4>{{comment.author.username}}</h4> <span>Posté le {{comment.dateInserted|date("d/m/Y")}}</span>
+                    <div class="comment-header">
+                        <h4>{{comment.author.username}}</h4> <small>Posté le {{comment.dateInserted|date("d/m/Y")}}</small>
+                    </div>
                     <p>{{comment.content}}</p>
                 </div>
             {% endfor %}
@@ -24,5 +26,6 @@
                 {{form_end(form)}}
             {% endif %}
         </section>
+        <a href="{{path('homepage')}}">Revenir à l'acceuil</a>
     </div>
 {% endblock %}
