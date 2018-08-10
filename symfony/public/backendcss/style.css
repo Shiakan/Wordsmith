@@ -20,7 +20,11 @@
     border:none;
 }
 
-.fas {
+.fas, .fab {
     font-size:1.5em;
     margin-top:0.2rem;
+}
+
+#container {
+    margin-top:2rem;
 }

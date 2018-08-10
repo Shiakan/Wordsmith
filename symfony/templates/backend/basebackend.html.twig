@@ -71,9 +71,11 @@
                 <a class="btn btn-info m-3" href="{{ path('homepage') }}">Retour sur le site</a>
             </div>
             <div class="col">
-                {% block main %}
+                <div id="container">
+                    {% block main %}
 
-                {% endblock %}
+                    {% endblock %}
+                </div>
             </div>
         </div>
     </div>
