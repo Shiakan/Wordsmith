@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
  * Local import
  */
 // Composants
-import Dice from './Dice';
+import Dice from 'src/containers/Dice';
 import Sheet from './Sheet';
 import Help from './Help';
 
