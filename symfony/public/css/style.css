@@ -56,6 +56,7 @@ small {
     font-family: 'BenchNine', sans-serif;
     text-transform:uppercase;
     font-size:0.9em;
+    margin:0;
 }
 
 .navbar {
@@ -90,7 +91,7 @@ small {
 }
 
 .wrapper {
-    width:40%;
+    width:45%;
     margin:auto;
     background-color:#0B0B0B; 
     padding:1em;
@@ -103,6 +104,13 @@ small {
     margin-bottom:2em;
 }
 
+.article-title {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid  #503415;
+    margin-bottom:1em;
+}
 .article-link {
     color:#125C38; 
 }
