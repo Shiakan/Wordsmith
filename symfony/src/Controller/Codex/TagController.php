@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class TagController extends AbstractController
 {
     /**
-     * @Route("/show/tag/{id}", name="showByTag")
+     * @Route("/show/tag/{id}", name="search_by_tag")
      */
     public function findArticlesByTag(Tag $tag)
     {

@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Spectral+SC:400,400i,700');
+@import url('https://fonts.googleapis.com/css?family=BenchNine:300,400,700');
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700');
 
 * {
     margin: 0;
@@ -8,6 +10,7 @@
 body {
     background-color:#0D0D0D;
     color:#BDBDBD;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 a {
@@ -48,6 +51,11 @@ footer {
 footer ul li {
     list-style:none;
     display:inline-block;
+}
+small {
+    font-family: 'BenchNine', sans-serif;
+    text-transform:uppercase;
+    font-size:0.9em;
 }
 
 .navbar {
@@ -92,4 +100,30 @@ footer ul li {
     border:1px solid  #503415; 
     padding:2em;
     margin-bottom:2em;
+}
+
+.article-link {
+    color:#125C38; 
+}
+ .tags {
+     margin-top:1em;
+ }
+
+.btn {
+    padding:0.1em 0.3em;
+    border-radius:0.2em;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size:0.8em;
+    font-weight:600;
+}
+
+.btn-tag {
+    background-color: #125C38;  
+    color: #BDBDBD;
+    border:1px solid rgb(15, 49, 33);
+}
+
+.btn-tag:hover {
+    background-color: rgb(15, 49, 33);  
+    color: #BDBDBD;
 }

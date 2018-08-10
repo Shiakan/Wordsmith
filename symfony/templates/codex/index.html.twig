@@ -5,25 +5,22 @@
         <ul class="tagbar">
                 {% for tag in tags %}
             <li>
-                <a href="{{path('showByTag',{'id':tag.id})}}">{{tag.name}}</a>
+                <a href="{{path('search_by_tag',{'id':tag.id})}}">{{tag.name}}</a>
             </li>
             {% endfor %}
         </ul>
         {% for article in articles %}
             <section class="container">
-                <h2>{{article.title}}</h2>
+               <h2><a class="article-link" href="{{ path('show',{'id':article.id}) }}">{{article.title}}</a></h2>
                 <small>Publié le {{article.dateInserted|date("d/m/Y")}} à {{article.dateInserted| date("H:i")}}</small>
-                <a href="{{ path('show',{'id':article.id}) }}">Lire</a>
+                <div class="tags">
                 {% for tag in article.tags %}
-                    <small>{{tag.name}}</small>
+                    <a class="btn btn-tag" href="{{path('search_by_tag',{'id':tag.id})}}">{{tag.name}}</a>
                 {% endfor %}
+                </div>
             </section>
         {% endfor %}
-        <ul>-
-            <li>
-                <a href="{{path('homepage')}}">Revenir à l'acceuil</a>
-                </li>
-        </ul>
+         <a href="{{path('homepage')}}">Revenir à l'acceuil</a>
     </div>
 {% endblock %}
 
