@@ -7,10 +7,37 @@
  * Style
  */
 .dice
-    background-color: red
+  display: grid
+  grid-template-areas: ". . ." ". Dblock ." ". . ."
+  grid-template-columns: 20% 60% 20%
+  grid-template-rows: 5% 30% auto 5%
+  grid-gap: .5em
+  background-color: red
+  height: 100%
+  witdh: 100%
+  &-img
+    margin: 0 auto
+    grid-column: 2
+    grid-row: 2
     height: 100%
     witdh: 100%
-    &-form
-        &-input
-        &-roll
-        &-share
+  &-block
+    grid-area: Dblock
+    grid-column: 2
+    grid-row: 3
+    &-result
+    &-share
+      grid-area: Dshare
+      color: red
+  &-form
+    box-sizing: border-box
+    grid-area: Dform
+    display: flex
+    justify-content: space-between
+    // flex-wrap: wrap
+    &-input
+      grid-area: Dinput
+      width: 50%
+    &-roll
+      grid-area: Droll    
+    

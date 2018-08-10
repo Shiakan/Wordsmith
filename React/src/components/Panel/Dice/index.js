@@ -10,14 +10,18 @@ import React from 'react';
 
 // Styles et assets
 import './dice.sass';
-
 /**
  * Code
  */
 const Dice = () => (
   <div className="dice">
-    <p>DiceTEST</p>
-    <div>
+    <p className="dice-text">DiceTEST</p>
+    <img
+      className="dice-img"
+      src="src/assets/img/dicesTest1.png"
+      alt="some roleplay dices"
+    />
+    <div className="dice-block">
       <form
         className="dice-form"
         autoComplete="off"
@@ -38,10 +42,10 @@ const Dice = () => (
           Roll
         </button>
       </form>
-      <p> Votre résultat est </p>
+      <p className="dice-block-result"> Votre résultat est :</p>
       <button
         type="button"
-        className="dice-form-share"
+        className="dice-block-share"
         // onClick={}
       >
         MJ Share

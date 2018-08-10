@@ -23,7 +23,7 @@ class ActionBar extends React.Component {
   };
 
   componentDidMount() {
-    console.log('gameScreen loaded');
+    console.log('ActionBar loaded');
   }
 
   render() {
