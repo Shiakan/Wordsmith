@@ -1,34 +1,23 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-    <div class="wrapper wrapper--blog">
-        <div class="article-container">
-            {% for article in articles %}
-            <section class="container">
-               <div class="article-title">
-                    <h2><a class="article-link" href="{{ path('show',{'id':article.id}) }}">{{article.title}}</a></h2>
-                    <small>Publié le {{article.dateInserted|date("d/m/Y")}}</small>
-                </div>
-                <p class="preview">{{article.description}}</p>
-                <div class="tags">
-                {% for tag in article.tags %}
-                    <a class="btn btn-tag" href="{{path('search_by_tag',{'id':tag.id})}}">{{tag.name}}</a>
-                {% endfor %}
-                </div>
-            </section>
+{{ include('codex/aside.html.twig') }}
+    <div class="wrapper">
+        {% for article in articles %}
+        <section class="container">
+            <div class="article-title">
+                <h2><a class="article-link" href="{{ path('show',{'id':article.id}) }}">{{article.title}}</a></h2>
+                <small>Publié le {{article.dateInserted|date("d/m/Y")}}</small>
+            </div>
+            <p class="preview">{{article.description}}</p>
+            <div class="tags">
+            {% for tag in article.tags %}
+                <a class="btn btn-tag" href="{{path('search_by_tag',{'id':tag.id})}}">{{tag.name}}</a>
             {% endfor %}
-            <a href="{{path('homepage')}}">Revenir à l'acceuil</a>
-        </div>
-        <div class="tagbar">
-            <h2>Navigation</h2>
-            <ol>
-                {% for tag in tags %}
-                <li>
-                    <a href="{{path('search_by_tag',{'id':tag.id})}}">{{tag.name}}</a>
-                </li>
-                {% endfor %}
-            </ol>   
-        </div>   
+            </div>
+        </section>
+        {% endfor %}
+        <a href="{{path('homepage')}}">Revenir à l'acceuil</a>
     </div>
 {% endblock %}
 

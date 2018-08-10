@@ -60,7 +60,10 @@ small {
     margin:0;
     letter-spacing:0.075em;
 }
-
+.fixed-navbar {
+    position:fixed;
+    width: 100%;
+}
 .navbar {
     font-family: 'Spectral SC', serif;
     padding:1em;
@@ -85,7 +88,9 @@ small {
 }
 
 .tagbar {
-    width:25%;
+    position:fixed;
+    margin-top:5.2em;
+    min-width:12%;
     padding:0.3em 0.8em;
     background-color:#0D0D0D;  
     border:1px solid  #503415;
@@ -106,12 +111,7 @@ small {
     width:45%;
     margin:auto;
     background-color:#0B0B0B; 
-    padding:1em;
-}
-
-.wrapper--blog {
-    display:flex;
-    align-items: flex-start;
+    padding:5em 1em 1em 1em;
 }
 
 .container {
@@ -119,10 +119,6 @@ small {
     border:1px solid  #503415; 
     padding:2em;
     margin-bottom:2em;
-}
-
-.article-container {
-    width:75%;
 }
 
 .article-title {
