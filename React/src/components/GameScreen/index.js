@@ -2,6 +2,7 @@
  * Import
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { GithubPicker } from 'react-color';
 /**
  * Local import
@@ -15,9 +16,15 @@ import './gamescreen.sass';
  * Code
  */
 class GameScreen extends React.Component {
+  static propTypes = {
+    toggleScreen: PropTypes.func.isRequired,
+    board: PropTypes.bool.isRequired,
+    map: PropTypes.bool.isRequired,
+  };
+
   state = {
-    board: false,
-    map: true,
+    // board: false,
+    // map: true,
     grid: true,
     color: '#d4c4fb',
     toggle: false,
@@ -109,8 +116,8 @@ class GameScreen extends React.Component {
 
   render() {
     const {
-      board,
-      map,
+      // board,
+      // map,
       grid,
       color,
       toggle,
@@ -118,6 +125,7 @@ class GameScreen extends React.Component {
       created,
 
     } = this.state;
+    const { toggleScreen, board, map } = this.props;
     const {
       typingName, name, coordX, coordY,
     } = this.state.playerOne;
@@ -131,7 +139,7 @@ class GameScreen extends React.Component {
                 <button
                   type="button"
                   className="screen-switch-map-button"
-                  onClick={this.handleClick}
+                  onClick={toggleScreen}
                 >
               Switch to Board
                 </button>
@@ -190,7 +198,7 @@ class GameScreen extends React.Component {
             <button
               type="button"
               className="screen-switch-button"
-              onClick={this.handleClick}
+              onClick={toggleScreen}
             >
             Switch to Map
             </button>
