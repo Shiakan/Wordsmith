@@ -159,7 +159,7 @@ class GameScreen extends React.Component {
             ) }
         </div>
         {map && (
-        <div className="screen-map">
+        <div className="screen-map" onClick={moving ? this.displayPlayer : undefined}>
           {grid && <div className="screen-map-grid" onClick={moving ? this.displayPlayer : undefined} />}
           <img
             src="http://medievalshop.com/parchemin/wp-content/uploads/2013/08/La-prison.jpg"
