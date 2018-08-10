@@ -1,21 +1,20 @@
 {% extends 'base.html.twig' %} 
 {% block main %}
+{{ include('codex/aside.html.twig') }}
     <div class="wrapper">
-        <article class="container">
-                <h2>{{article.title}}</h2>
-                {% for tag in article.tags %}
-                    <small>{{tag.name}}</small>
-                {% endfor %}
-                <p>{{article.content|raw}}</p>
-                <span>Ecrit le {{article.dateInserted|date("d/m/Y")}} à {{article.dateInserted| date("H:i")}}</span>
+        <article class="container container--article">
+            <h1>{{article.title}}</h1>
+            <div class="article-content">
+                {{article.content|raw}}
+            </div>
+            <small>Publié le {{article.dateInserted|date("d/m/Y")}}.</small>
         </article>
         <section class="container">
-            <h2>Les commentaires:</h2>
+            <h2>Commentaires</h2>
             {% for comment in article.comments %}
-                <div>
+                <div class="comment">
+                    <h4>{{comment.author.username}}</h4> <span>Posté le {{comment.dateInserted|date("d/m/Y")}}</span>
                     <p>{{comment.content}}</p>
-                    <span>Ecrit le {{comment.dateInserted|date("d/m/Y")}} à {{comment.dateInserted| date("H:i")}}</span>
-                    <small>Par {{comment.author.username}}</small>
                 </div>
             {% endfor %}
              {% if is_granted('IS_AUTHENTICATED_FULLY') %}

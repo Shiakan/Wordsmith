@@ -3,6 +3,7 @@
 namespace App\Controller\Codex;
 
 
+use App\Entity\Tag;
 use App\Entity\User;
 use App\Entity\Article;
 use App\Entity\Comment;
@@ -22,10 +23,15 @@ class ArticleController extends Controller
      */
     public function show(Article $article, Request $request, ObjectManager $manager, UserInterface $user=null)
     {
+        $repositoryTag= $this->getDoctrine()->getRepository(Tag::class);
+
+        $tags = $repositoryTag->findByOrderId();
+
         $comment = new Comment();
         $form = $this->createForm(CommentType::class , $comment);
         $form->handleRequest($request);
         $comment->setAuthor($user);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $comment->setArticle($article);
             $em = $this->getDoctrine()->getManager();
@@ -35,6 +41,7 @@ class ArticleController extends Controller
         }
         return $this->render('article/show.html.twig', [
             'article'=> $article,
+            'tags' => $tags,
             'form' => $form->createView(),
         ]); 
     }

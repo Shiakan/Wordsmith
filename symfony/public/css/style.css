@@ -30,7 +30,12 @@ a:active {
 
 h1 {
     font-family: 'Spectral SC', serif;
+    font-size:2.5em;
+    font-weight:400;
     color: #125C38; 
+    border-bottom:1px solid #503415;
+    text-align:center;
+    margin: 0;
 }
 
 h2 {
@@ -121,6 +126,30 @@ small {
     margin-bottom:2em;
 }
 
+.article-content {
+    margin:0.5em;
+    text-align:justify;
+}
+
+.article-content p {
+    margin: 0.5em 0em;
+}
+
+.article-content td {
+    text-align:center;
+    padding:0.3em 0.8em;
+    border:1px solid  #503415;
+}
+
+.article-content table {
+    border-collapse: collapse;
+    margin:1em;
+}
+
+.container--article h2 {
+    color: #A56E3A;
+}
+
 .article-title {
     display:flex;
     justify-content:space-between;
@@ -157,4 +186,11 @@ small {
 .btn-tag:hover {
     background-color: rgb(15, 49, 33);  
     color: #BDBDBD;
+}
+
+.author-icon {
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    float:left;
 }
