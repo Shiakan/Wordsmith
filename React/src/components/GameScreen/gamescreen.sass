@@ -34,25 +34,17 @@
             font-family: $name-font
             text-align: center
             transition: 1s cubic-bezier(.42,0,.78,1.25) 
+            &:hover
+                &> .screen-map-player-nickname
+                    visibility: visible
+            &-nickname
+                visibility: hidden
             &-cursor
                 width: 2em
                 height: 2em
                 border-radius: 50%
 
-        &-custom
-            margin: auto
-            display: inline-block
-            padding: .3em
-            position: relative
-            border: 1px solid black
-            border-radius: .2em
-            z-index: 1
-            background-color: #DDDDDD
-            &-form
-                display: flex
-                &-input
-                    padding: .5em
-                    font-family: $test-font
+        
 
         &-image
             width: 
@@ -66,20 +58,43 @@
             background-size: 100%
     &-switch
         position: relative
+        padding-right: 1em 
+        display: block
+        border: 1px solid black
+        border-radius: .2em
+        position: absolute
+        left: -11em
+        transition: .6s
+        transform: translateX(0)
+        // transition: right 2s;
+        // transition-timing-function: ease
+        z-index: 1
+        background-color: #DDDDDD
+        &:hover
+            left: 0
         &-button
-            position: absolute
             font-family: $test-font
+            font-size: 1.5em
+            padding-right: 1.2em
         &-map
-            display: block
-            border: 1px solid black
-            border-radius: .2em
-            position: absolute
-            z-index: 1
-            background-color: #DDDDDD
-            height: 4em
             &-button
                 font-family: $test-font
+                font-size: 1.5em
             &-checkbox
                 display: block
             &-label
                 display: inline
+            &-custom
+                position: relative
+                margin: auto
+                display: inline-block
+                padding: .3em
+                background-color: #DDDDDD
+                &-picker
+                    position: absolute
+                    z-index: 5
+                &-form
+                    display: flex
+                    &-input
+                        padding: .5em
+                        font-family: $test-font
