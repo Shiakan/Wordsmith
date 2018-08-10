@@ -13,6 +13,7 @@
             <section class="container">
                <h2><a class="article-link" href="{{ path('show',{'id':article.id}) }}">{{article.title}}</a></h2>
                 <small>Publié le {{article.dateInserted|date("d/m/Y")}} à {{article.dateInserted| date("H:i")}}</small>
+                <p class="preview">{{article.description}}</p>
                 <div class="tags">
                 {% for tag in article.tags %}
                     <a class="btn btn-tag" href="{{path('search_by_tag',{'id':tag.id})}}">{{tag.name}}</a>

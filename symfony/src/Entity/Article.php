@@ -59,6 +59,11 @@ class Article
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -206,4 +211,16 @@ class Article
         return $this->title;
         return $this->content;
         }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
 }

@@ -6,6 +6,7 @@ use App\Entity\Article;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ArticleType extends AbstractType
@@ -13,7 +14,10 @@ class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
+            ->add('title', TextType::class, [
+                'label' => 'Titre de l\'article'
+            ])
+            ->add('description')
             ->add('content', TextareaType::class, array('attr' => array('class' => 'ckeditor')))
             ->add('slug')
             ->add('tags')

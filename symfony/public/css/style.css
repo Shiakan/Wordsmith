@@ -59,6 +59,7 @@ small {
 }
 
 .navbar {
+    font-family: 'Spectral SC', serif;
     padding:1em;
     background-color: #0B0B0B;
     display:flex;
@@ -104,6 +105,11 @@ small {
 
 .article-link {
     color:#125C38; 
+}
+
+.preview {
+    text-align:justify;
+    font-size:1em;
 }
  .tags {
      margin-top:1em;
