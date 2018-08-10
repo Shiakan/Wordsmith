@@ -93,11 +93,6 @@ class User implements UserInterface
     private $rooms;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Room", mappedBy="participants")
-     */
-    private $myrooms;
-
-    /**
      * @ORM\OneToOne(targetEntity="App\Entity\Charactersheet", mappedBy="user", cascade={"persist", "remove"})
      */
     private $charactersheet;
@@ -107,6 +102,26 @@ class User implements UserInterface
      */
     private $characterProfile;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Room", mappedBy="playerOne", cascade={"persist", "remove"})
+     */
+    private $playerOne;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Room", mappedBy="playerTwo", cascade={"persist", "remove"})
+     */
+    private $playerTwo;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Room", mappedBy="playerThree", cascade={"persist", "remove"})
+     */
+    private $playerThree;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Room", mappedBy="playerFour", cascade={"persist", "remove"})
+     */
+    private $playerFour;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -114,7 +129,6 @@ class User implements UserInterface
         $this->posts = new ArrayCollection();
         $this->threads = new ArrayCollection();
         $this->rooms = new ArrayCollection();
-        $this->myrooms = new ArrayCollection();
         $this->isActive = 1;
         $this->dateInserted = new \DateTime();
         $this->dateUpdated = new \DateTime();
@@ -413,34 +427,6 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Room[]
-     */
-    public function getMyrooms(): Collection
-    {
-        return $this->myrooms;
-    }
-
-    public function addMyroom(Room $myroom): self
-    {
-        if (!$this->myrooms->contains($myroom)) {
-            $this->myrooms[] = $myroom;
-            $myroom->addParticipant($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMyroom(Room $myroom): self
-    {
-        if ($this->myrooms->contains($myroom)) {
-            $this->myrooms->removeElement($myroom);
-            $myroom->removeParticipant($this);
-        }
-
-        return $this;
-    }
-
     public function __toString(){
         return $this->username;
         }
@@ -474,6 +460,78 @@ class User implements UserInterface
         // set the owning side of the relation if necessary
         if ($this !== $characterProfile->getUser()) {
             $characterProfile->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function getPlayerOne(): ?Room
+    {
+        return $this->playerOne;
+    }
+
+    public function setPlayerOne(?Room $playerOne): self
+    {
+        $this->playerOne = $playerOne;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newPlayerOne = $playerOne === null ? null : $this;
+        if ($newPlayerOne !== $playerOne->getPlayerOne()) {
+            $playerOne->setPlayerOne($newPlayerOne);
+        }
+
+        return $this;
+    }
+
+    public function getPlayerTwo(): ?Room
+    {
+        return $this->playerTwo;
+    }
+
+    public function setPlayerTwo(?Room $playerTwo): self
+    {
+        $this->playerTwo = $playerTwo;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newPlayerTwo = $playerTwo === null ? null : $this;
+        if ($newPlayerTwo !== $playerTwo->getPlayerTwo()) {
+            $playerTwo->setPlayerTwo($newPlayerTwo);
+        }
+
+        return $this;
+    }
+
+    public function getPlayerThree(): ?Room
+    {
+        return $this->playerThree;
+    }
+
+    public function setPlayerThree(?Room $playerThree): self
+    {
+        $this->playerThree = $playerThree;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newPlayerThree = $playerThree === null ? null : $this;
+        if ($newPlayerThree !== $playerThree->getPlayerThree()) {
+            $playerThree->setPlayerThree($newPlayerThree);
+        }
+
+        return $this;
+    }
+
+    public function getPlayerFour(): ?Room
+    {
+        return $this->playerFour;
+    }
+
+    public function setPlayerFour(?Room $playerFour): self
+    {
+        $this->playerFour = $playerFour;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newPlayerFour = $playerFour === null ? null : $this;
+        if ($newPlayerFour !== $playerFour->getPlayerFour()) {
+            $playerFour->setPlayerFour($newPlayerFour);
         }
 
         return $this;
