@@ -17,118 +17,59 @@ import './gamescreen.sass';
  */
 class GameScreen extends React.Component {
   static propTypes = {
+    togglePicker: PropTypes.func.isRequired,
     toggleScreen: PropTypes.func.isRequired,
+    toggleGrid: PropTypes.func.isRequired,
+    onChangeColor: PropTypes.func.isRequired,
+    onInputChange: PropTypes.func.isRequired,
+    onSubmitName: PropTypes.func.isRequired,
+    onDisplayPlayer: PropTypes.func.isRequired,
+    createPlayer: PropTypes.func.isRequired,
     board: PropTypes.bool.isRequired,
     map: PropTypes.bool.isRequired,
+    grid: PropTypes.bool.isRequired,
+    color: PropTypes.string.isRequired,
+    toggle: PropTypes.bool.isRequired,
+    moving: PropTypes.bool.isRequired,
+    name: PropTypes.string.isRequired,
+    created: PropTypes.bool.isRequired,
+    typingName: PropTypes.string.isRequired,
+    coordX: PropTypes.number.isRequired,
+    coordY: PropTypes.number.isRequired,
   };
-
-  state = {
-    // board: false,
-    // map: true,
-    grid: true,
-    color: '#d4c4fb',
-    toggle: false,
-    moving: false,
-    created: false,
-    playerOne: {
-      typingName: '',
-      name: '',
-      coordX: '',
-      coordY: '',
-    },
-  }
 
   componentDidMount() {
     console.log('gameScreen loaded');
   }
 
-  handleGrid = () => {
-    const { grid } = this.state;
-
-    this.setState({
-      grid: !grid,
-    });
-  }
-
   handleChange = (e) => {
+    const { onInputChange } = this.props;
     const { value } = e.target;
-    this.setState({
-      playerOne: {
-        typingName: value,
-      },
-    });
+    onInputChange(value);
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { playerOne } = this.state;
-    const { typingName } = this.state.playerOne;
-    this.setState({
-      playerOne: {
-        name: typingName,
-        ...playerOne,
-      },
-    });
+    const { onSubmitName } = this.props;
+    onSubmitName();
   }
 
-  handleClick = () => {
-    const { board, map } = this.state;
-    console.log(this.state);
-
-    this.setState({
-      board: !board,
-      map: !map,
-    });
-  }
-
-  handleChangeComplete = (color) => {
-    this.setState({ color: color.hex });
-    console.log(this.state);
-    this.togglePicker();
-  };
-
-  togglePicker = () => {
-    const { toggle } = this.state;
-
-    this.setState({
-      toggle: !toggle,
-    });
-  }
-
-  createPlayer = () => {
-    this.setState({
-      moving: true,
-    });
+  changeColor = (color) => {
+    const { onChangeColor, togglePicker } = this.props;
+    onChangeColor(color.hex);
+    togglePicker();
   }
 
   displayPlayer = (e) => {
-    const { playerOne } = this.state;
-    this.setState({
-      playerOne: {
-        ...playerOne,
-        coordX: e.pageX,
-        coordY: e.pageY,
-      },
-      // moving: false,
-      created: true,
-    });
+    const { onDisplayPlayer } = this.props;
+    onDisplayPlayer(e);
   }
 
   render() {
     const {
-      // board,
-      // map,
-      grid,
-      color,
-      toggle,
-      moving,
-      created,
-
-    } = this.state;
-    const { toggleScreen, board, map } = this.props;
-    const {
-      typingName, name, coordX, coordY,
-    } = this.state.playerOne;
+      toggleScreen, toggleGrid, togglePicker, createPlayer, board, map,
+      grid, color, toggle, moving, created, typingName, coordX, coordY, name,
+    } = this.props;
     return (
       <div className="screen">
         <div className="screen-switch">
@@ -147,7 +88,7 @@ class GameScreen extends React.Component {
                   type="checkbox"
                   id="check"
                   className="screen-switch-map-checkbox"
-                  onChange={this.handleGrid}
+                  onChange={toggleGrid}
                   checked={grid}
                 />
                 <label
@@ -164,7 +105,7 @@ class GameScreen extends React.Component {
                   class="screen-switch-map-custom-picker"
                   color={color}
                   width="170px"
-                  onChangeComplete={this.handleChangeComplete}
+                  onChange={this.changeColor}
                   triangle="hide"
                 />
                 )}
@@ -172,7 +113,7 @@ class GameScreen extends React.Component {
                   <button
                     type="button"
                     style={{ backgroundColor: color }}
-                    onClick={this.togglePicker}
+                    onClick={togglePicker}
                   >
                   &nbsp;
                   </button>
@@ -185,7 +126,7 @@ class GameScreen extends React.Component {
                   />
                   <input
                     type="submit"
-                    onClick={this.createPlayer}
+                    onClick={createPlayer}
                     value="+"
                   />
 

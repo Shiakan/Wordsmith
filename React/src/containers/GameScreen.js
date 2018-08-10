@@ -9,7 +9,10 @@ import { connect } from 'react-redux';
 import GameScreen from 'src/components/GameScreen';
 
 // Action Creators
-import { toggleScreen } from 'src/store/reducers/gameScreen';
+import {
+  toggleScreen, toggleGrid, togglePicker, changeColor, submitName, createPlayer, changeInput,
+  typingName, name, coordX, coordY, movePlayer, created,
+} from 'src/store/reducers/gameScreen';
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation
@@ -21,6 +24,15 @@ import { toggleScreen } from 'src/store/reducers/gameScreen';
 const mapStateToProps = state => ({
   board: state.gameScreen.board,
   map: state.gameScreen.map,
+  grid: state.gameScreen.grid,
+  color: state.gameScreen.color,
+  toggle: state.gameScreen.toggle,
+  moving: state.gameScreen.moving,
+  created: state.gameScreen.created,
+  typingName: state.gameScreen.typingName,
+  name: state.gameScreen.name,
+  coordX: state.gameScreen.coordX,
+  coordY: state.gameScreen.coordY,
 });
 
 /* === Actions ===
@@ -33,6 +45,27 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   toggleScreen: () => {
     dispatch(toggleScreen());
+  },
+  toggleGrid: () => {
+    dispatch(toggleGrid());
+  },
+  togglePicker: () => {
+    dispatch(togglePicker());
+  },
+  onChangeColor: (value) => {
+    dispatch(changeColor(value));
+  },
+  createPlayer: () => {
+    dispatch(createPlayer());
+  },
+  onInputChange: (value) => {
+    dispatch(changeInput(value));
+  },
+  onSubmitName: () => {
+    dispatch(submitName());
+  },
+  onDisplayPlayer: (value) => {
+    dispatch(movePlayer(value));
   },
 });
 
