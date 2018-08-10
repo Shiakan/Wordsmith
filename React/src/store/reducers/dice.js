@@ -2,7 +2,8 @@
  * Initial State
  */
 const initialState = {
-  diceInput: '',
+  diceValue: '',
+  rolled: 0,
 };
 
 /**
@@ -14,7 +15,16 @@ const DICE_CHANGE = 'DICE_CHANGE';
 /**
  * Traitements
  */
-
+const roll = (dice) => {
+  let numberOfDice = dice[0];
+  const numberOfSides = dice.slice(2);
+  let total = 0;
+  for (numberOfDice; numberOfDice > 0; numberOfDice--) {
+    total += Math.floor(Math.random() * numberOfSides) + 1;
+  }
+  console.log(total);
+  return total;
+};
 /**
  * Reducer
  */
@@ -23,13 +33,13 @@ const reducer = (state = initialState, action = {}) => {
     case ROLL_DICE:
       return {
         ...state,
-        test: 'gg',
+        rolled: roll(state.diceValue),
       };
 
     case DICE_CHANGE:
       return {
         ...state,
-        diceInput: action.value,
+        diceValue: action.value,
       };
     default:
       return state;

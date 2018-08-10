@@ -20,7 +20,8 @@ import { rollDice, diceChange } from 'src/store/reducers/dice';
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
 const mapStateToProps = state => ({
-
+  diceValue: state.dice.diceValue,
+  rollResult: state.dice.rolled,
 });
 
 /* === Actions ===

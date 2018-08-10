@@ -18,6 +18,13 @@ class Dice extends React.Component {
   static propTypes = {
     rollDice: PropTypes.func.isRequired,
     diceChange: PropTypes.func.isRequired,
+    diceValue: PropTypes.string,
+    rollResult: PropTypes.number,
+  }
+
+  static defaultProps = {
+    diceValue: '',
+    rollResult: '',
   }
 
   componentDidMount() {
@@ -27,7 +34,7 @@ class Dice extends React.Component {
   handleSubmit = (evt) => {
     evt.preventDefault();
     const { rollDice } = this.props;
-    console.log(evt.value);
+    // console.log(rollDice);
     rollDice();
   }
 
@@ -35,14 +42,16 @@ class Dice extends React.Component {
     const { diceChange } = this.props;
     // Je recup la valeur du champ
     const { value } = evt.target;
+    console.log(value);
     // passer la valeur vers le state => disptach avec une action capable de prendre cette valeur
     diceChange(value);
   }
 
   render() {
-    // const {
-    //   rollDice,
-    // } = this.props;
+    const {
+      diceValue,
+      rollResult,
+    } = this.props;
     return (
       <div className="dice">
         <p className="dice-text">DiceTEST</p>
@@ -62,7 +71,7 @@ class Dice extends React.Component {
               className="dice-form-input"
               onChange={this.diceChange}
               placeholder="ex : 1d20"
-            //   value={tempAuteur}
+              value={diceValue}
             //   focus="on"
             />
             <input
@@ -72,7 +81,7 @@ class Dice extends React.Component {
               value="Roll"
             />
           </form>
-          <p className="dice-block-result"> Votre résultat est :</p>
+          <p className="dice-block-result"> Votre résultat est : {rollResult} </p>
           <button
             type="button"
             className="dice-block-share"
