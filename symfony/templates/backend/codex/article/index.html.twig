@@ -19,7 +19,7 @@
             <tr>
                 <td>{{ article.id }}</td>
                 <td>{{ article.title }}</td>
-                <td>{{ article.dateInserted ? article.dateInserted|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ article.dateInserted ? article.dateInserted|date('d-m-Y H:i:s') : '' }}</td>
                 <td>{{ article.status ? 'Visible' : 'Non visible' }}</td>
                 <td>
                     <a title="Voir l'article" class="btn btn-info" href="{{ path('backend_article_show', {'id': article.id}) }}"><i class="fab fa-readme"></i></a>

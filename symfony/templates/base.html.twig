@@ -2,37 +2,77 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        {% endblock %}
+        <title>{% block title %}Aetherlust{% endblock %}</title>
     </head>
     
     <body>
-    <ul>
-            <li>
-                <a href="{{path('homepage')}}">Home</a>
-            </li>
-            <li>
-                <a href="{{path('CGU')}}">About</a>
-            </li>
-            <li>
-                <a href="{{path('about')}}">CGU</a>
-            </li>
-            <li>
-                <a href="{{path('security_registration')}}">Inscription</a>
-            </li>
-            <li>
-                <a href="{{path('security_login')}}">Connexion</a>
-            </li>
-            <li>
-                <a href="{{path('security_logout')}}">Déconnexion</a>
-            </li>
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <li>
-                <a href="{{path('user_profile', {'id': app.user.id })}}">Mon profil</a>
-            </li>
-            {% endif %}
-        </ul>
-    {% block body %}   
+    {% block body %}
+
+        {% block header %}
+            {% block nav %}
+                <nav class="navbar">
+                    <div class="navbar-left">
+                        <ul>
+                            <li>
+                                <a href="{{path('homepage')}}">Home</a>
+                            </li>
+                            <li>
+                                <a href="{{path('codex')}}">Codex</a>
+                            </li>
+                            <li>
+                                <a href="#">Forum</a>
+                            </li>
+                            <li>
+                                <a href="#">Room</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="navbar-middle">
+                    
+                    </div>
+                    <div class="navbar-right">
+                        <ul>
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <li>
+                                Bienvenue <a href="{{path('user_profile', {'id': app.user.id })}}">{{ app.user.username }}</a>
+                            </li>
+                            <li>
+                                <a href="{{path('security_logout')}}">Déconnexion</a>
+                            </li>
+                            {% else %}
+                            <li>
+                                <a href="{{path('security_registration')}}">Inscription</a>
+                            </li>
+                            <li>
+                                <a href="{{path('security_login')}}">Connexion</a>
+                            </li>
+                        {% endif %}
+                        </ul>
+                    </div>
+                </nav>
+            {% endblock %}
+        {% endblock %}
+        <main>
+            {% block main %}
+            {% endblock %}
+        </main>
+        <footer>
+        {% block footer %}
+            <ul>
+                <li>
+                    <a href="{{path('CGU')}}">About</a>
+                </li>
+                <li>
+                    <a href="{{path('about')}}">CGU</a>
+                </li>
+            </ul>
+        {% endblock %}
+       </footer>
     {% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

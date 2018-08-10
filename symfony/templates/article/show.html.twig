@@ -1,26 +1,29 @@
-{% extends 'base.html.twig' %} {% block body %}
-    <div>
-        <h3>{{article.title}}</h3>
-        {% for tag in article.tags %}
-            <small>{{tag.name}}</small>
-        {% endfor %}
-        <p>{{article.content|raw}}</p>
-        <span>Ecrit le {{article.dateInserted|date("d/m/Y")}} à {{article.dateInserted| date("H:i")}}</span>
-    </div>
-    <div>
-        <h2>Les commentaires:</h2>
-        {% for comment in article.comments %}
-            <div>
-                <p>{{comment.content}}</p>
-                <span>Ecrit le {{comment.dateInserted|date("d/m/Y")}} à {{comment.dateInserted| date("H:i")}}</span>
-                <small>Par {{comment.author.username}}</small>
-            </div>
-        {% endfor %}
-         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            {{form_start(form)}}
-             {{ form_widget(form) }}
-             <button type="submit">Valider</button>
-            {{form_end(form)}}
-        {% endif %}
+{% extends 'base.html.twig' %} 
+{% block main %}
+    <div class="wrapper">
+        <article class="container">
+                <h2>{{article.title}}</h2>
+                {% for tag in article.tags %}
+                    <small>{{tag.name}}</small>
+                {% endfor %}
+                <p>{{article.content|raw}}</p>
+                <span>Ecrit le {{article.dateInserted|date("d/m/Y")}} à {{article.dateInserted| date("H:i")}}</span>
+        </article>
+        <section class="container">
+            <h2>Les commentaires:</h2>
+            {% for comment in article.comments %}
+                <div>
+                    <p>{{comment.content}}</p>
+                    <span>Ecrit le {{comment.dateInserted|date("d/m/Y")}} à {{comment.dateInserted| date("H:i")}}</span>
+                    <small>Par {{comment.author.username}}</small>
+                </div>
+            {% endfor %}
+             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                {{form_start(form)}}
+                 {{ form_widget(form) }}
+                 <button type="submit">Valider</button>
+                {{form_end(form)}}
+            {% endif %}
+        </section>
     </div>
 {% endblock %}

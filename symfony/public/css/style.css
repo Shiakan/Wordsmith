@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css?family=Spectral+SC:400,400i,700');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color:#0D0D0D;
+    color:#BDBDBD;
+}
+
+a {
+    font-family: 'Spectral SC', serif;
+    color: #A56E3A;
+    text-decoration:none;
+}
+
+a:hover {
+    color: #843C1B;
+}
+
+a:active {
+    color: #125C38;
+}
+
+h1 {
+    font-family: 'Spectral SC', serif;
+    color: #125C38; 
+}
+
+h2 {
+    font-family: 'Spectral SC', serif;
+    font-size:1.6em;
+    font-weight:400;
+    color: #125C38;  
+}
+
+footer {
+    padding:1em;
+    background-color: #0B0B0B;
+    display:flex;
+    justify-content:space-between;
+    border-top:1px solid #503415;
+    text-transform:uppercase;
+}
+
+footer ul li {
+    list-style:none;
+    display:inline-block;
+}
+
+.navbar {
+    padding:1em;
+    background-color: #0B0B0B;
+    display:flex;
+    justify-content:space-between;
+    border-bottom:1px solid #503415;
+    text-transform:uppercase;
+}
+
+.navbar ul li {
+    list-style:none;
+    display:inline-block;
+}
+
+.navbar-left ul li {
+    margin-right:0.8em;
+}
+
+.navbar-right ul li {
+    margin-left:0.8em;
+}
+
+.tagbar {
+    margin-bottom:1em;
+}
+.tagbar li {
+    list-style:none;
+    display:inline-block;
+}
+
+.wrapper {
+    width:900px;
+    margin:auto;
+    background-color:#0B0B0B; 
+    padding:1em;
+}
+
+.container{
+    background-color:#0D0D0D;  
+    border:1px solid  #503415; 
+    padding:2em;
+    margin-bottom:2em;
+}

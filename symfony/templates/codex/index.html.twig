@@ -1,26 +1,29 @@
 {% extends 'base.html.twig' %}
-        {% block body %}
-                <ul>
-                     {% for tag in tags %}
-                    <li>
-                        <a href="{{path('showByTag',{'id':tag.id})}}">{{tag.name}}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-                     {% for article in articles %}
-                    <div>
-                        <h3>{{article.title}}</h3>
-                        {% for tag in article.tags %}
-                        <small>{{tag.name}}</small>
-                        {% endfor %}
-                        <span>Ecrit le {{article.dateInserted|date("d/m/Y")}} à {{article.dateInserted| date("H:i")}}</span>
-                        <a href="{{ path('show',{'id':article.id}) }}">Acceder à la vue</a>
-                    </div>
-                    {% endfor %}
-                <ul>
-                    <li>
-                        <a href="{{path('homepage')}}">Revenir à l'acceuil</a>
-                     </li>
-                </ul>
-        {% endblock %}
+
+{% block main %}
+    <div class="wrapper">
+        <ul class="tagbar">
+                {% for tag in tags %}
+            <li>
+                <a href="{{path('showByTag',{'id':tag.id})}}">{{tag.name}}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% for article in articles %}
+            <section class="container">
+                <h2>{{article.title}}</h2>
+                <small>Publié le {{article.dateInserted|date("d/m/Y")}} à {{article.dateInserted| date("H:i")}}</small>
+                <a href="{{ path('show',{'id':article.id}) }}">Lire</a>
+                {% for tag in article.tags %}
+                    <small>{{tag.name}}</small>
+                {% endfor %}
+            </section>
+        {% endfor %}
+        <ul>-
+            <li>
+                <a href="{{path('homepage')}}">Revenir à l'acceuil</a>
+                </li>
+        </ul>
+    </div>
+{% endblock %}
 
