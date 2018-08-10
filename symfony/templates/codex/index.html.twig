@@ -1,15 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-    <div class="wrapper">
-        <ul class="tagbar">
-                {% for tag in tags %}
-            <li>
-                <a href="{{path('search_by_tag',{'id':tag.id})}}">{{tag.name}}</a>
-            </li>
-            {% endfor %}
-        </ul>
-        {% for article in articles %}
+    <div class="wrapper wrapper--blog">
+        <div class="article-container">
+            {% for article in articles %}
             <section class="container">
                <div class="article-title">
                     <h2><a class="article-link" href="{{ path('show',{'id':article.id}) }}">{{article.title}}</a></h2>
@@ -22,8 +16,19 @@
                 {% endfor %}
                 </div>
             </section>
-        {% endfor %}
-        <a href="{{path('homepage')}}">Revenir à l'acceuil</a>
+            {% endfor %}
+            <a href="{{path('homepage')}}">Revenir à l'acceuil</a>
+        </div>
+        <div class="tagbar">
+            <h2>Navigation</h2>
+            <ol>
+                {% for tag in tags %}
+                <li>
+                    <a href="{{path('search_by_tag',{'id':tag.id})}}">{{tag.name}}</a>
+                </li>
+                {% endfor %}
+            </ol>   
+        </div>   
     </div>
 {% endblock %}
 

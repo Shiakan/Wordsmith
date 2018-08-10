@@ -5,6 +5,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -57,6 +58,7 @@ small {
     text-transform:uppercase;
     font-size:0.9em;
     margin:0;
+    letter-spacing:0.075em;
 }
 
 .navbar {
@@ -83,11 +85,21 @@ small {
 }
 
 .tagbar {
-    margin-bottom:1em;
+    width:25%;
+    padding:0.3em 0.8em;
+    background-color:#0D0D0D;  
+    border:1px solid  #503415;
+    margin-left:1em;
 }
-.tagbar li {
-    list-style:none;
-    display:inline-block;
+.tagbar ol {
+    margin-left:1.2em;
+    color:#125C38;
+    list-style-type: upper-roman;
+}
+
+.tagbar h2 {
+    border-bottom: 1px solid  #503415; 
+    margin-bottom:0.2em;
 }
 
 .wrapper {
@@ -97,11 +109,20 @@ small {
     padding:1em;
 }
 
-.container{
+.wrapper--blog {
+    display:flex;
+    align-items: flex-start;
+}
+
+.container {
     background-color:#0D0D0D;  
     border:1px solid  #503415; 
     padding:2em;
     margin-bottom:2em;
+}
+
+.article-container {
+    width:75%;
 }
 
 .article-title {
@@ -109,7 +130,6 @@ small {
     justify-content:space-between;
     align-items:center;
     border-bottom:1px solid  #503415;
-    margin-bottom:1em;
 }
 .article-link {
     color:#125C38; 
@@ -117,10 +137,11 @@ small {
 
 .preview {
     text-align:justify;
-    font-size:1em;
+    font-size:0.9em;
+    padding:0.5em 1em;
 }
  .tags {
-     margin-top:1em;
+     margin-left:1em;
  }
 
 .btn {
