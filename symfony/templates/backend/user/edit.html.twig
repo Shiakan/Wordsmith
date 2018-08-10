@@ -4,8 +4,7 @@
 {% block title %}Edit User{% endblock %}
 
 {% block main %}
-    <h1>Edit User</h1>
-    <a class="btn btn-primary mb-2" href="{{ path('backend_user_index') }}">Retour</a>
-
+    <a class="btn btn-primary mt-2 mb-2" href="{{ path('backend_user_index') }}">Retour</a>
+    <h1>Modifier l'utilisateur</h1>
     {{ include('backend/user/_form.html.twig', {'button_label': 'Envoyer'}) }}
 {% endblock %}

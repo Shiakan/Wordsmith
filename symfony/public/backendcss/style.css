@@ -19,3 +19,8 @@
 #dropdownMenuLink1:active {
     border:none;
 }
+
+.fas {
+    font-size:1.5em;
+    margin-top:0.2rem;
+}

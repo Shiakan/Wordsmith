@@ -64,4 +64,24 @@ class UserBackendController extends Controller
 
         return $this->redirectToRoute('backend_user_index');
     }
+
+    /**
+     * @Route("/{id}/hide", name="backend_user_hide")
+     */
+    public function hide(User $user)
+    {   
+        $em = $this->getDoctrine()->getManager();
+
+        if($user->getIsActive() === true) {
+            // On passe le statut à false pour que la réponse ne soit plus affichée
+            $user->setIsActive(false);
+            $em->flush();
+        } else {
+            // On passe le statut à ftrue pour que la réponse soit affichée
+            $user->setIsActive(true);
+            $em->flush();
+        }
+        //On redirige ensuite sur la page de la question où l'on se trouvait
+        return $this->redirectToRoute('backend_user_index');
+    }
 }

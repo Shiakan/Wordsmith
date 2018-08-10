@@ -7,9 +7,14 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
@@ -18,8 +23,16 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username')
-            ->add('email')
+            ->add('username', TextType::class, [
+                'label' => 'Nom de l\'utilisateur'
+            ])
+            ->add('email', EmailType::class, [
+                'constraints' => [
+                    New Email([
+                        'mode' => 'html5'
+                    ])
+                ]  
+            ])
             ->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event){
                 // On récupère le formulaire en cours de validation
                 $user = $event->getData();
@@ -75,8 +88,12 @@ class UserType extends AbstractType
                     ]);
                 }
             })
-            ->add('isActive')
-            ->add('birthdate')
+            ->add('isActive', CheckboxType::class, [
+                'label' => 'Utilisateur actif'
+            ])
+            ->add('birthdate', DateType::class, [
+                'label' => 'Date de naissance'
+            ])
             ->add('role')
         ;
     }
