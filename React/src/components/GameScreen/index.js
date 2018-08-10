@@ -118,34 +118,72 @@ class GameScreen extends React.Component {
       created,
 
     } = this.state;
-    const { typingName, name, coordX, coordY } = this.state.playerOne;
+    const {
+      typingName, name, coordX, coordY,
+    } = this.state.playerOne;
     return (
       <div className="screen">
         <div className="screen-switch">
           {map
             && (
-            <form className="screen-switch-map">
-              <button
-                type="button"
-                className="screen-switch-map-button"
-                onClick={this.handleClick}
-              >
+            <div>
+              <form className="screen-switch-map">
+                <button
+                  type="button"
+                  className="screen-switch-map-button"
+                  onClick={this.handleClick}
+                >
               Switch to Board
-              </button>
-              <input
-                type="checkbox"
-                id="check"
-                className="screen-switch-map-checkbox"
-                onChange={this.handleGrid}
-                checked={grid}
-              />
-              <label
-                className="screen-switch-map-label"
-                htmlFor="check"
-              >
-              Grid
-              </label>
-            </form>
+                </button>
+                <input
+                  type="checkbox"
+                  id="check"
+                  className="screen-switch-map-checkbox"
+                  onChange={this.handleGrid}
+                  checked={grid}
+                />
+                <label
+                  className="screen-switch-map-label"
+                  htmlFor="check"
+                >
+              Quadrillage
+                </label>
+              </form>
+              <div className="screen-switch-map-custom">
+                {toggle
+                && (
+                <GithubPicker
+                  class="screen-switch-map-custom-picker"
+                  color={color}
+                  width="170px"
+                  onChangeComplete={this.handleChangeComplete}
+                  triangle="hide"
+                />
+                )}
+                <form className="screen-switch-map-custom-form" onSubmit={this.handleSubmit}>
+                  <button
+                    type="button"
+                    style={{ backgroundColor: color }}
+                    onClick={this.togglePicker}
+                  >
+                  &nbsp;
+                  </button>
+                  <input
+                    className="screen-switch-map-custom-form-input"
+                    type="text"
+                    placeholder="Nom du personnage"
+                    onChange={this.handleChange}
+                    value={typingName}
+                  />
+                  <input
+                    type="submit"
+                    onClick={this.createPlayer}
+                    value="+"
+                  />
+
+                </form>
+              </div>
+            </div>
             ) }
           {board
             && (
@@ -167,7 +205,7 @@ class GameScreen extends React.Component {
             className="screen-map-image"
           />
           {created && (
-          <div 
+          <div
             className="screen-map-player"
             style={{
               position: 'absolute',
@@ -190,39 +228,7 @@ class GameScreen extends React.Component {
             />
           </div>
           ) }
-          <div className="screen-map-custom">
-            {toggle
-                && (
-                <GithubPicker
-                  class="screen-map-custom-picker"
-                  color={color}
-                  onChangeComplete={this.handleChangeComplete}
-                  triangle="hide"
-                />
-                )}
-            <form className="screen-map-custom-form" onSubmit={this.handleSubmit}>
-              <button
-                type="button"
-                style={{ backgroundColor: color }}
-                onClick={this.togglePicker}
-              >
-              &nbsp;
-              </button>
-              <input
-                className="screen-map-custom-form-input"
-                type="text"
-                placeholder="Nom du personnage"
-                onChange={this.handleChange}
-                value={typingName}
-              />
-              <input
-                type="submit"
-                onClick={this.createPlayer}
-                value="+"
-              />
 
-            </form>
-          </div>
         </div>
         ) }
         {board && <div className="screen-board">THIS IS THE BOARD</div> }
