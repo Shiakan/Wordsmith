@@ -17,8 +17,9 @@ import './dice.sass';
 class Dice extends React.Component {
   static propTypes = {
     rollDice: PropTypes.func.isRequired,
+    diceChange: PropTypes.func.isRequired,
   }
-  
+
   componentDidMount() {
     console.log('Dice cDM');
   }
@@ -26,8 +27,16 @@ class Dice extends React.Component {
   handleSubmit = (evt) => {
     evt.preventDefault();
     const { rollDice } = this.props;
-    console.log('ok');
+    console.log(evt.value);
     rollDice();
+  }
+
+  diceChange = (evt) => {
+    const { diceChange } = this.props;
+    // Je recup la valeur du champ
+    const { value } = evt.target;
+    // passer la valeur vers le state => disptach avec une action capable de prendre cette valeur
+    diceChange(value);
   }
 
   render() {
@@ -51,7 +60,8 @@ class Dice extends React.Component {
             <input
               type="text"
               className="dice-form-input"
-            //   onChange={this.auteurChange}
+              onChange={this.diceChange}
+              placeholder="ex : 1d20"
             //   value={tempAuteur}
             //   focus="on"
             />

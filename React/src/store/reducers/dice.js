@@ -2,13 +2,14 @@
  * Initial State
  */
 const initialState = {
-  test: 'test',
+  diceInput: '',
 };
 
 /**
  * Types
  */
 const ROLL_DICE = 'ROLL_DICE';
+const DICE_CHANGE = 'DICE_CHANGE';
 
 /**
  * Traitements
@@ -25,6 +26,11 @@ const reducer = (state = initialState, action = {}) => {
         test: 'gg',
       };
 
+    case DICE_CHANGE:
+      return {
+        ...state,
+        diceInput: action.value,
+      };
     default:
       return state;
   }
@@ -36,6 +42,11 @@ const reducer = (state = initialState, action = {}) => {
 
 export const rollDice = () => ({
   type: ROLL_DICE,
+});
+
+export const diceChange = value => ({
+  type: DICE_CHANGE,
+  value,
 });
 
 /**
