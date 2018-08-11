@@ -8,6 +8,7 @@ use App\Entity\User;
 use App\Form\LoginType;
 use App\Entity\Charactersheet;
 use App\Form\RegistrationType;
+use App\Entity\CharacterProfile;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -39,6 +40,8 @@ class SecurityController extends Controller
             $user->setPassword($hash);
             $manager->persist($user);
             $manager->flush();
+
+            $this->createSheets($user);
 
             // On redirige vers le login
             return $this->redirectToRoute('security_login');
@@ -75,6 +78,24 @@ class SecurityController extends Controller
             );
         }
     }
+
+    public function createSheets($user)
+    {
+        $characterProfile = new CharacterProfile();
+        $charactersheet = new Charactersheet();
+
+        $em = $this->getDoctrine()->getManager();
+        $characterProfile->setUser($user);
+        $characterProfile->setAvatar('rdgregz');
+        $em->persist($characterProfile);
+        $em->flush();
+
+        $charactersheet->setUser($user);
+        $em->persist($charactersheet);
+        $em->flush();
+
+    }
+
     /**
      * @Route("/logout", name="security_logout")
      */
