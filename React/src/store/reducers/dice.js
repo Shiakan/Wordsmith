@@ -15,9 +15,11 @@ const DICE_CHANGE = 'DICE_CHANGE';
 /**
  * Traitements
  */
+// const numberOfSides = dice.slice(2);
+
 const roll = (dice) => {
-  let numberOfDice = dice[0];
-  const numberOfSides = dice.slice(2);
+  let numberOfDice = dice.split(/d|D/)[0];
+  const numberOfSides = dice.split(/d|D/)[1];
   let total = 0;
   console.log(numberOfSides);
   for (numberOfDice; numberOfDice > 0; numberOfDice--) {
