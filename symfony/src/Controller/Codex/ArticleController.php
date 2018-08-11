@@ -39,11 +39,23 @@ class ArticleController extends Controller
             $em->flush();
             return $this->redirectToRoute('show',['id'=>$article->getId()]);
         }
-        return $this->render('article/show.html.twig', [
+        return $this->render('codex/article/show.html.twig', [
             'article'=> $article,
             'tags' => $tags,
             'form' => $form->createView(),
         ]); 
+    }
+
+    /**
+     * @Route("/codex/show/tag/{id}", name="search_by_tags")
+     */
+    public function findArticlesByTag(Tag $tag)
+    {
+        $articles = $tag->getArticles();
+        return $this->render('codex/article/taglist.html.twig', [
+            'articles' =>$articles, 
+            'tag'=>$tag,
+        ]);
     }
     
 }

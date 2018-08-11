@@ -3,7 +3,7 @@
     <ol>
         {% for tag in tags %}
         <li>
-            <a href="{{path('search_by_tag',{'id':tag.id})}}">{{tag.name}}</a>
+            <a href="{{path('search_by_tags',{'id':tag.id})}}">{{tag.name}}</a>
         </li>
         {% endfor %}
     </ol>   

@@ -15,7 +15,7 @@
             <p class="preview">{{article.description}} <a href="{{ path('show',{'id':article.id}) }}">Lire la suite</a></p>
             <div class="tags">
             {% for tag in article.tags %}
-                <a class="btn btn-tag" href="{{path('search_by_tag',{'id':tag.id})}}">{{tag.name}}</a>
+                <a class="btn btn-tag" href="{{path('search_by_tags',{'id':tag.id})}}">{{tag.name}}</a>
             {% endfor %}
             </div>
         </section>
