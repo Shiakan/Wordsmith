@@ -55,7 +55,7 @@ class Dice extends React.Component {
     return (
       <div className="dice">
         <p className="dice-text">DiceTEST</p>
-        <div
+        <img
           className="dice-img"
           src="src/assets/img/dicesTest1.png"
           alt="some roleplay dices"
