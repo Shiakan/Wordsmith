@@ -1,8 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-    HOMEPAGE
-    <a href="{{path('codex')}}">Codex</a>
-    <a href="{{path('backend_article_index')}}">Backend Article</a>
-    <a href="{{path('backend_tag_index')}}">Backend Tag</a>
+<div class="wrapper-homepage">
+    <div class="container">
+        HOMEPAGE
+        <a href="{{path('codex')}}">Codex</a>
+        <a href="{{path('backend_article_index')}}">Backend Article</a>
+        <a href="{{path('backend_tag_index')}}">Backend Tag</a>
+    </div>
+</div>
 {% endblock %}

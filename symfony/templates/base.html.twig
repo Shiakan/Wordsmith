@@ -22,10 +22,10 @@
                     <div class="navbar-left">
                         <ul>
                             <li>
-                                <a href="{{path('homepage')}}">Home</a>
+                                <a class="{{ app.request.get('_route') == 'homepage' ? 'active' }}" href="{{path('homepage')}}">Portail</a>
                             </li>
                             <li>
-                                <a href="{{path('codex')}}">Codex</a>
+                                <a class="{{ app.request.get('_route') == 'codex' ? 'active' }}" href="{{path('codex')}}">Codex</a>
                             </li>
                             <li>
                                 <a href="#">Forum</a>

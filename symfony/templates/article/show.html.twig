@@ -2,6 +2,7 @@
 {% block main %}
 {{ include('codex/aside.html.twig') }}
     <div class="wrapper">
+        <a href="{{path('homepage')}}">Revenir à l'acceuil</a>
         <article class="container container--article">
             <h1>{{article.title}}</h1>
             <div class="article-content">
@@ -26,6 +27,6 @@
                 {{form_end(form)}}
             {% endif %}
         </section>
-        <a href="{{path('homepage')}}">Revenir à l'acceuil</a>
+        
     </div>
 {% endblock %}

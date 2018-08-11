@@ -3,8 +3,7 @@
 {% block title %}New Article{% endblock %}
 
 {% block main %}
-    <a class="btn btn-primary mb-2" href="{{ path('backend_article_index') }}">Retour</a>
-    <h1>Rédiger un nouvel article</h1>
+    <h1 class="mb-3 mt-3">Rédiger un nouvel article</h1>
 
     {{ include('backend/codex/article/_form.html.twig') }}
 

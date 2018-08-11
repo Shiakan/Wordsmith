@@ -14,6 +14,7 @@ body {
     background-attachment:fixed;
     color:#BDBDBD;
     font-family: Arial, Helvetica, sans-serif;
+    position:relative;
 }
 
 a {
@@ -26,7 +27,7 @@ a:hover {
     color: #843C1B;
 }
 
-a:active {
+.active {
     color: #125C38;
 }
 
@@ -39,14 +40,12 @@ h1 {
     text-align:center;
     margin: 0;
 }
-
 h2 {
     font-family: 'Spectral SC', serif;
     font-size:1.6em;
     font-weight:400;
     color: #125C38;  
 }
-
 footer {
     padding:1em;
     background-color: #0B0B0B;
@@ -54,8 +53,11 @@ footer {
     justify-content:space-between;
     border-top:1px solid #503415;
     text-transform:uppercase;
-}
+    position: absolute;
+    bottom: 0px;
+    width:100%;
 
+}
 footer ul li {
     list-style:none;
     display:inline-block;
@@ -81,21 +83,17 @@ small {
     border-bottom:1px solid #503415;
     text-transform:uppercase;
 }
-
 .navbar ul li {
     list-style:none;
     display:inline-block;
     margin-top:1em;
 }
-
 .navbar-left ul li {
     margin-right:0.8em;
 }
-
 .navbar-right ul li {
     margin-left:0.8em;
 }
-
 .logo {
     height:50px;
 }
@@ -113,19 +111,22 @@ small {
     color:#125C38;
     list-style-type: upper-roman;
 }
-
 .tagbar h2 {
     border-bottom: 1px solid  #503415; 
     margin-bottom:0.2em;
 }
-
 .wrapper {
     width:45%;
     margin:auto;
     background-color:#0B0B0B; 
-    padding:5em 1em 1em 1em;
+    padding:5em 1em 5em 1em;
 }
-
+.wrapper-homepage {
+    padding:5em 1em 1em 1em;
+    width:100%;
+    height:100vh;
+    background-color:none;
+}
 .container {
     background-color:#0D0D0D;  
     border:1px solid  #503415; 
@@ -133,30 +134,33 @@ small {
     margin-bottom:2em;
 }
 
+.jumbotron {
+    width:100%;
+    height:500px;
+    background-image: url('https://nsa39.casimages.com/img/2018/08/11//180811012328587853.jpg');  
+    padding:2em;
+    margin-bottom:2em;
+    border-radius:1em;
+}
 .article-content {
     margin:0.5em;
     text-align:justify;
 }
-
 .article-content p {
     margin: 0.5em 0em;
 }
-
 .article-content td {
     text-align:center;
     padding:0.3em 0.8em;
     border:1px solid  #503415;
 }
-
 .article-content table {
     border-collapse: collapse;
     margin:1em;
 }
-
 .container--article h2 {
     color: #A56E3A;
 }
-
 .article-title {
     display:flex;
     justify-content:space-between;
@@ -166,7 +170,6 @@ small {
 .article-link {
     color:#125C38; 
 }
-
 .preview {
     text-align:justify;
     font-size:0.9em;
@@ -174,8 +177,7 @@ small {
 }
  .tags {
      margin-left:1em;
- }
-
+}
 .btn {
     padding:0.1em 0.3em;
     border-radius:0.2em;
@@ -183,33 +185,27 @@ small {
     font-size:0.8em;
     font-weight:600;
 }
-
 .btn-tag {
     background-color: #125C38;  
     color: #BDBDBD;
     border:1px solid rgb(15, 49, 33);
 }
-
 .btn-tag:hover {
     background-color: rgb(15, 49, 33);  
     color: #BDBDBD;
 }
-
 .comment {
     background-color:#0b0b0b;
 }
-
 .comment-header {
     display:flex;
 }
-
 .comment h4 {
     font-family: 'Spectral SC', serif;
     font-size:1.2em;
     font-weight:400;
     color: #A56E3A;
 }
-
 .comment small {
     margin-left:1em;
     margin-top:0.2em;

@@ -1,10 +1,10 @@
 {% extends 'backend/basebackend.html.twig' %}
 
 
-{% block title %}Edit User{% endblock %}
+{% block title %}Modifier l'utilisateur{% endblock %}
 
 {% block main %}
-    <a class="btn btn-primary mt-2 mb-2" href="{{ path('backend_user_index') }}">Retour</a>
-    <h1>Modifier l'utilisateur</h1>
+    
+    <h1 class="mb-3 mt-3">Modifier l'utilisateur</h1>
     {{ include('backend/user/_form.html.twig', {'button_label': 'Envoyer'}) }}
 {% endblock %}

@@ -1,10 +1,9 @@
 {% extends 'backend/basebackend.html.twig' %}
 
-{% block title %}Edit Tag{% endblock %}
+{% block title %}Modifier le tag{% endblock %}
 
 {% block main %}
-    <h1>Modifier le tag</h1>
-    <a class="btn btn-primary mb-2" href="{{ path('backend_tag_index') }}">Retour</a>
+    <h1 class="mb-3 mt-3">Modifier le tag</h1>
 
     {{ include('backend/codex/tag/_form.html.twig', {'button_label': 'Modifier'}) }}
 

@@ -1,3 +1,7 @@
+body {
+    height:80vh;
+}
+
 .btn-delete {
     display:inline-block;
 }
@@ -19,12 +23,20 @@
 #dropdownMenuLink1:active {
     border:none;
 }
-
+.btn {
+    padding:1em 1.5em;
+}
 .fas, .fab {
-    font-size:1.5em;
-    margin-top:0.2rem;
+    font-size:1.2em;
+    /* margin-top:0.2rem; */
 }
 
 #container {
-    margin-top:2rem;
+    margin:auto;
+    width:80%;
+    height:100vh;
+}
+
+.col {
+    overflow:auto;
 }
