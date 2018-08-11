@@ -25,7 +25,7 @@ class UserController extends Controller
     }
 
      /**
-     * @Route("/profile/{id}/edit", name="user_profile_edit", methods="GET|POST")
+     * @Route("/profil/{id}/edit", name="user_profile_edit", methods="GET|POST")
      */
     public function edit(Request $request, User $user, UserPasswordEncoderInterface $encoder): Response
     {
