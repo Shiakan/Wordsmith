@@ -1,18 +1,22 @@
-{% extends 'base.html.twig' %} {% block body %}
+{% extends 'base.html.twig' %} 
+{% block title %} {{tag.name}}{% endblock %}
 
+{% block main %}
+<div class="wrapper-list">
 {% for article in articles %}
-<div>
-    <h3>{{article.title}}</h3>
-    {% for tag in article.tags %}
-    <small>{{tag.name}}</small>
+    <section class="container">
+        <div class="article-title">
+            <h2><a class="article-link" href="{{ path('show',{'id':article.id}) }}">{{article.title}}</a></h2>
+            <small>Publié le {{article.dateInserted|date("d/m/Y")}}</small>
+        </div>
+        <p class="preview">{{article.description}} <a href="{{ path('show',{'id':article.id}) }}">Lire la suite</a></p>
+        <div class="tags">
+        {% for tag in article.tags %}
+            <a class="btn btn-tag" href="{{path('search_by_tag',{'id':tag.id})}}">{{tag.name}}</a>
+        {% endfor %}
+        </div>
+    </section>
     {% endfor %}
-    <span>Ecrit le {{article.dateInserted|date("d/m/Y")}} à {{article.dateInserted| date("H:i")}}</span>
-    <a href="{{ path('show',{'id':article.id}) }}">Acceder à la vue</a>
+    <a href="{{path('codex')}}">Retour</a>
 </div>
-{% endfor %}
-<ul>
-    <li>
-        <a href="{{path('homepage')}}">Revenir à l'acceuil</a>
-    </li>
-</ul>
 {% endblock %}

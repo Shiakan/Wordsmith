@@ -3,14 +3,14 @@
 {{ include('codex/aside.html.twig') }}
     <div class="wrapper">
         <a href="{{path('homepage')}}">Revenir à l'acceuil</a>
-        <article class="container container--article">
+        <article class="container container-article">
             <h1>{{article.title}}</h1>
             <div class="article-content">
                 {{article.content|raw}}
             </div>
             <small>Publié le {{article.dateInserted|date("d/m/Y")}}.</small>
         </article>
-        <section class="container">
+        <section class="container container-comment">
             <h2>Commentaires</h2>
             {% for comment in article.comments %}
                 <div class="comment">
@@ -23,7 +23,7 @@
              {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 {{form_start(form)}}
                  {{ form_widget(form) }}
-                 <button type="submit">Valider</button>
+                 <button type="submit">Poster</button>
                 {{form_end(form)}}
             {% endif %}
         </section>
