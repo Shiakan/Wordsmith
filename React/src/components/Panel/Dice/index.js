@@ -3,7 +3,6 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-
 /**
  * Local import
  */
@@ -73,6 +72,12 @@ class Dice extends React.Component {
               placeholder="ex : 1d20"
               value={diceValue}
             />
+            {/* <AwesomeButton
+              type="primary submit"
+              cssModule={AwesomeButtonStyles}
+            >
+              Roll
+            </AwesomeButton> */}
             <button
               type="submit"
               className="dice-block-form-roll"
