@@ -1,3 +1,5 @@
+import { empty } from "rxjs/observable/empty";
+
 /**
  * Initial State
  */
@@ -18,16 +20,25 @@ const DICE_CHANGE = 'DICE_CHANGE';
 // const numberOfSides = dice.slice(2);
 
 const roll = (dice) => {
-  let numberOfDice = dice.split(/d|D/)[0];
+  const numberOfDices = dice.split(/d|D/)[0];
   const numberOfSides = dice.split(/d|D/)[1];
   let total = 0;
+  console.log(numberOfDices);
   console.log(numberOfSides);
-  for (numberOfDice; numberOfDice > 0; numberOfDice--) {
-    total += Math.floor(Math.random() * numberOfSides) + 1;
+  if (typeof (numberOfSides) !== 'undefined' && (numberOfSides && numberOfDices > '0') && !Number.isNaN(Number(total))) {
+    for (let dices = 0; dices < numberOfDices; dices += 1) {
+      total += Math.floor(Math.random() * numberOfSides) + 1;
+      // console.log(total);
+    }
+    // console.log(total);
+    return total;
   }
-  console.log(total);
-  return total;
+
+  return 777;
 };
+
+// if (typeof (numberOfSides) !== 'undefined' && (numberOfSides && numberOfDices > '0') && !Number.isNaN(total)) {
+
 /**
  * Reducer
  */

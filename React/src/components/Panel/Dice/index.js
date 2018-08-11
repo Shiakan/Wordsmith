@@ -62,24 +62,25 @@ class Dice extends React.Component {
         />
         <div className="dice-block">
           <form
-            className="dice-form"
+            className="dice-block-form"
             autoComplete="off"
             onSubmit={this.handleSubmit}
           >
             <input
               type="text"
-              className="dice-form-input"
+              className="dice-block-form-input"
               onChange={this.diceChange}
               placeholder="ex : 1d20"
               value={diceValue}
-            //   focus="on"
             />
-            <input
+            <button
               type="submit"
-              className="dice-form-roll"
+              className="dice-block-form-roll"
               // onClick={this.handleSumbit}
               value="Roll"
-            />
+            >
+              Roll
+            </button>
           </form>
           <p className="dice-block-result"> Votre résultat est : {rollResult} </p>
           <button
