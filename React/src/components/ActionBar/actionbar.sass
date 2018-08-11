@@ -7,16 +7,11 @@
  * Styles
  */
 .actionBar
-  // height: 60%
-  // width: 100%
-  // border: 1px solid black
-  // text-align: center
   grid-area: a
   display: grid
   grid-template-areas: "mj mj mj mj mj" "table table table table table" ". player player player ."
   grid-template-columns: 5% 30% 30% 30% 5%
   grid-template-rows: 25% auto 25%
-  // grid-gap: .5em
 
   &-mj
     grid-area: mj
@@ -28,10 +23,8 @@
   &-table
     background: url(../../assets/img/woodtable.jpg) no-repeat center
     background-size: cover
-    // margin: 0 auto
     grid-area: table
     background-color: brown
-    // width: 80%
     grid-column: 2 / 5
     display: grid
     grid-template-areas: ". . . . ."". dice sheet help ."". . . . ."
@@ -41,16 +34,10 @@
     border-radius: .7em
     &-dice
       grid-area: dice
-      // grid-column: 2
-      // grid-row: 2
     &-sheet
       grid-area: sheet
-      // grid-column: 3
-      // grid-row: 2
     &-help
       grid-area: help
-      // grid-column: 4
-      // grid-row: 2
   &-player
     display: grid
     grid-area: player
