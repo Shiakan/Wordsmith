@@ -6,12 +6,11 @@ import { connect } from 'react-redux';
 /**
  * Local import
  */
-import GameScreen from 'src/components/GameScreen';
+import SwitchMap from 'src/components/GameScreen/SwitchMap';
 
 // Action Creators
 import {
-  toggleScreen,
-  movePlayer,
+  toggleScreen, toggleGrid,
 } from 'src/store/reducers/gameScreen';
 
 /* === State (données) ===
@@ -22,11 +21,7 @@ import {
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
 const mapStateToProps = state => ({
-  board: state.gameScreen.board,
-  map: state.gameScreen.map,
   grid: state.gameScreen.grid,
-  moving: state.gameScreen.moving,
-  created: state.gameScreen.created,
 });
 
 /* === Actions ===
@@ -40,24 +35,24 @@ const mapDispatchToProps = dispatch => ({
   toggleScreen: () => {
     dispatch(toggleScreen());
   },
-  onDisplayPlayer: (value) => {
-    dispatch(movePlayer(value));
+  toggleGrid: () => {
+    dispatch(toggleGrid());
   },
 });
 
 // Container
 // connect(Ce dont j'ai besoin)(Qui en a besoin)
-const GameScreenContainer = connect(
+const SwitchMapContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(GameScreen);
+)(SwitchMap);
 
 /* 2 temps
 const createContainer = connect(mapStateToProps, mapDispatchToProps);
-const GameScreenContainer = createContainer(GameScreen);
+constSwitchMapContainer = createContainer(Character);
 */
 
 /**
  * Export
  */
-export default GameScreenContainer;
+export default SwitchMapContainer;

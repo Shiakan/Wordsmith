@@ -6,12 +6,10 @@ import { connect } from 'react-redux';
 /**
  * Local import
  */
-import GameScreen from 'src/components/GameScreen';
+import Character from 'src/components/GameScreen/Character';
 
 // Action Creators
 import {
-  toggleScreen,
-  movePlayer,
 } from 'src/store/reducers/gameScreen';
 
 /* === State (données) ===
@@ -22,11 +20,10 @@ import {
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
 const mapStateToProps = state => ({
-  board: state.gameScreen.board,
-  map: state.gameScreen.map,
-  grid: state.gameScreen.grid,
-  moving: state.gameScreen.moving,
-  created: state.gameScreen.created,
+  color: state.gameScreen.color,
+  name: state.gameScreen.name,
+  coordX: state.gameScreen.coordX,
+  coordY: state.gameScreen.coordY,
 });
 
 /* === Actions ===
@@ -36,28 +33,22 @@ const mapStateToProps = state => ({
  *  - ownProps : les props passées au container
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
-const mapDispatchToProps = dispatch => ({
-  toggleScreen: () => {
-    dispatch(toggleScreen());
-  },
-  onDisplayPlayer: (value) => {
-    dispatch(movePlayer(value));
-  },
+const mapDispatchToProps = () => ({
 });
 
 // Container
 // connect(Ce dont j'ai besoin)(Qui en a besoin)
-const GameScreenContainer = connect(
+const CharacterContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(GameScreen);
+)(Character);
 
 /* 2 temps
 const createContainer = connect(mapStateToProps, mapDispatchToProps);
-const GameScreenContainer = createContainer(GameScreen);
+const CharacterContainer = createContainer(Character);
 */
 
 /**
  * Export
  */
-export default GameScreenContainer;
+export default CharacterContainer;

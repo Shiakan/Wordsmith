@@ -19,7 +19,6 @@ const initialState = {
 /**
  * Types
  */
-const DO_SOMETHING = 'DO_SOMETHING';
 const TOGGLE_SCREEN = 'TOGGLE_SCREEN';
 const TOGGLE_GRID = 'TOGGLE_GRID';
 const TOGGLE_PICKER = 'TOGGLE_PICKER';
@@ -38,11 +37,6 @@ const MOVE_PLAYER = 'MOVE_PLAYER';
  */
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case DO_SOMETHING:
-      return {
-        ...state,
-      };
-
     case TOGGLE_SCREEN:
       return {
         ...state,
@@ -69,6 +63,7 @@ const reducer = (state = initialState, action = {}) => {
       };
 
     case CREATE_PLAYER:
+      console.log(state);
       return {
         ...state,
         moving: true,
@@ -99,9 +94,6 @@ const reducer = (state = initialState, action = {}) => {
 /**
  * Action Creators
  */
-export const doSomething = () => ({
-  type: DO_SOMETHING,
-});
 
 export const toggleScreen = () => ({
   type: TOGGLE_SCREEN,

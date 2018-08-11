@@ -1,0 +1,21 @@
+/**
+ * Import
+ */
+@import src/styles/vars
+
+/**
+ * Styles
+ */
+.character
+    font-family: $name-font
+    text-align: center
+    transition: 1s cubic-bezier(.42,0,.78,1.25) 
+    &:hover
+        &> .character-nickname
+            visibility: visible
+    &-nickname
+        visibility: hidden
+    &-cursor
+        width: 2em
+        height: 2em
+        border-radius: 50%

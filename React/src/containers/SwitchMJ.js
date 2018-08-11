@@ -6,12 +6,11 @@ import { connect } from 'react-redux';
 /**
  * Local import
  */
-import GameScreen from 'src/components/GameScreen';
+import SwitchMJ from 'src/components/GameScreen/SwitchMJ';
 
 // Action Creators
 import {
-  toggleScreen,
-  movePlayer,
+  togglePicker, changeColor, changeInput, submitName, movePlayer, createPlayer,
 } from 'src/store/reducers/gameScreen';
 
 /* === State (données) ===
@@ -22,11 +21,9 @@ import {
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
 const mapStateToProps = state => ({
-  board: state.gameScreen.board,
-  map: state.gameScreen.map,
-  grid: state.gameScreen.grid,
-  moving: state.gameScreen.moving,
-  created: state.gameScreen.created,
+  color: state.gameScreen.color,
+  toggle: state.gameScreen.toggle,
+  typingName: state.gameScreen.typingName,
 });
 
 /* === Actions ===
@@ -37,8 +34,20 @@ const mapStateToProps = state => ({
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
 const mapDispatchToProps = dispatch => ({
-  toggleScreen: () => {
-    dispatch(toggleScreen());
+  togglePicker: () => {
+    dispatch(togglePicker());
+  },
+  onChangeColor: (value) => {
+    dispatch(changeColor(value));
+  },
+  createPlayer: () => {
+    dispatch(createPlayer());
+  },
+  onInputChange: (value) => {
+    dispatch(changeInput(value));
+  },
+  onSubmitName: () => {
+    dispatch(submitName());
   },
   onDisplayPlayer: (value) => {
     dispatch(movePlayer(value));
@@ -47,17 +56,17 @@ const mapDispatchToProps = dispatch => ({
 
 // Container
 // connect(Ce dont j'ai besoin)(Qui en a besoin)
-const GameScreenContainer = connect(
+const SwitchMJContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(GameScreen);
+)(SwitchMJ);
 
 /* 2 temps
 const createContainer = connect(mapStateToProps, mapDispatchToProps);
-const GameScreenContainer = createContainer(GameScreen);
+constSwitchMJContainer = createContainer(Character);
 */
 
 /**
  * Export
  */
-export default GameScreenContainer;
+export default SwitchMJContainer;
