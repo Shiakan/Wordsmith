@@ -2,12 +2,15 @@
 
 {% block title %}Connexion{% endblock %}
 
-{% block body %}
-
-{{ form_start(form) }}
-  {{ form_row(form.username, {'full_name': '_username'}) }}
-  {{ form_row(form.password, {'full_name': '_password'}) }}
-  {{ form_errors(form) }}
-{{ form_end(form) }}
+{% block main %}
+<div class="wrapper-homepage">
+    <div class="container container-width">
+    {{ form_start(form) }}
+      {{ form_row(form.username, {'full_name': '_username'}) }}
+      {{ form_row(form.password, {'full_name': '_password'}) }}
+      {{ form_errors(form) }}
+    {{ form_end(form) }}
+    </div>
+</div>
 
 {% endblock %}
