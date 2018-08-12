@@ -5,33 +5,49 @@
 {% block main %}
 <div class="wrapper">
     <div class="container">
-        <h1>Bienvenue {{ user.username }}</h1>
+        <h1>Bienvenue {{ app.user.username }}</h1>
+        <a class="btn" href="{{path('user_profile_edit', {'id': app.user.id })}}">Modifier mon profil</a> <a class="btn" href="{{path('characterprofile_edit', {'id': app.user.characterProfile.id })}}">Profil forum</a> <a class="btn" href="#">Voir mes sujets</a> <a class="btn" href="#">Voir mes réponses</a>
         <div class="container-profil">
             <img src="{{user.characterProfile.avatar}}">
-
-            <section class="profil-tabs">
-                <input id="tab-one" type="radio" name="grp" checked="checked"/>
-                <label for="tab-one">Tab One</label>
-                <div class="tab">
-                    <p><span class="profile-label">{{ user.username }}
-                    {{ user.email}}
-                    {{ user.birthdate|date("d-m-Y")}}
-
-                <a href="{{path('user_profile_edit', {'id': user.id }) }}">Modifier le profil</a>
-                </div class="tab">
-
-                <input id="tab-two" type="radio" name="grp" />
-                <label for="tab-two">Tab Two</label>
-                <div class="tab">
-                <img src="https://sbarthel.github.io/images/img/berg.JPG" alt="mountain" />
-                </div>
-
-                <input id="tab-three" type="radio" name="grp" />
-                <label for="tab-three">Tab Three</label>
-                <div class="tab">
-                ... no fixed height for tabbed area!
-                </div>
-            </section>
+            <div class="information">
+            <h2>Informations générales</h2>
+            <ul>
+                <li>
+                    <span class="profile-label">Nom d'utilisateur :</span> {{ user.username }}
+                </li>
+                <li>
+                    <span class="profile-label">Email :</span> {{ user.email}}
+                </li>
+                <li>
+                    <span class="profile-label">Date de naissance :</span> {{ user.birthdate|date("d-m-Y")}}
+                </li>
+            </ul>
+            <h2>Profil du personnage</h2>
+            <ul>
+                <li>
+                    <span class="profile-label">Age :</span> {{ user.characterProfile.age}}
+                </li>
+                <li>
+                    <span class="profile-label">Race :</span> {{ user.characterProfile.race}}
+                </li>
+                <li>
+                    <span class="profile-label">Classe :</span> {{ user.characterProfile.class}}
+                </li>
+                <li>
+                    <span class="profile-label">Caste sociale :</span> {{ user.characterProfile.socialCast}}
+                </li>
+                <li>
+                    <span class="profile-label">Localisation :</span> {{ user.characterProfile.localisation}}
+                </li>
+                <li>
+                    <span class="profile-label">Faits divers :</span> {{ user.characterProfile.miscellaneous}}
+                </li>
+            </ul>
+            <a class="btn" href="{{ user.characterProfile.link1}}">Fiche de présentation</a> <a class="btn" href="{{ user.characterProfile.link2}}">Liens</a>
+               
+                
+                
+            </div>
         </div>
     </div>
  </div>

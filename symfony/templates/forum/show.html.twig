@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block main %}
+<div class="wrapper">
+    <div class="container">
+        <h1>Bienvenue {{ user.username }}</h1>
+        <div class="container-profil">
+            <img src="{{user.characterProfile.avatar}}">
+
+            <section class="profil-tabs">
+                <input id="tab-one" type="radio" name="grp" checked="checked"/>
+                <label for="tab-one">Tab One</label>
+                <div class="tab">
+                    <p><span class="profile-label">{{ user.username }}
+                    {{ user.email}}
+                    {{ user.birthdate|date("d-m-Y")}}
+
+                <a href="{{path('user_profile_edit', {'id': user.id }) }}">Modifier le profil</a>
+                </div class="tab">
+
+                <input id="tab-two" type="radio" name="grp" />
+                <label for="tab-two">Tab Two</label>
+                <div class="tab">
+                <img src="https://sbarthel.github.io/images/img/berg.JPG" alt="mountain" />
+                </div>
+
+                <input id="tab-three" type="radio" name="grp" />
+                <label for="tab-three">Tab Three</label>
+                <div class="tab">
+                ... no fixed height for tabbed area!
+                </div>
+            </section>
+        </div>
+    </div>
+ </div>
+{% endblock %}

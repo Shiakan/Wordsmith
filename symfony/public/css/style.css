@@ -243,6 +243,18 @@ small {
     font-size:1.5em;
 }
 
+.form-error-icon {
+    display:none;
+}
+
+.form-error-message {
+    display:block;
+    color: rgb(218, 57, 57);
+    font-family:'Nunito Sans', sans-serif;
+    margin-top:0.3em;
+    font-size:0.8em;
+}
+
 .container-width label, legend {
     font-size:1em;
 }
@@ -304,7 +316,6 @@ form button {
   .container-profil label {
     background: #0b0b0b;
     border-radius:0.2em 0 0 0;
-    border: 1px solid #ddd; 
     padding: .3em 0.5em;
     cursor: pointer;
     z-index: 1;
@@ -321,7 +332,7 @@ form button {
     width: 100%;
     margin-top: -1px;
     padding: 1em;
-    border: 1px solid #ddd;
+    /* border: 1px solid #ddd; */
     -webkit-order: 1;
     order: 1;
   }
