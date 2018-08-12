@@ -6,7 +6,7 @@
         <article class="container container-article">
             <h1>{{article.title}}</h1>
             <div class="article-content">
-                {{article.content|raw}}
+                {{article.content|filter_black_listed()|raw }}
             </div>
             <small>Publié le {{article.dateInserted|date("d/m/Y")}}.</small>
         </article>
