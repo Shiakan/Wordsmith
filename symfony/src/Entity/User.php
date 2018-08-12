@@ -13,8 +13,13 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 * @ORM\Table(name="app_user")
 * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
 * @UniqueEntity(
-     * fields={"email", "username"},
-     * message={"Cet email est déjà pris", "Ce nom de personnage est déjà pris"})
+     * fields={"email"},
+     * errorPath="email",  
+     * message="Cet email est déjà pris")
+* @UniqueEntity(
+     * fields={"username"},
+     * errorPath="username",  
+     * message="Ce nom d'utilisateur est déjà pris")
 */
 class User implements UserInterface
 {
@@ -26,12 +31,12 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=64)
+     * @ORM\Column(type="string", length=64, unique=true)
      */
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=128)
+     * @ORM\Column(type="string", length=128, unique=true)
      * @Assert\Email()
      */
     private $email;
@@ -171,7 +176,7 @@ class User implements UserInterface
         return $this->id;
     }
 
-    public function getUsername(): ?string
+    public function getUsername()
     {
         return $this->username;
     }
@@ -183,7 +188,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getEmail()
     {
         return $this->email;
     }

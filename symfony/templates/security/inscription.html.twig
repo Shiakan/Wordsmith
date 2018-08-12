@@ -8,8 +8,8 @@
     <h1>Nous rejoindre</h1>
         {{ form_start(form)  }}
         {{ form_widget(form) }}
+        {{ form_errors(form) }}
         <button type="submit" class="btn btn-success">Inscription</button>
-        {{ form_end(form) }}
         </div>
     </div>
 {% endblock %}
