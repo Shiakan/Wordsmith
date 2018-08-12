@@ -95,6 +95,9 @@ class Dice extends React.Component {
           >
             MJ Share
           </button>
+          <div className="tooltip">Hover over me
+            <span className="tooltiptext">Tooltip text</span>
+          </div>
         </div>
       </div>
 

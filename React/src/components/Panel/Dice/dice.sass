@@ -56,5 +56,44 @@
       &-roll
         grid-column: 3
         grid-row: 1
-        grid-area: Droll    
+        grid-area: Droll
+        display: inline-block
+        padding: 0 1em
+        // cursor: pointer
+        text-align: center
+        text-decoration: none
+        outline: none
+        color: #fff
+        background-color: #0D7445
+        border: none
+        border-radius: 15px
+        box-shadow: 0 9px #999
+        &:hover
+          background-color: #083F23
+        &:active
+          background-color: #083F23
+          box-shadow: 0 5px #666
+          transform: translateY(4px)
     
+.tooltip 
+    position: relative
+    display: inline-block
+    border-bottom: 1px dotted black
+
+
+.tooltip .tooltiptext 
+    visibility: hidden
+    width: 120px
+    background-color: black
+    color: #fff
+    text-align: center
+    border-radius: 6px
+    padding: 5px 0
+
+    /* Position the tooltip */
+    position: absolute
+    z-index: 1
+
+
+.tooltip:hover .tooltiptext 
+    visibility: visible
