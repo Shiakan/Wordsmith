@@ -3,7 +3,6 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-
 /**
  * Local import
  */
@@ -62,24 +61,31 @@ class Dice extends React.Component {
         />
         <div className="dice-block">
           <form
-            className="dice-form"
+            className="dice-block-form"
             autoComplete="off"
             onSubmit={this.handleSubmit}
           >
             <input
               type="text"
-              className="dice-form-input"
+              className="dice-block-form-input"
               onChange={this.diceChange}
               placeholder="ex : 1d20"
               value={diceValue}
-            //   focus="on"
             />
-            <input
+            {/* <AwesomeButton
+              type="primary submit"
+              cssModule={AwesomeButtonStyles}
+            >
+              Roll
+            </AwesomeButton> */}
+            <button
               type="submit"
-              className="dice-form-roll"
+              className="dice-block-form-roll"
               // onClick={this.handleSumbit}
               value="Roll"
-            />
+            >
+              Roll
+            </button>
           </form>
           <p className="dice-block-result"> Votre résultat est : {rollResult} </p>
           <button
@@ -89,6 +95,9 @@ class Dice extends React.Component {
           >
             MJ Share
           </button>
+          <div className="tooltip">Hover over me
+            <span className="tooltiptext">Tooltip text</span>
+          </div>
         </div>
       </div>
 
