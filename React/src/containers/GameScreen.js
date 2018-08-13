@@ -11,7 +11,6 @@ import GameScreen from 'src/components/GameScreen';
 // Action Creators
 import {
   toggleScreen,
-  movePlayer,
 } from 'src/store/reducers/gameScreen';
 
 /* === State (données) ===
@@ -25,8 +24,7 @@ const mapStateToProps = state => ({
   board: state.gameScreen.board,
   map: state.gameScreen.map,
   grid: state.gameScreen.grid,
-  moving: state.gameScreen.moving,
-  created: state.gameScreen.created,
+  characters: state.gameScreen.characters,
 });
 
 /* === Actions ===
@@ -39,9 +37,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   toggleScreen: () => {
     dispatch(toggleScreen());
-  },
-  onDisplayPlayer: (value) => {
-    dispatch(movePlayer(value));
   },
 });
 

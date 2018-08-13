@@ -10,6 +10,7 @@ import Character from 'src/components/GameScreen/Character';
 
 // Action Creators
 import {
+  movePlayer, deletePlayer,
 } from 'src/store/reducers/gameScreen';
 
 /* === State (données) ===
@@ -19,11 +20,11 @@ import {
  *  - ownProps : les props passées au container
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
-const mapStateToProps = state => ({
-  color: state.gameScreen.color,
-  name: state.gameScreen.name,
-  coordX: state.gameScreen.coordX,
-  coordY: state.gameScreen.coordY,
+const mapStateToProps = () => ({
+  // color: state.gameScreen.color,
+  // name: state.gameScreen.name,
+  // coordX: state.gameScreen.coordX,
+  // coordY: state.gameScreen.coordY,
 });
 
 /* === Actions ===
@@ -33,7 +34,14 @@ const mapStateToProps = state => ({
  *  - ownProps : les props passées au container
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
-const mapDispatchToProps = () => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  onMovePlayer: (value) => {
+    dispatch(movePlayer(value));
+  },
+  deletePlayer: () => {
+    console.log('onDelete', ownProps.id);
+    dispatch(deletePlayer(ownProps.id));
+  },
 });
 
 // Container

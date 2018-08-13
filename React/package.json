@@ -57,8 +57,10 @@
     "react-color": "^2.14.1",
     "react-dom": "^16.4.1",
     "react-icons": "^3.0.5",
-    "react-redux": "^5.0.7",
     "react-tooltip": "^3.6.1",
-    "redux": "^4.0.0"
+    "react-draggable": "^3.0.5",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "uuid": "^3.3.2"
   }
 }

@@ -8,16 +8,27 @@
  */
 .switch
     &-board
-            position: relative
-            margin: auto
-            display: inline-block
-            padding: .3em
-            background-color: #DDDDDD
-            &-picker
-                position: absolute
-                z-index: 5
-            &-form
-                display: flex
-            &-input
-                padding: .5em
-                font-family: $test-font
+        color: $font-color
+        background-color: $border-color
+        position: relative
+        margin: auto
+        display: inline-block
+        padding: .3em
+        &-picker
+            border: none
+            background-color: $bg-color-block        
+        &-form
+            background-color: $bg-color-block
+            display: flex
+        &-input
+            padding: .5em
+            font-family: $test-font
+            color: $font-color
+            background-color: $bg-color-block
+            border: 1px solid $border-color
+        &-button
+            background-color: $bg-color-block
+            color: $font-color-italic
+            font-weight: bold
+            border: 1px solid $border-color
+
