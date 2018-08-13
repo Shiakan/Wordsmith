@@ -39,6 +39,7 @@ class Subcategory
      */
     private $description;
 
+
     public function __construct()
     {
         $this->threads = new ArrayCollection();

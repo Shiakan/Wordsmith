@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Spectral+SC:400,400i,700');
 @import url('https://fonts.googleapis.com/css?family=BenchNine:300,400,700');
-@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700');
-@import url('https://fonts.googleapis.com/css?family=Alegreya+SC|Playfair+Display+SC');
-@import url('https://fonts.googleapis.com/css?family=Cormorant+SC');
+@import url('https://fonts.googleapis.com/css?family=Forum');
 
 /* Général */
 * {
@@ -31,7 +29,7 @@ main {
 }
 
 a {
-    font-family: 'Cormorant SC', serif;
+    font-family: 'Forum', cursive;
     color: #A56E3A;
     text-decoration:none;
 }
@@ -52,12 +50,14 @@ h1 {
     border-bottom:1px solid #503415;
     text-align:center;
     margin: 0;
+    text-transform: uppercase;
 }
 h2 {
     font-family: 'Spectral SC', serif;
-    font-size:1.6em;
+    font-size:1.8em;
     font-weight:400;
-    color: #125C38;  
+    color: #125C38; 
+    text-transform: uppercase; 
 }
 footer {
     padding:1em;
@@ -98,6 +98,7 @@ small {
     justify-content:space-between;
     border-bottom:1px solid #503415;
     text-transform:uppercase;
+    letter-spacing:0.075em;
 }
 .navbar ul li {
     list-style:none;
@@ -147,6 +148,15 @@ small {
     padding:5em 1em 1em 1em;
     width:100%;
     background-color:none;
+}
+
+.wrapper-codex {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.container-index{
+    width:49%;
 }
 .wrapper-list {
     padding:5em 1em 1em 1em;
@@ -311,6 +321,7 @@ select {
     height:6em;
     background-color:#0b0b0b;
     border:1px solid  #503415;
+    color:#BDBDBD;
 }
 .form-group input {
     padding:0.5em;
