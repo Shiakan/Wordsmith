@@ -68,19 +68,38 @@ class Dice extends React.Component {
             autoComplete="off"
             onSubmit={this.handleSubmit}
           >
-            <input
-              type="text"
-              className="dice-block-form-input"
-              onChange={this.diceChange}
-              placeholder="ex : 1d20"
-              value={diceValue}
-            />
-            {/* <AwesomeButton
-              type="primary submit"
-              cssModule={AwesomeButtonStyles}
-            >
-              Roll
-            </AwesomeButton> */}
+            <div className="roll-input-flex">
+
+              <input
+                type="text"
+                className="dice-block-form-input"
+                onChange={this.diceChange}
+                placeholder="ex : 1d20"
+                value={diceValue}
+              />
+              <FaInfoCircle
+                data-tip="React-tooltip"
+                className="tooltip"
+              />
+              <ReactTooltip
+                place="left"
+                type="dark"
+                effect="float"
+                border="data-border"
+              >
+                <p className="tooltip-text">
+                Pour lancer un dé, il vous faut écrire sous cette forme xDy où :
+                </p>
+                <ul className="tooltip-ul">
+                  <li className="tooltip-ul-li">x correspond au nombre de dés à lancer</li>
+                  <li className="tooltip-ul-li">D est le séparateur</li>
+                  <li className="tooltip-ul-li">y le nombre de face pour les dés à lancer</li>
+                </ul>
+                <p className="tooltip-text">
+                Par exemple, la commande 2D100 revient à lancer deux dés à cent faces
+                </p>
+              </ReactTooltip>
+            </div>
             <button
               type="submit"
               className="dice-block-form-roll"
@@ -90,6 +109,7 @@ class Dice extends React.Component {
               Roll
             </button>
           </form>
+
           <p className="dice-block-result"> Votre résultat est : {rollResult} </p>
           <button
             type="button"
@@ -98,18 +118,7 @@ class Dice extends React.Component {
           >
             MJ Share
           </button>
-          <FaInfoCircle
-            data-tip="React-tooltip"
-            className="tooltip"
-          />
-          <ReactTooltip place="top" type="dark" effect="float">
-            Pour lancer un dé, il vous faut écrire sous cette forme xDy où :
-            <ul>
-              <li>x correspond au nombre de dés à lancer</li>
-              <li>D est le séparateur</li>
-              <li>y le nombre de face pour les dés à lancer</li>
-            </ul>
-          </ReactTooltip>
+
         </div>
       </div>
 
