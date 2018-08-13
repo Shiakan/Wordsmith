@@ -5,33 +5,25 @@
 {% block main %}
 <div class="wrapper">
 
-    <h1>Mes Room</h1>
-    <div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Maitre du jeu</th>
+                <th>actions</th>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Maitre du jeu</th>
-                    <th>Joueur 1</th>
-                    <th>Joueur 2</th>
-                    <th>Joueur 3</th>
-                    <th>Joueur 4</th>
-                    <th>actions</th>
-                    
-                </tr>
-            </thead>
-            <tbody>
-                {% for room in rooms %}
+            </tr>
+        </thead>
+        <tbody>
+        {% for room in rooms %}
+            <tr>
+                <td>{{ room.name }}</td>
+                <td><a>{{room.dungeonmaster.username}}</a></td>
                 {% if room.dungeonmaster.username == app.user.username %}
 
                 <tr>
                     <td>{{ room.name }}</td>
                     <td><a>{{room.dungeonmaster.username}}</a></td>
-                    <td><a>{{ room.playerOne }}</a></td>
-                    <td><a>{{ room.playerTwo }}</a></td>
-                    <td><a>{{ room.playerThree }}</a></td>
-                    <td><a>{{ room.playerFour }}</a></td>
                     {% if room.dungeonmaster.username == app.user.username %}
                     <td><a href="{{ path('room_edit', {'id': room.id}) }}"><i class="far fa-edit"></i></a></td>
                     {% endif %}

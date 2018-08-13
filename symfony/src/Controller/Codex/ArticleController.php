@@ -19,7 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class ArticleController extends Controller
 {
     /**
-     * @Route("/codex/show/{id}", name="show")
+     * @Route("/codex/show/{id}", name="article_show")
      */
     public function show(Article $article, Request $request, ObjectManager $manager, UserInterface $user=null)
     {
@@ -37,7 +37,7 @@ class ArticleController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();
-            return $this->redirectToRoute('show',['id'=>$article->getId()]);
+            return $this->redirectToRoute('article_show',['id'=>$article->getId()]);
         }
         return $this->render('codex/article/show.html.twig', [
             'article'=> $article,

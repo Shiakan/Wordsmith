@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Show room{% endblock %}
+
+{% block main %}
+<div class="wrapper">
+    <div class="container">
+    {% for participant in room.participants %}
+    <ul>
+        <li>
+            <strong> {{participant.username}} : <a href="http://127.0.0.1:8001/enter_room/?code={{ room.code}}&user={{participant.id}}">http://127.0.0.1:8001/enter_room/?code={{ room.code}}&user={{participant.id}}</a>
+        </li>
+    </ul>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

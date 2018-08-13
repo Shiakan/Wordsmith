@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Entity\Room;
+use App\Entity\User;
 use App\Form\RoomType;
 use App\Repository\RoomRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,11 +11,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
 
 class RoomController extends Controller
 {
     /**
-     * @Route("/profil/{id}/room", name="room_index", methods="GET")
+     * @Route("room", name="room_index", methods="GET")
      */
     public function index(RoomRepository $roomRepository): Response
     {
@@ -24,21 +26,24 @@ class RoomController extends Controller
     }
 
     /**
-     * @Route("/room/new", name="room_new", methods="GET|POST")
+     * @Route("room/new", name="room_new", methods="GET|POST")
      */
-    public function new(Request $request, UserInterface $user): Response
-    {
+    public function new(Request $request, UserInterface $user)
+    {   
         $room = new Room();
         $form = $this->createForm(RoomType::class, $room);
         $form->handleRequest($request);
+
+        $code = $this->createRandomCode();
         
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $room->setDungeonmaster($user);
+            $room->setCode($code);
             $em->persist($room);
             $em->flush();
 
-            return $this->redirectToRoute('room_index');
+            return $this->redirectToRoute('room_link', ['code' => $code ]);
         }
 
         return $this->render('room/new.html.twig', [
@@ -48,7 +53,36 @@ class RoomController extends Controller
     }
 
     /**
-     * @Route("/room/{id}", name="room_show", methods="GET")
+     * @Route("enter_room/{code}", name="room_link", methods="GET")
+     */
+    public function getRoomLink(Room $room) {
+        
+        return $this->render('room/show.html.twig', array(
+            'room' => $room
+        ));
+
+    }
+    
+
+    private function createRandomCode() { 
+
+        $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ023456789"; 
+        srand((double)microtime()*1000000); 
+        $i = 0; 
+        $pass = '' ; 
+    
+        while ($i <= 10) { 
+            $num = rand() % 33; 
+            $tmp = substr($chars, $num, 1); 
+            $pass = $pass . $tmp; 
+            $i++; 
+        } 
+    
+        return $pass; 
+    } 
+
+    /**
+     * @Route("room/{id}", name="room_show", methods="GET")
      */
     public function show(Room $room): Response
     {
@@ -56,7 +90,7 @@ class RoomController extends Controller
     }
 
     /**
-     * @Route("/room/{id}/edit", name="room_edit", methods="GET|POST")
+     * @Route("room/{id}/edit", name="room_edit", methods="GET|POST")
      */
     public function edit(Request $request, Room $room): Response
     {
@@ -76,7 +110,7 @@ class RoomController extends Controller
     }
 
     /**
-     * @Route("/room/delete/{id}", name="room_delete", methods="DELETE")
+     * @Route("room/{id}", name="room_delete", methods="DELETE")
      */
     public function delete(Request $request, Room $room): Response
     {

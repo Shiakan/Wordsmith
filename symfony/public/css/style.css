@@ -115,6 +115,20 @@ small {
     height:50px;
 }
 /* Fin navbar */
+.navbar-codex {
+    margin-top:0;
+    margin-bottom:1em;
+    font-size:1.2em;
+}
+.navbar-codex ul li {
+    list-style: none;
+}
+
+.navbar-codex ul {
+    display:flex;
+    justify-content: space-evenly;
+    width:100%;
+}
 
 /* Sommaire Codex */
 .tagbar {
@@ -222,13 +236,19 @@ small {
      margin-left:1em;
 }
 .btn {
-    padding:0.1em 0.3em;
-    border-radius:0.2em;
+    padding:0.3em 0.5em;
+    border-radius:0.3em;
     font-family: 'Nunito Sans', sans-serif;
     font-size:0.8em;
     font-weight:600;
+    background-color: #125C38;  
+    color:#BDBDBD;
+}
+.btn:hover {
+    color:rgb(83, 224, 156); 
 }
 .btn-tag {
+    padding:0.1em 0.3em;
     background-color: #125C38;  
     color: #BDBDBD;
     border:1px solid rgb(15, 49, 33);
@@ -347,46 +367,54 @@ form button {
 }
 
 /* Onglets */
-.profil-tabs {
-    display: flex;
-    flex-wrap: wrap;
-    margin-left:1em;
-    /* width:80%; */
+#tabs {
+    background-color:#0b0b0b;
+    color: #BDBDBD;
+    border:none;
+    margin-left:0.5em;
+}
+.tabs-header {
+    margin-bottom:1em;
+}
+.tabs-header li {
+    background-color: #0b0b0b;
+    color:#A56E3A;
+    text-transform:uppercase;
+    font-family: 'Forum', cursive;
+    list-style:none;
+    display:inline-block;
+}
+
+.tabs-header li a {
+    background-color: #0b0b0b;
+    padding:0.5em;
+}
+
+.tabs-header li a:active {
+    background-color:green;
+}
+
+#tabs-1, #tabs-2, #tabs-3 {
+    background-color:#0b0b0b;
+    color: #BDBDBD;
+}
+#tabs h2 {
+    border-bottom:1px solid rgb(119, 67, 7);
+    margin-bottom:0.5em;
+}
+#tabs-1 ul li {
+    list-style:none;
+    padding-left:0.5em;
 }
 .container-profil {
       display:flex;
       align-items: flex-start;
       margin-top:1em;
 }  
-.container-profil label {
-    background: #0b0b0b;
-    border-radius:0.2em 0 0 0;
-    padding: .3em 0.5em;
-    cursor: pointer;
-    z-index: 1;
-    margin-left: -1px;
-}
-.container-profil label:last-child {
-      border-top-right-radius: 0.2em;
-}
-.container-profil label:first-of-type {
-    margin-left: 0;
-}
-.container-profil .tab {
-    width: 100%;
-    margin-top: -1px;
-    padding: 1em;
-    /* border: 1px solid #ddd; */
-    -webkit-order: 1;
-    order: 1;
-}
-.container-profil input[type=radio], .tab {
-    display: none;
-}
-.container-profil input[type=radio]:checked + label {
-    background: #0b0b0b;
-    border-bottom: 1px solid #fff;
-}
-.container-profil input[type=radio]:checked + label + .tab {
-    display: block;
+
+.profile-label {
+    font-family: 'Forum', cursive;
+    color: #A56E3A;
+    text-transform:uppercase;
+    font-size:1.1em;
 }
