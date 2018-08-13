@@ -6,7 +6,7 @@
 <div class="wrapper">
     <div class="container">
         <h1>Bienvenue {{ app.user.username }}</h1>
-        <a class="btn" href="{{path('user_profile_edit', {'id': app.user.id })}}">Modifier mon profil</a> <a class="btn" href="{{path('characterprofile_edit', {'id': app.user.characterProfile.id })}}">Profil forum</a> <a class="btn" href="#">Voir mes sujets</a> <a class="btn" href="#">Voir mes réponses</a>
+        <a class="btn" href="{{path('user_profile_edit', {'id': app.user.id })}}">Modifier mon profil</a> <a class="btn" href="{{path('characterprofile_edit', {'id': app.user.characterProfile.id })}}">Profil forum</a> <a class="btn" href="#">Voir mes sujets</a> <a class="btn" href="#">Voir mes réponses</a><a class="btn" href="{{ path('room_index') }}">Mes rooms</a>
         <div class="container-profil">
             <img src="{{user.characterProfile.avatar}}">
             <div class="information">
