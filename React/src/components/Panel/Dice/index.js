@@ -21,7 +21,7 @@ class Dice extends React.Component {
     rollDice: PropTypes.func.isRequired,
     diceChange: PropTypes.func.isRequired,
     diceValue: PropTypes.string,
-    rollResult: PropTypes.oneOfType([
+    rolled: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number,
     ]),
@@ -29,7 +29,7 @@ class Dice extends React.Component {
 
   static defaultProps = {
     diceValue: '',
-    rollResult: '',
+    rolled: '',
   }
 
   componentDidMount() {
@@ -55,7 +55,7 @@ class Dice extends React.Component {
   render() {
     const {
       diceValue,
-      rollResult,
+      rolled,
     } = this.props;
     return (
       <div className="dice">
@@ -87,7 +87,7 @@ class Dice extends React.Component {
                 place="left"
                 type="dark"
                 effect="float"
-                border="data-border"
+                border
               >
                 <p className="tooltip-text">
                 Pour lancer un dé, il vous faut écrire sous cette forme xDy où :
@@ -111,8 +111,9 @@ class Dice extends React.Component {
               Roll
             </button>
           </form>
-
-          <p className="dice-block-result"> Votre résultat est : {rollResult} </p>
+          {rolled === 'wrong'
+          && <p className="dice-block-result"> Bravo, vous avez jeté les dés en dehors du plateau... </p>
+          }
           <button
             type="button"
             className="dice-block-share"

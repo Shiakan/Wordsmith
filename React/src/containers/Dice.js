@@ -21,7 +21,7 @@ import { rollDice, diceChange } from 'src/store/reducers/dice';
  */
 const mapStateToProps = state => ({
   diceValue: state.dice.diceValue,
-  rollResult: state.dice.rolled,
+  rolled: state.dice.rolled,
 });
 
 /* === Actions ===

@@ -3,7 +3,7 @@
  */
 const initialState = {
   diceValue: '',
-  rolled: 0,
+  rolled: '',
 };
 
 /**
