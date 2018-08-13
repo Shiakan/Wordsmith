@@ -30,18 +30,21 @@ class RoomController extends Controller
      * @Route("/new", name="room_new", methods="GET|POST")
      */
     public function new(Request $request, UserInterface $user): Response
-    {
+    {   
         $room = new Room();
         $form = $this->createForm(RoomType::class, $room);
         $form->handleRequest($request);
+
+        $code = $this->createRandomCode();
         
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $room->setDungeonmaster($user);
+            $room->setCode($code);
             $em->persist($room);
             $em->flush();
 
-            return $this->redirectToRoute('room_index');
+            return $this->redirectToRoute('room_link', ['code' => $code ]);
         }
 
         return $this->render('room/new.html.twig', [
@@ -49,6 +52,32 @@ class RoomController extends Controller
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/{code}", name="room_link", methods="GET")
+     */
+    public function getRoomLink(Room $room) {
+        dump($room);die;
+
+    }
+    
+
+    private function createRandomCode() { 
+
+        $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ023456789"; 
+        srand((double)microtime()*1000000); 
+        $i = 0; 
+        $pass = '' ; 
+    
+        while ($i <= 10) { 
+            $num = rand() % 33; 
+            $tmp = substr($chars, $num, 1); 
+            $pass = $pass . $tmp; 
+            $i++; 
+        } 
+    
+        return $pass; 
+    } 
 
     /**
      * @Route("/{id}", name="room_show", methods="GET")
