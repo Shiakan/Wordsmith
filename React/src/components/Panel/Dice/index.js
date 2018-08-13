@@ -21,7 +21,10 @@ class Dice extends React.Component {
     rollDice: PropTypes.func.isRequired,
     diceChange: PropTypes.func.isRequired,
     diceValue: PropTypes.string,
-    rollResult: PropTypes.number,
+    rollResult: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
   }
 
   static defaultProps = {
