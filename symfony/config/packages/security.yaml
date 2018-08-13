@@ -33,8 +33,11 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         # - { path: '^/profil/[0-9]{0-10}/edit', roles: ROLE_USER }
-        - { path: '^/profil/[0-9]{0-10}', roles: ROLE_USER } 
-        - { path: ^/backend, roles: ROLE_ADMINISTRATOR }
+        - { path: '^/profil', roles: ROLE_USER } 
+        - { path: ^/backend/user, roles: ROLE_ADMINISTRATOR }
+        - { path: ^/backend/codex/article, roles: ROLE_MODERATOR }
+        - { path: ^/backend/codex/tag, roles: ROLE_MODERATOR }
+        - { path: ^/backend, roles: ROLE_MODERATOR }
     role_hierarchy:
         ROLE_MODERATOR: ROLE_USER
         ROLE_ADMINISTRATOR: ROLE_USER, ROLE_MODERATOR
