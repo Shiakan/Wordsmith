@@ -27,7 +27,7 @@
     grid-column: 2
     grid-row: 3
     display: grid
-    grid-template-areas: ". . ." "Dform Dform Dform" "Dresult Dresult Dresult" ". . ." "Dshare Dshare Dshare"
+    grid-template-areas: ". . ." "Dform Dform Dform" ". . ." "Dresult Dresult Dresult" "Dshare Dshare Dshare"
     grid-template-rows: 1fr repeat(1,1/3) 1fr
     grid-template-columns: 20% 50% 30%
     &-result
@@ -63,16 +63,19 @@
         text-decoration: none
         outline: none
         color: #fff
-        background-color: #0D7445
+        background-color: $font-color-bold
         border: none
         border-radius: 15px
         box-shadow: 0 9px #999
         &:hover
-          background-color: #083F23
+          background-color: $link-active
         &:active
-          background-color: #083F23
+          background-color: $link-active
           box-shadow: 0 5px #666
           transform: translateY(4px)
+
+.roll-input-flex
+  margin: auto 0
 
 .tooltip 
   &-text

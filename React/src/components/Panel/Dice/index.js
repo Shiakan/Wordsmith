@@ -69,7 +69,6 @@ class Dice extends React.Component {
             onSubmit={this.handleSubmit}
           >
             <div className="roll-input-flex">
-
               <input
                 type="text"
                 className="dice-block-form-input"
