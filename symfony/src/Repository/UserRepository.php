@@ -19,22 +19,39 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
-//    /**
-//     * @return User[] Returns an array of User objects
-//     */
-    /*
-    public function findByExampleField($value)
+
+    /**
+     * @return User[] Returns an array of User objects
+     */
+    public function findUserByPage($page,$limit)
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
+         $offset = ($page == 0)? 0 : ($page-1) * $limit;
+
+         $qb = $this->createQueryBuilder('u')
+        ->addSelect('COUNT(u) AS HIDDEN mycount')
+        ->groupBy('u')
+        ->orderBy('u.id', 'ASC')
+        ->setFirstResult( $offset )
+        ->setMaxResults( $limit )
+        ->getQuery()
+        ->getResult()
         ;
+        return $qb;
     }
+         /**
+    * @return Integer
     */
+    public function findCountMax()
+    // Fonction qui compte le nombre total de question dans la BDD (toutes ou les non-bans)
+    {
+        
+        $qb = $this->createQueryBuilder('u')
+        ->select('COUNT(u)')
+        ->getQuery()
+        ->getSingleScalarResult(); //Retourne un chiffre
+        ;
+        return $qb;
+    }
 
     /*
     public function findOneBySomeField($value): ?User

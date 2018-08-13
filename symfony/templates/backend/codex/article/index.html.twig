@@ -38,5 +38,16 @@
         {% endfor %}
         </tbody>
     </table>
+    <div>
+        <div class="btn">
+            {# Si page supérieure à 1 on affiche un bouton précédent qui mène à la page-1 #} 
+            {% if page > 1 %}
+            <a href="{{path('backend_article_index',{'page':page -1})}}" class="btn">Précédent</a>
+            {% endif %} {# si page inférieure à la page max calculée alors on affiche un bouton suivant qui mène à la page +1 #} 
+            {% if page < pageMax %} 
+            <a href="{{path('backend_article_index',{'page':page +1})}}" class="btn btn-primary">Suivant</a>
+                {% endif %}
+        </div>
+    </div>
     <a class="btn btn-success mb-2" href="{{ path('backend_article_new') }}">Créer un nouvel article</a>
 {% endblock %}
