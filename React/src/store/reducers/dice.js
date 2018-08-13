@@ -37,9 +37,14 @@ const roll = (dice) => {
     numberOfDices += 1;
   }
 
-  console.log('number of dices', numberOfDices);
-  console.log('number of sides', numberOfSides);
-  if (typeof (numberOfSides) !== 'undefined' && numberOfSides > '0' && !Number.isNaN(parseFloat(total))) {
+  console.log('number of dices :', numberOfDices);
+  console.log('number of sides :', numberOfSides);
+  console.log('dices + sides :', numberOfDices + numberOfSides);
+  // if (!Number.parseFloat(numberOfDices) || !Number.parseFloat(numberOfSides)) {
+  //   return 'wrong';
+  // }
+
+  if (Number.parseFloat(numberOfDices) && Number.parseFloat(numberOfSides) && numberOfSides > '0') {
     for (let dices = 0; dices < numberOfDices; dices += 1) {
       total += Math.floor(Math.random() * numberOfSides) + 1;
       // console.log(total);
