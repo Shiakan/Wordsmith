@@ -16,9 +16,10 @@ import './sheet.sass';
  */
 const Sheet = () => (
   <div className="sheet">
-    <p>SheetTEST</p>
-    <p>Votre Nom</p>
-    <input
+    <p className="sheet-name">Votre Nom</p>
+    <textarea
+      // ROWS="3"
+      // COLS="30"
       type="text"
       className="sheet-character"
       placeholder="feuille personnage"

@@ -7,8 +7,19 @@
  * Style
  */
 .sheet
-    background-color: blue
-    height: 100%
-    witdh: 100%
-    background: url(../../../assets/img/scroll.jpg) no-repeat
-    background-size: cover
+  display: grid
+  // grid-template-areas: ". Sname ." ". Schar ." ". . ."
+  grid-template-rows: 5% auto 80% 5%
+  grid-template-columns: 15% 70% 15%
+  height: 100%
+  witdh: 100%
+  background: url(../../../assets/img/scroll.jpg) no-repeat
+  background-size: cover
+  &-name
+    grid-column: 1 / 4
+    grid-row: 2
+    margin: auto auto
+  &-character
+    grid-column: 2 / 3
+    grid-row: 3 / 4
+    resize: none
