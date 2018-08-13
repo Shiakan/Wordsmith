@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
  */
 // Composants
 import Dice from 'src/containers/Dice';
-import Sheet from './Sheet';
+import Sheet from 'src/containers/Sheet';
 import Help from './Help';
 
 // Styles et assets
