@@ -1,7 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Spectral+SC:400,400i,700');
 @import url('https://fonts.googleapis.com/css?family=BenchNine:300,400,700');
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700');
+@import url('https://fonts.googleapis.com/css?family=Alegreya+SC|Playfair+Display+SC');
+@import url('https://fonts.googleapis.com/css?family=Cormorant+SC');
 
+/* Général */
 * {
     margin: 0;
     padding: 0;
@@ -15,10 +18,20 @@ body {
     color:#BDBDBD;
     font-family: Arial, Helvetica, sans-serif;
     position:relative;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height:100vh;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+main {
+    width:100%;
 }
 
 a {
-    font-family: 'Spectral SC', serif;
+    font-family: 'Cormorant SC', serif;
     color: #A56E3A;
     text-decoration:none;
 }
@@ -69,13 +82,16 @@ small {
     margin:0;
     letter-spacing:0.075em;
 }
+
+/* HEADER  */
+/* Navbar */
 .fixed-navbar {
     position:fixed;
     width: 100%;
 }
 .navbar {
     font-family: 'Spectral SC', serif;
-    font-size:1.2em;
+    font-size:1em;
     padding:0.5em 1em 0 1em;
     background-color: #0B0B0B;
     display:flex;
@@ -97,6 +113,9 @@ small {
 .logo {
     height:50px;
 }
+/* Fin navbar */
+
+/* Sommaire Codex */
 .tagbar {
     position:fixed;
     margin-top:5.2em;
@@ -115,6 +134,9 @@ small {
     border-bottom: 1px solid  #503415; 
     margin-bottom:0.2em;
 }
+/* Fin sommaire Codex */
+
+/* Wrappers & containers */
 .wrapper {
     width:45%;
     margin:auto;
@@ -124,7 +146,6 @@ small {
 .wrapper-homepage {
     padding:5em 1em 1em 1em;
     width:100%;
-    height:100vh;
     background-color:none;
 }
 .wrapper-list {
@@ -132,7 +153,6 @@ small {
     width:45%;
     margin:auto;
     background-color:#0B0B0B; 
-    height:100vh;
 }
 .container {
     background-color:#0D0D0D;  
@@ -142,9 +162,9 @@ small {
 }
 .container-width {
     width:45%;
-    margin:auto;
+    margin:0 auto 3.5em;
 }
-
+/* Codex */
 .header-codex {
     width:100%;
     height:300px;
@@ -185,6 +205,8 @@ small {
     font-size:0.9em;
     padding:0.5em 1em;
 }
+
+/* Boutons tags Codex */
  .tags {
      margin-left:1em;
 }
@@ -200,10 +222,21 @@ small {
     color: #BDBDBD;
     border:1px solid rgb(15, 49, 33);
 }
-.btn-tag:hover {
+.btn-tag:hover, .btn-admin:hover {
     background-color: rgb(15, 49, 33);  
     color: #BDBDBD;
 }
+
+.btn-admin {
+    position:fixed;
+    bottom:6%;
+    right:2%;
+    background-color:#125C38;  
+    color: #BDBDBD;
+    padding:0.3em 0.5em;
+}
+
+/* Commentaires Codex */
 .container-comment h2 {
     border-bottom:1px solid  #503415;
     margin-bottom:0.5em;
@@ -232,6 +265,7 @@ small {
     color:rgb(139, 139, 139);
 }
 
+/* Formulaires */
 .form-group {
     width:90%;
     margin:0.5em auto;
@@ -300,49 +334,47 @@ form button {
     cursor:pointer;
 }
 
+/* Onglets */
 .profil-tabs {
     display: flex;
     flex-wrap: wrap;
     margin-left:1em;
     /* width:80%; */
-  }
-
-  .container-profil {
+}
+.container-profil {
       display:flex;
       align-items: flex-start;
       margin-top:1em;
-  }
-  
-  .container-profil label {
+}  
+.container-profil label {
     background: #0b0b0b;
     border-radius:0.2em 0 0 0;
     padding: .3em 0.5em;
     cursor: pointer;
     z-index: 1;
     margin-left: -1px;
-  }
-
-  .container-profil label:last-child {
+}
+.container-profil label:last-child {
       border-top-right-radius: 0.2em;
-  }
-  .container-profil label:first-of-type {
+}
+.container-profil label:first-of-type {
     margin-left: 0;
-  }
-  .container-profil .tab {
+}
+.container-profil .tab {
     width: 100%;
     margin-top: -1px;
     padding: 1em;
     /* border: 1px solid #ddd; */
     -webkit-order: 1;
     order: 1;
-  }
-  .container-profil input[type=radio], .tab {
+}
+.container-profil input[type=radio], .tab {
     display: none;
-  }
-  .container-profil input[type=radio]:checked + label {
+}
+.container-profil input[type=radio]:checked + label {
     background: #0b0b0b;
     border-bottom: 1px solid #fff;
-  }
-  .container-profil input[type=radio]:checked + label + .tab {
+}
+.container-profil input[type=radio]:checked + label + .tab {
     display: block;
-  }
+}
