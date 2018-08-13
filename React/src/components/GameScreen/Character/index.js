@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import Draggable from 'react-draggable';
 
 
 /**
@@ -18,43 +19,61 @@ import './character.sass';
  */
 class Character extends React.Component {
   static propTypes = {
+    onMovePlayer: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
-    coordX: PropTypes.number.isRequired,
-    coordY: PropTypes.number.isRequired,
+    deletePlayer: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
     console.log('Character loaded');
   }
 
+  movePlayer = (e) => {
+    console.log(e.target.id);
+    const { onMovePlayer } = this.props;
+    onMovePlayer(e);
+  }
+
   render() {
     const {
-      name, color, coordX, coordY,
+      name, color, id, deletePlayer,
     } = this.props;
     return (
-      <div
-        className="character"
-        style={{
-          position: 'absolute',
-          left: `${coordX - 25}px`,
-          top: `${coordY - 50}px`,
-        }}
+      <Draggable
+        onStop={this.movePlayer}
+        bounds="parent"
       >
-        <span
-          className="character-nickname"
-          style={{
-            color,
-          }}
-        >{name}
-        </span>
         <div
-          className="character-cursor"
+          className="character"
           style={{
-            backgroundColor: color,
+            position: 'absolute',
           }}
-        />
-      </div>
+        >
+          <div
+            className="character-nickname"
+            style={{
+              color,
+            }}
+          >{name}
+            <button
+              type="button"
+              className="character-nickname-delete"
+              onClick={deletePlayer}
+            >X
+            </button>
+          </div>
+          <div
+            className="character-cursor"
+            id={id}
+            style={{
+              backgroundColor: color,
+            }}
+          />
+        </div>
+      </Draggable>
+
     );
   }
 }

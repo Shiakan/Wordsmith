@@ -22,8 +22,6 @@ class SwitchMJ extends React.Component {
     togglePicker: PropTypes.func.isRequired,
     onChangeColor: PropTypes.func.isRequired,
     onInputChange: PropTypes.func.isRequired,
-    onSubmitName: PropTypes.func.isRequired,
-    onDisplayPlayer: PropTypes.func.isRequired,
     color: PropTypes.string.isRequired,
     toggle: PropTypes.bool.isRequired,
     typingName: PropTypes.string.isRequired,
@@ -31,7 +29,7 @@ class SwitchMJ extends React.Component {
   }
 
   componentDidMount() {
-    console.log('switch board loaded');
+    console.log('switch MJ loaded');
   }
 
   handleChange = (e) => {
@@ -42,8 +40,8 @@ class SwitchMJ extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { onSubmitName } = this.props;
-    onSubmitName();
+    const { createPlayer } = this.props;
+    createPlayer();
   }
 
   changeColor = (color) => {
@@ -52,14 +50,9 @@ class SwitchMJ extends React.Component {
     togglePicker();
   }
 
-  displayPlayer = (e) => {
-    const { onDisplayPlayer } = this.props;
-    onDisplayPlayer(e);
-  }
-
   render() {
     const {
-      togglePicker, createPlayer, color, toggle, typingName,
+      togglePicker, color, toggle, typingName,
     } = this.props;
     return (
       <div className="switch-board">
@@ -89,8 +82,8 @@ class SwitchMJ extends React.Component {
             value={typingName}
           />
           <input
+            className="switch-board-button"
             type="submit"
-            onClick={createPlayer}
             value="+"
           />
 

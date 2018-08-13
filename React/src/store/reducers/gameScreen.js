@@ -1,3 +1,4 @@
+import uuidv4 from 'uuid/v4'; // https://www.npmjs.com/package/uuid
 
 /**
  * Initial State
@@ -12,9 +13,33 @@ const initialState = {
   created: false,
   name: '',
   typingName: '',
-  coordX: 0,
-  coordY: 0,
+  // coordX: 0,
+  // coordY: 0,
+  characters: [
+    {
+      id: uuidv4(),
+      name: 'troll',
+      color: '#d4c4fb',
+      coordX: 125,
+      coordY: 250,
+    },
+    {
+      id: uuidv4(),
+      name: 'orc',
+      color: '#d4c4fb',
+      coordX: 0,
+      coordY: 0,
+    },
+    {
+      id: uuidv4(),
+      name: 'ben',
+      color: '#d4c4fb',
+      coordX: 0,
+      coordY: 0,
+    },
+  ],
 };
+console.log(initialState.characters);
 
 /**
  * Types
@@ -25,12 +50,22 @@ const TOGGLE_PICKER = 'TOGGLE_PICKER';
 const CHANGE_COLOR = 'CHANGE_COLOR';
 const CREATE_PLAYER = 'CREATE_PLAYER';
 const INPUT_CHANGE = 'INPUT_CHANGE';
-const SUBMIT_NAME = 'SUBMIT_NAME';
 const MOVE_PLAYER = 'MOVE_PLAYER';
+const DELETE_PLAYER = 'DELETE_PLAYER';
 
 /**
  * Traitements
  */
+// const charsProp = (chars, id, lastProp, prop) => chars.map((char) => {
+//   console.log(char);
+//   if (char.id === id) {
+//     return {
+//       ...char,
+//       [lastProp]: char[prop],
+//     };
+//   }
+//   return char;
+// });
 
 /**
  * Reducer
@@ -62,30 +97,58 @@ const reducer = (state = initialState, action = {}) => {
         color: action.value,
       };
 
-    case CREATE_PLAYER:
+    case CREATE_PLAYER: {
       console.log(state);
+      const newChar = {
+        id: uuidv4(),
+        name: state.typingName,
+        color: state.color,
+        coordX: 0,
+        coordY: 0,
+      };
+
       return {
         ...state,
+        characters: [...state.characters, newChar],
         moving: true,
+        typingName: '',
       };
+    }
+
     case INPUT_CHANGE:
       return {
         ...state,
         typingName: action.value,
       };
-    case SUBMIT_NAME:
+
+    case MOVE_PLAYER: {
+      const movedChars = state.characters.map((char) => {
+        console.log(action.value);
+        if (char.id === action.value.target.id) {
+          console.log('char :', char);
+
+          return {
+            ...char,
+            coordX: action.value.pageX,
+            coordY: action.value.pageY,
+          };
+        }
+        return char;
+      });
       return {
         ...state,
-        name: state.typingName,
-        typingName: '',
-      };
-    case MOVE_PLAYER:
-      return {
-        ...state,
-        coordX: action.value.pageX,
-        coordY: action.value.pageY,
+        characters: movedChars,
         created: true,
       };
+    }
+    case DELETE_PLAYER: {
+      const remainingChars = state.characters.filter(char => char.id !== action.id);
+
+      return {
+        ...state,
+        characters: remainingChars,
+      };
+    }
     default:
       return state;
   }
@@ -121,12 +184,17 @@ export const createPlayer = () => ({
   type: CREATE_PLAYER,
 });
 
-export const submitName = () => ({
-  type: SUBMIT_NAME,
-});
+// export const submitName = () => ({
+//   type: SUBMIT_NAME,
+// });
 export const movePlayer = value => ({
   type: MOVE_PLAYER,
   value,
+});
+
+export const deletePlayer = id => ({
+  type: DELETE_PLAYER,
+  id,
 });
 /**
  * Selectors

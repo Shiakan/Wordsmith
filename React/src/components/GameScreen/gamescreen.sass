@@ -11,7 +11,7 @@
     height: 100%
     grid-area: g
     // margin: auto .3em
-    border: .5em solid #503415
+    border: .5em solid $border-color
     border-radius: .2em
     &-board
         border: .1em solid black
@@ -40,19 +40,17 @@
             background-size: 100%
     &-switch
         position: relative
-        padding-right: 1em 
+        z-index: 1
+        padding-right: 1em
         display: block
-        border: 1px solid black
         border-radius: .2em
         position: absolute
         left: -11em
         transition: .6s
-        transform: translateX(0)
-        // transition: right 2s;
-        // transition-timing-function: ease
-        z-index: 1
-        background-color: #DDDDDD
+        background-color: $border-color
+        color: $font-color
         &:hover
+            transform: translateX(0)
             left: 0
         &-button
             font-family: $test-font

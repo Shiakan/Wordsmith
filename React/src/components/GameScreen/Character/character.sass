@@ -9,12 +9,24 @@
 .character
     font-family: $name-font
     text-align: center
-    transition: 1s cubic-bezier(.42,0,.78,1.25) 
+    // transition: 1s cubic-bezier(.42,0,.78,1.25)
+    position: relative
+    cursor: grabbing
     &:hover
         &> .character-nickname
             visibility: visible
     &-nickname
+        display: flex
         visibility: hidden
+        position: absolute
+        top: -2.5em
+        left: -0.7em
+        padding: 1em
+        &-delete
+            background-color: rgba(117, 190, 218, .4)
+            border: none
+            margin: 0.2em
+            color: font-color-italic
     &-cursor
         width: 2em
         height: 2em

@@ -20,27 +20,20 @@ import './gamescreen.sass';
 class GameScreen extends React.Component {
   static propTypes = {
     toggleScreen: PropTypes.func.isRequired,
-    onDisplayPlayer: PropTypes.func.isRequired,
     board: PropTypes.bool.isRequired,
     map: PropTypes.bool.isRequired,
     grid: PropTypes.bool.isRequired,
-    moving: PropTypes.bool.isRequired,
-    created: PropTypes.bool.isRequired,
+    characters: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   };
 
   componentDidMount() {
     console.log('gameScreen loaded');
   }
 
-  displayPlayer = (e) => {
-    const { onDisplayPlayer } = this.props;
-    onDisplayPlayer(e);
-  }
-
   render() {
     const {
       toggleScreen, board, map,
-      grid, moving, created,
+      grid, characters,
     } = this.props;
     return (
       <div className="screen">
@@ -64,16 +57,19 @@ class GameScreen extends React.Component {
             ) }
         </div>
         {map && (
-        <div className="screen-map" onClick={moving ? this.displayPlayer : undefined}>
-          {grid && <div className="screen-map-grid" onClick={moving ? this.displayPlayer : undefined} />}
+        <div className="screen-map">
+          {grid && <div className="screen-map-grid" />}
           <img
             src="http://medievalshop.com/parchemin/wp-content/uploads/2013/08/La-prison.jpg"
             alt="map"
             className="screen-map-image"
           />
-          {created && (
-            <Character />
-          )}
+          {characters.map(character => (
+            <Character
+              key={character.id}
+              {...character}
+            />
+          ))}
         </div>
         ) }
         {board && <div className="screen-board">THIS IS THE BOARD</div> }
