@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Entity\Room;
+use App\Entity\User;
 use App\Form\RoomType;
 use App\Repository\RoomRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,14 +11,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-/**
- * @Route("/room")
- */
+
 class RoomController extends Controller
 {
     /**
-     * @Route("/", name="room_index", methods="GET")
+     * @Route("room", name="room_index", methods="GET")
      */
     public function index(RoomRepository $roomRepository): Response
     {
@@ -27,9 +26,9 @@ class RoomController extends Controller
     }
 
     /**
-     * @Route("/new", name="room_new", methods="GET|POST")
+     * @Route("room/new", name="room_new", methods="GET|POST")
      */
-    public function new(Request $request, UserInterface $user): Response
+    public function new(Request $request, UserInterface $user)
     {   
         $room = new Room();
         $form = $this->createForm(RoomType::class, $room);
@@ -54,10 +53,13 @@ class RoomController extends Controller
     }
 
     /**
-     * @Route("/{code}", name="room_link", methods="GET")
+     * @Route("enter_room/{code}", name="room_link", methods="GET")
      */
     public function getRoomLink(Room $room) {
-        dump($room);die;
+        
+        return $this->render('room/show.html.twig', array(
+            'room' => $room
+        ));
 
     }
     
@@ -80,7 +82,7 @@ class RoomController extends Controller
     } 
 
     /**
-     * @Route("/{id}", name="room_show", methods="GET")
+     * @Route("room/{id}", name="room_show", methods="GET")
      */
     public function show(Room $room): Response
     {
@@ -88,7 +90,7 @@ class RoomController extends Controller
     }
 
     /**
-     * @Route("/{id}/edit", name="room_edit", methods="GET|POST")
+     * @Route("room/{id}/edit", name="room_edit", methods="GET|POST")
      */
     public function edit(Request $request, Room $room): Response
     {
@@ -108,7 +110,7 @@ class RoomController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="room_delete", methods="DELETE")
+     * @Route("room/{id}", name="room_delete", methods="DELETE")
      */
     public function delete(Request $request, Room $room): Response
     {

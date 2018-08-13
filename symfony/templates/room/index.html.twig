@@ -10,10 +10,6 @@
             <tr>
                 <th>Name</th>
                 <th>Maitre du jeu</th>
-                <th>Joueur 1</th>
-                <th>Joueur 2</th>
-                <th>Joueur 3</th>
-                <th>Joueur 4</th>
                 <th>actions</th>
 
             </tr>
@@ -23,10 +19,6 @@
             <tr>
                 <td>{{ room.name }}</td>
                 <td><a>{{room.dungeonmaster.username}}</a></td>
-                <td><a>{{ room.playerOne }}</a></td>
-                <td><a>{{ room.playerTwo }}</a></td>
-                <td><a>{{ room.playerThree }}</a></td>
-                <td><a>{{ room.playerFour }}</a></td>
                 {% if room.dungeonmaster.username == app.user.username %}
                 <td><a href="{{ path('room_edit', {'id': room.id}) }}"><i class="far fa-edit"></i></a></td>
                 {% endif %}

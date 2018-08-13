@@ -2,9 +2,11 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\Count;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RoomRepository")
@@ -36,6 +38,12 @@ class Room
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="playerRooms")
+     * @Assert\Count(
+     *      min = 2,
+     *      max = 4,
+     *      minMessage = "Sélectionnez au moins 2 joueurs",
+     *      maxMessage = "Vous ne pouvez pas sélectionner plus de 4 joueurs"
+     * )
      */
     private $participants;
 
@@ -110,5 +118,9 @@ class Room
 
         return $this;
     }
+
+    public function __toString(){
+        return $this->participants;
+        }
 
 }
