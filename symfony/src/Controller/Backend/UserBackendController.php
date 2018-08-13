@@ -17,11 +17,19 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserBackendController extends Controller
 {
     /**
-     * @Route("/", name="backend_user_index", methods="GET")
+     * @Route("/page/{page}", name="backend_user_index", requirements={"page" = "\d+"}, defaults={"page" = 1}, methods="GET")
      */
-    public function index(UserRepository $userRepository): Response
+    public function index(UserRepository $userRepository,$page): Response
     {
-        return $this->render('backend/user/index.html.twig', ['users' => $userRepository->findAll()]);
+        $limit = 5; //limite de questions par page (pagination)
+        $users = $userRepository->findUserByPage($page,$limit); //requête où on passe la page actuelle, le seeBanned et la limite de questions
+        $totalUser =  $userRepository->findCountMax(); //requête qui compte le nombre total de questions avec ou sans les banned
+        $pageMax = ceil($totalUser / $limit);
+        return $this->render('backend/user/index.html.twig', [
+            'users' => $users,
+            'page'=>$page,
+            'pageMax'=>$pageMax
+        ]);
     }
 
     /**

@@ -22,7 +22,8 @@ class RoomController extends Controller
      */
     public function index(RoomRepository $roomRepository): Response
     {
-        return $this->render('room/index.html.twig', ['rooms' => $roomRepository->findAll()]);
+        return $this->render('room/index.html.twig', [
+            'rooms' => $roomRepository->findAll()]);
     }
 
     /**

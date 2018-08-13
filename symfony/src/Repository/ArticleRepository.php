@@ -31,20 +31,38 @@ class ArticleRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-   //     /**
-    // * @return Article[] Returns an array of Article objects
-     //*/
-    /*public function findByTag($tags)
+    /**
+     * @return Article[] Returns an array of Article objects
+     */
+    public function findByAll($page,$limit)
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.tags.id = :tags.id')
-            ->setParameter('tags.id', $tags)
-            ->orderBy('a.dateInserted', 'DESC')
-            ->getQuery()
-            ->getResult()
+         $offset = ($page == 0)? 0 : ($page-1) * $limit;
+
+         $qb = $this->createQueryBuilder('a')
+        ->addSelect('COUNT(a) AS HIDDEN mycount')
+        ->groupBy('a')
+        ->orderBy('a.id', 'ASC')
+        ->setFirstResult( $offset )
+        ->setMaxResults( $limit )
+        ->getQuery()
+        ->getResult()
         ;
+        return $qb;
     }
-*/
+     /**
+    * @return Integer
+    */
+    public function findCountMax()
+    // Fonction qui compte le nombre total de question dans la BDD (toutes ou les non-bans)
+    {
+        
+        $qb = $this->createQueryBuilder('a')
+        ->select('COUNT(a)')
+        ->getQuery()
+        ->getSingleScalarResult(); //Retourne un chiffre
+        ;
+        return $qb;
+    }
     /*
     public function findOneBySomeField($value): ?Article
     {

@@ -4,6 +4,8 @@ namespace App\Controller\Backend\Codex;
 
 use App\Entity\Article;
 use App\Form\ArticleType;
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Pagerfanta;
 use App\Repository\ArticleRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,11 +19,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class ArticleController extends Controller
 {
     /**
-     * @Route("/", name="backend_article_index", methods="GET")
+     * @Route("/page/{page}", name="backend_article_index", requirements={"page" = "\d+"}, defaults={"page" = 1}, methods="GET")
      */
-    public function index(ArticleRepository $articleRepository): Response
+    public function index(ArticleRepository $articleRepository, $page): Response
     {
-        return $this->render('backend/codex/article/index.html.twig', ['articles' => $articleRepository->findAll()]);
+        $limit = 5; //limite de questions par page (pagination)
+        $articles = $articleRepository->findByAll($page,$limit); //requête où on passe la page actuelle, le seeBanned et la limite de questions
+        $totalArticles =  $articleRepository->findCountMax(); //requête qui compte le nombre total de questions avec ou sans les banned
+        $pageMax = ceil($totalArticles / $limit); // nombre de page max à afficher (sert pour bouton suivant)
+        return $this->render('backend/codex/article/index.html.twig', [
+            'articles' => $articles,
+            'page'=>$page,
+            'pageMax'=>$pageMax
+        ]);
     }
 
     /**
