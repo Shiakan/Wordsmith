@@ -32,19 +32,13 @@
     &-result
       grid-area: Dresult
       margin: auto 0
-      // grid-column: 2
-      // grid-row: 3
     &-share
       grid-area: Dshare
       color: red
-      // grid-column: 2
-      // grid-row: 3
 
     &-form
       grid-area: Dform
       display: flex
-      // justify-content: space-between
-      // flex-wrap: wrap
 
       &-input
         grid-area: Dinput
@@ -56,16 +50,7 @@
         grid-row: 1
         grid-area: Droll
         display: inline-block
-        padding: 0 1em
-        // cursor: pointer
-        text-align: center
-        text-decoration: none
-        outline: none
-        color: #fff
-        background-color: $font-color-bold
-        border: none
-        border-radius: 15px
-        box-shadow: 0 9px #999
+        @extend %click-button
         &:hover
           background-color: $link-active
         &:active
@@ -84,3 +69,14 @@
     &-li
       list-style-type: disc
       padding: .1em 0
+
+%click-button
+  padding: 0 1em
+  text-align: center
+  text-decoration: none
+  outline: none
+  color: #fff
+  background-color: $font-color-bold
+  border: none
+  border-radius: 15px
+  box-shadow: 0 9px #999
