@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Spectral+SC:400,400i,700');
 @import url('https://fonts.googleapis.com/css?family=BenchNine:300,400,700');
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700');
+@import url('https://fonts.googleapis.com/css?family=Alegreya+SC|Playfair+Display+SC');
+@import url('https://fonts.googleapis.com/css?family=Cormorant+SC');
 
 /* Général */
 * {
@@ -16,10 +18,20 @@ body {
     color:#BDBDBD;
     font-family: Arial, Helvetica, sans-serif;
     position:relative;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height:100vh;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+main {
+    width:100%;
 }
 
 a {
-    font-family: 'Spectral SC', serif;
+    font-family: 'Cormorant SC', serif;
     color: #A56E3A;
     text-decoration:none;
 }
@@ -79,7 +91,7 @@ small {
 }
 .navbar {
     font-family: 'Spectral SC', serif;
-    font-size:1.2em;
+    font-size:1em;
     padding:0.5em 1em 0 1em;
     background-color: #0B0B0B;
     display:flex;
@@ -134,7 +146,6 @@ small {
 .wrapper-homepage {
     padding:5em 1em 1em 1em;
     width:100%;
-    height:100vh;
     background-color:none;
 }
 .wrapper-list {
@@ -142,7 +153,6 @@ small {
     width:45%;
     margin:auto;
     background-color:#0B0B0B; 
-    height:100vh;
 }
 .container {
     background-color:#0D0D0D;  
@@ -152,7 +162,7 @@ small {
 }
 .container-width {
     width:45%;
-    margin:auto;
+    margin:0 auto 3.5em;
 }
 /* Codex */
 .header-codex {
@@ -212,9 +222,18 @@ small {
     color: #BDBDBD;
     border:1px solid rgb(15, 49, 33);
 }
-.btn-tag:hover {
+.btn-tag:hover, .btn-admin:hover {
     background-color: rgb(15, 49, 33);  
     color: #BDBDBD;
+}
+
+.btn-admin {
+    position:fixed;
+    bottom:6%;
+    right:2%;
+    background-color:#125C38;  
+    color: #BDBDBD;
+    padding:0.3em 0.5em;
 }
 
 /* Commentaires Codex */
