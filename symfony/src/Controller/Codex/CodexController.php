@@ -20,7 +20,7 @@ class CodexController extends Controller
 
         $tags = $repositoryTag->findByOrderId();
 
-        $articles = $repositoryArticle->findLastFive();
+        $articles = $repositoryArticle->findLastSix();
 
         return $this->render('codex/index.html.twig', [
             'articles' => $articles,

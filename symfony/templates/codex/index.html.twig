@@ -1,18 +1,27 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-{{ include('codex/aside.html.twig') }}
-    {# <div class="header-codex">
-        blablabla
-    </div> #}
     <div class="wrapper"> 
+    <h2>Sommaire</h2>
+    <div class="container">
+        <ol>
+            {% for tag in tags %}
+            <li>
+                <a href="{{path('search_by_tags',{'id':tag.id})}}">{{tag.name}}</a>
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+    <h2>Les dernières publications</h2>
+    <div class="wrapper-codex">
+     
         {% for article in articles %}
-        <section class="container">
-            <div class="article-title">
+        <section class="container container-index">
+            <div class="article-preview">
                 <h2><a class="article-link" href="{{ path('show',{'id':article.id}) }}">{{article.title}}</a></h2>
-                <small>Publié le {{article.dateInserted|date("d/m/Y")}}</small>
-            </div>
+                <small>Publié le {{article.dateInserted|date("d/m/Y")}}</small>         
             <p class="preview">{{article.description}} <a href="{{ path('show',{'id':article.id}) }}">Lire la suite</a></p>
+            </div>
             <div class="tags">
             {% for tag in article.tags %}
                 <a class="btn btn-tag" href="{{path('search_by_tags',{'id':tag.id})}}">{{tag.name}}</a>
@@ -20,7 +29,8 @@
             </div>
         </section>
         {% endfor %}
-        <a href="{{path('homepage')}}">Revenir à l'acceuil</a>
+        </div>
+        <a href="{{path('codex')}}">Revenir à l'acceuil</a>
     </div>
 {% endblock %}
 
