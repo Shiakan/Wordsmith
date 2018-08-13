@@ -3,42 +3,51 @@
 {% block title %}Room index{% endblock %}
 
 {% block main %}
-    <h1>Room index</h1>
+<div class="wrapper">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Maitre du jeu</th>
-                <th>Joueur 1</th>
-                <th>Joueur 2</th>
-                <th>Joueur 3</th>
-                <th>Joueur 4</th>
-                <th>actions</th>
+    <h1>Mes Room</h1>
+    <div class="container">
 
-            </tr>
-        </thead>
-        <tbody>
-        {% for room in rooms %}
-            <tr>
-                <td>{{ room.name }}</td>
-                <td><a>{{room.dungeonmaster.username}}</a></td>
-                <td><a>{{ room.playerOne }}</a></td>
-                <td><a>{{ room.playerTwo }}</a></td>
-                <td><a>{{ room.playerThree }}</a></td>
-                <td><a>{{ room.playerFour }}</a></td>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Maitre du jeu</th>
+                    <th>Joueur 1</th>
+                    <th>Joueur 2</th>
+                    <th>Joueur 3</th>
+                    <th>Joueur 4</th>
+                    <th>actions</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for room in rooms %}
                 {% if room.dungeonmaster.username == app.user.username %}
-                <td><a href="{{ path('room_edit', {'id': room.id}) }}"><i class="far fa-edit"></i></a></td>
-                {% endif %}
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-<a href="{{ path('room_new') }}">Créé une room</a>  
-{% endif %}
+
+                <tr>
+                    <td>{{ room.name }}</td>
+                    <td><a>{{room.dungeonmaster.username}}</a></td>
+                    <td><a>{{ room.playerOne }}</a></td>
+                    <td><a>{{ room.playerTwo }}</a></td>
+                    <td><a>{{ room.playerThree }}</a></td>
+                    <td><a>{{ room.playerFour }}</a></td>
+                    {% if room.dungeonmaster.username == app.user.username %}
+                    <td><a href="{{ path('room_edit', {'id': room.id}) }}"><i class="far fa-edit"></i></a></td>
+                    {% endif %}
+                     {% endif %}
+
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <a href="{{ path('room_new') }}">Créé une room</a>  
+        {% endif %}
+    </div>
+</div>
 {% endblock %}
