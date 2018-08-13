@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class BackendController extends Controller
 {
     /**
-     * @Route("/backend", name="homebackend")
+     * @Route("/backend", name="home_backend")
      */
     public function index()
     {
