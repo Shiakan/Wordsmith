@@ -41,7 +41,7 @@ class ArticleRepository extends ServiceEntityRepository
          $qb = $this->createQueryBuilder('a')
         ->addSelect('COUNT(a) AS HIDDEN mycount')
         ->groupBy('a')
-        ->orderBy('a.id', 'ASC')
+        ->orderBy('a.dateInserted', 'DESC')
         ->setFirstResult( $offset )
         ->setMaxResults( $limit )
         ->getQuery()
