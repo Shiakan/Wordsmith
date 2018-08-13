@@ -31,14 +31,13 @@
     grid-template-columns: 20% 50% 30%
     &-result
       grid-area: Dresult
-      margin: auto 0
     &-share
       grid-area: Dshare
-      color: red
-
+      @extend %click-button
     &-form
       grid-area: Dform
       display: flex
+      justify-content: space-between
 
       &-input
         grid-area: Dinput
@@ -51,12 +50,7 @@
         grid-area: Droll
         display: inline-block
         @extend %click-button
-        &:hover
-          background-color: $link-active
-        &:active
-          background-color: $link-active
-          box-shadow: 0 5px #666
-          transform: translateY(4px)
+        
 
 .roll-input-flex
   margin: auto 0
@@ -70,13 +64,3 @@
       list-style-type: disc
       padding: .1em 0
 
-%click-button
-  padding: 0 1em
-  text-align: center
-  text-decoration: none
-  outline: none
-  color: #fff
-  background-color: $font-color-bold
-  border: none
-  border-radius: 15px
-  box-shadow: 0 9px #999

@@ -34,10 +34,13 @@
     border-radius: .7em
     &-dice
       grid-area: dice
+      @extend %click-button
     &-sheet
       grid-area: sheet
+      @extend %click-button
     &-help
       grid-area: help
+      @extend %click-button
   &-player
     display: grid
     grid-area: player
