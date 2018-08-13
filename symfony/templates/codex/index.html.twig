@@ -18,9 +18,9 @@
         {% for article in articles %}
         <section class="container container-index">
             <div class="article-preview">
-                <h2><a class="article-link" href="{{ path('show',{'id':article.id}) }}">{{article.title}}</a></h2>
+                <h2><a class="article-link" href="{{ path('article_show',{'id':article.id}) }}">{{article.title}}</a></h2>
                 <small>Publié le {{article.dateInserted|date("d/m/Y")}}</small>         
-            <p class="preview">{{article.description}} <a href="{{ path('show',{'id':article.id}) }}">Lire la suite</a></p>
+            <p class="preview">{{article.description}} <a href="{{ path('article_show',{'id':article.id}) }}">Lire la suite</a></p>
             </div>
             <div class="tags">
             {% for tag in article.tags %}

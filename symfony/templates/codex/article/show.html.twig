@@ -15,7 +15,7 @@
             {% for comment in article.comments %}
                 <div class="comment">
                     <div class="comment-header">
-                        <h4>{{comment.author.username}}</h4> <small>Posté le {{comment.dateInserted|date("d/m/Y")}}</small>
+                        <h4>{{comment.author.username}}</h4> <small>Posté le {{comment.dateInserted|date("d/m/Y")}}</small> <a class="btn" href="{{path('hide_comment', {'id' : comment.id }) }}"><i class="far fa-eye-slash"></i></a>
                     </div>
                     <p>{{comment.content}}</p>
                 </div>
