@@ -6,49 +6,71 @@
 <div class="wrapper-homepage">
     <div class="container container-width">
         <h1>Bienvenue {{ app.user.username }}</h1>
-        <a class="btn" href="{{path('user_profile_edit', {'id': app.user.id })}}">Modifier mon profil</a> <a class="btn" href="{{path('characterprofile_edit', {'id': app.user.characterProfile.id })}}">Profil forum</a> <a class="btn" href="#">Voir mes sujets</a> <a class="btn" href="#">Voir mes réponses</a><a class="btn" href="{{ path('room_index') }}">Mes rooms</a>
         <div class="container-profil">
             <img src="{{user.characterProfile.avatar}}">
-            <div class="information">
-            <h2>Informations générales</h2>
-            <ul>
-                <li>
-                    <span class="profile-label">Nom d'utilisateur :</span> {{ user.username }}
-                </li>
-                <li>
-                    <span class="profile-label">Email :</span> {{ user.email}}
-                </li>
-                <li>
-                    <span class="profile-label">Date de naissance :</span> {{ user.birthdate|date("d-m-Y")}}
-                </li>
-            </ul>
-            <h2>Profil du personnage</h2>
-            <ul>
-                <li>
-                    <span class="profile-label">Age :</span> {{ user.characterProfile.age}}
-                </li>
-                <li>
-                    <span class="profile-label">Race :</span> {{ user.characterProfile.race}}
-                </li>
-                <li>
-                    <span class="profile-label">Classe :</span> {{ user.characterProfile.class}}
-                </li>
-                <li>
-                    <span class="profile-label">Caste sociale :</span> {{ user.characterProfile.socialCast}}
-                </li>
-                <li>
-                    <span class="profile-label">Localisation :</span> {{ user.characterProfile.localisation}}
-                </li>
-                <li>
-                    <span class="profile-label">Faits divers :</span> {{ user.characterProfile.miscellaneous}}
-                </li>
-            </ul>
-            <a class="btn" href="{{ user.characterProfile.link1}}">Fiche de présentation</a> <a class="btn" href="{{ user.characterProfile.link2}}">Liens</a>
-               
-                
-                
-            </div>
+            <div class="container-tabs">
+                <div id="tabs">
+                    <ul class="tabs-header">
+                        <li><a href="#tabs-1">Profil</a></li>
+                        <li><a href="#tabs-2">Mes sujets</a></li>
+                        <li><a href="#tabs-3">Mes réponses</a></li>
+                    </ul>
+                    <div id="tabs-1">
+                    <a class="btn" href="{{path('user_profile_edit', {'id': app.user.id })}}">Modifier mon profil</a> <a class="btn" href="{{path('characterprofile_edit', {'id': app.user.characterProfile.id })}}">Profil forum</a> 
+                    <h2>Informations générales</h2>
+                    <ul>
+                        <li>
+                            <span class="profile-label">Nom d'utilisateur :</span> {{ user.username }}
+                        </li>
+                        <li>
+                            <span class="profile-label">Email :</span> {{ user.email}}
+                        </li>
+                        <li>
+                            <span class="profile-label">Date de naissance :</span> {{ user.birthdate|date("d-m-Y")}}
+                        </li>
+                    </ul>
+                    <h2>Profil du personnage</h2>
+                    <ul>
+                        <li>
+                            <span class="profile-label">Age :</span> {{ user.characterProfile.age}}
+                        </li>
+                        <li>
+                            <span class="profile-label">Race :</span> {{ user.characterProfile.race}}
+                        </li>
+                        <li>
+                            <span class="profile-label">Classe :</span> {{ user.characterProfile.class}}
+                        </li>
+                        <li>
+                            <span class="profile-label">Caste sociale :</span> {{ user.characterProfile.socialCast}}
+                        </li>
+                        <li>
+                            <span class="profile-label">Localisation :</span> {{ user.characterProfile.localisation}}
+                        </li>
+                        <li>
+                            <span class="profile-label">Faits divers :</span> {{ user.characterProfile.miscellaneous}}
+                        </li>
+                    </ul>
+                    <a class="btn" href="{{ user.characterProfile.link1}}">Fiche de présentation</a> <a class="btn" href="{{ user.characterProfile.link2}}">Liens</a>
+                    </div>
+                    <div id="tabs-2">
+                        <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
+                    </div>
+                    <div id="tabs-3">
+                        <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+                        <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+                    </div>
+                </div>
+            </div>                            
         </div>
     </div>
  </div>
+{% endblock %}
+
+{% block javascripts %}
+{{parent()}}
+<script>
+  $( function() {
+    $( "#tabs" ).tabs();
+  } );
+  </script>
 {% endblock %}

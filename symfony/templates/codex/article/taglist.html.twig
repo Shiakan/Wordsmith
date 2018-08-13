@@ -7,10 +7,10 @@
 {% for article in articles %}
     <section class="container">
         <div class="article-title">
-            <h2><a class="article-link" href="{{ path('show',{'id':article.id}) }}">{{article.title}}</a></h2>
+            <h2><a class="article-link" href="{{ path('article_show',{'id':article.id}) }}">{{article.title}}</a></h2>
             <small>Publié le {{article.dateInserted|date("d/m/Y")}}</small>
         </div>
-        <p class="preview">{{article.description}} <a href="{{ path('show',{'id':article.id}) }}">Lire la suite</a></p>
+        <p class="preview">{{article.description}} <a href="{{ path('article_show',{'id':article.id}) }}">Lire la suite</a></p>
         <div class="tags">
         {% for tag in article.tags %}
             <a class="btn btn-tag" href="{{path('search_by_tags',{'id':tag.id})}}">{{tag.name}}</a>

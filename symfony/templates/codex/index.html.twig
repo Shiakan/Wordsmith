@@ -2,15 +2,14 @@
 
 {% block main %}
     <div class="wrapper"> 
-    <h2>Sommaire</h2>
-    <div class="container">
-        <ol>
+    <div class="navbar navbar-codex">
+        <ul>
             {% for tag in tags %}
             <li>
                 <a href="{{path('search_by_tags',{'id':tag.id})}}">{{tag.name}}</a>
             </li>
             {% endfor %}
-        </ol>
+        </ul>
     </div>
     <h2>Les dernières publications</h2>
     <div class="wrapper-codex">
