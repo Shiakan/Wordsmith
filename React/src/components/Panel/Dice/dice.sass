@@ -22,15 +22,19 @@
     height: 100%
     max-witdh: 100%
   &-block
+    position: relative
     grid-area: Dblock
     grid-column: 2
     grid-row: 3
     display: grid
     grid-template-areas: ". . ." "Dform Dform Dform" ". . ." "Dresult Dresult Dresult" "Dshare Dshare Dshare"
-    grid-template-rows: 1fr repeat(1,1/3) 1fr
+    grid-template-rows: auto repeat(3,1/3) 1fr
     grid-template-columns: 20% 50% 30%
     &-result
       grid-area: Dresult
+      position: absolute
+      font-style: italic
+      top: -.5em
     &-share
       grid-area: Dshare
       @extend %click-button

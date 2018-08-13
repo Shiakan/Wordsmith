@@ -6,11 +6,11 @@ import { connect } from 'react-redux';
 /**
  * Local import
  */
-import Dice from 'src/components/Panel/Dice';
+import Sheet from 'src/components/Panel/Sheet';
 
 // Action Creators
 // import { doSomething } from 'src/store/reducer';
-import { rollDice, diceChange } from 'src/store/reducers/dice';
+import { sheetChange } from 'src/store/reducers/sheet';
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation
@@ -20,8 +20,7 @@ import { rollDice, diceChange } from 'src/store/reducers/dice';
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
 const mapStateToProps = state => ({
-  diceValue: state.dice.diceValue,
-  rolled: state.dice.rolled,
+  charSheet: state.sheet.charSheet,
 });
 
 /* === Actions ===
@@ -32,22 +31,19 @@ const mapStateToProps = state => ({
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
 const mapDispatchToProps = dispatch => ({
-  rollDice: () => {
-    dispatch(rollDice());
-  },
-  diceChange: (value) => {
-    dispatch(diceChange(value));
+  sheetChange: (value) => {
+    dispatch(sheetChange(value));
   },
 });
 
 // Container
 // connect(Ce dont j'ai besoin)(Qui en a besoin)
-const DiceContainer = connect(
+const SheetContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Dice);
+)(Sheet);
 
 /**
  * Export
  */
-export default DiceContainer;
+export default SheetContainer;

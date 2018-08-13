@@ -21,12 +21,15 @@ class Dice extends React.Component {
     rollDice: PropTypes.func.isRequired,
     diceChange: PropTypes.func.isRequired,
     diceValue: PropTypes.string,
-    rollResult: PropTypes.number,
+    rolled: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
   }
 
   static defaultProps = {
     diceValue: '',
-    rollResult: '',
+    rolled: '',
   }
 
   componentDidMount() {
@@ -42,17 +45,16 @@ class Dice extends React.Component {
 
   diceChange = (evt) => {
     const { diceChange } = this.props;
-    // Je recup la valeur du champ
+    // I get the field value
     const { value } = evt.target;
-    console.log(value);
-    // passer la valeur vers le state => disptach avec une action capable de prendre cette valeur
+    // I dispatch a field value with an action
     diceChange(value);
   }
 
   render() {
     const {
       diceValue,
-      rollResult,
+      rolled,
     } = this.props;
     return (
       <div className="dice">
@@ -84,7 +86,7 @@ class Dice extends React.Component {
                 place="left"
                 type="dark"
                 effect="float"
-                border="data-border"
+                border
               >
                 <p className="tooltip-text">
                 Pour lancer un dé, il vous faut écrire sous cette forme xDy où :
@@ -102,14 +104,19 @@ class Dice extends React.Component {
             <button
               type="submit"
               className="dice-block-form-roll"
-              // onClick={this.handleSumbit}
               value="Roll"
             >
               Roll
             </button>
           </form>
-
-          <p className="dice-block-result"> Votre résultat est : {rollResult} </p>
+          {/* if the rolled dices throws an error : */}
+          {rolled === 'wrong'
+          && <p className="dice-block-result"> Bravo, vous avez jeté les dés en dehors du plateau... </p>
+          }
+          {/* if there is a result and that this result isn't wrong */}
+          {rolled && rolled !== 'wrong'
+          && <p className="dice-block-result">Vous avez tiré un {rolled}</p>
+          }
           <button
             type="button"
             className="dice-block-share"
