@@ -45,10 +45,9 @@ class Dice extends React.Component {
 
   diceChange = (evt) => {
     const { diceChange } = this.props;
-    // Je recup la valeur du champ
+    // I get the field value
     const { value } = evt.target;
-    console.log(value);
-    // passer la valeur vers le state => disptach avec une action capable de prendre cette valeur
+    // I dispatch a field value with an action
     diceChange(value);
   }
 
@@ -105,14 +104,18 @@ class Dice extends React.Component {
             <button
               type="submit"
               className="dice-block-form-roll"
-              // onClick={this.handleSumbit}
               value="Roll"
             >
               Roll
             </button>
           </form>
+          {/* if the rolled dices throws an error : */}
           {rolled === 'wrong'
           && <p className="dice-block-result"> Bravo, vous avez jeté les dés en dehors du plateau... </p>
+          }
+          {/* if there is a result and that this result isn't wrong */}
+          {rolled && rolled !== 'wrong'
+          && <p className="dice-block-result">Vous avez tiré un {rolled}</p>
           }
           <button
             type="button"
