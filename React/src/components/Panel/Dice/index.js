@@ -3,6 +3,9 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactTooltip from 'react-tooltip';
+import { FaInfoCircle } from 'react-icons/fa/';
+
 /**
  * Local import
  */
@@ -53,12 +56,12 @@ class Dice extends React.Component {
     } = this.props;
     return (
       <div className="dice">
-        <p className="dice-text">DiceTEST</p>
         <img
           className="dice-img"
           src="src/assets/img/dicesTest1.png"
           alt="some roleplay dices"
         />
+
         <div className="dice-block">
           <form
             className="dice-block-form"
@@ -95,9 +98,18 @@ class Dice extends React.Component {
           >
             MJ Share
           </button>
-          <div className="tooltip">Hover over me
-            <span className="tooltiptext">Tooltip text</span>
-          </div>
+          <FaInfoCircle
+            data-tip="React-tooltip"
+            className="tooltip"
+          />
+          <ReactTooltip place="top" type="dark" effect="float">
+            Pour lancer un dé, il vous faut écrire sous cette forme xDy où :
+            <ul>
+              <li>x correspond au nombre de dés à lancer</li>
+              <li>D est le séparateur</li>
+              <li>y le nombre de face pour les dés à lancer</li>
+            </ul>
+          </ReactTooltip>
         </div>
       </div>
 
