@@ -19,11 +19,13 @@ import './character.sass';
  */
 class Character extends React.Component {
   static propTypes = {
-    onMovePlayer: PropTypes.func.isRequired,
+    movePlayer: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
     deletePlayer: PropTypes.func.isRequired,
+    // coordX: PropTypes.number.isRequired,
+    // coordY: PropTypes.number.isRequired,
   }
 
   componentDidMount() {
@@ -32,8 +34,8 @@ class Character extends React.Component {
 
   movePlayer = (e) => {
     console.log(e.target.id);
-    const { onMovePlayer } = this.props;
-    onMovePlayer(e);
+    const { movePlayer } = this.props;
+    movePlayer(e);
   }
 
   render() {
@@ -47,9 +49,10 @@ class Character extends React.Component {
       >
         <div
           className="character"
-          style={{
-            position: 'absolute',
-          }}
+          // style={{
+          //   top: `${coordX}px`,
+          //   left: `${coordY}px`,
+          // }}
         >
           <div
             className="character-nickname"

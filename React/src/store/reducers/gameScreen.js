@@ -9,8 +9,6 @@ const initialState = {
   grid: true,
   color: '#d4c4fb',
   toggle: false,
-  moving: false,
-  created: false,
   name: '',
   typingName: '',
   // coordX: 0,
@@ -19,21 +17,21 @@ const initialState = {
     {
       id: uuidv4(),
       name: 'troll',
-      color: '#d4c4fb',
+      color: '#b80000',
       coordX: 125,
       coordY: 250,
     },
     {
       id: uuidv4(),
       name: 'orc',
-      color: '#d4c4fb',
+      color: '#008b02',
       coordX: 0,
       coordY: 0,
     },
     {
       id: uuidv4(),
       name: 'ben',
-      color: '#d4c4fb',
+      color: '#fccb00',
       coordX: 0,
       coordY: 0,
     },
@@ -110,7 +108,6 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         characters: [...state.characters, newChar],
-        moving: true,
         typingName: '',
       };
     }
@@ -123,22 +120,17 @@ const reducer = (state = initialState, action = {}) => {
 
     case MOVE_PLAYER: {
       const movedChars = state.characters.map((char) => {
-        console.log(action.value);
         if (char.id === action.value.target.id) {
-          console.log('char :', char);
-
-          return {
-            ...char,
-            coordX: action.value.pageX,
-            coordY: action.value.pageY,
-          };
+          console.log('old coords :', char.coordX, char.coordY);
+          console.log('new coords :', action.value.pageX, action.value.pageY);
+          char.coordX = action.value.pageX;
+          char.coordY = action.value.pageY;
         }
         return char;
       });
       return {
         ...state,
         characters: movedChars,
-        created: true,
       };
     }
     case DELETE_PLAYER: {
@@ -184,9 +176,6 @@ export const createPlayer = () => ({
   type: CREATE_PLAYER,
 });
 
-// export const submitName = () => ({
-//   type: SUBMIT_NAME,
-// });
 export const movePlayer = value => ({
   type: MOVE_PLAYER,
   value,

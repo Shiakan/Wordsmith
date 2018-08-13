@@ -20,7 +20,7 @@ import {
  *  - ownProps : les props passées au container
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
-const mapStateToProps = () => ({
+const mapStateToProps = state => ({
   // color: state.gameScreen.color,
   // name: state.gameScreen.name,
   // coordX: state.gameScreen.coordX,
@@ -35,11 +35,10 @@ const mapStateToProps = () => ({
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onMovePlayer: (value) => {
+  movePlayer: (value) => {
     dispatch(movePlayer(value));
   },
   deletePlayer: () => {
-    console.log('onDelete', ownProps.id);
     dispatch(deletePlayer(ownProps.id));
   },
 });
