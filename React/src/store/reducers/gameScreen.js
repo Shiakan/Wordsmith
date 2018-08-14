@@ -10,6 +10,7 @@ const initialState = {
   color: '#d4c4fb',
   toggle: false,
   isSlided: false,
+  cpt: 1,
   name: '',
   typingName: '',
   characters: [
@@ -18,28 +19,28 @@ const initialState = {
       name: 'troll',
       color: '#b80000',
       coordX: 10,
-      coordY: 50,
+      coordY: 150,
     },
     {
       id: uuidv4(),
       name: 'orc',
       color: '#008b02',
       coordX: 10,
-      coordY: 100,
+      coordY: 200,
     },
     {
       id: uuidv4(),
       name: 'ben',
       color: '#fccb00',
       coordX: 10,
-      coordY: 150,
+      coordY: 250,
     },
     {
       id: uuidv4(),
       name: 'nain',
       color: '#b80000',
       coordX: 10,
-      coordY: 200,
+      coordY: 300,
     },
   ],
 };
@@ -104,10 +105,14 @@ const reducer = (state = initialState, action = {}) => {
         id: uuidv4(),
         name: state.typingName,
         color: state.color,
-        coordX: 10,
-        coordY: 250,
+        coordX: Math.floor(Math.random() * 600) + 1,
+        coordY: Math.floor(Math.random() * 500) + 1,
       };
-
+      if (newChar.name.length === 0) {
+        newChar.name = `Opponent#${state.cpt}`;
+        state.cpt += 1;
+      }
+      console.log(newChar.name);
       return {
         ...state,
         characters: [...state.characters, newChar],

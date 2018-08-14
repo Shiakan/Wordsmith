@@ -51,7 +51,7 @@ class SwitchMap extends React.Component {
           htmlFor="check"
           id="box"
         >
-              Quadrillage
+        Quadrillage
         </label>
       </form>
     );

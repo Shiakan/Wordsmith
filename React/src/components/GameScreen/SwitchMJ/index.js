@@ -4,6 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { GithubPicker } from 'react-color';
+import ReactTooltip from 'react-tooltip';
 
 
 /**
@@ -90,7 +91,6 @@ class SwitchMJ extends React.Component {
             type="submit"
             value="+"
           />
-
         </form>
       </div>
     );

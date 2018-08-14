@@ -7,15 +7,17 @@
  * Styles
  */
 .character
+    // transition: 1s cubic-bezier(.42,0,.78,1.25) RIP :'(
     font-family: $name-font
     text-align: center
-    // transition: 1s cubic-bezier(.42,0,.78,1.25)
     position: absolute
     z-index: 1
     cursor: grabbing
     &:hover
         &> .character-nickname
             visibility: visible
+        &> .character-cursor
+            box-shadow: $box-shadow-npc
     &-nickname
         display: flex
         visibility: hidden

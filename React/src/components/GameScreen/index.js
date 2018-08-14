@@ -39,16 +39,22 @@ class GameScreen extends React.Component {
       toggleScreen, board, map,
       grid, characters, handleSlide, isSlided,
     } = this.props;
-    const classCss = classNames(
+    const classSwitch = classNames(
       'screen-switch',
       {
         'screen-switch--active': isSlided,
       },
     );
+    const classArrow = classNames(
+      'screen-switch-arrow',
+      {
+        'screen-switch-arrow--board': board,
+      },
+    );
     return (
       <div className="screen">
         <div
-          className={classCss}
+          className={classSwitch}
         >
 
           {map
@@ -70,12 +76,12 @@ class GameScreen extends React.Component {
             ) }
           {isSlided ? (
             <FaAngleDoubleLeft
-              className="screen-switch-arrow"
+              className={classArrow}
               onClick={handleSlide}
             />
           ) : (
             <FaAngleDoubleRight
-              className="screen-switch-arrow"
+              className={classArrow}
               onClick={handleSlide}
             />
           )}
