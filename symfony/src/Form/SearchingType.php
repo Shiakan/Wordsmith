@@ -14,7 +14,10 @@ class SearchingType extends AbstractType
     {
         $builder
             ->add('title', SearchType::class,[
-                'label'=>'Recherche',
+                'label'=>' ',
+                'attr' => [
+                    'placeholder' => 'Rechercher un article'
+                ]
             ])
         ;
     }

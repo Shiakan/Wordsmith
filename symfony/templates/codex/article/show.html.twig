@@ -2,10 +2,15 @@
 {% block main %}
 {{ include('codex/aside.html.twig') }}
     <div class="wrapper">
-    {% for tag in article.tags %}
-        <a class="btn btn-tag" href="">{{ tag.name }}</a>
-    {% endfor %}
-        
+    <div class="navbar navbar-codex">
+            <ul>
+                {% for tag in tags %}
+                <li>
+                    <a href="{{path('search_by_tags',{'id':tag.id})}}">{{tag.name}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
         <article class="container container-article">
             <h1>{{article.title}}</h1>
             <div class="article-content">
@@ -13,6 +18,9 @@
             </div>
             <small>Publié le {{article.dateInserted|date("d/m/Y")}}.</small>
         </article>
+         {% for tag in article.tags %}
+        <a class="btn btn-tag" href="">{{ tag.name }}</a>
+        {% endfor %}
         <section class="container container-comment">
             <h2>Commentaires</h2>
             {% for comment in article.comments %}

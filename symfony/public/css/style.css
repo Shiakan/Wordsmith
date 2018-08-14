@@ -356,7 +356,6 @@ select {
 }
 .form-group input {
     padding:0.5em;
-    margin:0.5em;
     width:100%;
     color:#BDBDBD;
     background-color:#0b0b0b;
@@ -374,6 +373,37 @@ form button {
     color: #BDBDBD;
     border:1px solid rgb(15, 49, 33);
     cursor:pointer;
+}
+
+.search-form {
+   width:31%;
+   display:flex;
+   flex-flow:row wrap;
+   align-items: center;
+}
+.search-form .form-group, input {
+    display:inline-block;
+    width:85%;
+    border-color:#125C38;
+    border-top-left-radius: 0.3em;
+    border-bottom-left-radius: 0.3em;
+}
+
+
+.search-form button {
+    display:inline-block;
+    padding: 0.5em;
+    margin-left:-0.125em;
+    border-radius: 0 0.3em 0.3em 0;
+    border-width: 1px 1px 1px 0;
+    border-style: solid;
+    border-color: #125C38;
+    background-color:#125C38;
+}
+
+.search-form button:hover {
+    background-color:rgb(15, 49, 33);
+    border-color: rgb(15, 49, 33);
 }
 
 /* Onglets */
@@ -440,4 +470,10 @@ a.ui-button:active, .ui-button:active,
     justify-content: space-between;
     align-items: center;
     margin-bottom:0.5em;
+}
+
+.last-article {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
 }
