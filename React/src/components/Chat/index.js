@@ -6,6 +6,7 @@ import React from 'react';
 /**
  * Local import
  */
+import TextInput from 'src/containers/TextInput';
 // Composants
 
 // Styles et assets
@@ -16,7 +17,7 @@ import './chat.sass';
  */
 const Chat = () => (
   <div className="chat">
-    <p>chat</p>
+    <TextInput />
   </div>
 );
 
