@@ -2,7 +2,10 @@
 {% block main %}
 {{ include('codex/aside.html.twig') }}
     <div class="wrapper">
-        <a href="{{path('homepage')}}">Revenir à l'acceuil</a>
+    {% for tag in article.tags %}
+        <a class="btn btn-tag" href="">{{ tag.name }}</a>
+    {% endfor %}
+        
         <article class="container container-article">
             <h1>{{article.title}}</h1>
             <div class="article-content">
@@ -42,6 +45,6 @@
                 {{form_end(form)}}
             {% endif %}
         </section>
-        
+        <a class="btn" href="{{path('codex')}}">Retour</a>
     </div>
 {% endblock %}

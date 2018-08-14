@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-    <div class="wrapper"> 
+<div class="wrapper"> 
     <div class="navbar navbar-codex">
         <ul>
             {% for tag in tags %}
@@ -11,9 +11,11 @@
             {% endfor %}
         </ul>
     </div>
+    <div class="header-codex">
+
+    </div>
     <h2>Les dernières publications</h2>
     <div class="wrapper-codex">
-     
         {% for article in articles %}
         <section class="container container-index">
             <div class="article-preview">
@@ -28,8 +30,7 @@
             </div>
         </section>
         {% endfor %}
-        </div>
-        <a href="{{path('codex')}}">Revenir à l'acceuil</a>
     </div>
+</div>
 {% endblock %}
 

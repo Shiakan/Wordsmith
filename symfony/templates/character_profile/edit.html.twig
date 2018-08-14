@@ -4,7 +4,7 @@
 {% block main %}
 <div class="wrapper-homepage">
     <div class="container container-width">
-        <h1>Bienvenue {{ app.user.username }}</h1>
+        <h1>{{ app.user.username }}</h1>
         {{ form_start(form) }}
         {{ form_widget(form) }}
         <button type="submit">Poster</button>

@@ -62,7 +62,18 @@ class RoomController extends Controller
         ));
 
     }
-    
+
+    /**
+     * @Route("room_access", name="room_access", methods="GET")
+     */
+
+     public function roomAccess(Request $request)
+    {
+        $code = $request->request->get('code');
+        $id = $request->request->get('id');
+
+        dump($code);die;
+    }
 
     private function createRandomCode() { 
 
