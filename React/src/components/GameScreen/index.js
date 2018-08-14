@@ -37,6 +37,12 @@ class GameScreen extends React.Component {
     } = this.props;
     return (
       <div className="screen">
+        {characters.map(character => (
+          <Character
+            key={character.id}
+            {...character}
+          />
+        ))}
         <div className="screen-switch">
           {map
             && (
@@ -64,12 +70,7 @@ class GameScreen extends React.Component {
             alt="map"
             className="screen-map-image"
           />
-          {characters.map(character => (
-            <Character
-              key={character.id}
-              {...character}
-            />
-          ))}
+
         </div>
         ) }
         {board && <div className="screen-board">THIS IS THE BOARD</div> }

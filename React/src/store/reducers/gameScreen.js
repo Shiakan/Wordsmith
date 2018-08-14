@@ -11,29 +11,34 @@ const initialState = {
   toggle: false,
   name: '',
   typingName: '',
-  // coordX: 0,
-  // coordY: 0,
   characters: [
     {
       id: uuidv4(),
       name: 'troll',
       color: '#b80000',
-      coordX: 125,
-      coordY: 250,
+      coordX: 10,
+      coordY: 50,
     },
     {
       id: uuidv4(),
       name: 'orc',
       color: '#008b02',
-      coordX: 0,
-      coordY: 0,
+      coordX: 10,
+      coordY: 100,
     },
     {
       id: uuidv4(),
       name: 'ben',
       color: '#fccb00',
-      coordX: 0,
-      coordY: 0,
+      coordX: 10,
+      coordY: 150,
+    },
+    {
+      id: uuidv4(),
+      name: 'nain',
+      color: '#b80000',
+      coordX: 10,
+      coordY: 200,
     },
   ],
 };
@@ -54,16 +59,6 @@ const DELETE_PLAYER = 'DELETE_PLAYER';
 /**
  * Traitements
  */
-// const charsProp = (chars, id, lastProp, prop) => chars.map((char) => {
-//   console.log(char);
-//   if (char.id === id) {
-//     return {
-//       ...char,
-//       [lastProp]: char[prop],
-//     };
-//   }
-//   return char;
-// });
 
 /**
  * Reducer
@@ -102,7 +97,7 @@ const reducer = (state = initialState, action = {}) => {
         name: state.typingName,
         color: state.color,
         coordX: 0,
-        coordY: 0,
+        coordY: -370,
       };
 
       return {

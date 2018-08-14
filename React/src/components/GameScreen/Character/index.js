@@ -24,8 +24,8 @@ class Character extends React.Component {
     id: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
     deletePlayer: PropTypes.func.isRequired,
-    // coordX: PropTypes.number.isRequired,
-    // coordY: PropTypes.number.isRequired,
+    coordX: PropTypes.number.isRequired,
+    coordY: PropTypes.number.isRequired,
   }
 
   componentDidMount() {
@@ -40,19 +40,16 @@ class Character extends React.Component {
 
   render() {
     const {
-      name, color, id, deletePlayer,
+      name, color, id, deletePlayer, coordX, coordY,
     } = this.props;
     return (
       <Draggable
         onStop={this.movePlayer}
         bounds="parent"
+        defaultPosition={{ x: coordX, y: coordY }}
       >
         <div
           className="character"
-          // style={{
-          //   top: `${coordX}px`,
-          //   left: `${coordY}px`,
-          // }}
         >
           <div
             className="character-nickname"

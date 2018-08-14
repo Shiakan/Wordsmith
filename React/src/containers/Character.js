@@ -10,7 +10,7 @@ import Character from 'src/components/GameScreen/Character';
 
 // Action Creators
 import {
-  movePlayer, deletePlayer,
+  movePlayer, deletePlayer, positioning,
 } from 'src/store/reducers/gameScreen';
 
 /* === State (données) ===
@@ -21,6 +21,7 @@ import {
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
 const mapStateToProps = state => ({
+  positioning: state.gameScreen.positioning,
   // color: state.gameScreen.color,
   // name: state.gameScreen.name,
   // coordX: state.gameScreen.coordX,
