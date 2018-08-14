@@ -3,6 +3,13 @@
 {% block title %}Liste des utilisateurs{% endblock %}
 
 {% block main %}
+        <div>
+            {{ form_start(form, {'action': path('back_search_user'), 'method': 'POST'}) }} {{ form_row(form.username) }}
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-search"></i>
+            </button>
+            {{ form_end(form) }}
+        </div>
     <h1 class="mt-3 mb-3">Liste des utilisateurs</h1>
 
     <table class="table table-hover text-center">
@@ -12,7 +19,6 @@
                 <th>Username</th>
                 <th>Email</th>
                 <th>Actif</th>
-                <th>Date de naissance</th>
                 <th>Date d'inscription</th>
                 <th>Role</th>
                 <th>Actions</th>
@@ -25,7 +31,6 @@
                 <td>{{ user.username }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.isActive ? 'Oui' : 'Non' }}</td>
-                <td>{{ user.birthdate ? user.birthdate|date('d-m-Y') : '' }}</td>
                 <td>{{ user.dateInserted ? user.dateInserted|date('d-m-Y') : '' }}</td>
                 <td>{{ user.role.name }}</td>
                 <td>

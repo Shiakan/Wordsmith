@@ -52,7 +52,19 @@ class UserRepository extends ServiceEntityRepository
         ;
         return $qb;
     }
-
+       /**
+     * @return User[] Returns an array of User objects
+     */
+    public function findBySearch($username)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.username LIKE :searching')
+            ->setParameter('searching','%'.$username.'%')
+            ->orderBy('u.dateInserted', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     /*
     public function findOneBySomeField($value): ?User
     {

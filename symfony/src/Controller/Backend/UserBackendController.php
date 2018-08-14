@@ -4,6 +4,7 @@ namespace App\Controller\Backend;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Form\SearchUserType;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,10 +26,27 @@ class UserBackendController extends Controller
         $users = $userRepository->findUserByPage($page,$limit); //requête où on passe la page actuelle, le seeBanned et la limite de questions
         $totalUser =  $userRepository->findCountMax(); //requête qui compte le nombre total de questions avec ou sans les banned
         $pageMax = ceil($totalUser / $limit);
+        $form = $this->createForm(SearchUserType::class);
         return $this->render('backend/user/index.html.twig', [
             'users' => $users,
             'page'=>$page,
-            'pageMax'=>$pageMax
+            'pageMax'=>$pageMax,
+            'form' => $form->createView(),
+        ]);
+    }
+        /**
+     * @Route("/search", name="back_search_user")
+     */
+    public function findBakUserBySearch(Request $request)
+    {
+        $data = $request->request->get('search_user');
+        $username = $data['username'];
+
+        $userRepository = $this->getDoctrine()->getRepository(User::class);
+        $users = $userRepository->findBySearch($username);
+
+        return $this->render('backend/user/search.html.twig', [
+            'users' =>$users,
         ]);
     }
 
