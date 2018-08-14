@@ -2,15 +2,15 @@
 {% block title %} {{tag.name}}{% endblock %}
 
 {% block main %}
-<div class="wrapper-list">
-<h2>Articles de la section <em>{{tag.name}}</em> :</h2>
+<div class="wrapper">
+<h2 class="taglist-title">Articles de la section <em>{{tag.name}}</em> :</h2>
 {% for article in articles %}
-    <section class="container">
-        <div class="article-title">
+    <section class="container container-article">
+        <div class="article-preview">
             <h2><a class="article-link" href="{{ path('article_show',{'id':article.id}) }}">{{article.title}}</a></h2>
             <small>Publié le {{article.dateInserted|date("d/m/Y")}}</small>
+            <p class="preview">{{article.description}} <a href="{{ path('article_show',{'id':article.id}) }}">Lire la suite</a></p>
         </div>
-        <p class="preview">{{article.description}} <a href="{{ path('article_show',{'id':article.id}) }}">Lire la suite</a></p>
         <div class="tags">
         {% for tag in article.tags %}
             <a class="btn btn-tag" href="{{path('search_by_tags',{'id':tag.id})}}">{{tag.name}}</a>
@@ -18,6 +18,6 @@
         </div>
     </section>
     {% endfor %}
-    <a href="{{path('codex')}}">Retour</a>
+    <a class="btn" href="{{path('codex')}}">Retour</a>
 </div>
 {% endblock %}

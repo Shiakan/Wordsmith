@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Spectral+SC:400,400i,700');
 @import url('https://fonts.googleapis.com/css?family=BenchNine:300,400,700');
 @import url('https://fonts.googleapis.com/css?family=Forum');
+@import url('https://fonts.googleapis.com/css?family=Palanquin:300,400,600');
 
 /* Général */
 * {
@@ -8,13 +9,12 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 body {
     background-image: url('https://nsa39.casimages.com/img/2018/08/12//180812035309968266.png');
     background-repeat:no-repeat;
     background-attachment:fixed;
     color:#BDBDBD;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Palanquin', sans-serif;
     position:relative;
     display:flex;
     justify-content: space-between;
@@ -23,25 +23,20 @@ body {
     flex-direction: column;
     flex-wrap: wrap;
 }
-
 main {
     width:100%;
 }
-
 a {
     font-family: 'Forum', cursive;
     color: #A56E3A;
     text-decoration:none;
 }
-
 a:hover {
     color: #843C1B;
 }
-
 .active {
     color: #125C38;
 }
-
 h1 {
     font-family: 'Spectral SC', serif;
     font-size:2.5em;
@@ -69,7 +64,6 @@ footer {
     position: absolute;
     bottom: 0px;
     width:100%;
-
 }
 footer ul li {
     list-style:none;
@@ -149,6 +143,10 @@ small {
     border-bottom: 1px solid  #503415; 
     margin-bottom:0.2em;
 }
+
+.taglist-title em {
+    color: #A56E3A;
+}
 /* Fin sommaire Codex */
 
 /* Wrappers & containers */
@@ -191,8 +189,21 @@ small {
     width:45%;
     margin:0 auto 3.5em;
 }
+
+.container-article {
+    margin-top:1em;
+}
 /* Codex */
 
+.header-codex {
+    background-image:url('https://nsa39.casimages.com/img/2018/08/14//180814093858746062.jpg');
+    background-repeat: no-repeat;
+    background-position:center;
+    background-size:100% 100%;
+    margin:1em;
+    height:20em;
+    border-radius:0.3em;
+}
 .article-content {
     margin:0.5em;
     text-align:justify;
@@ -209,7 +220,7 @@ small {
     border-collapse: collapse;
     margin:1em;
 }
-.container--article h2 {
+.container-article h2 {
     color: #A56E3A;
 }
 .article-preview h2 {
@@ -257,7 +268,6 @@ small {
     background-color: rgb(15, 49, 33);  
     color: #BDBDBD;
 }
-
 .btn-admin {
     position:fixed;
     bottom:6%;
@@ -367,44 +377,49 @@ form button {
 }
 
 /* Onglets */
+.container-tabs {
+    padding-left:1em;
+    padding-right:1em;
+}
 #tabs {
     background-color:#0b0b0b;
     color: #BDBDBD;
     border:none;
-    margin-left:0.5em;
 }
-.tabs-header {
-    margin-bottom:1em;
-}
+
 .tabs-header li {
-    background-color: #0b0b0b;
-    color:#A56E3A;
+    background-color:#0b0b0b;
+    padding:0.5em;
     text-transform:uppercase;
     font-family: 'Forum', cursive;
     list-style:none;
     display:inline-block;
+    border:1px solid gray;
+    border-bottom:0;
+    border-top-left-radius: 0.3em;
+    border-top-right-radius: 0.3em;
 }
 
-.tabs-header li a {
-    background-color: #0b0b0b;
-    padding:0.5em;
-}
 
-.tabs-header li a:active {
-    background-color:green;
+.ui-state-active, 
+.ui-widget-content .ui-state-active, 
+.ui-widget-header .ui-state-active, 
+a.ui-button:active, .ui-button:active, 
+.ui-button.ui-state-active:hover {
+    background-color:#000000;
 }
 
 #tabs-1, #tabs-2, #tabs-3 {
+    border:1px solid gray;
     background-color:#0b0b0b;
     color: #BDBDBD;
+    padding:0.8em;
+    text-align:justify;
 }
-#tabs h2 {
-    border-bottom:1px solid rgb(119, 67, 7);
-    margin-bottom:0.5em;
-}
+
 #tabs-1 ul li {
     list-style:none;
-    padding-left:0.5em;
+    padding:0 1em;
 }
 .container-profil {
       display:flex;
@@ -417,4 +432,12 @@ form button {
     color: #A56E3A;
     text-transform:uppercase;
     font-size:1.1em;
+}
+
+.profile-title {
+    display:flex;
+    border-bottom:1px solid rgb(119, 67, 7);
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom:0.5em;
 }
