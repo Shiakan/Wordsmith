@@ -4,8 +4,7 @@ namespace App\Controller\Backend\Codex;
 
 use App\Entity\Article;
 use App\Form\ArticleType;
-use Pagerfanta\Adapter\ArrayAdapter;
-use Pagerfanta\Pagerfanta;
+use App\Form\SearchingType;
 use App\Repository\ArticleRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,10 +26,12 @@ class ArticleController extends Controller
         $articles = $articleRepository->findByAll($page,$limit); //requête où on passe la page actuelle, le seeBanned et la limite de questions
         $totalArticles =  $articleRepository->findCountMax(); //requête qui compte le nombre total de questions avec ou sans les banned
         $pageMax = ceil($totalArticles / $limit); // nombre de page max à afficher (sert pour bouton suivant)
+        $form = $this->createForm(SearchingType::class);
         return $this->render('backend/codex/article/index.html.twig', [
             'articles' => $articles,
             'page'=>$page,
-            'pageMax'=>$pageMax
+            'pageMax'=>$pageMax,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -104,5 +105,20 @@ class ArticleController extends Controller
         }
         //On redirige ensuite sur la page de la question où l'on se trouvait
         return $this->redirectToRoute('backend_article_index');
+    }
+    /**
+     * @Route("/search", name="back_search_article")
+     */
+    public function findBakArticleBySearch(Request $request)
+    {
+        $data = $request->request->get('searching');
+        $title = $data['title'];
+
+        $repositoryArticle = $this->getDoctrine()->getRepository(Article::class);
+        $articles = $repositoryArticle->findBySearch($title);
+
+        return $this->render('backend/codex/article/search.html.twig', [
+            'articles' =>$articles,
+        ]);
     }
 }
