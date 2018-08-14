@@ -96,8 +96,8 @@ const reducer = (state = initialState, action = {}) => {
         id: uuidv4(),
         name: state.typingName,
         color: state.color,
-        coordX: 0,
-        coordY: -370,
+        coordX: 10,
+        coordY: 250,
       };
 
       return {

@@ -37,16 +37,13 @@ class GameScreen extends React.Component {
     } = this.props;
     return (
       <div className="screen">
-        {characters.map(character => (
-          <Character
-            key={character.id}
-            {...character}
-          />
-        ))}
-        <div className="screen-switch">
+        <div
+          className="screen-switch"
+          // onClick={handleSlide}
+        >
           {map
             && (
-            <div>
+            <div className="screen-switch-form">
               <SwitchMap />
               <SwitchMJ />
             </div>
@@ -64,6 +61,12 @@ class GameScreen extends React.Component {
         </div>
         {map && (
         <div className="screen-map">
+          {characters.map(character => (
+            <Character
+              key={character.id}
+              {...character}
+            />
+          ))}
           {grid && <div className="screen-map-grid" />}
           <img
             src="http://medievalshop.com/parchemin/wp-content/uploads/2013/08/La-prison.jpg"

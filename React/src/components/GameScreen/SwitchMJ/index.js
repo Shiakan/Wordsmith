@@ -24,9 +24,13 @@ class SwitchMJ extends React.Component {
     onInputChange: PropTypes.func.isRequired,
     color: PropTypes.string.isRequired,
     toggle: PropTypes.bool.isRequired,
-    typingName: PropTypes.string.isRequired,
+    typingName: PropTypes.string,
     createPlayer: PropTypes.func.isRequired,
   }
+
+  static defaultProps = {
+    typingName: '',
+  };
 
   componentDidMount() {
     console.log('switch MJ loaded');
