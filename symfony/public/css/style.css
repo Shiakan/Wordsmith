@@ -309,12 +309,14 @@ small {
 }
 .comment-header {
     display:flex;
+    align-items: center;
 }
 .comment h4 {
     font-family: 'Forum', cursive;
     font-size:1.2em;
     font-weight:400;
     color: #A56E3A;
+    text-transform:uppercase;
 }
 .comment small {
     margin-left:1em;
@@ -324,6 +326,20 @@ small {
 .comment-hidden {
     background-color:rgb(22, 22, 22);
     opacity: 0.7;
+    text-align:right;
+}
+
+.comment-hidden p {
+    text-align:left;
+}
+.deactivated {
+    font-size:0.9em;
+    margin-left:0.3em;
+    color:rgb(235, 144, 83);
+    text-transform:uppercase;
+    font-family: 'BenchNine', sans-serif;
+    letter-spacing:0.1em;
+    text-align:right;
 }
 /* Formulaires */
 .form-group {

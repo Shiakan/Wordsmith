@@ -40,7 +40,7 @@ class SubcategoryController extends Controller
             return $this->redirectToRoute('subcategory_index');
         }
 
-        return $this->render('subcategory/new.html.twig', [
+        return $this->render('backend/forum/subcategory/new.html.twig', [
             'subcategory' => $subcategory,
             'form' => $form->createView(),
         ]);
@@ -51,7 +51,7 @@ class SubcategoryController extends Controller
      */
     public function show(Subcategory $subcategory): Response
     {
-        return $this->render('subcategory/show.html.twig', ['subcategory' => $subcategory]);
+        return $this->render('backend/forum/subcategory/show.html.twig', ['subcategory' => $subcategory]);
     }
 
     /**
@@ -68,7 +68,7 @@ class SubcategoryController extends Controller
             return $this->redirectToRoute('subcategory_edit', ['id' => $subcategory->getId()]);
         }
 
-        return $this->render('subcategory/edit.html.twig', [
+        return $this->render('backend/forum/subcategory/edit.html.twig', [
             'subcategory' => $subcategory,
             'form' => $form->createView(),
         ]);

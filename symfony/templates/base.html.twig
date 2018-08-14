@@ -31,7 +31,7 @@
                                 <a class="{{ app.request.get('_route') == 'codex' ? 'active' }}" href="{{path('codex')}}">Codex</a>
                             </li>
                             <li>
-                                <a href="#">Forum</a>
+                                <a class="{{ app.request.get('_route') == 'forum_index' ? 'active' }}" href="{{path('forum_index')}}">Forum</a>
                             </li>
                             <li>
                                 <a href="{{ path('room_new') }}">Room</a>
