@@ -60,7 +60,6 @@ class RoomController extends Controller
         return $this->render('room/show.html.twig', array(
             'room' => $room
         ));
-
     }
 
     /**

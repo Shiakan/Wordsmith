@@ -277,6 +277,14 @@ small {
     padding:0.3em 0.5em;
 }
 
+.btn-mod {
+    margin-left:0.5em;
+}
+
+.show {
+    color:#125C38;
+}
+
 /* Commentaires Codex */
 .container-comment h2 {
     border-bottom:1px solid  #503415;
