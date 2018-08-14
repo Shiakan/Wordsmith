@@ -59,7 +59,11 @@
 .roll-input-flex
   margin: auto 0
 
-.tooltip 
+.tooltip
+  &-error
+    animation-name: toolTipError
+    animation-duration: .7s
+    animation-timing-function: linear
   &-text
     padding: .5em 0
   &-ul
@@ -68,3 +72,19 @@
       list-style-type: disc
       padding: .1em 0
 
+/** KEYFRAMES **/
+
+@keyframes toolTipError 
+  0%
+    transform: rotate(0deg)
+  25%
+    transform: rotate(-45deg)
+    color: red
+  50%
+    transform: rotate(45deg)
+    color: black
+  75%
+    transform: rotate(-45deg)
+    color: red
+  100% 
+    transform: rotate(0deg)

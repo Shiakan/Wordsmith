@@ -5,6 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 import { FaInfoCircle } from 'react-icons/fa/';
+import classNames from 'classnames';
 
 /**
  * Local import
@@ -56,6 +57,12 @@ class Dice extends React.Component {
       diceValue,
       rolled,
     } = this.props;
+    const toolTip = classNames(
+      'tooltip',
+      {
+        'tooltip-error': rolled === 'wrong',
+      },
+    );
     return (
       <div className="dice">
         <img
@@ -63,7 +70,6 @@ class Dice extends React.Component {
           src="src/assets/img/dicesTest1.png"
           alt="some roleplay dices"
         />
-
         <div className="dice-block">
           <form
             className="dice-block-form"
@@ -79,8 +85,8 @@ class Dice extends React.Component {
                 value={diceValue}
               />
               <FaInfoCircle
+                className={toolTip}
                 data-tip="React-tooltip"
-                className="tooltip"
               />
               <ReactTooltip
                 place="left"
