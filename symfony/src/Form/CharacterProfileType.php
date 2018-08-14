@@ -18,20 +18,30 @@ class CharacterProfileType extends AbstractType
             ->add('age')
             ->add('race')
             ->add('class', TextType::class, [
-                'label' => 'Classe'
+                'label' => 'Classe',
+                'required'   => false,
+                'empty_data' => ' ',
             ])
             ->add('socialCast', TextType::class, [
-                'label' => 'Caste sociale'
+                'label' => 'Caste sociale',
+                'required'   => false,
+                'empty_data' => ' ',
             ])
             ->add('localisation')
             ->add('miscellaneous', TextareaType::class, [
-                'label' => 'Faits divers'
+                'label' => 'Faits divers',
+                'required'   => false,
+                'empty_data' => ' ',
             ])
             ->add('link1', TextType::class, [
-                'label' => 'Fiche de présentation'
+                'label' => 'Fiche de présentation',
+                'required'   => false,
+                'empty_data' => ' ',
             ])
             ->add('link2', TextType::class, [
-                'label' => 'Relations'
+                'label' => 'Relations',
+                'required'   => false,
+                'empty_data' => ' ',
             ])
         ;
     }

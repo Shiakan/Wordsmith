@@ -45,6 +45,7 @@ class CodexController extends Controller
 
         return $this->render('codex/article/search.html.twig', [
             'articles' =>$articles,
+            'title' => $title
         ]);
     }
 }

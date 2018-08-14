@@ -2,7 +2,7 @@
 {% block main %}
 {{ include('codex/aside.html.twig') }}
     <div class="wrapper">
-    <div class="navbar navbar-codex">
+        <div class="navbar navbar-codex">
             <ul>
                 {% for tag in tags %}
                 <li>
@@ -18,9 +18,11 @@
             </div>
             <small>Publié le {{article.dateInserted|date("d/m/Y")}}.</small>
         </article>
-         {% for tag in article.tags %}
-        <a class="btn btn-tag" href="">{{ tag.name }}</a>
-        {% endfor %}
+        <div class="article-tags">
+            {% for tag in article.tags %}
+                <a class="btn btn-tag" href="">{{ tag.name }}</a>
+            {% endfor %}
+        </div>
         <section class="container container-comment">
             <h2>Commentaires</h2>
             {% for comment in article.comments %}
@@ -36,7 +38,7 @@
                     <p>{{comment.content}}</p>
                 </div>
             {% elseif comment.status == false and is_granted('ROLE_MODERATOR') %}
-                 <div class="comment">
+                 <div class="comment comment-hidden">
                     <div class="comment-header">
                         <h4>{{comment.author.username}}</h4> <small>Posté le {{comment.dateInserted|date("d/m/Y")}}</small> 
                         {% if is_granted('ROLE_MODERATOR') %}

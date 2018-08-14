@@ -1,19 +1,15 @@
 {% extends 'base.html.twig' %} 
-{% block title %}{% endblock %} 
+{% block title %} {{articles|length}} Résultats trouvés pour "{{title}}" {% endblock %} 
 {% block main %}
-<div class="wrapper-list">
-    <h2>Résultats :</h2>
+<div class="wrapper">
+    <h2>{{articles|length}} Résultats trouvés pour "{{title}}"</h2>
     {% for article in articles %}
     <section class="container">
-        <div class="article-title">
-            <h2>
-                <a class="article-link" href="{{ path('article_show',{'id':article.id}) }}">{{article.title}}</a>
-            </h2>
+        <div class="article-preview">
+            <h2><a class="article-link" href="{{ path('article_show',{'id':article.id}) }}">{{article.title}}</a></h2>
+            <p class="preview">{{article.description}} <a href="{{ path('article_show',{'id':article.id}) }}">Lire la suite</a></p>
             <small>Publié le {{article.dateInserted|date("d/m/Y")}}</small>
         </div>
-        <p class="preview">{{article.description}}
-            <a href="{{ path('article_show',{'id':article.id}) }}">Lire la suite</a>
-        </p>
         <div class="tags">
             {% for tag in article.tags %}
             <a class="btn btn-tag" href="{{path('search_by_tags',{'id':tag.id})}}">{{tag.name}}</a>
@@ -21,6 +17,6 @@
         </div>
     </section>
     {% endfor %}
-    <a href="{{path('codex')}}">Retour</a>
+   <a class="btn" href="{{path('codex')}}">Retour</a>
 </div>
 {% endblock %}

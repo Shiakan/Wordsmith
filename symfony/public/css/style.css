@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Spectral+SC:400,400i,700');
 @import url('https://fonts.googleapis.com/css?family=BenchNine:300,400,700');
 @import url('https://fonts.googleapis.com/css?family=Forum');
 @import url('https://fonts.googleapis.com/css?family=Palanquin:300,400,600');
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700');
 
 /* Général */
 * {
@@ -38,7 +38,7 @@ a:hover {
     color: #125C38;
 }
 h1 {
-    font-family: 'Spectral SC', serif;
+    font-family: 'Forum', cursive;
     font-size:2.5em;
     font-weight:400;
     color: #125C38; 
@@ -48,11 +48,15 @@ h1 {
     text-transform: uppercase;
 }
 h2 {
-    font-family: 'Spectral SC', serif;
+    font-family: 'Forum', cursive;
     font-size:1.8em;
     font-weight:400;
     color: #125C38; 
     text-transform: uppercase; 
+}
+em {
+    color:#A56E3A;
+    font-style: normal;
 }
 footer {
     padding:1em;
@@ -84,7 +88,7 @@ small {
     width: 100%;
 }
 .navbar {
-    font-family: 'Spectral SC', serif;
+    font-family: 'Forum', cursive;
     font-size:1em;
     padding:0.5em 1em 0 1em;
     background-color: #0B0B0B;
@@ -183,7 +187,7 @@ small {
     background-color:#0D0D0D;  
     border:1px solid  #503415; 
     padding:2em;
-    margin-bottom:2em;
+    margin-bottom:1.5em;
 }
 .container-width {
     width:45%;
@@ -246,6 +250,10 @@ small {
  .tags {
      margin-left:1em;
 }
+
+.article-tags {
+    margin-bottom:1.5em;
+}
 .btn {
     padding:0.3em 0.5em;
     border-radius:0.3em;
@@ -303,7 +311,7 @@ small {
     display:flex;
 }
 .comment h4 {
-    font-family: 'Spectral SC', serif;
+    font-family: 'Forum', cursive;
     font-size:1.2em;
     font-weight:400;
     color: #A56E3A;
@@ -313,17 +321,22 @@ small {
     margin-top:0.2em;
     color:rgb(139, 139, 139);
 }
-
+.comment-hidden {
+    background-color:rgb(22, 22, 22);
+    opacity: 0.7;
+}
 /* Formulaires */
 .form-group {
     width:90%;
     margin:0.5em auto;
 }
 .form-group label, legend {
-    font-family: 'Spectral SC', serif;
+    font-family: 'Forum', cursive;
     color: #A56E3A;
     display:block;
     font-size:1.5em;
+    text-transform:uppercase;
+    margin-bottom:0.2em;
 }
 
 .form-error-icon {
@@ -400,13 +413,18 @@ form button {
 
 .search-form button {
     display:inline-block;
-    padding: 0.5em;
-    margin-left:-0.125em;
+    padding: 0.505em;
+    margin-left:-0.175em;
     border-radius: 0 0.3em 0.3em 0;
     border-width: 1px 1px 1px 0;
     border-style: solid;
     border-color: #125C38;
     background-color:#125C38;
+    font-size:1em;
+}
+
+.search-form label {
+    display:none;
 }
 
 .search-form button:hover {
@@ -415,7 +433,15 @@ form button {
 }
 
 /* Onglets */
-.container-tabs {
+
+.left-side {
+    text-align:center;
+}
+
+.left-side img {
+    margin-bottom:1em;
+}
+.right-side {
     padding-left:1em;
     padding-right:1em;
 }
@@ -424,7 +450,9 @@ form button {
     color: #BDBDBD;
     border:none;
 }
-
+.tabs-header {
+    background-color: #000;
+}
 .tabs-header li {
     background-color:#0b0b0b;
     padding:0.5em;
@@ -432,33 +460,42 @@ form button {
     font-family: 'Forum', cursive;
     list-style:none;
     display:inline-block;
-    border:1px solid gray;
-    border-bottom:0;
+    border:1px solid #000000;
+    border-bottom:2px solid #0b0b0b;
     border-top-left-radius: 0.3em;
     border-top-right-radius: 0.3em;
 }
-
 
 .ui-state-active, 
 .ui-widget-content .ui-state-active, 
 .ui-widget-header .ui-state-active, 
 a.ui-button:active, .ui-button:active, 
 .ui-button.ui-state-active:hover {
-    background-color:#000000;
+    border-bottom: 2px solid #A56E3A;
 }
 
-#tabs-1, #tabs-2, #tabs-3 {
-    border:1px solid gray;
+.ui-tabs-anchor:active,
+.ui-tabs-anchor:hover {
+    border:0;
+}
+
+#tabs-1, #tabs-2, #tabs-3, #tabs-4 {
+    border:1px solid #000000;
+    border-top:0;
     background-color:#0b0b0b;
     color: #BDBDBD;
     padding:0.8em;
     text-align:justify;
 }
-
+#tabs-1 ul {
+    margin-bottom:1em;
+}
 #tabs-1 ul li {
     list-style:none;
     padding:0 1em;
 }
+
+
 .container-profil {
       display:flex;
       align-items: flex-start;
