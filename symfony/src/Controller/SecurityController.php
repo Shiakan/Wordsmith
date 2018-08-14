@@ -72,9 +72,10 @@ class SecurityController extends Controller
                 ));
             }
             $form->handleRequest($request);
-            return $this->render('security/login.html.twig', array(
-                    'form' => $form->createView(),
-                    )
+            return $this->render('security/login.html.twig',[
+                'form' => $form->createView(),
+            ]
+                    
             );
         }
     }

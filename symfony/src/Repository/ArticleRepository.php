@@ -64,19 +64,19 @@ class ArticleRepository extends ServiceEntityRepository
         return $qb;
     }
 
-//       /**
-//     * @return Article[] Returns an array of Article objects
-//     */
-/*    public function findBySearch()
+       /**
+     * @return Article[] Returns an array of Article objects
+     */
+    public function findBySearch($title)
     {
         return $this->createQueryBuilder('a')
-            ->where('a.title = :search')
-            ->setParameter('search','%search%')
+            ->where('a.title LIKE :searching')
+            ->setParameter('searching','%'.$title.'%')
             ->orderBy('a.dateInserted', 'DESC')
             ->getQuery()
             ->getResult()
         ;
-    }*/
+    }
     /*
     public function findOneBySomeField($value): ?Article
     {
