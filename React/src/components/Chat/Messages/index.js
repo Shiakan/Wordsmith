@@ -17,13 +17,12 @@ import './messages.sass';
  */
 class Messages extends React.Component {
   static propTypes = {
-    messages: PropTypes.array,
-
+    messages: PropTypes.array/* Of(PropTypes.object.isRequired) */.isRequired,
   };
 
-  static defaultProps = {
-    messages: [],
-  };
+  // static defaultProps = {
+  //   messages: [],
+  // };
 
   componentDidUpdate() {
     console.log('Message didMount');

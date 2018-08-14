@@ -1,3 +1,5 @@
+import uuidv4 from 'uuid/v4'; // https://www.npmjs.com/package/uuid
+
 /**
  * Initial State
  */
@@ -33,7 +35,7 @@ const reducer = (state = initialState, action = {}) => {
     case ADD_MESSAGE: {
       // Je créer un objet dans lequel je range les data recues
       const newMessEntry = {
-        id: 12,
+        id: uuidv4(),
         // auteur: action.auteur,
         message: state.message,
         // userId: action.userId,
