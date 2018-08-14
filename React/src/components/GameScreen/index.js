@@ -3,9 +3,11 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import { FaAngleDoubleRight, FaAngleDoubleLeft } from 'react-icons/fa';
 /**
  * Local import
- */
+*/
 // Composants
 import Character from 'src/containers/Character';
 import SwitchMap from 'src/containers/SwitchMap';
@@ -24,6 +26,8 @@ class GameScreen extends React.Component {
     map: PropTypes.bool.isRequired,
     grid: PropTypes.bool.isRequired,
     characters: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+    handleSlide: PropTypes.func.isRequired,
+    isSlided: PropTypes.bool.isRequired,
   };
 
   componentDidMount() {
@@ -33,14 +37,20 @@ class GameScreen extends React.Component {
   render() {
     const {
       toggleScreen, board, map,
-      grid, characters,
+      grid, characters, handleSlide, isSlided,
     } = this.props;
+    const classCss = classNames(
+      'screen-switch',
+      {
+        'screen-switch--active': isSlided,
+      },
+    );
     return (
       <div className="screen">
         <div
-          className="screen-switch"
-          // onClick={handleSlide}
+          className={classCss}
         >
+
           {map
             && (
             <div className="screen-switch-form">
@@ -58,6 +68,17 @@ class GameScreen extends React.Component {
             Switch to Map
             </button>
             ) }
+          {isSlided ? (
+            <FaAngleDoubleLeft
+              className="screen-switch-arrow"
+              onClick={handleSlide}
+            />
+          ) : (
+            <FaAngleDoubleRight
+              className="screen-switch-arrow"
+              onClick={handleSlide}
+            />
+          )}
         </div>
         {map && (
         <div className="screen-map">

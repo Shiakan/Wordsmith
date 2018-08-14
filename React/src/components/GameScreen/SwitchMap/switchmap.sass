@@ -9,10 +9,12 @@
 .switch
     &-map
         &-button
-            color: $font-color-italic
-            background-color: $border-color
+            @extend %click-button
+            margin: 0.6em 0 0.6em 0.5em
+            // color: $font-color-italic
+            // background-color: $border-color
             font-family: $test-font
-            font-size: 1.5em
+            font-size: 1.2em
             border: none
 
         &-checkbox

@@ -10,7 +10,7 @@ import GameScreen from 'src/components/GameScreen';
 
 // Action Creators
 import {
-  toggleScreen,
+  toggleScreen, handleSlide,
 } from 'src/store/reducers/gameScreen';
 
 /* === State (données) ===
@@ -25,6 +25,7 @@ const mapStateToProps = state => ({
   map: state.gameScreen.map,
   grid: state.gameScreen.grid,
   characters: state.gameScreen.characters,
+  isSlided: state.gameScreen.isSlided,
 });
 
 /* === Actions ===
@@ -37,6 +38,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   toggleScreen: () => {
     dispatch(toggleScreen());
+  },
+  handleSlide: () => {
+    dispatch(handleSlide());
   },
 });
 

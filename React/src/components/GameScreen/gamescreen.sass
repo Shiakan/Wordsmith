@@ -41,7 +41,7 @@
     &-switch
         position: relative
         z-index: 2
-        padding-right: 1em
+        padding-right: 1.8em
         display: block
         border-radius: .2em
         position: absolute
@@ -49,12 +49,19 @@
         transition: .6s
         background-color: $border-color
         color: $font-color
-        &:hover
+        &--active
             transform: translateX(0)
             left: 0
         &-form
             
         &-button
-            font-family: $test-font
+            @extend %click-button
+            // font-family: $test-font
+            // font-size: 1.5em
+            // padding-right: 1.4em
+        &-arrow
+            position: absolute
+            bottom: 1.8em
+            left: 7.3em
             font-size: 1.5em
-            padding-right: 1.4em
+            cursor: pointer

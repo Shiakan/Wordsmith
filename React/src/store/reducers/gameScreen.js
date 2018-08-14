@@ -9,6 +9,7 @@ const initialState = {
   grid: true,
   color: '#d4c4fb',
   toggle: false,
+  isSlided: false,
   name: '',
   typingName: '',
   characters: [
@@ -55,6 +56,7 @@ const CREATE_PLAYER = 'CREATE_PLAYER';
 const INPUT_CHANGE = 'INPUT_CHANGE';
 const MOVE_PLAYER = 'MOVE_PLAYER';
 const DELETE_PLAYER = 'DELETE_PLAYER';
+const HANDLE_SLIDE = 'HANDLE_SLIDE';
 
 /**
  * Traitements
@@ -70,6 +72,12 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         board: !state.board,
         map: !state.map,
+      };
+
+    case HANDLE_SLIDE:
+      return {
+        ...state,
+        isSlided: !state.isSlided,
       };
 
     case TOGGLE_GRID:
@@ -179,6 +187,10 @@ export const movePlayer = value => ({
 export const deletePlayer = id => ({
   type: DELETE_PLAYER,
   id,
+});
+
+export const handleSlide = () => ({
+  type: HANDLE_SLIDE,
 });
 /**
  * Selectors
