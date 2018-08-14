@@ -31,22 +31,21 @@ const roll = (dice) => {
   const numberOfSides = dice.split(/d|D/)[1];
   let total = 0;
   // if the user didn't type any numberOfDices
-  // we assume that he wanted to throw only one dice
+  // I assume that he wanted to throw only one dice
   // so typing d20 is like typing 1d20
   if (numberOfDices < 1) {
     numberOfDices += 1;
   }
-  // console.log(numberOfDices);
-  // console.log(numberOfSides);
-  if (typeof (numberOfSides) !== 'undefined' && numberOfSides > '0' && !Number.isNaN(parseFloat(total))) {
+  // I need to verify that numberOfDices & numberOfSides are numbers
+  // and that numberOfSiders is greater than zero (a dice has at least 1 face (sphere))
+  if (Number.parseFloat(numberOfDices) && Number.parseFloat(numberOfSides) && numberOfSides > '0') {
+    // Then for each Dice I add a random number from 1 to numberOfSides
     for (let dices = 0; dices < numberOfDices; dices += 1) {
       total += Math.floor(Math.random() * numberOfSides) + 1;
-      // console.log(total);
     }
-    // console.log(total);
     return total;
   }
-
+  // If my previous test (if) has failed :
   return 'wrong';
 };
 

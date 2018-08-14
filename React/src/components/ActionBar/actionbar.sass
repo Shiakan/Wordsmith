@@ -9,23 +9,20 @@
 .actionBar
   grid-area: a
   display: grid
-  grid-template-areas: "mj mj mj mj mj" "table table table table table" ". player player player ."
+  grid-template-areas: ". . mj . ." "table table table table table" ". player player player ."
   grid-template-columns: 5% 30% 30% 30% 5%
   grid-template-rows: 25% auto 25%
-
   &-mj
     grid-area: mj
-    background-color: pink
-    grid-column: 3
-    border-radius: 40%
-    width: 50%
+    color: pink
+    height: 30%
+    width: auto
     margin: 0 auto
   &-table
     background: url(../../assets/img/floorwhynot.jpg) no-repeat center
     background-size: cover
     grid-area: table
     background-color: brown
-    grid-column: 2 / 5
     display: grid
     grid-template-areas: ". . . . ."". dice sheet help ."". . . . ."
     grid-template-columns: repeat(5, 1/5)
@@ -47,27 +44,26 @@
     grid-template-areas: "p1 p2 p3 p4"
     grid-template-columns: repeat(4, 1/4)
     &-1
-      padding: auto
-      background-color: red
-      border-radius: 50%
-      width: 50%
-      margin: 0 auto
       grid-area: p1
+      color: red
+      width: auto
+      height: 100%
+      margin: 0 auto
     &-2
       grid-area: p2
-      border-radius: 50%
-      width: 50%
+      color: blue
+      width: auto
+      height: 100%
       margin: 0 auto
-      background-color: green
     &-3
       grid-area: p3
-      border-radius: 50%
-      width: 50%
+      color: green
+      width: auto
+      height: 100%
       margin: 0 auto
-      background-color: blue
     &-4
       grid-area: p4
-      border-radius: 50%
-      width: 50%
+      color: yellow
+      width: auto
+      height: 100%
       margin: 0 auto
-      background-color: yellow
