@@ -17,9 +17,13 @@ import './textInput.sass';
  */
 class TextInput extends React.Component {
   static propTypes = {
-    message: PropTypes.string.isRequired,
+    message: PropTypes.string,
     onInputChange: PropTypes.func.isRequired,
     onAddMessage: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    message: '',
   };
 
   handleChange = (evt) => {

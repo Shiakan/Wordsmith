@@ -2,16 +2,15 @@
  * Initial State
  */
 const initialState = {
-  // La valeur de mon input form
-  message: '',
-  messages: [],
+  // // J'initie mon chat vide
+  // messages: [],
 };
 
 /**
  * Types
  */
-const INPUT_CHANGE = 'INPUT_CHANGE';
-export const ADD_MESSAGE = 'ADD_MESSAGE';
+const DO_SOMETHING = 'DO_SOMETHING';
+const SEND_MESSAGE = 'SEND_MESSAGE';
 
 
 /**
@@ -23,27 +22,24 @@ export const ADD_MESSAGE = 'ADD_MESSAGE';
  */
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    // input controllé
-    case INPUT_CHANGE:
+    case DO_SOMETHING:
       return {
         ...state,
-        message: action.message,
       };
 
-    case ADD_MESSAGE: {
+    case SEND_MESSAGE: {
       // Je créer un objet dans lequel je range les data recues
       const newMessEntry = {
-        id: 12,
-        // auteur: action.auteur,
-        message: state.message,
-        // userId: action.userId,
+        id: action.id,
+        auteur: action.auteur,
+        message: action.message,
+        userId: action.userId,
       };
       // Nouveau state
       return {
         ...state,
         // Je le rajoute au state existant
         messages: [...state.messages, newMessEntry],
-        message: '',
       };
     }
 
@@ -55,13 +51,13 @@ const reducer = (state = initialState, action = {}) => {
 /**
  * Action Creators
  */
-export const changeInput = value => ({
-  type: INPUT_CHANGE,
-  message: value,
+export const doSomething = () => ({
+  type: DO_SOMETHING,
 });
 
-export const addMessage = () => ({
-  type: ADD_MESSAGE,
+export const sheetChange = value => ({
+  type: SHEET_CHANGE,
+  value,
 });
 
 
