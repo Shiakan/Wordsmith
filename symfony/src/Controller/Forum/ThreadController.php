@@ -13,6 +13,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+/**
+ * @Route("/forum")
+ */
+
 class ThreadController extends Controller
 {
     /**
@@ -62,6 +66,7 @@ class ThreadController extends Controller
         return $this->render('forum/thread/new.html.twig', [
             'thread' => $thread,
             'form' => $form->createView(),
+            'subcategory' => $currentSubcategory
         ]);
     }
 
@@ -79,7 +84,7 @@ class ThreadController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="thread_show", methods="GET")
+     * @Route("/thread/{id}", name="thread_show", methods="GET")
      */
     public function show(Thread $thread): Response
     {
