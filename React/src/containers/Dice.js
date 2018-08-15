@@ -32,8 +32,8 @@ const mapStateToProps = state => ({
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
 const mapDispatchToProps = dispatch => ({
-  rollDice: () => {
-    dispatch(rollDice());
+  rollDice: (dice) => {
+    dispatch(rollDice(dice));
   },
   diceChange: (value) => {
     dispatch(diceChange(value));
