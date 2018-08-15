@@ -12,7 +12,7 @@ const initialState = {
 /**
  * Types
  */
-const ROLL_DICE = 'ROLL_DICE';
+export const ROLL_DICE = 'ROLL_DICE';
 const DICE_CHANGE = 'DICE_CHANGE';
 
 /**

@@ -1,4 +1,5 @@
 import uuidv4 from 'uuid/v4'; // https://www.npmjs.com/package/uuid
+import { ROLL_DICE } from './dice';
 /**
  * Initial State
  */
@@ -12,7 +13,7 @@ const initialState = {
  * Types
  */
 const INPUT_CHANGE = 'INPUT_CHANGE';
-export const ADD_MESSAGE = 'ADD_MESSAGE';
+const ADD_MESSAGE = 'ADD_MESSAGE';
 
 
 /**
@@ -47,6 +48,26 @@ const reducer = (state = initialState, action = {}) => {
         message: '',
       };
     }
+
+    case ROLL_DICE: {
+    // Je créer un objet dans lequel je range les data recues
+      const newDice = {
+        id: uuidv4(),
+        // auteur: action.auteur,
+        message: action.dice,
+      // userId: action.userId,
+      };
+      // Nouveau state
+      return {
+        ...state,
+        // Je le rajoute au state existant
+        messages: [...state.messages, newDice],
+      };
+    }
+    // return {
+    //   ...state,
+    //   rolled: action.dice,
+    // };
 
     default:
       return state;
