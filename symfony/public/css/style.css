@@ -510,8 +510,17 @@ a.ui-button:active, .ui-button:active,
     list-style:none;
     padding:0 1em;
 }
-
-
+.room-content{
+    display: flex;
+    justify-content: space-between; 
+}
+.room-content-dungeonmaster{
+    display: flex;
+    justify-content: flex-start;
+}
+.room-content-btn{
+    display: flex;
+}
 .container-profil {
       display:flex;
       align-items: flex-start;

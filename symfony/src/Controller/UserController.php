@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Enity\Room;
 use App\Entity\User;
 use App\Form\RegistrationType;
+use App\Repository\RoomRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,12 +17,13 @@ class UserController extends Controller
     /**
      * @Route("/profil/{id}", name="user_profile")
      */
-    public function show(User $user) : Response
+    public function show(User $user, RoomRepository $roomRepository) : Response
     {
         $currentUser = $user;
         
         return $this->render('user/show.html.twig', [
-            'user' => $currentUser
+            'user' => $currentUser,
+            'rooms' => $roomRepository->findAll()
         ]);
     }
 
