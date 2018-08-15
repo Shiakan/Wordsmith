@@ -1,0 +1,9 @@
+{% extends 'backend/basebackend.html.twig' %}
+
+{% block title %}Créer une sous-catégorie{% endblock %}
+
+{% block main %}
+    <h1 class="mb-3 mt-3">Créer une sous-catégorie</h1>
+
+    {{ include('backend/forum/subcategory/_form.html.twig') }}
+{% endblock %}

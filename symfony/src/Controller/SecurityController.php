@@ -9,6 +9,7 @@ use App\Form\LoginType;
 use App\Entity\Charactersheet;
 use App\Form\RegistrationType;
 use App\Entity\CharacterProfile;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
@@ -40,6 +41,8 @@ class SecurityController extends Controller
             $manager->persist($user);
             $manager->flush();
 
+            $this->createSheets($user);
+
             // On redirige vers le login
             return $this->redirectToRoute('security_login');
         }
@@ -54,15 +57,46 @@ class SecurityController extends Controller
     public function login(Request $request, AuthenticationUtils $authenticationUtils)
     {   
 
-        // On récupère les erreurs s'il y en a
-        $error = $authenticationUtils->getLastAuthenticationError();
-        // On récupère le dernier username entré par l'utilisateur
-        $lastUsername = $authenticationUtils->getLastUsername();
-        return $this->render('security/login.html.twig', array(
-            'last_username' => $lastUsername,
-            'error'         => $error,
-        ));
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $this->addFlash('warning', 'Vous êtes déjà connecté');
+            return $this->redirectToRoute('homepage');
+        } else {
+            $authenticationUtils = $this->get('security.authentication_utils');
+            $defaultData = array('username' => $authenticationUtils->getLastUsername());
+
+            $form = $this->createForm(LoginType::class, $defaultData);
+
+            if (!is_null($authenticationUtils->getLastAuthenticationError(false))) {
+                $form->addError(new FormError(
+                    $authenticationUtils->getLastAuthenticationError()->getMessageKey()
+                ));
+            }
+            $form->handleRequest($request);
+            return $this->render('security/login.html.twig',[
+                'form' => $form->createView(),
+            ]
+                    
+            );
+        }
     }
+
+    public function createSheets($user)
+    {
+        $characterProfile = new CharacterProfile();
+        $charactersheet = new Charactersheet();
+
+        $em = $this->getDoctrine()->getManager();
+        $characterProfile->setUser($user);
+        $characterProfile->setAvatar('rdgregz');
+        $em->persist($characterProfile);
+        $em->flush();
+
+        $charactersheet->setUser($user);
+        $em->persist($charactersheet);
+        $em->flush();
+
+    }
+
     /**
      * @Route("/logout", name="security_logout")
      */

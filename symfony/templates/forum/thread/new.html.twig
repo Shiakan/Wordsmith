@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau sujet{% endblock %}
+
+{% block main %}
+<div class="wrapper">
+    <div class="container container-forum">
+        <div class="category-header">
+            <h2>Poster dans <em>{{subcategory.name}}</em></h2>
+        </div>
+
+        {{ include('forum/thread/_form.html.twig') }}
+    </div>
+</div>
+{% endblock %}

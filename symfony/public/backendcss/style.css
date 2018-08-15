@@ -1,0 +1,60 @@
+body {
+    height:80vh;
+}
+
+.btn-delete {
+    display:inline-block;
+}
+
+.row {
+    height: 93vh;
+}
+
+#article_content {
+    width:500px;
+}
+
+#dropdownMenuLink1 {
+    display:inline;
+}
+#dropdownMenuLink1:hover {
+    border:none;
+}
+#dropdownMenuLink1:active {
+    border:none;
+}
+.btn {
+    padding:1em 1.5em;
+}
+.fas, .fab {
+    font-size:1.2em;
+    /* margin-top:0.2rem; */
+}
+
+#container {
+    margin:auto;
+    width:85%;
+    height:100vh;
+}
+
+.col {
+    overflow:auto;
+}
+
+.search-form {
+    display:flex;
+    align-items: center;
+}
+.search-form .form-group,input{
+    /* width: 50%; */
+    display: inline-block;
+}
+.search-form button{
+    display: inline-block;
+    padding:1em 1em;
+    
+}
+
+.actions {
+    width:50%;
+}

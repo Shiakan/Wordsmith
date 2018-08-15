@@ -2,22 +2,90 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+            {# <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> #}
+            {# <link rel="stylesheet" href="/resources/demos/style.css"> #}
+
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+                crossorigin="anonymous">
+        {% endblock %}
+        <title>{% block title %}Aetherlust{% endblock %}</title>
     </head>
+    
     <body>
-        <ul>
-            <li>
-                <a href="{{path('homepage')}}">Home</a>
-            </li>
-            <li>
-                <a href="{{path('CGU')}}">About</a>
-            </li>
-            <li>
-                <a href="{{path('about')}}">CGU</a>
-            </li>
-        </ul>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+    {% block body %}
+
+        {% block header %}
+            {% block nav %}
+            <div class="fixed-navbar">
+                <nav class="navbar">
+                    <div class="navbar-left">
+                        <ul>
+                            <li>
+                                <a class="{{ app.request.get('_route') == 'homepage' ? 'active' }}" href="{{path('homepage')}}">Portail</a>
+                            </li>
+                            <li>
+                                <a class="{{ app.request.get('_route') == 'codex' ? 'active' }}" href="{{path('codex')}}">Codex</a>
+                            </li>
+                            <li>
+                                <a class="{{ app.request.get('_route') == 'forum_index' ? 'active' }}" href="{{path('forum_index')}}">Forum</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('room_new') }}">Room</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="navbar-middle">
+                        <a href="{{ path('homepage') }}"><img class="logo" src="https://nsa39.casimages.com/img/2018/08/12//180812035308814067.png" alt="logo"></a>
+                    </div>
+                    <div class="navbar-right">
+                        <ul>
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <li>
+                                Bienvenue <a href="{{path('user_profile', {'id': app.user.id })}}">{{ app.user.username }}</a>
+                            </li>
+                            <li>
+                                <a href="{{path('security_logout')}}">Déconnexion</a>
+                            </li>
+                            {% else %}
+                            <li>
+                                <a href="{{path('security_registration')}}">Inscription</a>
+                            </li>
+                            <li>
+                                <a href="{{path('security_login')}}">Connexion</a>
+                            </li>
+                        {% endif %}
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            {% endblock %}
+        {% endblock %}
+        <main>
+            {% block main %}
+            {% endblock %}
+            <a class="btn btn-admin" href="{{path('home_backend')}}"><i class="fas fa-sign-in-alt"></i> Panneau d'administration</a>
+        </main>
+        <footer>
+        {% block footer %}
+        <a href="https://twitter.com/KelProjet?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @KelProjet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <ul>
+                <li>
+                    <a href="{{path('CGU')}}">About</a>
+                </li>
+                <li>
+                    <a href="{{path('about')}}">CGU</a>
+                </li>
+            </ul>
+        {% endblock %}
+       </footer>
+    {% endblock %}
+        {% block javascripts %}
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        {% endblock %}
     </body>
 </html>
