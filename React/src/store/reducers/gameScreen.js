@@ -108,12 +108,8 @@ const reducer = (state = initialState, action = {}) => {
         }
         state.cptY += 70;
         if (newChar.name.length === 0) {
-<<<<<<< HEAD
-          newChar.name = `Opponent#${state.characters.length + 1}`;
-=======
           newChar.name = `Opponent#${state.cpt}`;
           state.cpt += 1;
->>>>>>> chat
         }
         console.log(newChar.name);
         return {
@@ -130,11 +126,7 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
       };
     }
-<<<<<<< HEAD
-    case INPUT_CHANGE:
-=======
     case INPUT_CHAR_CHANGE:
->>>>>>> chat
       return {
         ...state,
         typingName: action.value,
