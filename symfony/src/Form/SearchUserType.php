@@ -14,7 +14,10 @@ class SearchUserType extends AbstractType
     {
         $builder
             ->add('username',SearchType::class,[
-                'label'=>'Recherche',
+                'label'=>' ',
+                'attr' => [
+                    'placeholder' => 'Rechercher un utilisateur'
+                ]
             ])
 
         ;

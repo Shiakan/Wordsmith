@@ -1,11 +1,9 @@
 {% extends 'backend/basebackend.html.twig' %}
 
-{% block title %}New Subcategory{% endblock %}
+{% block title %}Créer une sous-catégorie{% endblock %}
 
 {% block main %}
-    <h1>Create new Subcategory</h1>
+    <h1 class="mb-3 mt-3">Créer une sous-catégorie</h1>
 
     {{ include('backend/forum/subcategory/_form.html.twig') }}
-
-    <a href="{{ path('subcategory_index') }}">back to list</a>
 {% endblock %}

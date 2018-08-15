@@ -33,18 +33,28 @@ body {
 
 #container {
     margin:auto;
-    width:80%;
+    width:85%;
     height:100vh;
 }
 
 .col {
     overflow:auto;
 }
-.form-group,input{
-    width: 25%;
+
+.search-form {
+    display:flex;
+    align-items: center;
+}
+.search-form .form-group,input{
+    /* width: 50%; */
     display: inline-block;
 }
 .search-form button{
     display: inline-block;
+    padding:1em 1em;
     
+}
+
+.actions {
+    width:50%;
 }

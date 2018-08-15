@@ -18,9 +18,14 @@ class SubcategoryController extends Controller
     /**
      * @Route("/", name="subcategory_index", methods="GET")
      */
-    public function index(SubcategoryRepository $subcategoryRepository): Response
+    public function index(): Response
     {
-        return $this->render('backend/forum/subcategory/index.html.twig', ['subcategories' => $subcategoryRepository->findAll()]);
+         $repository = $this->getDoctrine()->getRepository(Subcategory::class);
+         $subcategories = $repository->findAll();
+
+        return $this->render('backend/forum/subcategory/index.html.twig', [
+            'subcategories' => $subcategories,
+            ]);
     }
 
     /**
