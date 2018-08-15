@@ -1,0 +1,43 @@
+{% extends 'backend/basebackend.html.twig' %}
+
+
+{% block title %}User{% endblock %}
+
+{% block main %}
+    <h1 class="mb-3 mt-3">{{ user.username }}</h1>
+    <table class="table table-hover">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td>{{ user.username }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Actif</th>
+                <td>{{ user.isActive ? 'Oui' : 'Non' }}</td>
+            </tr>
+            <tr>
+                <th>Date de naissance</th>
+                <td>{{ user.birthdate ? user.birthdate|date('d-m-Y') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date d'inscription</th>
+                <td>{{ user.dateInserted ? user.dateInserted|date('d-m-Y H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Role</th>
+                <td>{{ user.role.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-primary mt-2 mb-2" href="{{ path('backend_user_index') }}">Retour</a>
+    <a class="btn btn-success" href="{{ path('backend_user_edit', {'id': user.id}) }}">Modifier</a>
+    {{ include('backend/user/_delete_form.html.twig') }}
+{% endblock %}

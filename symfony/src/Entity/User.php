@@ -12,9 +12,14 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
 * @ORM\Table(name="app_user")
 * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
-*@UniqueEntity(
-     * fields={"email", "username"},
-     * message={"Cet email est déjà pris", "Ce nom de personnage est déjà pris"})
+* @UniqueEntity(
+     * fields={"email"},
+     * errorPath="email",  
+     * message="Cet email est déjà pris")
+* @UniqueEntity(
+     * fields={"username"},
+     * errorPath="username",  
+     * message="Ce nom d'utilisateur est déjà pris")
 */
 class User implements UserInterface
 {
@@ -26,12 +31,12 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=64)
+     * @ORM\Column(type="string", length=64, unique=true)
      */
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=128)
+     * @ORM\Column(type="string", length=128, unique=true)
      * @Assert\Email()
      */
     private $email;
@@ -93,11 +98,6 @@ class User implements UserInterface
     private $rooms;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Room", mappedBy="participants")
-     */
-    private $myrooms;
-
-    /**
      * @ORM\OneToOne(targetEntity="App\Entity\Charactersheet", mappedBy="user", cascade={"persist", "remove"})
      */
     private $charactersheet;
@@ -107,6 +107,11 @@ class User implements UserInterface
      */
     private $characterProfile;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Room", mappedBy="participants")
+     */
+    private $playerRooms;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -114,10 +119,10 @@ class User implements UserInterface
         $this->posts = new ArrayCollection();
         $this->threads = new ArrayCollection();
         $this->rooms = new ArrayCollection();
-        $this->myrooms = new ArrayCollection();
         $this->isActive = 1;
         $this->dateInserted = new \DateTime();
         $this->dateUpdated = new \DateTime();
+        $this->playerRooms = new ArrayCollection();
     }
 
     public function getSalt()
@@ -157,7 +162,7 @@ class User implements UserInterface
         return $this->id;
     }
 
-    public function getUsername(): ?string
+    public function getUsername()
     {
         return $this->username;
     }
@@ -169,7 +174,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getEmail()
     {
         return $this->email;
     }
@@ -186,7 +191,7 @@ class User implements UserInterface
        return $this->password;
    }
 
-    public function setPassword(string $password): self
+    public function setPassword($password)
     {
         $this->password = $password;
 
@@ -413,34 +418,6 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Room[]
-     */
-    public function getMyrooms(): Collection
-    {
-        return $this->myrooms;
-    }
-
-    public function addMyroom(Room $myroom): self
-    {
-        if (!$this->myrooms->contains($myroom)) {
-            $this->myrooms[] = $myroom;
-            $myroom->addParticipant($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMyroom(Room $myroom): self
-    {
-        if ($this->myrooms->contains($myroom)) {
-            $this->myrooms->removeElement($myroom);
-            $myroom->removeParticipant($this);
-        }
-
-        return $this;
-    }
-
     public function __toString(){
         return $this->username;
         }
@@ -474,6 +451,34 @@ class User implements UserInterface
         // set the owning side of the relation if necessary
         if ($this !== $characterProfile->getUser()) {
             $characterProfile->setUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Room[]
+     */
+    public function getPlayerRooms(): Collection
+    {
+        return $this->playerRooms;
+    }
+
+    public function addPlayerRoom(Room $playerRoom): self
+    {
+        if (!$this->playerRooms->contains($playerRoom)) {
+            $this->playerRooms[] = $playerRoom;
+            $playerRoom->addParticipant($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlayerRoom(Room $playerRoom): self
+    {
+        if ($this->playerRooms->contains($playerRoom)) {
+            $this->playerRooms->removeElement($playerRoom);
+            $playerRoom->removeParticipant($this);
         }
 
         return $this;

@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %} 
+{% block main %}
+{{ include('codex/aside.html.twig') }}
+    <div class="wrapper">
+        <div class="navbar navbar-codex">
+            <ul>
+                {% for tag in tags %}
+                <li>
+                    <a href="{{path('search_by_tags',{'id':tag.id})}}">{{tag.name}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <article class="container container-article">
+            <h1>{{article.title}}</h1>
+            <div class="article-content">
+                {{article.content|filter_black_listed()|raw }}
+            </div>
+            <small>Publié le {{article.dateInserted|date("d/m/Y")}}.</small>
+        </article>
+        <div class="article-tags">
+            {% for tag in article.tags %}
+                <a class="btn btn-tag" href="">{{ tag.name }}</a>
+            {% endfor %}
+        </div>
+        <section class="container container-comment">
+            <h2>Commentaires</h2>
+            {% for comment in article.comments %}
+
+            {% if comment.status == true %}
+                <div class="comment">
+                    <div class="comment-header">
+                        <h4>{{comment.author.username}}</h4> <small>Posté le {{comment.dateInserted|date("d/m/Y")}}</small> 
+                        {% if is_granted('ROLE_MODERATOR') %}
+                            <a title="Masquer le commentaire" class="btn-mod hide" href="{{path('hide_comment', {'id' : comment.id }) }}"><i class="far fa-eye-slash"></i></a>
+                        {% endif %}
+                    </div>
+                    <p>{{comment.content}}</p>
+                </div>
+            {% elseif comment.status == false and is_granted('ROLE_MODERATOR') %}
+                 <div class="comment comment-hidden">
+                    <div class="comment-header">
+                        <h4>{{comment.author.username}}</h4> <small>Posté le {{comment.dateInserted|date("d/m/Y")}}</small> 
+                        {% if is_granted('ROLE_MODERATOR') %}
+                            <a title="Afficher le commentaire" class="btn-mod show" href="{{path('hide_comment', {'id' : comment.id }) }}"><i class="far fa-eye"></i></a>
+                        {% endif %}
+                    </div>
+                    <p>{{comment.content}}</p>
+                    <span class="deactivated">Commentaire désactivé</span>
+                </div>
+            {% endif %}
+            {% endfor %}
+             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                {{form_start(form)}}
+                 {{ form_widget(form) }}
+                 <button type="submit">Poster</button>
+                {{form_end(form)}}
+            {% endif %}
+        </section>
+        <a class="btn" href="{{path('codex')}}">Retour</a>
+    </div>
+{% endblock %}

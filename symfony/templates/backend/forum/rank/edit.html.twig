@@ -1,0 +1,10 @@
+{% extends 'backend/basebackend.html.twig' %}
+
+{% block title %}Modifier le rang{% endblock %}
+
+{% block main %}
+    <h1 class="mb-3 mt-3">Modifier le rang</h1>
+
+    {{ include('backend/forum/rank/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+{% endblock %}
