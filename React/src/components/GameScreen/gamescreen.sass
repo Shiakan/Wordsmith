@@ -7,42 +7,69 @@
  * Styles
  */
 .screen
-    width: 95%
-    height: 95%
+    // width: 95%
+    height: 100%
     grid-area: g
-    margin: auto .3em
-    border: .5em solid #5f2a2a
+    margin: .1em 
+    border: 1px solid $border-color
     border-radius: .2em
     &-board
+        border: .1em solid black
+        background: white
         width: 100%
         height: 100%
         margin: 0
         text-align: center
         font-size: 3em
     &-map
+        background-color: $bg-color-container
         width: 100%
         height: 100%
-        margin: 0
         text-align: center
-        background: url('http://medievalshop.com/parchemin/wp-content/uploads/2013/08/La-prison.jpg') no-repeat center
-        background-size: 100%
+        position: relative
+
+        &-image
+            width: 
+            height: 100%
         &-grid
+            position: absolute
             width: 100%
             height: 100%
             margin: 0
             background: url('https://www.freeiconspng.com/uploads/tile-grid-png-6.png') no-repeat center
             background-size: 100%
     &-switch
+        border: 1px solid $border-color
         position: relative
-        &-map
-            display: block
-            height: 10em
-            border: 1px solid black
-            border-radius: .2em
+        z-index: 2
+        padding-right: 1.9em
+        display: block
+        border-radius: .2em
+        position: absolute
+        left: -11em
+        transition: .6s
+        background-color: $bg-color-container
+        color: $font-color
+        padding-bottom: 1em
+        &--active
+            transform: translateX(0)
+            left: 0
+        &-form
+            
+        &-button
+            @extend %click-button
+            margin: .6em 4.3em .6em .8em
+            // font-family: $test-font
+            // font-size: 1.2em
+            border: none
+            
+        &-arrow
+            color: $link-color
             position: absolute
-            background-color: #DDDDDD
-            height: 4em
-            &-checkbox
-                display: block
-            &-label
-                display: inline
+            bottom: 2.2em
+            left: 7.4em
+            font-size: 1.5em
+            cursor: pointer
+            &--board
+                bottom: .7em
+                left: 7.4em

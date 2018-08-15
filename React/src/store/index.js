@@ -7,7 +7,7 @@ import { createStore } from 'redux';
  * Local import
  */
 // Reducer
-import reducer from 'src/store/reducer';
+import reducers from 'src/store/reducers';
 
 /*
  * Code
@@ -18,7 +18,7 @@ if (window.devToolsExtension) {
 }
 
 // createStore
-const store = createStore(reducer, ...devTools);
+const store = createStore(reducers, ...devTools);
 
 /*
  * Export
