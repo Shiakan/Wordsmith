@@ -130,9 +130,10 @@ const reducer = (state = initialState, action = {}) => {
       const movedChars = state.characters.map((char) => {
         if (char.id === action.value.target.id) {
           console.log('old coords :', char.coordX, char.coordY);
-          console.log('new coords :', action.value.pageX, action.value.pageY);
-          char.coordX = action.value.pageX;
-          char.coordY = action.value.pageY;
+          console.log('new coords :', action.value.target.style, action.value.target.height);
+          console.log('new coords :', action.value.offsetX, action.value.offsetY);
+          char.coordX = (action.value.pageX - action.value.offsetX) - 16;
+          char.coordY = (action.value.pageY - action.value.offsetY) - 16;
         }
         return char;
       });

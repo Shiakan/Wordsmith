@@ -69,6 +69,8 @@ class Character extends React.Component {
             id={id}
             style={{
               backgroundColor: color,
+              width: 32,
+              height: 32,
             }}
           />
         </div>
