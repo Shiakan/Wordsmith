@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { GithubPicker } from 'react-color';
+import { CirclePicker } from 'react-color';
 import ReactTooltip from 'react-tooltip';
 
 
@@ -63,9 +63,11 @@ class SwitchMJ extends React.Component {
       <div className="switch-board">
         {toggle
           && (
-          <GithubPicker
-            class="switch-board-picker"
+          <CirclePicker
+            className="switch-board-picker"
             color={color}
+            circleSize={17}
+            circleSpacing={10}
             width="170px"
             onChange={this.changeColor}
             triangle="hide"

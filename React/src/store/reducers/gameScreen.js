@@ -127,7 +127,10 @@ const reducer = (state = initialState, action = {}) => {
           typingName: '',
         };
       }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 002b7328695977f59b1f44d6e28d91a9becfc917
       return {
         ...state,
       };
