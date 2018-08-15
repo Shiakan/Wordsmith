@@ -10,7 +10,8 @@ const initialState = {
   color: '#d4c4fb',
   toggle: false,
   isSlided: false,
-  cpt: 1,
+  cptX: 70,
+  cptY: 170,
   name: '',
   typingName: '',
   characters: [
@@ -19,28 +20,28 @@ const initialState = {
       name: 'troll',
       color: '#b80000',
       coordX: 10,
-      coordY: 150,
+      coordY: 170,
     },
     {
       id: uuidv4(),
       name: 'orc',
       color: '#008b02',
       coordX: 10,
-      coordY: 200,
+      coordY: 240,
     },
     {
       id: uuidv4(),
       name: 'ben',
       color: '#fccb00',
       coordX: 10,
-      coordY: 250,
+      coordY: 310,
     },
     {
       id: uuidv4(),
       name: 'nain',
       color: '#b80000',
       coordX: 10,
-      coordY: 300,
+      coordY: 380,
     },
   ],
 };
@@ -100,26 +101,35 @@ const reducer = (state = initialState, action = {}) => {
       };
 
     case CREATE_PLAYER: {
-      console.log(state);
-      const newChar = {
-        id: uuidv4(),
-        name: state.typingName,
-        color: state.color,
-        coordX: Math.floor(Math.random() * 600) + 1,
-        coordY: Math.floor(Math.random() * 500) + 1,
-      };
-      if (newChar.name.length === 0) {
-        newChar.name = `Opponent#${state.cpt}`;
-        state.cpt += 1;
+      if (state.characters.length < 20) {
+        console.log(state.characters.length);
+        const newChar = {
+          id: uuidv4(),
+          name: state.typingName,
+          color: state.color,
+          coordX: state.cptX,
+          coordY: state.cptY,
+        };
+        if (state.cptY >= 380) {
+          state.cptY = 100;
+          state.cptX += 70;
+        }
+        state.cptY += 70;
+        if (newChar.name.length === 0) {
+          newChar.name = `Opponent#${state.characters.length + 1}`;
+        }
+        console.log(newChar.name);
+        return {
+          ...state,
+          characters: [...state.characters, newChar],
+          typingName: '',
+        };
       }
-      console.log(newChar.name);
+
       return {
         ...state,
-        characters: [...state.characters, newChar],
-        typingName: '',
       };
     }
-
     case INPUT_CHANGE:
       return {
         ...state,
@@ -130,9 +140,9 @@ const reducer = (state = initialState, action = {}) => {
       const movedChars = state.characters.map((char) => {
         if (char.id === action.value.target.id) {
           console.log('old coords :', char.coordX, char.coordY);
-          console.log('new coords :', action.value.pageX, action.value.pageY);
-          char.coordX = action.value.pageX;
-          char.coordY = action.value.pageY;
+          char.coordX = (action.value.pageX - action.value.offsetX) - 16;
+          char.coordY = (action.value.pageY - action.value.offsetY) - 16;
+          console.log('new coords :', char.coordX, char.coordY);
         }
         return char;
       });
