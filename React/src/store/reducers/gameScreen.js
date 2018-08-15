@@ -10,6 +10,7 @@ const initialState = {
   color: '#d4c4fb',
   toggle: false,
   isSlided: false,
+  cpt: 1,
   cptX: 70,
   cptY: 170,
   name: '',
@@ -55,7 +56,7 @@ const TOGGLE_GRID = 'TOGGLE_GRID';
 const TOGGLE_PICKER = 'TOGGLE_PICKER';
 const CHANGE_COLOR = 'CHANGE_COLOR';
 const CREATE_PLAYER = 'CREATE_PLAYER';
-const INPUT_CHANGE = 'INPUT_CHANGE';
+const INPUT_CHAR_CHANGE = 'INPUT_CHAR_CHANGE';
 const MOVE_PLAYER = 'MOVE_PLAYER';
 const DELETE_PLAYER = 'DELETE_PLAYER';
 const HANDLE_SLIDE = 'HANDLE_SLIDE';
@@ -116,7 +117,8 @@ const reducer = (state = initialState, action = {}) => {
         }
         state.cptY += 70;
         if (newChar.name.length === 0) {
-          newChar.name = `Opponent#${state.characters.length + 1}`;
+          newChar.name = `Opponent#${state.cpt}`;
+          state.cpt += 1;
         }
         console.log(newChar.name);
         return {
@@ -130,7 +132,7 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
       };
     }
-    case INPUT_CHANGE:
+    case INPUT_CHAR_CHANGE:
       return {
         ...state,
         typingName: action.value,
@@ -186,7 +188,7 @@ export const changeColor = value => ({
 });
 
 export const changeInput = value => ({
-  type: INPUT_CHANGE,
+  type: INPUT_CHAR_CHANGE,
   value,
 });
 
