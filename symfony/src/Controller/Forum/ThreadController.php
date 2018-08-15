@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Forum;
 
 use App\Entity\Thread;
 use App\Form\ThreadType;
@@ -20,14 +20,15 @@ class ThreadController extends Controller
      */
     public function index(ThreadRepository $threadRepository): Response
     {
-        return $this->render('thread/index.html.twig', ['threads' => $threadRepository->findAll()]);
+        return $this->render('forum/thread/index.html.twig', ['threads' => $threadRepository->findAll()]);
     }
 
     /**
      * @Route("/new", name="thread_new", methods="GET|POST")
      */
     public function new(Request $request): Response
-    {
+    {   
+        
         $thread = new Thread();
         $form = $this->createForm(ThreadType::class, $thread);
         $form->handleRequest($request);
@@ -40,7 +41,7 @@ class ThreadController extends Controller
             return $this->redirectToRoute('thread_index');
         }
 
-        return $this->render('thread/new.html.twig', [
+        return $this->render('forum/thread/new.html.twig', [
             'thread' => $thread,
             'form' => $form->createView(),
         ]);
@@ -51,7 +52,7 @@ class ThreadController extends Controller
      */
     public function show(Thread $thread): Response
     {
-        return $this->render('thread/show.html.twig', ['thread' => $thread]);
+        return $this->render('forum/thread/show.html.twig', ['thread' => $thread]);
     }
 
     /**
@@ -68,7 +69,7 @@ class ThreadController extends Controller
             return $this->redirectToRoute('thread_edit', ['id' => $thread->getId()]);
         }
 
-        return $this->render('thread/edit.html.twig', [
+        return $this->render('forum/thread/edit.html.twig', [
             'thread' => $thread,
             'form' => $form->createView(),
         ]);

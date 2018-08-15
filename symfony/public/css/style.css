@@ -207,6 +207,11 @@ small {
     color:#A56E3A;
 }
 
+.category-header p {
+    text-align:justify;
+    font-size:0.8em;
+}
+
 .description,
 .statistic,
 .last-message {

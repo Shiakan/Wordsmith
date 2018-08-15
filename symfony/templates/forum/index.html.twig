@@ -10,13 +10,13 @@
 
     {% for category in categories %}
     <div class="container container-forum">
-    <div class="category-header">
-        <h2>{{category.name}}</h2>
-    </div>
+        <div class="category-header">
+            <h2>{{category.name}}</h2>
+        </div>
         {% for subcategory in category.subCategories %}
-    <div class="container-subcategory">
+        <div class="container-subcategory">
         <div class="container description">
-            <h3>{{subcategory.name}}</h3>
+            <h3><a href="{{path('forum_subcategory', {'name': subcategory.name })}}">{{subcategory.name}}</a></h3>
             <p>{{subcategory.description}}</p>
         </div>
         <div class="container statistic">
