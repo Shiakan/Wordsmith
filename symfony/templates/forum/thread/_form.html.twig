@@ -1,0 +1,8 @@
+{{ form_start(form) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.subtitle) }}
+     {% for post in form.posts %}
+            <li>{{ form_row(post.content) }}</li>
+        {% endfor %}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
