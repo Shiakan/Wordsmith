@@ -9,13 +9,29 @@
     </div>
 
     {% for category in categories %}
-        {{category.name}}
-        {% for subcategory in category.subCategories %}
     <div class="container container-forum">
-        <h2>{{subcategory.name}}</h2>
-        <p>{{subcategory.description}}</p>
+    <div class="category-header">
+        <h2>{{category.name}}</h2>
+    </div>
+        {% for subcategory in category.subCategories %}
+    <div class="container-subcategory">
+        <div class="container description">
+            <h3>{{subcategory.name}}</h3>
+            <p>{{subcategory.description}}</p>
+        </div>
+        <div class="container statistic">
+            <img src="">
+            <small>x Sujets</small>
+            <small> x Réponses</small>
+        </div>
+        <div class="container last-message">
+            <a href="#">Dernier sujet</a>
+            <small>15/08/2018</small>
+            <a href="#">Prénom Nom</a>
+        </div>
     </div>
     {% endfor %}
+    </div>
     {% endfor %}
 </div>
 {% endblock %}

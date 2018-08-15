@@ -113,6 +113,8 @@ small {
     height:50px;
 }
 /* Fin navbar */
+
+/* Codex Navbar */
 .navbar-codex {
     margin-top:0;
     margin-bottom:1em;
@@ -128,7 +130,7 @@ small {
     width:100%;
 }
 
-/* Sommaire Codex */
+/* Codex Aside = Sommaire */
 .tagbar {
     position:fixed;
     margin-top:5.2em;
@@ -147,7 +149,6 @@ small {
     border-bottom: 1px solid  #503415; 
     margin-bottom:0.2em;
 }
-
 .taglist-title em {
     color: #A56E3A;
 }
@@ -165,16 +166,9 @@ small {
     width:100%;
     background-color:none;
 }
-
 .wrapper-codex {
     display:flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-}
-.container-index{
-    width:49%;
-    display:flex;
-    flex-direction: column;
     justify-content: space-between;
 }
 .wrapper-list {
@@ -189,11 +183,85 @@ small {
     padding:2em;
     margin-bottom:1.5em;
 }
+
+.container-forum {
+    padding:0;
+}
+
+.container-subcategory {
+    background-color:#0D0D0D;  
+    border:1px solid  #503415; 
+    margin:1.5em;
+    padding:1em;
+    display:flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.category-header {
+    background-color:#0b0b0b;
+    text-align:center;
+    border-bottom:1px solid  #503415; 
+    padding:1em;
+}
+.category-header h2 {
+    color:#A56E3A;
+}
+
+.description,
+.statistic,
+.last-message {
+    margin-bottom:0;
+    padding:0.5em;
+    height:7em;
+    background-color:#0b0b0b;
+    border:1px solid black;
+}
+
+.description {
+    width:55%;
+}
+.statistic {
+    width:20%;
+}
+
+.last-message {
+    width:20%;
+}
+
+.description h3 {
+    font-family: 'Forum', cursive;
+    font-size:1.5em;
+    font-weight:400;
+    color: #125C38; 
+    border-bottom:1px solid #503415;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.description p {
+    max-height: 5em;
+    overflow:auto;
+    text-align:justify;
+    font-size:0.8em;
+    padding: 0.1em 0.5em;
+}
+
+.icon {
+    width:10%;
+    height:5em;
+    background-color:red;
+}
+
+.container-index{
+    width:49%;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 .container-width {
     width:45%;
     margin:0 auto 3.5em;
 }
-
 .container-article {
     margin-top:1em;
 }
