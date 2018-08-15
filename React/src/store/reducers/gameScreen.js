@@ -1,5 +1,4 @@
 import uuidv4 from 'uuid/v4'; // https://www.npmjs.com/package/uuid
-
 /**
  * Initial State
  */
@@ -10,6 +9,7 @@ const initialState = {
   color: '#d4c4fb',
   toggle: false,
   isSlided: false,
+  cpt: 1,
   cptX: 70,
   cptY: 170,
   name: '',
@@ -46,7 +46,6 @@ const initialState = {
   ],
 };
 console.log(initialState.characters);
-
 /**
  * Types
  */
@@ -55,15 +54,13 @@ const TOGGLE_GRID = 'TOGGLE_GRID';
 const TOGGLE_PICKER = 'TOGGLE_PICKER';
 const CHANGE_COLOR = 'CHANGE_COLOR';
 const CREATE_PLAYER = 'CREATE_PLAYER';
-const INPUT_CHANGE = 'INPUT_CHANGE';
+const INPUT_CHAR_CHANGE = 'INPUT_CHAR_CHANGE';
 const MOVE_PLAYER = 'MOVE_PLAYER';
 const DELETE_PLAYER = 'DELETE_PLAYER';
 const HANDLE_SLIDE = 'HANDLE_SLIDE';
-
 /**
  * Traitements
  */
-
 /**
  * Reducer
  */
@@ -75,31 +72,26 @@ const reducer = (state = initialState, action = {}) => {
         board: !state.board,
         map: !state.map,
       };
-
     case HANDLE_SLIDE:
       return {
         ...state,
         isSlided: !state.isSlided,
       };
-
     case TOGGLE_GRID:
       return {
         ...state,
         grid: !state.grid,
       };
-
     case TOGGLE_PICKER:
       return {
         ...state,
         toggle: !state.toggle,
       };
-
     case CHANGE_COLOR:
       return {
         ...state,
         color: action.value,
       };
-
     case CREATE_PLAYER: {
       if (state.characters.length < 20) {
         console.log(state.characters.length);
@@ -116,7 +108,8 @@ const reducer = (state = initialState, action = {}) => {
         }
         state.cptY += 70;
         if (newChar.name.length === 0) {
-          newChar.name = `Opponent#${state.characters.length + 1}`;
+          newChar.name = `Opponent#${state.cpt}`;
+          state.cpt += 1;
         }
         console.log(newChar.name);
         return {
@@ -125,17 +118,15 @@ const reducer = (state = initialState, action = {}) => {
           typingName: '',
         };
       }
-
       return {
         ...state,
       };
     }
-    case INPUT_CHANGE:
+    case INPUT_CHAR_CHANGE:
       return {
         ...state,
         typingName: action.value,
       };
-
     case MOVE_PLAYER: {
       const movedChars = state.characters.map((char) => {
         if (char.id === action.value.target.id) {
@@ -153,7 +144,6 @@ const reducer = (state = initialState, action = {}) => {
     }
     case DELETE_PLAYER: {
       const remainingChars = state.characters.filter(char => char.id !== action.id);
-
       return {
         ...state,
         characters: remainingChars,
@@ -163,54 +153,43 @@ const reducer = (state = initialState, action = {}) => {
       return state;
   }
 };
-
 /**
  * Action Creators
  */
-
 export const toggleScreen = () => ({
   type: TOGGLE_SCREEN,
 });
-
 export const toggleGrid = () => ({
   type: TOGGLE_GRID,
 });
-
 export const togglePicker = () => ({
   type: TOGGLE_PICKER,
 });
-
 export const changeColor = value => ({
   type: CHANGE_COLOR,
   value,
 });
-
 export const changeInput = value => ({
-  type: INPUT_CHANGE,
+  type: INPUT_CHAR_CHANGE,
   value,
 });
-
 export const createPlayer = () => ({
   type: CREATE_PLAYER,
 });
-
 export const movePlayer = value => ({
   type: MOVE_PLAYER,
   value,
 });
-
 export const deletePlayer = id => ({
   type: DELETE_PLAYER,
   id,
 });
-
 export const handleSlide = () => ({
   type: HANDLE_SLIDE,
 });
 /**
  * Selectors
  */
-
 /**
  * Export
  */
