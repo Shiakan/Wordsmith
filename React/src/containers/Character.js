@@ -10,7 +10,7 @@ import Character from 'src/components/GameScreen/Character';
 
 // Action Creators
 import {
-  movePlayer, deletePlayer, positioning,
+  movePlayer, deletePlayer,
 } from 'src/store/reducers/gameScreen';
 
 /* === State (données) ===
@@ -20,8 +20,8 @@ import {
  *  - ownProps : les props passées au container
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
-const mapStateToProps = state => ({
-  positioning: state.gameScreen.positioning,
+const mapStateToProps = () => ({
+  // positioning: state.gameScreen.positioning,
   // color: state.gameScreen.color,
   // name: state.gameScreen.name,
   // coordX: state.gameScreen.coordX,
