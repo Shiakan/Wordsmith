@@ -7,7 +7,7 @@ const initialState = {
   board: false,
   map: true,
   grid: true,
-  color: '#d4c4fb',
+  color: '#f44336',
   toggle: false,
   isSlided: false,
   cpt: 1,
@@ -141,8 +141,8 @@ const reducer = (state = initialState, action = {}) => {
       const movedChars = state.characters.map((char) => {
         if (char.id === action.value.target.id) {
           console.log('old coords :', char.coordX, char.coordY);
-          char.coordX = (action.value.pageX - action.value.offsetX) - 16;
-          char.coordY = (action.value.pageY - action.value.offsetY) - 16;
+          char.coordX = (action.value.pageX - action.value.offsetX) - 12;
+          char.coordY = (action.value.pageY - action.value.offsetY) - 12;
           console.log('new coords :', char.coordX, char.coordY);
         }
         return char;
