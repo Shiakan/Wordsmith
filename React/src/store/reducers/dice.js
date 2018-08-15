@@ -1,3 +1,5 @@
+// import uuidv4 from 'uuid/v4'; // https://www.npmjs.com/package/uuid
+
 /**
  * Initial State
  */
@@ -54,11 +56,19 @@ const roll = (dice) => {
  */
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case ROLL_DICE:
+    case ROLL_DICE: {
+      const rolled = roll(state.diceValue);
+      // const newDice = {
+      //   id: uuidv4(),
+      //   // auteur: action.auteur,
+      //   message: rolled,
+      //   // userId: action.userId,
+      // };
       return {
         ...state,
-        rolled: roll(state.diceValue),
-      };
+        rolled,
+        // messages: [...state.messages.messages, newDice],
+      }; }
 
     case DICE_CHANGE:
       return {

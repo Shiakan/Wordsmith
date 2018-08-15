@@ -10,7 +10,7 @@ const initialState = {
  * Types
  */
 const DO_SOMETHING = 'DO_SOMETHING';
-const SEND_MESSAGE = 'SEND_MESSAGE';
+// const SEND_MESSAGE = 'SEND_MESSAGE';
 
 
 /**
@@ -27,21 +27,21 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
       };
 
-    case SEND_MESSAGE: {
-      // Je créer un objet dans lequel je range les data recues
-      const newMessEntry = {
-        id: action.id,
-        auteur: action.auteur,
-        message: action.message,
-        userId: action.userId,
-      };
-      // Nouveau state
-      return {
-        ...state,
-        // Je le rajoute au state existant
-        messages: [...state.messages, newMessEntry],
-      };
-    }
+    // case SEND_MESSAGE: {
+    //   // Je créer un objet dans lequel je range les data recues
+    //   const newMessEntry = {
+    //     id: action.id,
+    //     auteur: action.auteur,
+    //     message: action.message,
+    //     userId: action.userId,
+    //   };
+    //   // Nouveau state
+    //   return {
+    //     ...state,
+    //     // Je le rajoute au state existant
+    //     messages: [...state.messages, newMessEntry],
+    //   };
+    // }
 
     default:
       return state;
@@ -55,10 +55,10 @@ export const doSomething = () => ({
   type: DO_SOMETHING,
 });
 
-export const sheetChange = value => ({
-  type: SHEET_CHANGE,
-  value,
-});
+// export const sheetChange = value => ({
+//   type: SHEET_CHANGE,
+//   value,
+// });
 
 
 /**
