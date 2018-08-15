@@ -47,6 +47,7 @@ class Character extends React.Component {
         onStop={this.movePlayer}
         bounds="parent"
         defaultPosition={{ x: coordX, y: coordY }}
+        handle=".character-cursor"
       >
         <div
           className="character"
@@ -69,8 +70,6 @@ class Character extends React.Component {
             id={id}
             style={{
               backgroundColor: color,
-              width: 32,
-              height: 32,
             }}
           />
         </div>
