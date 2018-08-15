@@ -9,10 +9,7 @@ const initialState = {
   color: '#d4c4fb',
   toggle: false,
   isSlided: false,
-<<<<<<< HEAD
-=======
   cpt: 1,
->>>>>>> chat
   cptX: 70,
   cptY: 170,
   name: '',
