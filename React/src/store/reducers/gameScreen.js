@@ -118,10 +118,6 @@ const reducer = (state = initialState, action = {}) => {
           typingName: '',
         };
       }
-<<<<<<< HEAD
-
-=======
->>>>>>> chat
       return {
         ...state,
       };
