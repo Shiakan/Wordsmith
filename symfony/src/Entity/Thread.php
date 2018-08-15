@@ -58,6 +58,8 @@ class Thread
     public function __construct()
     {
         $this->posts = new ArrayCollection();
+        $this->status = 1;
+        $this->createdAt = new \DateTime();
     }
 
     public function getId()

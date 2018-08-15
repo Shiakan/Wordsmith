@@ -43,6 +43,12 @@ class Post
      */
     private $createdAt;
 
+    public function __construct()
+    {
+        $this->status = 1;
+        $this->createdAt = new \DateTime();
+    }
+
     public function getId()
     {
         return $this->id;

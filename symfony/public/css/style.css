@@ -210,6 +210,8 @@ small {
 .category-header p {
     text-align:justify;
     font-size:0.8em;
+    margin:1em;
+    background-color:#0D0D0D;
 }
 
 .description,
