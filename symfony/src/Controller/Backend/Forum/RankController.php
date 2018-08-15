@@ -22,7 +22,7 @@ class RankController extends Controller
      */
     public function index(RankRepository $rankRepository, Request $request): Response
     {
-        //On récupère les tags
+        //On récupère les rangs
         $repository = $this->getDoctrine()->getRepository(Rank::class);
         $ranks = $repository->findAll();
         //On crée le form mappé sur Rank
@@ -43,14 +43,6 @@ class RankController extends Controller
             'rank'  => $rank,
             'form'  => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/{id}", name="rank_show", methods="GET")
-     */
-    public function show(Rank $rank): Response
-    {
-        return $this->render('backend/forum/rank/show.html.twig', ['rank' => $rank]);
     }
 
     /**
