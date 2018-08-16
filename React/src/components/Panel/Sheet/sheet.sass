@@ -1,0 +1,31 @@
+/**
+ * Import
+ */
+@import src/styles/vars
+
+/**
+ * Style
+ */
+.sheet
+  display: grid
+  grid-template-rows: 5% auto 80% 5%
+  grid-template-columns: 15% 70% 15%
+  height: 100%
+  witdh: 100%
+  background: url(../../../assets/img/parchment.png) no-repeat
+  background-size: 100% 100%
+  &-name
+    grid-column: 1 / 4
+    grid-row: 2
+    margin: auto auto
+  &-character
+    grid-column: 2 / 3
+    grid-row: 3 / 4
+    resize: none
+    background: url(../../../assets/img/parchment.png) no-repeat
+    background-position: 50% 50%
+    border: 2px solid $border-color
+    &::placeholder
+      color: $border-color
+      font-style: italic
+    

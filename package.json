@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "react": "^16.4.2",
+    "react-collapse": "^4.0.3",
+    "react-motion": "^0.5.2"
+  }
+}
