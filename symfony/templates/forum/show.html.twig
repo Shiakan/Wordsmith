@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{subcategory.name}}{% endblock %}
+
+{% block main %}
+<div class="wrapper">
+    <div class="container container-forum">
+    <div class="category-header">
+        <h2>{{subcategory.name}}</h2>
+        <p>{{subcategory.description}}</p>
+    </div>
+    {% for thread in subcategory.threads %}
+    <div class="container-subcategory">
+        <div class="container description">
+            <h3><a href="{{path('thread_show', {'id': thread.id })}}">{{thread.title}}</a></h3>
+        </div>
+        <div class="container statistic">
+            <img src="">
+            <small> {{thread.posts|length}} Réponses</small>
+        </div>
+        <div class="container last-message">
+            <a href="#">Dernier sujet</a>
+            <small>15/08/2018</small>
+            <a href="#">Prénom Nom</a>
+        </div>
+    </div>
+    {% endfor %}
+    <a class="btn" href="{{path('thread_new', {'subcategory_id' : subcategory.id})}}">Poster un nouvea sujet</a>
+ </div>
+{% endblock %}

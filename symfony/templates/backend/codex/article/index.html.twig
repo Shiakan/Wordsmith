@@ -1,0 +1,62 @@
+{% extends 'backend/basebackend.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block main %}
+    <div class="d-flex justify-content-between align-item align-items-center">
+        <h1 class="mb-3 mt-3">Liste des articles</h1>
+        <div class="actions">
+            {{ form_start(form, {'action': path('back_search_article'), 'method': 'POST','attr':{'class':'search-form'}}) }}
+                {{ form_row(form.title,{'attr': {'class': 'col-form-label col-form-label-sm'}}) }}
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-search"></i>
+            </button>
+            {{ form_end(form) }}
+        </div>
+        <a class="btn btn-success mb-2" href="{{ path('backend_article_new') }}">Créer un nouvel article</a>
+    </div>
+    <table class="table table-hover text-center">
+        <thead>
+            <tr>
+                <th>Article N°</th>
+                <th>Titre de l'article</th>
+                <th>Date de publication</th>
+                <th>Statut</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.id }}</td>
+                <td>{{ article.title }}</td>
+                <td>{{ article.dateInserted ? article.dateInserted|date('d-m-Y H:i:s') : '' }}</td>
+                <td>{{ article.status ? 'Visible' : 'Non visible' }}</td>
+                <td>
+                    <a title="Voir l'article" class="btn btn-info" href="{{ path('backend_article_show', {'id': article.id}) }}"><i class="fab fa-readme"></i></a>
+                    <a title="Editer l'article" class="btn btn-primary" href="{{ path('backend_article_edit', {'id': article.id}) }}"><i class="fas fa-pen-nib"></i></a>
+                    {% if article.status == true %}
+                        <a title="Masquer l'article sur le Codex" class="btn btn-warning" href="{{ path('backend_article_hide', {'id': article.id}) }}"><i class="fas fa-eye-slash"></i></a>
+                    {% else %}
+                        <a title="Rendre l'article visible sur le Codex" class="btn btn-success" href="{{ path('backend_article_hide', {'id': article.id}) }}"><i class="fas fa-eye"></i></a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Vous n'avez rédigé aucun article</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="text-center">
+        {# Si page supérieure à 1 on affiche un bouton précédent qui mène à la page-1 #} 
+        {% if page > 1 %}
+        <a href="{{path('backend_article_index',{'page':page -1})}}" class="btn btn-info">Précédent</a>
+        {% endif %} {# si page inférieure à la page max calculée alors on affiche un bouton suivant qui mène à la page +1 #} 
+        {% if page < pageMax %} 
+        <a href="{{path('backend_article_index',{'page':page +1})}}" class="btn btn-primary">Suivant</a>
+            {% endif %}
+    </div>
+   
+{% endblock %}

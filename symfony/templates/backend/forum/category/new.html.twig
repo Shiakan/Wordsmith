@@ -1,0 +1,10 @@
+{% extends 'backend/basebackend.html.twig' %}
+
+{% block title %}Créer une nouvelle catégorie{% endblock %}
+
+{% block main %}
+    <h1 class="mb-3 mt-3">Créer une nouvelle catégorie</h1>
+
+    {{ include('backend/forum/category/_form.html.twig') }}
+
+{% endblock %}
