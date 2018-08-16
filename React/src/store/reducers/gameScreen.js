@@ -1,9 +1,12 @@
 import uuidv4 from 'uuid/v4'; // https://www.npmjs.com/package/uuid
 
+import maps from 'src/data/maps';
+
 /**
  * Initial State
  */
 const initialState = {
+  maps,
   board: false,
   map: true,
   grid: true,

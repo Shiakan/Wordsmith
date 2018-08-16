@@ -96,7 +96,7 @@ class GameScreen extends React.Component {
           ))}
           {grid && <div className="screen-map-grid" />}
           <img
-            src="http://medievalshop.com/parchemin/wp-content/uploads/2013/08/La-prison.jpg"
+            src="http://4.bp.blogspot.com/-YCn-yY_Wt-c/UtME0OoI_FI/AAAAAAAADOY/1IeqF92KSLU/s800/DungeonZ+-+The+city+-+Overlays-+The+Prancing+Dragon+Tavern.jpg"
             alt="map"
             className="screen-map-image"
           />
