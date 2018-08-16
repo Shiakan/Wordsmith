@@ -4,7 +4,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { CirclePicker } from 'react-color';
-import ReactTooltip from 'react-tooltip';
 
 
 /**
@@ -60,11 +59,11 @@ class SwitchMJ extends React.Component {
       togglePicker, color, toggle, typingName,
     } = this.props;
     return (
-      <div className="switch-board">
+      <div className="mjSwitch">
         {toggle
           && (
           <CirclePicker
-            className="switch-board-picker"
+            className="mjSwitch-picker"
             color={color}
             circleSize={17}
             circleSpacing={10}
@@ -73,23 +72,23 @@ class SwitchMJ extends React.Component {
             triangle="hide"
           />
           )}
-        <form className="switch-board-form" onSubmit={this.handleSubmit}>
+        <form className="mjSwitch-form" onSubmit={this.handleSubmit}>
           <button
             type="button"
             style={{ backgroundColor: color }}
             onClick={togglePicker}
           >
-                  &nbsp;
+          &nbsp;
           </button>
           <input
-            className="switch-board-input"
+            className="mjSwitch-input"
             type="text"
             placeholder="Nom du personnage"
             onChange={this.handleChange}
             value={typingName}
           />
           <input
-            className="switch-board-button"
+            className="mjSwitch-button"
             type="submit"
             value="+"
           />
