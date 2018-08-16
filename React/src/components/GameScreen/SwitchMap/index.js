@@ -4,7 +4,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
 /**
  * Local import
  */
@@ -30,28 +29,28 @@ class SwitchMap extends React.Component {
   render() {
     const { toggleScreen, toggleGrid, grid } = this.props;
     return (
-      <form className="switch-map">
+      <form className="mapSwitch">
         <button
           type="button"
-          className="switch-map-button"
+          className="mapSwitch-button"
           onClick={toggleScreen}
         >
-              Switch to Board
+        Switch to Board
         </button>
-        <input
-          type="checkbox"
-          id="check"
-          name="check"
-          className="switch-map-checkbox"
-          onChange={toggleGrid}
-          checked={grid}
-        />
         <label
-          className="switch-map-label"
+          className="mapSwitch-label"
           htmlFor="check"
           id="box"
         >
-        Quadrillage
+          <input
+            type="checkbox"
+            id="check"
+            name="check"
+            className="mapSwitch-checkbox"
+            onChange={toggleGrid}
+            checked={grid}
+          />
+          <span>Quadrillage</span>
         </label>
       </form>
     );

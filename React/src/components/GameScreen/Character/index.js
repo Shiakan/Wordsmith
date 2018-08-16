@@ -4,7 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Draggable from 'react-draggable';
-
+import { TiDelete } from 'react-icons/ti';
 
 /**
  * Local import
@@ -57,12 +57,10 @@ class Character extends React.Component {
               color,
             }}
           >{name}
-            <button
-              type="button"
+            <TiDelete
               className="character-nickname-delete"
               onClick={deletePlayer}
-            >X
-            </button>
+            />
           </div>
           <div
             className="character-cursor"
@@ -73,7 +71,6 @@ class Character extends React.Component {
           />
         </div>
       </Draggable>
-
     );
   }
 }
