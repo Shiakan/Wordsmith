@@ -246,8 +246,7 @@ small {
 }
 
 .description p {
-    max-height: 5em;
-    overflow:auto;
+    max-height: 3em;
     text-align:justify;
     font-size:0.8em;
     padding: 0.1em 0.5em;
@@ -527,14 +526,17 @@ form button {
 
 .left-side {
     text-align:center;
+    width:30%;
 }
 
 .left-side img {
     margin-bottom:1em;
+    max-width:200px;
 }
 .right-side {
     padding-left:1em;
     padding-right:1em;
+    width:70%;
 }
 #tabs {
     background-color:#0b0b0b;
@@ -588,13 +590,26 @@ a.ui-button:active, .ui-button:active,
 .room-content{
     display: flex;
     justify-content: space-between; 
+    align-items: center;
+
 }
-.room-content-dungeonmaster{
-    display: flex;
-    justify-content: flex-start;
+
+.room-content h3 {
+    font-family: 'Forum', cursive;
+    color: #A56E3A;
+    text-transform:uppercase;
+    font-size:0.8em;
+    letter-spacing:0.2em;
 }
-.room-content-btn{
+
+.room-content-btn {
     display: flex;
+    justify-content:space-around;
+    align-items: flex-start;
+}
+
+.room-content-btn .btn {
+    margin:0.2em;
 }
 .container-profil {
       display:flex;

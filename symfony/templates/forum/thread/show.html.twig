@@ -15,7 +15,7 @@
             {{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}
         {% endfor %}
     </div>
-    <a href="{{ path('post_new') }}">Répondre</a>
+    <a href="{{path('post_new', {'thread_id' : thread.id})}}">Répondre</a>
 </div>
 
 {% endblock %}

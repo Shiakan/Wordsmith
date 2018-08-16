@@ -3,9 +3,14 @@
 {% block title %}New Post{% endblock %}
 
 {% block main %}
-    <h1>Create new Post</h1>
+<div class="wrapper">
+    <div class="container container-forum">
+        <div class="category-header">
+            <h2>Répondre au sujet <em>{{thread.title}}</em></h2>
+        </div>
 
     {{ include('forum/post/_form.html.twig') }}
 
-    <a href="{{ path('post_index') }}">back to list</a>
+    </div>
+</div>
 {% endblock %}

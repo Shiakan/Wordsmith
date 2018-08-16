@@ -60,7 +60,9 @@ class ThreadController extends Controller
             $em->flush();
             $this->createPost($thread, $content, $user);
 
-            return $this->redirectToRoute('forum_index');
+            return $this->redirectToRoute('thread_show', [
+                'id' => $thread->getId()
+            ]);
         }
 
         return $this->render('forum/thread/new.html.twig', [
