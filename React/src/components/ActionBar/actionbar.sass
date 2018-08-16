@@ -7,9 +7,63 @@
  * Styles
  */
 .actionBar
-    height: 60%
-    width: 100%
-    border: 1px solid black
-    padding: 3em
-    text-align: center
-    grid-area: a
+  grid-area: a
+  display: grid
+  grid-template-areas: ". . mj . ." "table table table table table" ". player player player ."
+  grid-template-columns: 5% 30% 30% 30% 5%
+  grid-template-rows: 25% auto 25%
+  &-mj
+    grid-area: mj
+    color: pink
+    height: 30%
+    width: auto
+    margin: 0 auto
+  &-table
+    // background: url(../../assets/img/floorwhynot.jpg) no-repeat center
+    // background-size: cover
+    background-color: $font-color
+    grid-area: table
+    display: grid
+    grid-template-areas: ". . . . ."". dice sheet help ."". . . . ."
+    grid-template-columns: repeat(5, 1/5)
+    grid-template-rows: 25% auto 25%
+    grid-gap: .2em
+    // border-radius: .4em
+    &-dice
+      grid-area: dice
+      @extend %click-button
+    &-sheet
+      grid-area: sheet
+      @extend %click-button
+    &-help
+      grid-area: help
+      @extend %click-button
+  &-player
+    display: grid
+    grid-area: player
+    grid-template-areas: "p1 p2 p3 p4"
+    grid-template-columns: repeat(4, 1/4)
+    &-1
+      grid-area: p1
+      color: red
+      width: auto
+      height: 100%
+      margin: 0 auto
+    &-2
+      grid-area: p2
+      color: blue
+      width: auto
+      height: 100%
+      margin: 0 auto
+    &-3
+      grid-area: p3
+      color: green
+      width: auto
+      height: 100%
+      margin: 0 auto
+    &-4
+      grid-area: p4
+      color: yellow
+      width: auto
+      height: 100%
+      margin: 0 auto

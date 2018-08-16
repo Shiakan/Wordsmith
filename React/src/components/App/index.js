@@ -10,11 +10,12 @@ import React from 'react';
 
 // Styles et assets
 import './app.sass';
-import GameScreen from 'src/components/GameScreen';
+import GameScreen from 'src/containers/GameScreen';
 import Chat from 'src/components/Chat';
-import Panel from 'src/components/Panel';
+import Panel from 'src/containers/Panel';
+import Aetherlust from 'src/components/Aetherlust';
 import Logo from 'src/components/Logo';
-import ActionBar from 'src/components/ActionBar';
+import ActionBar from 'src/containers/ActionBar';
 import Footer from 'src/components/Footer';
 
 
@@ -26,6 +27,7 @@ const App = () => (
     <GameScreen />
     <Panel />
     <Chat />
+    <Aetherlust />
     <Logo />
     <ActionBar />
     <Footer />
