@@ -20,7 +20,7 @@ class RankController extends Controller
     /**
      * @Route("/", name="backend_rank_index", methods="GET|POST")
      */
-    public function index(RankRepository $rankRepository, Request $request): Response
+    public function index( Request $request): Response
     {
         //On récupère les rangs
         $repository = $this->getDoctrine()->getRepository(Rank::class);
