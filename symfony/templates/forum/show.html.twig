@@ -10,21 +10,7 @@
         <h2>{{subcategory.name}}</h2>
         <p>{{subcategory.description}}</p>
     </div>
-    {% for thread in subcategory.threads %}
-    <div class="container-subcategory">
-        <div class="container description">
-            <h3><a href="{{path('thread_show', {'id': thread.id })}}">{{thread.title}}</a></h3>
-           {% if is_granted('ROLE_MODERATOR') %}
-                {{ form_start(form) }}
-                {{form_row(form.subcategory,{'label':false})}}
-                <button class="btn btn-success mb-2">{{ button_label|default('Modifié') }}</button>
-                {{form_end(form)}}
-            {% endif %}
-        </div>
-        <div class="container statistic">
-            <img src="">
-            <small> {{thread.posts|length}} Réponses</small>
-        </div>
+
     {% for thread in subcategory.threads %}
         <div class="thread">
             <div class="container thread-description">
@@ -32,6 +18,12 @@
                 <h3><a href="{{path('thread_show', {'id': thread.id })}}">{{thread.title}}</a></h3>
                 <small>{{thread.subtitle}}</small>
                 <h4>{{thread.author.username}}</h4>
+            {% if is_granted('ROLE_MODERATOR') %}
+                {{ form_start(form) }}
+                {{form_row(form.subcategory,{'label':false})}}
+                <button class="btn btn-success mb-2">{{ button_label|default('Modifier') }}</button>
+                {{form_end(form)}}
+            {% endif %}
 
             </div>
             <div class="container thread-statistic">
