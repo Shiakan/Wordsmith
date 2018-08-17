@@ -4,7 +4,6 @@
 
 {% block main %}
 <div class="wrapper">
-    <a class="btn" href="{{path('thread_new', {'subcategory_id' : subcategory.id})}}">Poster un nouveau sujet</a>
     <div class="container container-forum">
     <div class="category-header">
         <h2>{{subcategory.name}}</h2>
@@ -28,8 +27,8 @@
                 <a href="#">Prénom Nom</a>
             </div>
         </div>
+    </div>
     {% endfor %}
-     </div> 
-<a class="btn" href="{{path('thread_new', {'subcategory_id' : subcategory.id})}}">Poster un nouveau sujet</a>
-</div>
+    <a class="btn" href="{{path('thread_new', {'subcategory_id' : subcategory.id})}}">Poster un nouvea sujet</a>
+ </div>
 {% endblock %}
