@@ -37,6 +37,12 @@
             </div>
         </div>
         {% endfor %}
+        {% if is_granted('ROLE_MODERATOR') %}
+            {{ form_start(form, {'action': path('thread_move', {'id' : thread.id }), 'method': 'POST'}) }}
+            {{form_row(form.subcategory,{'label':false, 'id' : 'select' ~ thread.id })}}
+                <button class="btn btn-success mb-2">{{ button_label|default('Modifier') }}</button>
+            {{form_end(form)}}
+        {% endif %}
     </div>
     <a href="{{path('post_new', {'thread_id' : thread.id})}}">Répondre</a>
 </div>

@@ -29,21 +29,13 @@ class ForumController extends AbstractController
     /**
      * @Route("/forum/{name}", name="forum_subcategory", methods="GET|POST")
      */
-    public function showSubcategory(Subcategory $subcategory, Thread $thread, Request $request)
+    public function showSubcategory(Subcategory $subcategory, Request $request)
     {
-                $form = $this->createForm(SubjectType::class, $thread);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('thread_index');
-        }
+        $threads = $subcategory->getThreads();
 
         return $this->render('forum/show.html.twig', [
             'subcategory'=> $subcategory,
-            'thread' => $thread,
-            'form' => $form->createView(),
+            'thread' => $threads
         ]);
     }
 }

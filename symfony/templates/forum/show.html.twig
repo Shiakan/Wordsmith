@@ -18,13 +18,6 @@
                 <h3><a href="{{path('thread_show', {'id': thread.id })}}">{{thread.title}}</a></h3>
                 <small>{{thread.subtitle}}</small>
                 <h4>{{thread.author.username}}</h4>
-            {% if is_granted('ROLE_MODERATOR') %}
-                {{ form_start(form) }}
-                {{form_row(form.subcategory,{'label':false})}}
-                <button class="btn btn-success mb-2">{{ button_label|default('Modifier') }}</button>
-                {{form_end(form)}}
-            {% endif %}
-
             </div>
             <div class="container thread-statistic">
                 <img src="{{ asset('image/nonew.png') }}" class="icon">
