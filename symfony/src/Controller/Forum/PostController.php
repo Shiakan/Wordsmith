@@ -50,7 +50,7 @@ class PostController extends Controller
     }
 
     /**
-     * @Route("/{id}/edit", name="post_edit", methods="GET|POST")
+     * @Route("/thread/post/{id}/edit", name="post_edit", methods="GET|POST")
      */
     public function edit(Request $request, Post $post): Response
     {
@@ -63,7 +63,7 @@ class PostController extends Controller
             return $this->redirectToRoute('post_edit', ['id' => $post->getId()]);
         }
 
-        return $this->render('post/edit.html.twig', [
+        return $this->render('forum/post/edit.html.twig', [
             'post' => $post,
             'form' => $form->createView(),
         ]);
