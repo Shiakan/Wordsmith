@@ -5,6 +5,7 @@ namespace App\Controller\Forum;
 use App\Entity\Post;
 use App\Entity\Thread;
 use App\Form\ThreadType;
+use App\Form\SubjectType;
 use App\Entity\Subcategory;
 use App\Repository\ThreadRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -88,9 +89,36 @@ class ThreadController extends Controller
     /**
      * @Route("/thread/{id}", name="thread_show", methods="GET")
      */
-    public function show(Thread $thread): Response
+    public function show(Thread $thread, Request $request): Response
+    {   
+        $form = $this->createForm(SubjectType::class, $thread);
+        
+        return $this->render('forum/thread/show.html.twig', [
+            'thread' => $thread,
+            'form' => $form->createView() ]);
+    }
+
+    /**
+     * @Route("/thread/{id}/move", name="thread_move", methods="POST")
+     */
+
+    public function moveThread(Request $request, Thread $thread): Response 
     {
-        return $this->render('forum/thread/show.html.twig', ['thread' => $thread]);
+        
+        $data = $request->request->get('subject');
+        $subcategoryId = $data['subcategory'];
+
+        $repository = $this->getDoctrine()->getRepository(Subcategory::class);
+        $subcategory = $repository ->findById($subcategoryId);
+        $newSubcategory = $subcategory[0];
+
+        $em = $this->getDoctrine()->getManager();
+        $thread->setSubcategory($newSubcategory);
+        $em->persist($thread);
+        $em->flush();
+
+        return $this->redirectToRoute('forum_subcategory', ['name' => $newSubcategory->getName()]);
+
     }
 
     /**

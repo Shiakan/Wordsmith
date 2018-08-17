@@ -9,19 +9,23 @@
         <h2>{{subcategory.name}}</h2>
         <p>{{subcategory.description}}</p>
     </div>
+
     {% for thread in subcategory.threads %}
-    <div class="container-subcategory">
-        <div class="container description">
-            <h3><a href="{{path('thread_show', {'id': thread.id })}}">{{thread.title}}</a></h3>
-        </div>
-        <div class="container statistic">
-            <img src="">
-            <small> {{thread.posts|length}} Réponses</small>
-        </div>
-        <div class="container last-message">
-            <a href="#">Dernier sujet</a>
-            <small>15/08/2018</small>
-            <a href="#">Prénom Nom</a>
+        <div class="thread">
+            <div class="container thread-description">
+
+                <h3><a href="{{path('thread_show', {'id': thread.id })}}">{{thread.title}}</a></h3>
+                <small>{{thread.subtitle}}</small>
+                <h4>{{thread.author.username}}</h4>
+            </div>
+            <div class="container thread-statistic">
+                <img src="{{ asset('image/nonew.png') }}" class="icon">
+                <small> {{thread.posts|length}} Réponses</small>
+            </div>
+            <div class="container thread-last-message">
+                <small>15/08/2018</small>
+                <a href="#">Prénom Nom</a>
+            </div>
         </div>
     </div>
     {% endfor %}
