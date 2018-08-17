@@ -2,8 +2,11 @@
 
 namespace App\Controller\Forum;
 
+use App\Entity\Thread;
 use App\Entity\Category;
+use App\Form\SubjectType;
 use App\Entity\Subcategory;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -24,12 +27,23 @@ class ForumController extends AbstractController
     }
 
     /**
-     * @Route("/forum/{name}", name="forum_subcategory")
+     * @Route("/forum/{name}", name="forum_subcategory", methods="GET|POST")
      */
-    public function showSubcategory(Subcategory $subcategory)
+    public function showSubcategory(Subcategory $subcategory, Thread $thread, Request $request)
     {
+                $form = $this->createForm(SubjectType::class, $thread);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('thread_index');
+        }
+
         return $this->render('forum/show.html.twig', [
             'subcategory'=> $subcategory,
+            'thread' => $thread,
+            'form' => $form->createView(),
         ]);
     }
 }

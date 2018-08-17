@@ -15,9 +15,9 @@
         {{ form_row(form.miscellaneous) }}
         {{ form_row(form.link1) }}
         {{ form_row(form.link2) }}
-        {{ form_row(form.rank) }}
-        {{ form_row(form.groupForum) }}    
         <button type="submit">Poster</button>
+        {{ form_row(form.rank, {'label':false,'attr':{'style':'display:none;'}}) }}
+        {{ form_row(form.groupForum, {'label':false,'attr':{'style':'display:none;'}}) }}
         {{ form_end(form) }}
     </div>
  </div>

@@ -45,8 +45,8 @@ class CharacterProfileType extends AbstractType
                 'empty_data' => ' ',
             ])
             
-            ->add('rank', HiddenType::class)
-            ->add('groupForum', HiddenType::class)
+            ->add('rank')
+            ->add('groupForum')
         ;
     }
 
