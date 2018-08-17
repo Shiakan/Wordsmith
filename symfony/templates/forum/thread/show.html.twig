@@ -9,6 +9,7 @@
             <h2>{{ thread.title }}</h2>
             <h3>{{ thread.subtitle }}</h3>
         </div>
+        <div class="container-post">
         {% for post in thread.posts %}
             {{ post.content }}
             {{ post.author.username }}

@@ -13,9 +13,7 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('content', TextareaType::class, [
-                'label' => 'Contenu'
-            ])
+            ->add('content', TextareaType::class, array('attr' => array('class' => 'ckeditor-forum')))
         ;
     }
 

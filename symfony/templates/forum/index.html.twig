@@ -15,20 +15,20 @@
         </div>
         {% for subcategory in category.subCategories %}
         <div class="container-subcategory">
-        <div class="container description">
-            <h3><a href="{{path('forum_subcategory', {'name': subcategory.name })}}">{{subcategory.name}}</a></h3>
-            <p>{{subcategory.description}}</p>
+            <div class="container description">
+                <h3><a href="{{path('forum_subcategory', {'name': subcategory.name })}}">{{subcategory.name}}</a></h3>
+                <p>{{subcategory.reminder}}</p>
+            </div>
+            <div class="container statistic">
+                <img src="">
+                <small>{{subcategory.threads|length}} Sujets</small>
+            </div>
+            <div class="container last-message">
+                <a href="#">Dernier sujet</a>
+                <small>15/08/2018</small>
+                <a href="#">Prénom Nom</a>
+            </div>
         </div>
-        <div class="container statistic">
-            <img src="">
-            <small>{{subcategory.threads|length}} Sujets</small>
-        </div>
-        <div class="container last-message">
-            <a href="#">Dernier sujet</a>
-            <small>15/08/2018</small>
-            <a href="#">Prénom Nom</a>
-        </div>
-    </div>
     {% endfor %}
     </div>
     {% endfor %}

@@ -14,3 +14,12 @@
     </div>
 </div>
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('javascript/ckeditor-forum/ckeditor.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('javascript/ckeditor-forum/adapters/jquery.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+        CKEDITOR.replace( 'post_content' );
+    </script>
+{% endblock %}

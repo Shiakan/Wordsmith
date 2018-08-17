@@ -34,7 +34,7 @@ class ThreadController extends Controller
     {   
         $thread = new Thread();
         
-        // On récupère la question à laquelle l'utilisateur a répondu
+        // On récupère la sous-catégorie dans laquelle l'utilisateur poste son sujet
         $repository = $this->getDoctrine()->getRepository(Subcategory::class);
         $subcategory = $repository->findById($subcategory_id);
         $currentSubcategory = $subcategory[0];

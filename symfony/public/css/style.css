@@ -271,6 +271,14 @@ small {
 .container-article {
     margin-top:1em;
 }
+
+.description a {
+    color:#125C38;
+}
+
+.description a:hover {
+    color:rgb(27, 136, 83);
+}
 /* Codex */
 
 .header-codex {
