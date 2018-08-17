@@ -96,7 +96,7 @@ class RoomController extends Controller
      */
     public function show(Room $room): Response
     {
-        return $this->render('room/show.html.twig', ['room' => $room]);
+        return $this->render('room/index.html.twig', ['room' => $room]);
     }
 
     /**

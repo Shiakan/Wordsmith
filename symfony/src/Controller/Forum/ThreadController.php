@@ -140,18 +140,4 @@ class ThreadController extends Controller
             'form' => $form->createView(),
         ]);
     }
-
-    /**
-     * @Route("/{id}", name="thread_delete", methods="DELETE")
-     */
-    public function delete(Request $request, Thread $thread): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$thread->getId(), $request->request->get('_token'))) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($thread);
-            $em->flush();
-        }
-
-        return $this->redirectToRoute('thread_index');
-    }
 }

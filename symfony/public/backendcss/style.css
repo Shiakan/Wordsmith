@@ -1,14 +1,14 @@
 body {
-    height:80vh;
+    height:100vh;
 }
 
 .btn-delete {
     display:inline-block;
 }
 
-.row {
+/* .row {
     height: 93vh;
-}
+} */
 
 #article_content {
     width:500px;
@@ -34,7 +34,7 @@ body {
 #container {
     margin:auto;
     width:85%;
-    height:100vh;
+    height:100%;
 }
 
 .col {

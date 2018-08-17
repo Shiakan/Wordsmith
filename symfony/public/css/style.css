@@ -156,7 +156,8 @@ small {
 
 /* Wrappers & containers */
 .wrapper {
-    width:45%;
+    width:50%;
+    min-height:100vh;
     margin:auto;
     background-color:#0B0B0B; 
     padding:5em 1em 5em 1em;
@@ -740,4 +741,13 @@ a.ui-button:active, .ui-button:active,
 .abtPOST div img{
     margin:auto; 
     max-width:180px;
+}
+
+@media screen and (max-width: 1200px) {
+    .wrapper {
+        width:75%;
+    }
+    .container-width {
+        width:70%;
+    }
 }
