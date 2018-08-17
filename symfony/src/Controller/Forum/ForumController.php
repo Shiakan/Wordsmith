@@ -37,7 +37,7 @@ class ForumController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('thread_index');
+            return $this->redirectToRoute('forum_index');
         }
 
         return $this->render('forum/show.html.twig', [
