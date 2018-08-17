@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Forum;
 
 use App\Entity\CharacterProfile;
 use App\Form\CharacterProfileType;
@@ -26,7 +26,7 @@ class CharacterProfileController extends AbstractController
             return $this->redirectToRoute('user_profile', ['id' => $characterProfile->getUser()->getId()]);
         }
 
-        return $this->render('character_profile/edit.html.twig', [
+        return $this->render('forum/character_profile/edit.html.twig', [
             'characterProfile' => $characterProfile,
             'form' => $form->createView(),
         ]);

@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class CharacterProfileType extends AbstractType
@@ -43,6 +44,9 @@ class CharacterProfileType extends AbstractType
                 'required'   => false,
                 'empty_data' => ' ',
             ])
+            
+            ->add('rank', HiddenType::class)
+            ->add('groupForum', HiddenType::class)
         ;
     }
 

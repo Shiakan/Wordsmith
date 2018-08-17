@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block title %}Mon profil{% endblock %}
+
+{% block main %}
+<div class="wrapper-homepage">
+    <div class="container container-width">
+        <h1>{{ app.user.username }}</h1>
+        {{ form_start(form) }}
+        {{ form_row(form.avatar) }}
+        {{ form_row(form.age) }}
+        {{ form_row(form.race) }}
+        {{ form_row(form.class) }}
+        {{ form_row(form.socialCast) }}
+        {{ form_row(form.localisation) }}
+        {{ form_row(form.miscellaneous) }}
+        {{ form_row(form.link1) }}
+        {{ form_row(form.link2) }}
+        {{ form_row(form.rank) }}
+        {{ form_row(form.groupForum) }}    
+        <button type="submit">Poster</button>
+        {{ form_end(form) }}
+    </div>
+ </div>
+{% endblock %}
