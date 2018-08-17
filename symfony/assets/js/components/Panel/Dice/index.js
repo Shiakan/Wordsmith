@@ -100,7 +100,7 @@ class Dice extends React.Component {
       <div className="dice">
         <img
           className="dice-img"
-          src="src/assets/img/dicesTest1.png"
+          src="./dicesTest1.png"
           alt="some roleplay dices"
         />
         <div className="dice-block">
