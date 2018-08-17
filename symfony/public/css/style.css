@@ -10,7 +10,7 @@
     box-sizing: border-box;
 }
 body {
-    background-image: url('https://nsa39.casimages.com/img/2018/08/12//180812035309968266.png');
+    background-image: url('../image/background.png');
     background-repeat:no-repeat;
     background-attachment:fixed;
     color:#BDBDBD;
@@ -214,12 +214,27 @@ small {
     background-color:#0D0D0D;
 }
 
+.thread {
+    display:flex;
+    justify-content: space-between;
+    padding:1em;
+
+}
+
 .description,
 .statistic,
 .last-message {
     margin-bottom:0;
+    padding:0;
+    background-color:#0b0b0b;
+    border:1px solid black;
+}
+
+.thread-description,
+.thread-statistic,
+.thread-last-message {
+    margin-bottom:0;
     padding:0.5em;
-    height:7em;
     background-color:#0b0b0b;
     border:1px solid black;
 }
@@ -229,10 +244,18 @@ small {
 }
 .statistic {
     width:20%;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .last-message {
     width:20%;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .description h3 {
@@ -253,9 +276,10 @@ small {
 }
 
 .icon {
-    width:10%;
-    height:5em;
-    background-color:red;
+    width:50%;
+    border-radius:50%;
+    background-color:#0D0D0D;
+    border:2px solid #2b1c0b;
 }
 
 .container-index{
@@ -278,6 +302,12 @@ small {
 
 .description a:hover {
     color:rgb(27, 136, 83);
+}
+
+.wrapper-flex {
+    display:flex;
+    justify-content: space-between;
+
 }
 /* Codex */
 
