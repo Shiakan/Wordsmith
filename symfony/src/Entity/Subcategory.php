@@ -39,10 +39,21 @@ class Subcategory
      */
     private $description;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $reminder;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isPrivate;
+
 
     public function __construct()
     {
         $this->threads = new ArrayCollection();
+        $this->isPrivate = 0;
     }
 
     public function getId()
@@ -115,5 +126,32 @@ class Subcategory
         $this->description = $description;
 
         return $this;
+    }
+
+    public function getReminder(): ?string
+    {
+        return $this->reminder;
+    }
+
+    public function setReminder(?string $reminder): self
+    {
+        $this->reminder = $reminder;
+
+        return $this;
+    }
+
+    public function getIsPrivate(): ?bool
+    {
+        return $this->isPrivate;
+    }
+
+    public function setIsPrivate(bool $isPrivate): self
+    {
+        $this->isPrivate = $isPrivate;
+
+        return $this;
+    }
+    public function __toString(){
+    return $this->name;
     }
 }

@@ -43,7 +43,7 @@ class RoomController extends Controller
             $em->persist($room);
             $em->flush();
 
-            return $this->redirectToRoute('room_link', ['code' => $code ]);
+            return $this->redirectToRoute('room_show', ['code' => $code ]);
         }
 
         return $this->render('room/new.html.twig', [
@@ -52,27 +52,27 @@ class RoomController extends Controller
         ]);
     }
 
-    /**
-     * @Route("enter_room/{code}", name="room_link", methods="GET")
-     */
-    public function getRoomLink(Room $room) {
+    // /**
+    //  * @Route("enter_room/{code}", name="room_show", methods="GET")
+    //  */
+    // public function getRoomLink(Room $room) {
         
-        return $this->render('room/show.html.twig', array(
-            'room' => $room
-        ));
-    }
+    //     return $this->render('room/show.html.twig', array(
+    //         'room' => $room
+    //     ));
+    // }
 
-    /**
-     * @Route("room_access", name="room_access", methods="GET")
-     */
+    // /**
+    //  * @Route("room_access", name="room_access", methods="GET")
+    //  */
 
-     public function roomAccess(Request $request)
-    {
-        $code = $request->request->get('code');
-        $id = $request->request->get('id');
+    //  public function roomAccess(Request $request)
+    // {
+    //     $code = $request->request->get('code');
+    //     $id = $request->request->get('id');
 
-        dump($code);die;
-    }
+    //     dump($code);die;
+    // }
 
     private function createRandomCode() { 
 
@@ -92,11 +92,13 @@ class RoomController extends Controller
     } 
 
     /**
-     * @Route("room/{id}", name="room_show", methods="GET")
+     * @Route("room/{code}", name="room_show", methods="GET")
      */
     public function show(Room $room): Response
     {
-        return $this->render('room/show.html.twig', ['room' => $room]);
+        return $this->render('room/index.html.twig', [
+            'room' => $room
+            ]);
     }
 
     /**

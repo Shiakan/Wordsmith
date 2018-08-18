@@ -2,12 +2,26 @@
 
 {% block title %}Edit Post{% endblock %}
 
-{% block body %}
-    <h1>Edit Post</h1>
+{% block main %}
 
-    {{ include('post/_form.html.twig', {'button_label': 'Update'}) }}
+<div class="wrapper">
+    <div class="container container-forum">
+        <div class="category-header">
+            <h2>Editer le post</h2>
+        </div>
 
-    <a href="{{ path('post_index') }}">back to list</a>
+    {{ include('forum/post/_form.html.twig') }}
 
-    {{ include('post/_delete_form.html.twig') }}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('javascript/ckeditor-forum/ckeditor.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('javascript/ckeditor-forum/adapters/jquery.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+        CKEDITOR.replace( 'post_content' );
+    </script>
 {% endblock %}

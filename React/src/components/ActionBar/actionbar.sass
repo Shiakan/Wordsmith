@@ -19,16 +19,16 @@
     width: auto
     margin: 0 auto
   &-table
-    background: url(../../assets/img/floorwhynot.jpg) no-repeat center
-    background-size: cover
+    // background: url(../../assets/img/floorwhynot.jpg) no-repeat center
+    // background-size: cover
+    background-color: $font-color
     grid-area: table
-    background-color: brown
     display: grid
     grid-template-areas: ". . . . ."". dice sheet help ."". . . . ."
     grid-template-columns: repeat(5, 1/5)
     grid-template-rows: 25% auto 25%
     grid-gap: .2em
-    border-radius: .4em
+    // border-radius: .4em
     &-dice
       grid-area: dice
       @extend %click-button

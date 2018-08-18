@@ -13,6 +13,7 @@ class SubcategoryType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('reminder')
             ->add('description')
             ->add('category')
         ;

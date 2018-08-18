@@ -14,7 +14,7 @@ class CommentController extends Controller
     /**
      * @Route("/hide/{id}", name="hide_comment")
      */
-    public function validate(Comment $comment)
+    public function hide(Comment $comment)
     {   
         $em = $this->getDoctrine()->getManager();
         // Si la réponse avait le statut false (donc 'non valide') alors on le passe à true = valide

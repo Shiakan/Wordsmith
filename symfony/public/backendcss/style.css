@@ -1,14 +1,14 @@
 body {
-    height:80vh;
+    height:100vh;
 }
 
 .btn-delete {
     display:inline-block;
 }
 
-.row {
+/* .row {
     height: 93vh;
-}
+} */
 
 #article_content {
     width:500px;
@@ -24,7 +24,7 @@ body {
     border:none;
 }
 .btn {
-    padding:1em 1.5em;
+    padding:0.5em 1em;
 }
 .fas, .fab {
     font-size:1.2em;
@@ -34,7 +34,7 @@ body {
 #container {
     margin:auto;
     width:85%;
-    height:100vh;
+    height:100%;
 }
 
 .col {
