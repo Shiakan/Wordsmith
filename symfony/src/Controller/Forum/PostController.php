@@ -68,18 +68,4 @@ class PostController extends Controller
             'form' => $form->createView(),
         ]);
     }
-
-    /**
-     * @Route("/{id}", name="post_delete", methods="DELETE")
-     */
-    public function delete(Request $request, Post $post): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($post);
-            $em->flush();
-        }
-
-        return $this->redirectToRoute('post_index');
-    }
 }

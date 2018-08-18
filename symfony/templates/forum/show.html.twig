@@ -13,10 +13,9 @@
     {% for thread in threads %}
         <div class="thread">
             <div class="container thread-description">
-
                 <h3><a href="{{path('thread_show', {'id': thread.id })}}">{{thread.title}}</a></h3>
                 <small>{{thread.subtitle}}</small>
-                <h4>{{thread.author.username}}</h4>
+                <h4 style="color:{{thread.author.characterProfile.groupForum.color}};">{{thread.author.username}}</h4>
             </div>
             <div class="container thread-statistic">
                 <img src="{{ asset('image/nonew.png') }}" class="icon">

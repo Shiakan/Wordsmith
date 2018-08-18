@@ -19,22 +19,23 @@ class HasReadThreadRepository extends ServiceEntityRepository
         parent::__construct($registry, HasReadThread::class);
     }
 
-//    /**
-//     * @return HasReadThread[] Returns an array of HasReadThread objects
-//     */
-    /*
-    public function findByExampleField($value)
+   /**
+     * @return HasReadThread[] Returns an array of HasReadThread objects
+     */
+
+    public function findTimeStamp($user, $thread)
     {
         return $this->createQueryBuilder('h')
-            ->andWhere('h.exampleField = :val')
-            ->setParameter('val', $value)
+            ->where('h.user = :user')
+            ->andWhere('h.thread = :thread')
+            ->setParameters(array('user'=> $user, 'thread' => $thread))
             ->orderBy('h.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+   
 
     /*
     public function findOneBySomeField($value): ?HasReadThread

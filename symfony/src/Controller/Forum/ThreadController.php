@@ -8,6 +8,7 @@ use App\Form\ThreadType;
 use App\Form\SubjectType;
 use App\Entity\Subcategory;
 use App\Repository\PostRepository;
+use App\Entity\HasReadThread;
 use App\Repository\ThreadRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -90,14 +91,17 @@ class ThreadController extends Controller
     /**
      * @Route("/thread/{id}/page/{page}", name="thread_show", requirements={"page" = "\d+"}, defaults={"page" = 1}, methods="GET|POST")
      */
-    public function show(Thread $thread,PostRepository $postRepository, Request $request, $page): Response
+    public function show(Thread $thread, Request $request, UserInterface $user=null, $page): Response
     {   
         $limit = 10; //limite de questions par page (pagination)
+        $postRepository = $this->getDoctrine()->getRepository(Post::class);
         $posts = $postRepository->findByAll($page,$limit, $thread); //requête où on passe la page actuelle, le seeBanned et la limite de questions
         $totalPosts =  $postRepository->findCountMax($thread); //requête qui compte le nombre total de questions avec ou sans les banned
         $pageMax = ceil($totalPosts / $limit); // nombre de page max à afficher (sert pour bouton suivant)
         
         $form = $this->createForm(SubjectType::class, $thread);
+
+        $this->hasRead($thread, $user);
         
         return $this->render('forum/thread/show.html.twig', [
             'thread' => $thread,
@@ -105,6 +109,24 @@ class ThreadController extends Controller
             'pageMax'=>$pageMax,
             'posts'=>$posts,
             'form' => $form->createView() ]);
+    }
+
+    public function hasRead($thread, $user)
+    {
+        $hasReadThread = new HasReadThread();
+        
+        // On récupère la sous-catégorie dans laquelle l'utilisateur poste son sujet
+        $repository = $this->getDoctrine()->getRepository(HasReadThread::class);
+        $readThread = $repository->findTimeStamp($user, $thread);
+
+        if($readThread == false) {
+            $em = $this->getDoctrine()->getManager();
+            $hasReadThread->setThread($thread);
+            $hasReadThread->setUser($user);
+            $hasReadThread->setTimestamp(new \DateTime());
+            $em->persist($hasReadThread);
+            $em->flush();
+        }
     }
 
     /**
@@ -148,19 +170,5 @@ class ThreadController extends Controller
             'thread' => $thread,
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/{id}", name="thread_delete", methods="DELETE")
-     */
-    public function delete(Request $request, Thread $thread): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$thread->getId(), $request->request->get('_token'))) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($thread);
-            $em->flush();
-        }
-
-        return $this->redirectToRoute('thread_index');
     }
 }

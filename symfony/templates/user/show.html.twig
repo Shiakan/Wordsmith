@@ -16,7 +16,7 @@
                 <div id="tabs">
                     <ul class="tabs-header">
                         <li><a href="#tabs-1">Profil</a></li>
-                        <li><a href="#tabs-2">Mes sujets</a></li>
+                        <li><a href="#tabs-2">Forum</a></li>
                         <li><a href="#tabs-3">Mes rooms</a></li>
                     </ul>
                     <div id="tabs-1">
@@ -63,9 +63,40 @@
                     
                     </div>
                     <div id="tabs-2">
-                        <p>
-                            Altera sententia est, quae definit amicitiam paribus officiis ac voluntatibus. Hoc quidem est nimis exigue et exiliter ad calculos vocare amicitiam, ut par sit ratio acceptorum et datorum. Divitior mihi et affluentior videtur esse vera amicitia nec observare restricte, ne plus reddat quam acceperit; neque enim verendum est, ne quid excidat, aut ne quid in terram defluat, aut ne plus aequo quid in amicitiam congeratur. Altera sententia est, quae definit amicitiam paribus officiis ac voluntatibus. Hoc quidem est nimis exigue et exiliter ad calculos vocare amicitiam, ut par sit ratio acceptorum et datorum. Divitior mihi et affluentior videtur esse vera amicitia nec observare restricte, ne plus reddat quam acceperit; neque enim verendum est, ne quid excidat, aut ne quid in terram defluat, aut ne plus aequo quid in amicitiam congeratur. Cum haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia, tandem id ut optimum factu elegit: et Vrsicinum primum ad se venire summo cum honore mandavit ea specie ut pro rerum tunc urgentium captu disponeretur concordi consilio, quibus virium incrementis Parthicarum gentium a arma minantium impetus frangerentur. Haec ubi latius fama vulgasset missaeque relationes adsiduae Gallum Caesarem permovissent, quoniam magister equitum longius ea tempestate distinebatur, iussus comes orientis Nebridius contractis undique militaribus copiis ad eximendam periculo civitatem amplam et oportunam studio properabat ingenti, quo cognito abscessere latrones nulla re amplius memorabili gesta, dispersique ut solent avia montium petiere celsorum. Altera sententia est, quae definit amicitiam paribus officiis ac voluntatibus. Hoc quidem est nimis exigue et exiliter ad calculos vocare amicitiam, ut par sit ratio acceptorum et datorum. Divitior mihi et affluentior videtur esse vera amicitia nec observare restricte, ne plus reddat quam acceperit; neque enim verendum est, ne quid excidat, aut ne quid in terram defluat, aut ne plus aequo quid in amicitiam congeratur. Cum haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia, tandem id ut optimum factu elegit: et Vrsicinum primum ad se venire summo cum honore mandavit ea specie ut pro rerum tunc urgentium captu disponeretur concordi consilio, quibus virium incrementis Parthicarum gentium a arma minantium impetus frangerentur. Haec ubi latius fama vulgasset missaeque relationes adsiduae Gallum Caesarem permovissent, quoniam magister equitum longius ea tempestate distinebatur, iussus comes orientis Nebridius contractis undique militaribus copiis ad eximendam periculo civitatem amplam et oportunam studio properabat ingenti, quo cognito abscessere latrones nulla re amplius memorabili gesta, dispersique ut solent avia montium petiere celsorum. Cum haec taliaque sollicitas eius aures everberarent expositas semper eius modi rumoribus et patentes, varia animo tum miscente consilia, tandem id ut optimum factu elegit: et Vrsicinum primum ad se venire summo cum honore mandavit ea specie ut pro rerum tunc urgentium captu disponeretur concordi consilio, quibus virium incrementis Parthicarum gentium a arma minantium impetus frangerentur. Haec ubi latius fama vulgasset missaeque relationes adsiduae Gallum Caesarem permovissent, quoniam magister equitum longius ea tempestate distinebatur, iussus comes orientis Nebridius contractis undique militaribus copiis ad eximendam periculo civitatem amplam et oportunam studio properabat ingenti, quo cognito abscessere latrones nulla re amplius memorabili gesta, dispersique ut solent avia montium petiere celsorum.
-                        </p>
+                        <div class="profile-title">
+                            <h2>Mes sujets</h2> 
+                        </div>
+                        <ul>
+                        {% for thread in user.threads %}
+                            <li>
+                                <a href="{{path('thread_show', {'id': thread.id }) }}">{{ thread.title}}</a>
+                                <small>{{thread.posts|length}} 
+                                {% if thread.posts|length > 1 %}
+                                    réponses
+                                {% else %}
+                                    réponse 
+                                {% endif %}
+                                </small>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                        <div class="profile-title">
+                            <h2>Mes réponses</h2> 
+                        </div>
+                         <ul>
+                        {% for post in user.posts %}
+                            <li>
+                                <a href="{{path('thread_show', {'id': post.thread.id }) }}">{{ post.thread.title}}</a>
+                             <small>{{post|length}} 
+                             {% if post|length > 1 %}
+                                réponses
+                            {% else %}
+                                réponse 
+                            {% endif %}
+                            </small>
+                            </li>
+                        {% endfor %}
+                        </ul>
                     </div>
                     <div id="tabs-3">
                        <div class="profile-title">
@@ -78,12 +109,10 @@
                             <div class="room-content-btn">
                                 <a class="btn" href="{{ path('room_edit', {'id': room.id}) }}">
                                     <i class="far fa-edit"></i>
+                                </a>                                
+                                <a target="_blank" class="btn" href="{{ path('room_show', {'code': room.code}) }}">
+                                    <i class="fas fa-arrow-right"></i></button>
                                 </a>
-                                <form action="{{path('room_access')}}" method="GET">
-                                    <input id="code" name="code" type="hidden" value="{{room.code}}">
-                                    <input id="id" name="id" type="hidden" value="{{user.id}}">
-                                    <button type="submit" class="btn"><i class="fas fa-arrow-right"></i></button>
-                                </form>
                             </div>
                         </div>
                         {% endif %}
@@ -98,11 +127,9 @@
                             <div class="room-content">
                                 <h3>{{ room.name }}</h3>
                                 <div class="room-content-btn">
-                                    <form action="{{path('room_access')}}" method="GET">
-                                        <input id="code" name="code" type="hidden" value="{{room.code}}">
-                                        <input id="id" name="id" type="hidden" value="{{user.id}}">
-                                        <button type="submit" class="btn"><i class="fas fa-arrow-right"></i></button>
-                                    </form>
+                                    <a target="_blank" class="btn" href="{{ path('room_show', {'code': room.code}) }}">
+                                        <i class="fas fa-arrow-right"></i></button>
+                                    </a>
                                 </div>
                             </div>
                         {% endif %}    

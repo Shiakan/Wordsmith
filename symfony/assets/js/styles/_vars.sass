@@ -1,0 +1,42 @@
+/* Colors */
+$font-color: #BDBDBD
+$bg-color-container: #0B0B0B
+$bg-color-block: #0d0d0d
+$border-color: #503415
+$link-color: #a56e3a
+$link-active: #125c38
+$link-hover: #843c1b
+$font-color-bold: #3f7a5d
+$font-color-italic: #e6be98
+$box-shadow-npc: 0px 0px 8px 1px white
+
+
+
+// Fonts
+$test-font: 'Acme'
+$name-font: 'Fjalla One'
+$benchNine: 'BenchNine'
+$forum: 'Forum'
+$nunito-sans: 'Nunito Sans'
+
+// pre stylized components
+%click-button
+  font-family: 'Palanquin'
+  font-weight: bold
+  padding: 0 1em
+  text-align: center
+  text-decoration: none
+  outline: none
+  color: #fff
+  background-color: $font-color-bold
+  border: none
+  border-radius: .2em
+  box-shadow: 0 6px $link-active
+  &:hover
+    background-color: $link-active
+    transform: translateY(-1px)
+    box-shadow: 0 7px $font-color-bold
+  &:active
+    background-color: $link-active
+    box-shadow: 0 2px $font-color-bold
+    transform: translateY(4px)

@@ -1,13 +1,17 @@
-body {
-    height:80vh;
-}
+/* body {
+    height:100vh;
+} */
 
 .btn-delete {
     display:inline-block;
 }
 
-.row {
-    height: 93vh;
+ .row {
+    height: 100vh;
+} 
+
+.wrapper {
+    height:100%;
 }
 
 #article_content {
@@ -34,7 +38,7 @@ body {
 #container {
     margin:auto;
     width:85%;
-    height:100vh;
+    height:100%;
 }
 
 .col {

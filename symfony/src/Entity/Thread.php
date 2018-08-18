@@ -55,11 +55,17 @@ class Thread
      */
     private $createdAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\HasReadThread", mappedBy="thread")
+     */
+    private $hasReadThreads;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
         $this->status = 1;
         $this->createdAt = new \DateTime();
+        $this->hasReadThreads = new ArrayCollection();
     }
 
     public function getId()
@@ -168,5 +174,42 @@ class Thread
         $this->createdAt = $createdAt;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|HasReadThread[]
+     */
+    public function getHasReadThreads(): Collection
+    {
+        return $this->hasReadThreads;
+    }
+
+    public function addHasReadThread(HasReadThread $hasReadThread): self
+    {
+        if (!$this->hasReadThreads->contains($hasReadThread)) {
+            $this->hasReadThreads[] = $hasReadThread;
+            $hasReadThread->setThread($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHasReadThread(HasReadThread $hasReadThread): self
+    {
+        if ($this->hasReadThreads->contains($hasReadThread)) {
+            $this->hasReadThreads->removeElement($hasReadThread);
+            // set the owning side to null (unless already changed)
+            if ($hasReadThread->getThread() === $this) {
+                $hasReadThread->setThread(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->title;
+        return $this->subtitle;
     }
 }
