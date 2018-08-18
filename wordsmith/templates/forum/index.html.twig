@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Forum {% endblock %}
+
+{% block main %}
+<div class="wrapper"> 
+    <div class="container">
+        annonces
+    </div>
+
+    {% for category in categories %}
+    <div class="container container-forum">
+        <div class="category-header">
+            <h2>{{category.name}}</h2>
+        </div>
+        {% for subcategory in category.subCategories %}
+        <div class="container-subcategory">
+            <div class="container description">
+                <h3><a href="{{path('forum_subcategory', {'name': subcategory.name })}}">{{subcategory.name}}</a></h3>
+                <p>{{subcategory.reminder}}</p>
+            </div>
+            <div class="container statistic">
+                <img src="{{ asset('image/nonew.png') }}" class="icon">
+                <small>{{subcategory.threads|length}} Sujets</small>
+            </div>
+            <div class="container last-message">
+                <a href="#">Dernier sujet</a>
+                <small>15/08/2018</small>
+                <a href="#">Prénom Nom</a>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
