@@ -20,7 +20,7 @@ const test = document.getElementById('root');
 
 const rootComponent = (
   <Provider store={store}>
-    <App {...(test.dataset)} />
+    <App />
   </Provider>
 );
 

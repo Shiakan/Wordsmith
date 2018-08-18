@@ -1,10 +1,17 @@
 /**
  * Initial State
  */
+const test = document.getElementById('root');
+// const getData = (name) => {
+//   return test.getAttribute(`data-${name}`);
+// };
+
 const initialState = {
   dice: true,
   sheet: false,
   help: false,
+  role: test.dataset.role,
+  room: test.dataset.room,
 };
 
 /**

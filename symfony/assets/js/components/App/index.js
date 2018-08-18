@@ -22,9 +22,8 @@ import Footer from '../Footer';
 /**
  * Code
  */
-const App = ( {test}) => (
+const App = () => (
   <div id="app">
-    <p>{test}</p>
     <GameScreen />
     <Panel />
     <Chat />

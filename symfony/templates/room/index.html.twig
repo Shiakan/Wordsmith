@@ -1,4 +1,10 @@
-<div data-test="test" id="root"></div>
+<div
+ {% if app.user.id == room.dungeonMaster.id %}
+ data-role="dm"
+{% else %}
+  data-role="player"
+{% endif %}
+ data-room={{room.id}} id="root"></div>
 {% block stylesheets %}
    <link rel="stylesheet" href="{{ asset('build/main.css') }}">      
    <link rel="stylesheet" href="{{ asset('build/app.css') }}">      
