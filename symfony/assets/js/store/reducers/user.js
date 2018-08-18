@@ -8,7 +8,7 @@ const initialState = {
   userName: test.dataset.name,
   role: test.dataset.role,
   charSheet: 'tempthree',
-  roomId: test.dataset.name,
+  roomId: test.dataset.room,
 };
 
 /**

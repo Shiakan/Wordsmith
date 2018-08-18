@@ -39,6 +39,7 @@ Encore
 
 
   .enableReactPreset();
+
 // uncomment if you use TypeScript
 // .enableTypeScriptLoader()
 
