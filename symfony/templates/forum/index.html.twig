@@ -9,6 +9,7 @@
     </div>
 
     {% for category in categories %}
+    {% for hasReadThread in hasReadThreads %}
     <div class="container container-forum">
         <div class="category-header">
             <h2>{{category.name}}</h2>
@@ -20,6 +21,7 @@
                 <p>{{subcategory.reminder}}</p>
             </div>
             <div class="container statistic">
+                {# {% if } #}
                 <img src="{{ asset('image/nonew.png') }}" class="icon">
                 <small>{{subcategory.threads|length}} Sujets</small>
             </div>
@@ -31,6 +33,7 @@
         </div>
     {% endfor %}
     </div>
+    {% endfor %}
     {% endfor %}
 </div>
 {% endblock %}
