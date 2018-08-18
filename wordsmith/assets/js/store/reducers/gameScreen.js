@@ -1,6 +1,6 @@
 import uuidv4 from 'uuid/v4'; // https://www.npmjs.com/package/uuid
 
-import maps from 'src/data/maps';
+import maps from '../../data/maps';
 
 /**
  * Initial State
