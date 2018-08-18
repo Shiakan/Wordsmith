@@ -13,10 +13,9 @@
     {% for thread in subcategory.threads %}
         <div class="thread">
             <div class="container thread-description">
-
                 <h3><a href="{{path('thread_show', {'id': thread.id })}}">{{thread.title}}</a></h3>
                 <small>{{thread.subtitle}}</small>
-                <h4>{{thread.author.username}}</h4>
+                <h4 style="color:{{thread.author.characterProfile.groupForum.color}};">{{thread.author.username}}</h4>
             </div>
             <div class="container thread-statistic">
                 <img src="{{ asset('image/nonew.png') }}" class="icon">
@@ -27,8 +26,8 @@
                 <a href="#">Prénom Nom</a>
             </div>
         </div>
-    </div>
     {% endfor %}
-    <a class="btn" href="{{path('thread_new', {'subcategory_id' : subcategory.id})}}">Poster un nouvea sujet</a>
+    </div>
+    <a class="btn" href="{{path('thread_new', {'subcategory_id' : subcategory.id})}}">Poster un nouveau sujet</a>
  </div>
 {% endblock %}

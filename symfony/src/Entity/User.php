@@ -112,6 +112,11 @@ class User implements UserInterface
      */
     private $playerRooms;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\HasReadThread", mappedBy="user")
+     */
+    private $hasReadThreads;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -123,6 +128,7 @@ class User implements UserInterface
         $this->dateInserted = new \DateTime();
         $this->dateUpdated = new \DateTime();
         $this->playerRooms = new ArrayCollection();
+        $this->hasReadThreads = new ArrayCollection();
     }
 
     public function getSalt()
@@ -479,6 +485,37 @@ class User implements UserInterface
         if ($this->playerRooms->contains($playerRoom)) {
             $this->playerRooms->removeElement($playerRoom);
             $playerRoom->removeParticipant($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|HasReadThread[]
+     */
+    public function getHasReadThreads(): Collection
+    {
+        return $this->hasReadThreads;
+    }
+
+    public function addHasReadThread(HasReadThread $hasReadThread): self
+    {
+        if (!$this->hasReadThreads->contains($hasReadThread)) {
+            $this->hasReadThreads[] = $hasReadThread;
+            $hasReadThread->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHasReadThread(HasReadThread $hasReadThread): self
+    {
+        if ($this->hasReadThreads->contains($hasReadThread)) {
+            $this->hasReadThreads->removeElement($hasReadThread);
+            // set the owning side to null (unless already changed)
+            if ($hasReadThread->getUser() === $this) {
+                $hasReadThread->setUser(null);
+            }
         }
 
         return $this;

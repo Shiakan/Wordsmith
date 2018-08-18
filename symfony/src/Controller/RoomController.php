@@ -52,28 +52,6 @@ class RoomController extends Controller
         ]);
     }
 
-    // /**
-    //  * @Route("enter_room/{code}", name="room_show", methods="GET")
-    //  */
-    // public function getRoomLink(Room $room) {
-        
-    //     return $this->render('room/show.html.twig', array(
-    //         'room' => $room
-    //     ));
-    // }
-
-    // /**
-    //  * @Route("room_access", name="room_access", methods="GET")
-    //  */
-
-    //  public function roomAccess(Request $request)
-    // {
-    //     $code = $request->request->get('code');
-    //     $id = $request->request->get('id');
-
-    //     dump($code);die;
-    // }
-
     private function createRandomCode() { 
 
         $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ023456789"; 
@@ -97,7 +75,7 @@ class RoomController extends Controller
     public function show(Room $room): Response
     {
         return $this->render('room/index.html.twig', [
-            'room' => $room
+                'room' => $room
             ]);
     }
 

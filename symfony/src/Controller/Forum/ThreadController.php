@@ -7,6 +7,7 @@ use App\Entity\Thread;
 use App\Form\ThreadType;
 use App\Form\SubjectType;
 use App\Entity\Subcategory;
+use App\Entity\HasReadThread;
 use App\Repository\ThreadRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -89,13 +90,33 @@ class ThreadController extends Controller
     /**
      * @Route("/thread/{id}", name="thread_show", methods="GET")
      */
-    public function show(Thread $thread, Request $request): Response
+    public function show(Thread $thread, Request $request, UserInterface $user): Response
     {   
         $form = $this->createForm(SubjectType::class, $thread);
+
+        $this->hasRead($thread, $user);
         
         return $this->render('forum/thread/show.html.twig', [
             'thread' => $thread,
             'form' => $form->createView() ]);
+    }
+
+    public function hasRead($thread, $user)
+    {
+        $hasReadThread = new HasReadThread();
+        
+        // On récupère la sous-catégorie dans laquelle l'utilisateur poste son sujet
+        $repository = $this->getDoctrine()->getRepository(HasReadThread::class);
+        $readThread = $repository->findTimeStamp($user, $thread);
+
+        if($readThread == false) {
+            $em = $this->getDoctrine()->getManager();
+            $hasReadThread->setThread($thread);
+            $hasReadThread->setUser($user);
+            $hasReadThread->setTimestamp(new \DateTime());
+            $em->persist($hasReadThread);
+            $em->flush();
+        }
     }
 
     /**

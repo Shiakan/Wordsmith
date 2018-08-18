@@ -13,6 +13,7 @@ body {
     background-image: url('../image/background.png');
     background-repeat:no-repeat;
     background-attachment:fixed;
+    background-color:#0B0B0B;
     color:#BDBDBD;
     font-family: 'Palanquin', sans-serif;
     position:relative;
@@ -193,10 +194,11 @@ small {
     background-color:#0D0D0D;  
     border:1px solid  #503415; 
     margin:1.5em;
-    padding:1em;
+    padding:0.5em;
     display:flex;
     align-items: center;
     justify-content: space-around;
+    max-height:20%;
 }
 .category-header {
     background-color:#0b0b0b;
@@ -277,7 +279,7 @@ small {
 }
 
 .icon {
-    width:50%;
+    width:25%;
     border-radius:50%;
     background-color:#0D0D0D;
     border:2px solid #2b1c0b;
@@ -543,7 +545,7 @@ form button {
 .search-form button {
     display:inline-block;
     padding: 0.505em;
-    margin-left:-0.175em;
+    margin-left:-0.315em;
     border-radius: 0 0.3em 0.3em 0;
     border-width: 1px 1px 1px 0;
     border-style: solid;
@@ -619,13 +621,21 @@ a.ui-button:active, .ui-button:active,
     padding:0.8em;
     text-align:justify;
 }
-#tabs-1 ul {
+#tabs-1 ul, 
+#tabs-2 ul {
     margin-bottom:1em;
 }
-#tabs-1 ul li {
+#tabs-1 ul li,
+#tabs-2 ul li {
     list-style:none;
     padding:0 1em;
 }
+
+#tabs-2 ul li {
+    display:flex;
+    justify-content:space-between;
+}
+
 .room-content{
     display: flex;
     justify-content: space-between; 
