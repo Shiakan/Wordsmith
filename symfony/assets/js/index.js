@@ -16,10 +16,12 @@ import store from './store';
 /**
  * Code
  */
+const test = document.getElementById('root');
+
 const rootComponent = (
   <Provider store={store}>
-    <App />
+    <App {...(test.dataset)} />
   </Provider>
 );
 
-render(rootComponent, document.getElementById('root'));
+render(rootComponent, test);

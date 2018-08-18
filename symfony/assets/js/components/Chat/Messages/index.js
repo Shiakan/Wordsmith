@@ -25,7 +25,10 @@ class Messages extends React.Component {
   // };
 
   componentDidUpdate() {
-    this.messageDiv.scrollTo(0, this.messageDiv.scrollHeight);
+    // if (this.messageDiv.scrollTop + this.messageDiv.clientHeight === this.messageDiv.scrollHeight) {
+      // this.messageDiv.scrollTop = this.messageDiv.scrollHeight;
+      // }
+      this.messageDiv.scrollTo(0, this.messageDiv.scrollHeight);
   }
 
   // saveRef = (domElement) => {
