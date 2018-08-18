@@ -25,20 +25,21 @@ class Messages extends React.Component {
   // };
 
   componentDidUpdate() {
-    console.log('Message didMount');
     this.messageDiv.scrollTo(0, this.messageDiv.scrollHeight);
   }
 
-  saveRef = (domElement) => {
-    this.node = domElement;
-  }
+  // saveRef = (domElement) => {
+  //   this.node = domElement;
+  // }
 
   render() {
     const { messages } = this.props;
     console.log(messages);
     return (
       <div
-        ref={this.saveRef}
+        ref={(element) => {
+          this.messageDiv = element;
+        }}
         className="messages"
       >
         {messages.map((message) => {
