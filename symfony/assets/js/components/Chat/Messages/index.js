@@ -26,7 +26,7 @@ class Messages extends React.Component {
 
   componentDidUpdate() {
     console.log('Message didMount');
-    // this.messageDiv.scrollTo(0, this.messageDiv.scrollHeight);
+    this.messageDiv.scrollTo(0, this.messageDiv.scrollHeight);
   }
 
   saveRef = (domElement) => {

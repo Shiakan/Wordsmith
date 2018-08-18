@@ -10,6 +10,8 @@ import classNames from 'classnames';
 /**
  * Local import
  */
+import dicePng from '../../../assets/img/dicesTest1.png';
+
 // Composants
 
 // Styles et assets
@@ -100,7 +102,7 @@ class Dice extends React.Component {
       <div className="dice">
         <img
           className="dice-img"
-          src="./dicesTest1.png"
+          src={dicePng}
           alt="some roleplay dices"
         />
         <div className="dice-block">
