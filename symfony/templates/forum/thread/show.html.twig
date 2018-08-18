@@ -9,7 +9,7 @@
             <h2>{{ thread.title }}</h2>
             <h3>{{ thread.subtitle }}</h3>
         </div>
-        {% for post in thread.posts %}
+        {% for post in posts %}
         <div class="wrapper-flex">
             <div class="left-side">
                 {{ post.author.username }}
@@ -38,12 +38,23 @@
         </div>
         {% endfor %}
         {% if is_granted('ROLE_MODERATOR') %}
-            {{ form_start(form, {'action': path('thread_move', {'id' : thread.id }), 'method': 'POST'}) }}
-            {{form_row(form.subcategory,{'label':false, 'id' : 'select' ~ thread.id })}}
-                <button class="btn btn-success mb-2">{{ button_label|default('Modifier') }}</button>
-            {{form_end(form)}}
+            <div>
+                {{ form_start(form, {'action': path('thread_move', {'id' : thread.id }), 'method': 'POST'}) }}
+                {{form_row(form.subcategory,{'label':false, 'id' : 'select' ~ thread.id })}}
+                    <button class="btn btn-success mb-2">{{ button_label|default('Modifier') }}</button>
+                {{form_end(form)}}
+            </div>
         {% endif %}
     </div>
+            <div class="text-center">
+                {# Si page supérieure à 1 on affiche un bouton précédent qui mène à la page-1 #} 
+                {% if page > 1 %}
+                    <a href="{{path('thread_show',{'id':thread.id,'page':page -1})}}" class="btn btn-info">Précédent</a>
+                {% endif %} {# si page inférieure à la page max calculée alors on affiche un bouton suivant qui mène à la page +1 #} 
+                {% if page < pageMax %} 
+                    <a href="{{path('thread_show',{'id':thread.id,'page':page +1})}}" class="btn btn-primary">Suivant</a>
+                {% endif %}
+            </div>
     <a href="{{path('post_new', {'thread_id' : thread.id})}}">Répondre</a>
 </div>
 

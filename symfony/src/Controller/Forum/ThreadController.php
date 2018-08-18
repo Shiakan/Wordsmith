@@ -7,6 +7,7 @@ use App\Entity\Thread;
 use App\Form\ThreadType;
 use App\Form\SubjectType;
 use App\Entity\Subcategory;
+use App\Repository\PostRepository;
 use App\Repository\ThreadRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -87,14 +88,22 @@ class ThreadController extends Controller
     }
 
     /**
-     * @Route("/thread/{id}", name="thread_show", methods="GET")
+     * @Route("/thread/{id}/page/{page}", name="thread_show", requirements={"page" = "\d+"}, defaults={"page" = 1}, methods="GET|POST")
      */
-    public function show(Thread $thread, Request $request): Response
+    public function show(Thread $thread,PostRepository $postRepository, Request $request, $page): Response
     {   
+        $limit = 10; //limite de questions par page (pagination)
+        $posts = $postRepository->findByAll($page,$limit, $thread); //requête où on passe la page actuelle, le seeBanned et la limite de questions
+        $totalPosts =  $postRepository->findCountMax($thread); //requête qui compte le nombre total de questions avec ou sans les banned
+        $pageMax = ceil($totalPosts / $limit); // nombre de page max à afficher (sert pour bouton suivant)
+        
         $form = $this->createForm(SubjectType::class, $thread);
         
         return $this->render('forum/thread/show.html.twig', [
             'thread' => $thread,
+            'page'=>$page,
+            'pageMax'=>$pageMax,
+            'posts'=>$posts,
             'form' => $form->createView() ]);
     }
 
