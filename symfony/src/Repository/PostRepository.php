@@ -44,4 +44,40 @@ class PostRepository extends ServiceEntityRepository
         ;
     }
     */
+    /**
+     * @return Post[] Returns an array of Post objects
+     */
+        public function findByAll($page,$limit,$thread)
+    {
+        $offset = ($page == 0)? 0 : ($page-1) * $limit;
+
+        $qb = $this->createQueryBuilder('p')
+        ->where('p.thread = :thread')
+        ->setParameter('thread', $thread)
+        ->addSelect('COUNT(p) AS HIDDEN mycount')
+        ->groupBy('p')
+        ->orderBy('p.createdAt', 'DESC')
+        ->setFirstResult( $offset )
+        ->setMaxResults( $limit )
+        ->getQuery()
+        ->getResult()
+        ;
+        return $qb;
+    }
+     /**
+    * @return Integer
+    */
+    public function findCountMax($thread)
+    // Fonction qui compte le nombre total de question dans la BDD (toutes ou les non-bans)
+    {
+        
+        $qb = $this->createQueryBuilder('p')
+        ->where('p.thread = :thread')
+        ->setParameter('thread', $thread)
+        ->select('COUNT(p)')
+        ->getQuery()
+        ->getSingleScalarResult(); //Retourne un chiffre
+        ;
+        return $qb;
+    }
 }

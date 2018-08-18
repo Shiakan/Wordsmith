@@ -47,4 +47,40 @@ class ThreadRepository extends ServiceEntityRepository
         ;
     }
     */
+    /**
+    * @return Thread[] Returns an array of Thread objects
+    */
+        public function findByAll($page,$limit,$subcategory)
+    {
+         $offset = ($page == 0)? 0 : ($page-1) * $limit;
+
+         $qb = $this->createQueryBuilder('t')
+        ->where('t.subcategory = :subcategory')
+        ->setParameter('subcategory', $subcategory)
+        ->addSelect('COUNT(t) AS HIDDEN mycount')
+        ->groupBy('t')
+        ->orderBy('t.createdAt', 'ASC')
+        ->setFirstResult( $offset )
+        ->setMaxResults( $limit )
+        ->getQuery()
+        ->getResult()
+        ;
+        return $qb;
+    }
+     /**
+    * @return Integer
+    */
+    public function findCountMax($subcategory)
+    // Fonction qui compte le nombre total de question dans la BDD (toutes ou les non-bans)
+    {
+        
+        $qb = $this->createQueryBuilder('t')
+        ->where('t.subcategory = :subcategory')
+        ->setParameter('subcategory', $subcategory)
+        ->select('COUNT(t)')
+        ->getQuery()
+        ->getSingleScalarResult(); //Retourne un chiffre
+        ;
+        return $qb;
+    }
 }

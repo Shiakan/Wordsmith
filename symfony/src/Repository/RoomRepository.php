@@ -47,4 +47,36 @@ class RoomRepository extends ServiceEntityRepository
         ;
     }
     */
+        /**
+         * @return Room[] Returns an array of Room objects
+         */
+        public function findByAll($page,$limit)
+    {
+         $offset = ($page == 0)? 0 : ($page-1) * $limit;
+
+         $qb = $this->createQueryBuilder('r')
+        ->addSelect('COUNT(r) AS HIDDEN mycount')
+        ->groupBy('r')
+        ->orderBy('r.id', 'DESC')
+        ->setFirstResult( $offset )
+        ->setMaxResults( $limit )
+        ->getQuery()
+        ->getResult()
+        ;
+        return $qb;
+    }
+     /**
+    * @return Integer
+    */
+    public function findCountMax()
+    // Fonction qui compte le nombre total de question dans la BDD (toutes ou les non-bans)
+    {
+        
+        $qb = $this->createQueryBuilder('r')
+        ->select('COUNT(r)')
+        ->getQuery()
+        ->getSingleScalarResult(); //Retourne un chiffre
+        ;
+        return $qb;
+    }
 }

@@ -10,7 +10,7 @@
         <p>{{subcategory.description}}</p>
     </div>
 
-    {% for thread in subcategory.threads %}
+    {% for thread in threads %}
         <div class="thread">
             <div class="container thread-description">
                 <h3><a href="{{path('thread_show', {'id': thread.id })}}">{{thread.title}}</a></h3>
@@ -26,8 +26,18 @@
                 <a href="#">Prénom Nom</a>
             </div>
         </div>
-    {% endfor %}
+        {% endfor %}
     </div>
-    <a class="btn" href="{{path('thread_new', {'subcategory_id' : subcategory.id})}}">Poster un nouveau sujet</a>
+        <div class="text-center">
+            {# Si page supérieure à 1 on affiche un bouton précédent qui mène à la page-1 #} 
+            {% if page > 1 %}
+            <a href="{{path('forum_subcategory',{'name':subcategory.name,'page':page -1})}}" class="btn btn-info">Précédent</a>
+            {% endif %} {# si page inférieure à la page max calculée alors on affiche un bouton suivant qui mène à la page +1 #} 
+            {% if page < pageMax %}
+            <a href="{{path('forum_subcategory',{'name':subcategory.name,'page':page +1})}}" class="btn btn-primary">Suivant</a>  
+            {% endif %}
+        </div>
+    <a class="btn" href="{{path('thread_new', {'subcategory_id' : subcategory.id})}}">Poster un nouvea sujet</a>
  </div>
+
 {% endblock %}
