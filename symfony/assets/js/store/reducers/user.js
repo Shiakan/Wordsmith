@@ -1,13 +1,14 @@
 // import uuidv4 from 'uuid/v4'; // https://www.npmjs.com/package/uuid
+const test = document.getElementById('root');
 
 /**
  * Initial State
  */
 const initialState = {
-  userName: 'temp',
-  role: 'temptoo',
+  userName: test.dataset.name,
+  role: test.dataset.role,
   charSheet: 'tempthree',
-  roomId: 'tempfour',
+  roomId: test.dataset.name,
 };
 
 /**

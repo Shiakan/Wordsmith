@@ -16,7 +16,6 @@ import store from './store';
 /**
  * Code
  */
-const test = document.getElementById('root');
 
 const rootComponent = (
   <Provider store={store}>
@@ -24,4 +23,4 @@ const rootComponent = (
   </Provider>
 );
 
-render(rootComponent, test);
+render(rootComponent, document.getElementById('root'));

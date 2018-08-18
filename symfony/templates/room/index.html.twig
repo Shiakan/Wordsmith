@@ -4,7 +4,9 @@
 {% else %}
   data-role="player"
 {% endif %}
- data-room={{room.id}} id="root"></div>
+  data-name={{app.user.username}}
+  data-room={{room.id}}
+  id="root"></div>
 {% block stylesheets %}
    <link rel="stylesheet" href="{{ asset('build/main.css') }}">      
    <link rel="stylesheet" href="{{ asset('build/app.css') }}">      
