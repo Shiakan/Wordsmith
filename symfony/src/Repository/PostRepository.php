@@ -45,7 +45,7 @@ class PostRepository extends ServiceEntityRepository
         ->setParameter('thread', $thread)
         ->addSelect('COUNT(p) AS HIDDEN mycount')
         ->groupBy('p')
-        ->orderBy('p.createdAt', 'DESC')
+        ->orderBy('p.createdAt', 'ASC')
         ->setFirstResult( $offset )
         ->setMaxResults( $limit )
         ->getQuery()
