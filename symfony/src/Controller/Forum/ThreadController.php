@@ -3,12 +3,13 @@
 namespace App\Controller\Forum;
 
 use App\Entity\Post;
+use App\Entity\User;
 use App\Entity\Thread;
 use App\Form\ThreadType;
 use App\Form\SubjectType;
 use App\Entity\Subcategory;
-use App\Repository\PostRepository;
 use App\Entity\HasReadThread;
+use App\Repository\PostRepository;
 use App\Repository\ThreadRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -85,6 +86,7 @@ class ThreadController extends Controller
         $post->setAuthor($user);
         $em->persist($post);
         $em->flush();
+        
     }
 
     /**

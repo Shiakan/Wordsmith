@@ -19,6 +19,7 @@
                 <h4 style="color:{{thread.author.characterProfile.groupForum.color}};">{{thread.author.username}}</h4>
             </div>
             <div class="container thread-statistic">
+            {# {% if thread.dateInserted > %} #}
             {% for hasReadThread in thread.hasReadThreads %}
                 {% if hasReadThread.user.id is defined %}
                     {% if hasReadThread.user.id == app.user.id %}
@@ -28,18 +29,19 @@
                             <img src="{{ asset('image/nonew.png') }}" class="icon">
                         {% endif %}
                     {% endif %} 
-                {% else %}
-                    <img src="{{ asset('image/new.png') }}" class="icon">
                 {% endif %}
             {% endfor %}
 
-            {% for upToDate in userUpToDate %}
-            
-                {% if upToDate == false %}
-                {# {{userReadThread.thread.id}} #}
-                    <img src="{{ asset('image/new.png') }}" class="icon">
-                {% endif %}
-            {% endfor %}
+
+            {# {% for readThread in app.user.hasReadThreads %} 
+
+                 {% if app.user.hasReadThreads.get('thread') %}
+                
+                <img src="{{ asset('image/new.png') }}" class="icon">
+                {% else %}
+                <img src="{{ asset('image/nonew.png') }}" class="icon">
+                {% endif %} 
+             {% endfor %} #}
 
                 <small> {{thread.posts|length}} Réponses</small>
             </div>

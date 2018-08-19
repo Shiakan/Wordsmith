@@ -46,28 +46,31 @@ class ForumController extends AbstractController
 
         $userUpToDate = [];
 
-        foreach($threads as $currentThread) {
-            $repositoryHasRead = $this->getDoctrine()->getRepository(HasReadThread::class);
-            $hasReadThread = $repositoryHasRead->findByUserAndThread($user, $currentThread);
+        $repositoryHasRead = $this->getDoctrine()->getRepository(HasReadThread::class);
+        $hasReadThreads = $repositoryHasRead->findByUserAndThread($user, $threads);
+
+        // foreach($threads as $currentThread) {
+        //     $repositoryHasRead = $this->getDoctrine()->getRepository(HasReadThread::class);
+        //     $hasReadThread = $repositoryHasRead->findByUserAndThread($user, $currentThread);
 
 
-            if($hasReadThread == true) {
+        //     if($hasReadThread == true) {
 
-                $userUpToDate [] = true;
+        //         $userUpToDate [] = true;
 
-            }else{
-                $userUpToDate [] = false;
-            }
-        }
+        //     }else{
+        //         $userUpToDate [] = false;
+        //     }
+        // }
 
-        // dump($userUpToDate);die;
+        // dump($hasReadThreads);die;
 
         return $this->render('forum/show.html.twig', [
             'subcategory'=> $subcategory,
             'page'=>$page,
             'pageMax'=>$pageMax,
             'threads' => $threads,
-            'userUpToDate' => $userUpToDate
+            'hasReadThreads' => $hasReadThreads
         ]);
     }
 
