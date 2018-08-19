@@ -47,7 +47,7 @@ class Messages extends React.Component {
       >
         {messages.map((message) => {
           return (
-            <div className="message" key={message.message}>
+            <div className="message" key={message.id}>
               {/* <p className="message-auteur">{message.auteur}</p> */}
               {console.log(message, 'mess in index.js')}
               <p className="message-content">{message.author}:{message.message}</p>

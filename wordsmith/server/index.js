@@ -5,6 +5,7 @@ var express = require('express');
 var join = require('path').join;
 var Server = require('http').Server;
 var socket = require('socket.io');
+var uuidV4 = require('uuid/v4');
 // var queryString = require('query-string');
 // Local import
 var { Users } = require('./utils/users.js');
@@ -59,15 +60,17 @@ io.on('connection', function(socket) {
       var message = {};
       message.message = messageContent.message;
       message.author = messageContent.author;
+      message.id = uuidV4();
       console.log(message, 'on send_message');
       io.to(param.roomId).emit('send_message', message);
+
       socket.on('disconnect', function () {
         console.log('DISCONNECTION')
         var message = {};
         message.message = 'Vient de se déconnecter';
         message.author = messageContent.author;
+        message.id = uuidV4();
         io.to(param.roomId).emit('send_message', message);
-        // io.emit('user disconnected');
       });
     });
   });
