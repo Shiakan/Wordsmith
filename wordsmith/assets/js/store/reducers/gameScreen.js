@@ -8,7 +8,7 @@ import maps from '../../data/maps';
 const initialState = {
   maps,
   isBoard: false,
-  map: 'http://4.bp.blogspot.com/-YCn-yY_Wt-c/UtME0OoI_FI/AAAAAAAADOY/1IeqF92KSLU/s800/DungeonZ+-+The+city+-+Overlays-+The+Prancing+Dragon+Tavern.jpg',
+  map: 'http://medievalshop.com/parchemin/wp-content/uploads/2013/02/Plan-FG2-Auberge-des-3-anneaux-%C3%A9tage-de-nuit.jpg',
   isMap: true,
   grid: true,
   color: '#f44336',

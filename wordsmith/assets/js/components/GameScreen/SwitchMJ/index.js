@@ -90,23 +90,29 @@ class SwitchMJ extends React.Component {
           &nbsp;
           </button>
           <input
-            className="mjSwitch-input"
+            className="mjSwitch-form-input"
             type="text"
-            placeholder="Nom du personnage"
+            placeholder="Nom du pion"
             onChange={this.handleChange}
             value={typingName}
           />
           <input
-            className="mjSwitch-button"
+            className="mjSwitch-form-button"
             type="submit"
             value="+"
           />
         </form>
-        <span>Select the map</span>
-        <form id="mapSelect">
-          <select id="monselect" form="mapSelect" onChange={this.handleMap}>
+        <form id="mapSelect" className="mjSwitch-mapForm">
+          <span>Carte : </span>
+          <select
+            id="monselect"
+            className="mjSwitch-mapForm-select"
+            form="mapSelect"
+            onChange={this.handleMap}
+          >
             {maps.map(map => (
               <option
+                className="mjSwitch-mapForm-select-option"
                 key={map.id}
                 value={map.url}
               >
