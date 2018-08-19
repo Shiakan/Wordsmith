@@ -55,15 +55,15 @@ class ThreadRepository extends ServiceEntityRepository
          $offset = ($page == 0)? 0 : ($page-1) * $limit;
 
          $qb = $this->createQueryBuilder('t')
-        ->where('t.subcategory = :subcategory')
-        ->setParameter('subcategory', $subcategory)
-        ->addSelect('COUNT(t) AS HIDDEN mycount')
-        ->groupBy('t')
-        ->orderBy('t.createdAt', 'DESC')
-        ->setFirstResult( $offset )
-        ->setMaxResults( $limit )
-        ->getQuery()
-        ->getResult()
+            ->where('t.subcategory = :subcategory')
+            ->setParameter('subcategory', $subcategory)
+            ->addSelect('COUNT(t) AS HIDDEN mycount')
+            ->groupBy('t')
+            ->orderBy('t.createdAt', 'DESC')
+            ->setFirstResult( $offset )
+            ->setMaxResults( $limit )
+            ->getQuery()
+            ->getResult()
         ;
         return $qb;
     }
@@ -75,11 +75,11 @@ class ThreadRepository extends ServiceEntityRepository
     {
         
         $qb = $this->createQueryBuilder('t')
-        ->where('t.subcategory = :subcategory')
-        ->setParameter('subcategory', $subcategory)
-        ->select('COUNT(t)')
-        ->getQuery()
-        ->getSingleScalarResult(); //Retourne un chiffre
+            ->where('t.subcategory = :subcategory')
+            ->setParameter('subcategory', $subcategory)
+            ->select('COUNT(t)')
+            ->getQuery()
+            ->getSingleScalarResult(); //Retourne un chiffre
         ;
         return $qb;
     }

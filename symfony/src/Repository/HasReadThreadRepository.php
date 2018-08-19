@@ -34,12 +34,12 @@ class HasReadThreadRepository extends ServiceEntityRepository
     /**
      * @return HasReadThread[] Returns an array of HasReadThread objects
      */
-    public function findByUserAndThread($user, $thread)
+    public function findByUserAndThread($user, $threads)
     {
         return $this->createQueryBuilder('h')
             ->where('h.user = :user')
-            ->andWhere('h.thread = :thread')
-            ->setParameters(array('user'=> $user, 'thread' => $thread))
+            ->andWhere('h.thread IN(:thread)')
+            ->setParameters(array('user'=> $user, 'thread' => array_values($threads)))
             ->orderBy('h.id', 'ASC')
             ->getQuery()
             ->getResult()

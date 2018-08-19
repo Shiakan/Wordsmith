@@ -33,14 +33,6 @@
                 {% endif %}
             {% endfor %}
 
-            {% for upToDate in userUpToDate %}
-            
-                {% if upToDate == false %}
-                {# {{userReadThread.thread.id}} #}
-                    <img src="{{ asset('image/new.png') }}" class="icon">
-                {% endif %}
-            {% endfor %}
-
                 <small> {{thread.posts|length}} Réponses</small>
             </div>
             <div class="container thread-last-message">

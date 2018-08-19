@@ -81,18 +81,7 @@ small {
     margin:0;
     letter-spacing:0.075em;
 }
-/*Changement de sous catégorie*/
-.moveOn{
-    display: inline-block;
-    padding:1em 1em;
-}
-/*Pagination*/
-.text-center{
-text-align: center;
-}
-.btn-pagination{
-    font-size: 1.5em;
-}
+
 /* HEADER  */
 /* Navbar */
 .fixed-navbar {
@@ -124,51 +113,9 @@ text-align: center;
 .logo {
     height:50px;
 }
-/* Fin navbar */
 
-/* Codex Navbar */
-.navbar-codex {
-    margin-top:0;
-    margin-bottom:1em;
-    font-size:1.2em;
-}
-.navbar-codex ul li {
-    list-style: none;
-}
-
-.navbar-codex ul {
-    display:flex;
-    justify-content: space-evenly;
-    width:100%;
-}
-
-/* Codex Aside = Sommaire */
-.tagbar {
-    position:fixed;
-    margin-top:5.2em;
-    min-width:12%;
-    padding:0.3em 0.8em;
-    background-color:#0D0D0D;  
-    border:1px solid  #503415;
-    margin-left:1em;
-}
-.tagbar ol {
-    margin-left:1.2em;
-    color:#125C38;
-    list-style-type: upper-roman;
-}
-.tagbar h2 {
-    border-bottom: 1px solid  #503415; 
-    margin-bottom:0.2em;
-}
-.taglist-title em {
-    color: #A56E3A;
-}
-/* Fin sommaire Codex */
-
-/* Wrappers & containers */
-.wrapper {
-    width:50%;
+ /* Wrappers & containers */
+ .wrapper {
     min-height:100vh;
     margin:auto;
     background-color:#0B0B0B; 
@@ -176,7 +123,6 @@ text-align: center;
 }
 .wrapper-homepage {
     padding:5em 1em 1em 1em;
-    width:100%;
     background-color:none;
 }
 .wrapper-codex {
@@ -186,7 +132,6 @@ text-align: center;
 }
 .wrapper-list {
     padding:5em 1em 1em 1em;
-    width:45%;
     margin:auto;
     background-color:#0B0B0B; 
 }
@@ -197,134 +142,7 @@ text-align: center;
     margin-bottom:1.5em;
 }
 
-.container-forum {
-    padding:0;
-}
-
-.container-subcategory {
-    background-color:#0D0D0D;  
-    border:1px solid  #503415; 
-    margin:1.5em;
-    padding:0.5em;
-    display:flex;
-    align-items: center;
-    justify-content: space-around;
-    max-height:20%;
-}
-.category-header {
-    background-color:#0b0b0b;
-    text-align:center;
-    border-bottom:1px solid  #503415; 
-    padding:1em;
-}
-.category-header h2 {
-    color:#A56E3A;
-}
-
-.category-header p {
-    text-align:justify;
-    font-size:0.8em;
-    margin:1em;
-    background-color:#0D0D0D;
-}
-
-.thread {
-    display:flex;
-    justify-content: space-between;
-    padding:1em;
-
-}
-
-.description,
-.statistic,
-.last-message {
-    margin-bottom:0;
-    padding:0;
-    background-color:#0b0b0b;
-    border:1px solid black;
-}
-
-.thread-description,
-.thread-statistic,
-.thread-last-message {
-    margin-bottom:0;
-    padding:0.5em;
-    background-color:#0b0b0b;
-    border:1px solid black;
-}
-
-.description {
-    width:55%;
-}
-.statistic {
-    width:20%;
-    display:flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.last-message {
-    width:20%;
-    display:flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.description h3 {
-    font-family: 'Forum', cursive;
-    font-size:1.5em;
-    font-weight:400;
-    color: #125C38; 
-    border-bottom:1px solid #503415;
-    margin: 0;
-    text-transform: uppercase;
-}
-
-.description p {
-    max-height: 3em;
-    text-align:justify;
-    font-size:0.8em;
-    padding: 0.1em 0.5em;
-}
-
-.icon {
-    width:25%;
-    border-radius:50%;
-    background-color:#0D0D0D;
-    border:2px solid #2b1c0b;
-}
-
-.container-index{
-    width:49%;
-    display:flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-.container-width {
-    width:45%;
-    margin:0 auto 3.5em;
-}
-.container-article {
-    margin-top:1em;
-}
-
-.description a {
-    color:#125C38;
-}
-
-.description a:hover {
-    color:rgb(27, 136, 83);
-}
-
-.wrapper-flex {
-    display:flex;
-    justify-content: space-between;
-
-}
 /* Codex */
-
 .header-codex {
     background-image:url('https://nsa39.casimages.com/img/2018/08/14//180814093858746062.jpg');
     background-repeat: no-repeat;
@@ -333,6 +151,11 @@ text-align: center;
     margin:1em;
     height:20em;
     border-radius:0.3em;
+}
+.last-article {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .article-content {
     margin:0.5em;
@@ -373,8 +196,8 @@ text-align: center;
 }
 
 /* Boutons tags Codex */
- .tags {
-     margin-left:1em;
+.tags {
+    margin-left:1em;
 }
 
 .article-tags {
@@ -433,10 +256,7 @@ text-align: center;
     margin:0 1em;
     font-size:0.9em;
 }
-.comment-header {
-    display:flex;
-    align-items: center;
-}
+
 .comment h4 {
     font-family: 'Forum', cursive;
     font-size:1.2em;
@@ -467,6 +287,7 @@ text-align: center;
     letter-spacing:0.1em;
     text-align:right;
 }
+
 /* Formulaires */
 .form-group {
     width:90%;
@@ -539,14 +360,14 @@ form button {
 }
 
 .search-form {
-   width:31%;
-   display:flex;
-   flex-flow:row wrap;
-   align-items: center;
+    /* width:31%; à remettre sur plus grand écran*/
+    display:flex;
+    flex-flow:row wrap;
+    align-items: center;
 }
 .search-form .form-group, input {
     display:inline-block;
-    width:85%;
+    /* width:85%; à remettre sur plus grand écran */
     border-color:#125C38;
     border-top-left-radius: 0.3em;
     border-bottom-left-radius: 0.3em;
@@ -574,9 +395,9 @@ form button {
     border-color: rgb(15, 49, 33);
 }
 
-/* Onglets */
+ /* Onglets */
 
-.left-side {
+ .left-side {
     text-align:center;
     width:30%;
 }
@@ -672,9 +493,9 @@ a.ui-button:active, .ui-button:active,
     margin:0.2em;
 }
 .container-profil {
-      display:flex;
-      align-items: flex-start;
-      margin-top:1em;
+    display:flex;
+    align-items: flex-start;
+    margin-top:1em;
 }  
 
 .profile-label {
@@ -692,83 +513,304 @@ a.ui-button:active, .ui-button:active,
     margin-bottom:0.5em;
 }
 
-.last-article {
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-}
+@media screen and (max-width: 900px) {
+    
+    /* Wrappers & containers */
+    .wrapper {
+        width:100%;
+    }
+    .wrapper-homepage {
+        width:100%;
+    }
+    .wrapper-list {
+        width:100%;
+    }
 
-#blocAVA {
-    width:200px; 
-    height:320px; 
-    margin:8 auto 0; 
-    overflow:hidden;
-}
-.blocAVA {
-    position:relative; 
-    width:200px; 
-    height:320px; 
-    overflow:hidden;
-}
-/* AVATAR */
-.avaPOST {
-    width:200px; 
-    height:320px;
-    transition:transform 0.75s linear; 
-    -webkit-transition:transform 0.75s linear;
-}
-#blocAVA:hover .avaPOST {
-    transform:translateX(200px); 
-    -webkit-transform:translateX(200px);
-}
-/* BLOC INFORMATIONS JOUEUR */
-.abtPOST {
-    position:absolute; 
-    margin-top:-320px;padding:5px; 
-    width:188px; height:308px; 
-    overflow:auto;
-    background:#040404;
-    transform:translateX(-200px); 
-    -webkit-transform:translateX(-200px);
-    transition:transform 0.75s linear; 
-    -webkit-transition:transform 0.75s linear;
-    border: #17171f 1px solid;
-} 
-#blocAVA:hover .abtPOST {
-    transform:translateX(0px); 
-    -webkit-transform:translateX(0px);
-}
-/* CONTENU INFORMATIONS JOUEUR */
-.abtPOST div{
-    margin:2px auto;
-    width:178px; 
-    padding:5px;
-    font-family:Helvetica; 
-    font-size:10px; 
-    text-align:justify;
-    color:#A3A3A3; 
-    background-color:#08080B;
-}
-/* TITRES INFORMATIONS JOUEUR */
-.abtPOST div span{
-    font-size:11px;
-    letter-spacing:2px;
-    text-transform:uppercase; 
-    color:#206c77! important;
-    font-family: 'BenchNine', sans-serif;
-    font-weight:bold;
-}
-/* REDIMENSIONNEMENT IMAGES BLOC INFORMATIONS */
-.abtPOST div img{
-    margin:auto; 
-    max-width:180px;
-}
+    /* Codex */
+    .header-codex {
+        display:none;
+    }
 
-@media screen and (max-width: 1200px) {
+    .last-article {
+        display:inline;
+        text-align:center;
+    }
+
+    .left-side {
+        display:none;
+    }
+
+    .right-side {
+        width:100%;
+    }
+
+}
+@media screen and (min-width: 1024px) {
     .wrapper {
         width:75%;
     }
     .container-width {
         width:70%;
+    }
+
+    /* Codex Navbar */
+    .navbar-codex {
+        margin-top:0;
+        margin-bottom:1em;
+        font-size:1.2em;
+    }
+    .navbar-codex ul li {
+        list-style: none;
+    }
+
+    .navbar-codex ul {
+        display:flex;
+        justify-content: space-evenly;
+        width:100%;
+    }
+
+    /* Codex Aside = Sommaire */
+    .tagbar {
+        position:fixed;
+        margin-top:5.2em;
+        min-width:12%;
+        padding:0.3em 0.8em;
+        background-color:#0D0D0D;  
+        border:1px solid  #503415;
+        margin-left:1em;
+    }
+    .tagbar ol {
+        margin-left:1.2em;
+        color:#125C38;
+        list-style-type: upper-roman;
+    }
+    .tagbar h2 {
+        border-bottom: 1px solid  #503415; 
+        margin-bottom:0.2em;
+    }
+    .taglist-title em {
+        color: #A56E3A;
+    }
+    /* Fin sommaire Codex */
+
+    /* Codex commentaires */
+    .comment-header {
+        display:flex;
+        align-items: center;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+
+    .wrapper {
+        width:50%;
+    }
+
+    /*Changement de sous catégorie*/
+    .moveOn{
+        display: inline-block;
+        padding:1em 1em;
+    }
+    /*Pagination*/
+    .text-center{
+    text-align: center;
+    }
+    .btn-pagination{
+        font-size: 1.5em;
+    }
+
+    .container-forum {
+        padding:0;
+    }
+
+    .container-subcategory {
+        background-color:#0D0D0D;  
+        border:1px solid  #503415; 
+        margin:1.5em;
+        padding:0.5em;
+        display:flex;
+        align-items: center;
+        justify-content: space-around;
+        max-height:20%;
+    }
+    .category-header {
+        background-color:#0b0b0b;
+        text-align:center;
+        border-bottom:1px solid  #503415; 
+        padding:1em;
+    }
+    .category-header h2 {
+        color:#A56E3A;
+    }
+
+    .category-header p {
+        text-align:justify;
+        font-size:0.8em;
+        margin:1em;
+        background-color:#0D0D0D;
+    }
+
+    .thread {
+        display:flex;
+        justify-content: space-between;
+        padding:1em;
+
+    }
+
+    .description,
+    .statistic,
+    .last-message {
+        margin-bottom:0;
+        padding:0;
+        background-color:#0b0b0b;
+        border:1px solid black;
+    }
+
+    .thread-description,
+    .thread-statistic,
+    .thread-last-message {
+        margin-bottom:0;
+        padding:0.5em;
+        background-color:#0b0b0b;
+        border:1px solid black;
+    }
+
+    .description {
+        width:55%;
+    }
+    .statistic {
+        width:20%;
+        display:flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .last-message {
+        width:20%;
+        display:flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .description h3 {
+        font-family: 'Forum', cursive;
+        font-size:1.5em;
+        font-weight:400;
+        color: #125C38; 
+        border-bottom:1px solid #503415;
+        margin: 0;
+        text-transform: uppercase;
+    }
+
+    .description p {
+        max-height: 3em;
+        text-align:justify;
+        font-size:0.8em;
+        padding: 0.1em 0.5em;
+    }
+
+    .icon {
+        width:25%;
+        border-radius:50%;
+        background-color:#0D0D0D;
+        border:2px solid #2b1c0b;
+    }
+
+    .container-index{
+        width:49%;
+        display:flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .container-width {
+        width:45%;
+        margin:0 auto 3.5em;
+    }
+    .container-article {
+        margin-top:1em;
+    }
+
+    .description a {
+        color:#125C38;
+    }
+
+    .description a:hover {
+        color:rgb(27, 136, 83);
+    }
+
+    .wrapper-flex {
+        display:flex;
+        justify-content: space-between;
+
+    }
+
+   
+
+    #blocAVA {
+        width:200px; 
+        height:320px; 
+        margin:8 auto 0; 
+        overflow:hidden;
+    }
+    .blocAVA {
+        position:relative; 
+        width:200px; 
+        height:320px; 
+        overflow:hidden;
+    }
+    /* AVATAR */
+    .avaPOST {
+        width:200px; 
+        height:320px;
+        transition:transform 0.75s linear; 
+        -webkit-transition:transform 0.75s linear;
+    }
+    #blocAVA:hover .avaPOST {
+        transform:translateX(200px); 
+        -webkit-transform:translateX(200px);
+    }
+    /* BLOC INFORMATIONS JOUEUR */
+    .abtPOST {
+        position:absolute; 
+        margin-top:-320px;padding:5px; 
+        width:188px; height:308px; 
+        overflow:auto;
+        background:#040404;
+        transform:translateX(-200px); 
+        -webkit-transform:translateX(-200px);
+        transition:transform 0.75s linear; 
+        -webkit-transition:transform 0.75s linear;
+        border: #17171f 1px solid;
+    } 
+    #blocAVA:hover .abtPOST {
+        transform:translateX(0px); 
+        -webkit-transform:translateX(0px);
+    }
+    /* CONTENU INFORMATIONS JOUEUR */
+    .abtPOST div{
+        margin:2px auto;
+        width:178px; 
+        padding:5px;
+        font-family:Helvetica; 
+        font-size:10px; 
+        text-align:justify;
+        color:#A3A3A3; 
+        background-color:#08080B;
+    }
+    /* TITRES INFORMATIONS JOUEUR */
+    .abtPOST div span{
+        font-size:11px;
+        letter-spacing:2px;
+        text-transform:uppercase; 
+        color:#206c77! important;
+        font-family: 'BenchNine', sans-serif;
+        font-weight:bold;
+    }
+    /* REDIMENSIONNEMENT IMAGES BLOC INFORMATIONS */
+    .abtPOST div img{
+        margin:auto; 
+        max-width:180px;
     }
 }
