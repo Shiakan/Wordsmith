@@ -93,6 +93,13 @@ text-align: center;
 .btn-pagination{
     font-size: 1.5em;
 }
+/*JUMBOTRON*/
+.jumbotron{
+    width: 100%;
+    height: 40vh;
+    background-color: #206c77;
+    color: white;
+}
 /* HEADER  */
 /* Navbar */
 .fixed-navbar {
