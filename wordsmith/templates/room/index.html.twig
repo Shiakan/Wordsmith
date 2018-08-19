@@ -4,6 +4,7 @@
 {% else %}
   data-role="player"
 {% endif %}
+  data-playerid={{app.user.id}}
   data-name={{app.user.username}}
   data-room={{room.id}}
   id="root"></div>

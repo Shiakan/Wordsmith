@@ -34,7 +34,6 @@ app.use(function(req, res, next) {
 /*
 * Socket.io
  */
-var id = 0;
 io.on('connection', function(socket) {
   // users.addUser(12, 'Jackson', 'Chambre');
   
@@ -53,7 +52,7 @@ io.on('connection', function(socket) {
     // ?name=Nom&room=roomName => {name:'Nom',room:'roomName'}
     socket.join(param.roomId);
     users.removeUser(socket.id);
-    users.addUser(1, param.userName, param.roomId);
+    users.addUser(param.selfId, param.userName, param.roomId);
     console.log(users);
   //   // console.log('voici la vérité :', paramJson)
     socket.on('send_message', function(messageContent) {
