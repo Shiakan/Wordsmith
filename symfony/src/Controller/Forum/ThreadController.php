@@ -85,7 +85,6 @@ class ThreadController extends Controller
         $post->setAuthor($user);
         $em->persist($post);
         $em->flush();
-
     }
 
     /**
@@ -115,9 +114,14 @@ class ThreadController extends Controller
     {
         $hasReadThread = new HasReadThread();
         
-        // On récupère la sous-catégorie dans laquelle l'utilisateur poste son sujet
-        $repository = $this->getDoctrine()->getRepository(HasReadThread::class);
-        $readThread = $repository->findTimeStamp($user, $thread);
+        // We need to check if the user visiting the page has already read 
+        // this thread
+        $repositoryThread = $this->getDoctrine()->getRepository(HasReadThread::class);
+        $readThread = $repositoryThread->findTimeStamp($user, $thread);
+
+        $repositoryPost = $this->getDoctrine()->getRepository(Post::class);
+        $readPost = $repositoryPost->findByThread($thread);
+        $lastPost = $readPost->getCreatedAt();
 
         if($readThread == false) {
             $em = $this->getDoctrine()->getManager();
@@ -126,6 +130,15 @@ class ThreadController extends Controller
             $hasReadThread->setTimestamp(new \DateTime());
             $em->persist($hasReadThread);
             $em->flush();
+        } else{
+            $currentTimestamp = $readThread->getTimestamp();
+
+            if($lastPost > $currentTimestamp) {
+                $em = $this->getDoctrine()->getManager();
+                $readThread->setTimestamp(new \DateTime());
+                $em->persist($readThread);
+                $em->flush();
+            }
         }
     }
 

@@ -6,9 +6,11 @@ use App\Entity\Thread;
 use App\Entity\Category;
 use App\Form\SubjectType;
 use App\Entity\Subcategory;
+use App\Entity\HasReadThread;
 use App\Repository\ThreadRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ForumController extends AbstractController
@@ -16,14 +18,18 @@ class ForumController extends AbstractController
     /**
      * @Route("/forum", name="forum_index")
      */
-    public function index()
+    public function index(UserInterface $user = null)
     {
-        $repository = $this->getDoctrine()->getRepository(Category::class);
+        $repositoryCategory = $this->getDoctrine()->getRepository(Category::class);
+        $categories = $repositoryCategory ->findAll();
 
-        $categories = $repository ->findAll();
+        $repositoryHasRead = $this->getDoctrine()->getRepository(HasReadThread::class);
+        $hasReadThreads = $repositoryHasRead->findByUser($user);
+
 
         return $this->render('forum/index.html.twig', [
             'categories' => $categories,
+            'hasReadThreads' => $hasReadThreads
         ]);
     }
 
