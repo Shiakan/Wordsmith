@@ -55,12 +55,20 @@ io.on('connection', function(socket) {
     users.addUser(1, param.userName, param.roomId);
     console.log(users);
   //   // console.log('voici la vérité :', paramJson)
-    socket.on('send_message', function(messageString) {
+    socket.on('send_message', function(messageContent) {
       var message = {};
-      message.message = messageString.message;
-      message.author = messageString.author;
+      message.message = messageContent.message;
+      message.author = messageContent.author;
       console.log(message, 'on send_message');
       io.to(param.roomId).emit('send_message', message);
+      socket.on('disconnect', function () {
+        console.log('DISCONNECTION')
+        var message = {};
+        message.message = 'Vient de se déconnecter';
+        message.author = messageContent.author;
+        io.to(param.roomId).emit('send_message', message);
+        // io.emit('user disconnected');
+      });
     });
   });
 });
