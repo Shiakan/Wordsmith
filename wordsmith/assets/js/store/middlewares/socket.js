@@ -37,6 +37,7 @@ const socketConnect = store => next => (action) => {
       // const state = store.getState();
       console.log(state.user.userName, 'ADD MESSAGE');
       const content = {};
+      content.role = state.user.role;
       content.author = state.user.userName;
       content.message = state.textInput.message;
       socket.emit('send_message', content);
