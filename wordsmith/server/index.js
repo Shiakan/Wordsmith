@@ -51,7 +51,9 @@ io.on('connection', function(socket) {
       message.author = dice.author;
       message.id = uuidV4();
       console.log(message, 'on send_message');
-      io.to(param.roomId).emit('send_message', message);
+      if (dice.role === 'player') {
+        io.to(param.roomId).emit('send_message', message);
+      }
     });
     
     socket.on('send_message', function(messageContent) {

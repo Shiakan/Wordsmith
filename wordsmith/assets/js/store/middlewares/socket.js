@@ -46,6 +46,7 @@ const socketConnect = store => next => (action) => {
     case ROLL_DICE:
       console.log(action.dice, 'DICE');
       const dice = {};
+      dice.role = state.user.role;
       dice.author = state.user.userName;
       dice.rolled = action.dice;
       socket.emit('roll_dice', dice);
