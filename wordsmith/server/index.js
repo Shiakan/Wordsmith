@@ -50,16 +50,19 @@ io.on('connection', function(socket) {
     // }
     // je transforme les queryString en URL en objet
     // ?name=Nom&room=roomName => {name:'Nom',room:'roomName'}
-  //   socket.join(parsed.room);
+    socket.join(param.roomId);
   //   users.removeUser(socket.id);
   //   users.addUser(Number(parsed.id), parsed.name, parsed.room);
   //   console.log(users.users);
   //   // console.log('voici la vérité :', paramJson)
-  //   socket.on('send_message', function(message) {
-  //     message.id = ++id;
-  //     io.to(parsed.room).emit('send_message', message);
+    socket.on('send_message', function(messageString) {
+      console.log(message, 'on send_message');
+      var message = {};
+      message.message = messageString;
+      message.author = 'JOHNRAMBO';
+      io.to(param.roomId).emit('send_message', message);
     });
-  // });
+  });
 });
 
 /*

@@ -13,8 +13,8 @@ const initialState = {
  * Types
  */
 const INPUT_CHANGE = 'INPUT_CHANGE';
-const ADD_MESSAGE = 'ADD_MESSAGE';
-
+export const ADD_MESSAGE = 'ADD_MESSAGE';
+const MESSAGE_RECEIVED = 'MESSAGE_RECEIVED';
 
 /**
  * Traitements
@@ -33,18 +33,18 @@ const reducer = (state = initialState, action = {}) => {
       };
 
     case ADD_MESSAGE: {
-      // Je créer un objet dans lequel je range les data recues
-      const newMessEntry = {
-        id: uuidv4(),
-        // auteur: action.auteur,
-        message: state.message,
-        // userId: action.userId,
-      };
+      // // Je créer un objet dans lequel je range les data recues
+      // const newMessEntry = {
+      //   id: uuidv4(),
+      //   // auteur: action.auteur,
+      //   message: state.message,
+      //   // userId: action.userId,
+      // };
       // Nouveau state
       return {
         ...state,
         // Je le rajoute au state existant
-        messages: [...state.messages, newMessEntry],
+        // messages: [...state.messages, newMessEntry],
         message: '',
       };
     }
@@ -62,6 +62,22 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         // Je le rajoute au state existant
         messages: [...state.messages, newDice],
+      };
+    }
+
+    case MESSAGE_RECEIVED: {
+      // Je créer un objet dans lequel je range les data recues
+      const newMessEntry = {
+        // id: action.id,
+        author: action.author,
+        message: action.message,
+        // userId: action.userId,
+      };
+      // Nouveau state
+      return {
+        ...state,
+        // Je le rajoute au state existant
+        messages: [...state.messages, newMessEntry],
       };
     }
     // return {
@@ -86,7 +102,13 @@ export const addMessage = () => ({
   type: ADD_MESSAGE,
 });
 
-
+export const receiveMessage = message => ({
+  type: MESSAGE_RECEIVED,
+  message: message.message,
+  // id: message.id,
+  author: message.author,
+  // userId: message.userId,
+});
 /**
  * Selectors
  */
