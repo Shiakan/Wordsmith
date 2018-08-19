@@ -26,6 +26,8 @@ class SwitchMJ extends React.Component {
     toggle: PropTypes.bool.isRequired,
     typingName: PropTypes.string,
     createPlayer: PropTypes.func.isRequired,
+    maps: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+    changeMap: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -54,10 +56,17 @@ class SwitchMJ extends React.Component {
     togglePicker();
   }
 
+  handleMap = (e) => {
+    const { changeMap } = this.props;
+    console.log(e.target.value);
+    changeMap(e.target.value);
+  }
+
   render() {
     const {
-      togglePicker, color, toggle, typingName,
+      togglePicker, color, toggle, typingName, maps,
     } = this.props;
+    console.log('MAPS :', maps);
     return (
       <div className="mjSwitch">
         {toggle
@@ -92,6 +101,19 @@ class SwitchMJ extends React.Component {
             type="submit"
             value="+"
           />
+        </form>
+        <span>Select the map</span>
+        <form id="mapSelect">
+          <select id="monselect" form="mapSelect" onChange={this.handleMap}>
+            {maps.map(map => (
+              <option
+                key={map.id}
+                value={map.url}
+              >
+                {map.name}
+              </option>
+            ))}
+          </select>
         </form>
       </div>
     );

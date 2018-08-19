@@ -22,8 +22,9 @@ import './gamescreen.sass';
 class GameScreen extends React.Component {
   static propTypes = {
     toggleScreen: PropTypes.func.isRequired,
-    board: PropTypes.bool.isRequired,
-    map: PropTypes.bool.isRequired,
+    isBoard: PropTypes.bool.isRequired,
+    map: PropTypes.string.isRequired,
+    isMap: PropTypes.bool.isRequired,
     grid: PropTypes.bool.isRequired,
     characters: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
     handleSlide: PropTypes.func.isRequired,
@@ -36,7 +37,7 @@ class GameScreen extends React.Component {
 
   render() {
     const {
-      toggleScreen, board, map,
+      toggleScreen, isBoard, map, isMap,
       grid, characters, handleSlide, isSlided,
     } = this.props;
     const classSwitch = classNames(
@@ -48,7 +49,7 @@ class GameScreen extends React.Component {
     const classArrow = classNames(
       'screen-switch-arrow',
       {
-        'screen-switch-arrow--board': board,
+        'screen-switch-arrow--board': isBoard,
       },
     );
     return (
@@ -57,14 +58,14 @@ class GameScreen extends React.Component {
           className={classSwitch}
         >
 
-          {map
+          {isMap
             && (
             <div className="screen-switch-form">
               <SwitchMap />
               <SwitchMJ />
             </div>
             ) }
-          {board
+          {isBoard
             && (
             <button
               type="button"
@@ -86,7 +87,7 @@ class GameScreen extends React.Component {
             />
           )}
         </div>
-        {map && (
+        {isMap && (
         <div className="screen-map">
           {characters.map(character => (
             <Character
@@ -96,14 +97,14 @@ class GameScreen extends React.Component {
           ))}
           {grid && <div className="screen-map-grid" />}
           <img
-            src="http://4.bp.blogspot.com/-YCn-yY_Wt-c/UtME0OoI_FI/AAAAAAAADOY/1IeqF92KSLU/s800/DungeonZ+-+The+city+-+Overlays-+The+Prancing+Dragon+Tavern.jpg"
+            src={map}
             alt="map"
             className="screen-map-image"
           />
 
         </div>
         ) }
-        {board && <div className="screen-board">THIS IS THE BOARD</div> }
+        {isBoard && <div className="screen-board">THIS IS THE BOARD</div> }
       </div>
     );
   }

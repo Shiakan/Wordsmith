@@ -7,8 +7,9 @@ import maps from '../../data/maps';
  */
 const initialState = {
   maps,
-  board: false,
-  map: true,
+  isBoard: false,
+  map: 'http://4.bp.blogspot.com/-YCn-yY_Wt-c/UtME0OoI_FI/AAAAAAAADOY/1IeqF92KSLU/s800/DungeonZ+-+The+city+-+Overlays-+The+Prancing+Dragon+Tavern.jpg',
+  isMap: true,
   grid: true,
   color: '#f44336',
   toggle: false,
@@ -63,6 +64,7 @@ const INPUT_CHAR_CHANGE = 'INPUT_CHAR_CHANGE';
 const MOVE_PLAYER = 'MOVE_PLAYER';
 const DELETE_PLAYER = 'DELETE_PLAYER';
 const HANDLE_SLIDE = 'HANDLE_SLIDE';
+const CHANGE_MAP = 'CHANGE_MAP';
 
 /**
  * Traitements
@@ -76,8 +78,8 @@ const reducer = (state = initialState, action = {}) => {
     case TOGGLE_SCREEN:
       return {
         ...state,
-        board: !state.board,
-        map: !state.map,
+        isBoard: !state.isBoard,
+        isMap: !state.isMap,
       };
 
     case HANDLE_SLIDE:
@@ -102,6 +104,13 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         color: action.value,
+      };
+
+    case CHANGE_MAP:
+      console.log(state.map);
+      return {
+        ...state,
+        map: action.value,
       };
 
     case CREATE_PLAYER: {
@@ -211,6 +220,12 @@ export const deletePlayer = id => ({
 export const handleSlide = () => ({
   type: HANDLE_SLIDE,
 });
+
+export const changeMap = value => ({
+  type: CHANGE_MAP,
+  value,
+});
+
 /**
  * Selectors
  */
