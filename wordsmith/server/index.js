@@ -7,10 +7,10 @@ var Server = require('http').Server;
 var socket = require('socket.io');
 // var queryString = require('query-string');
 // Local import
-// var { Users } = require('./utils/users.js');
+var { Users } = require('./utils/users.js');
 // var { isRealString } = require('./utils/validation.js');
 // Class instanciation
-// var users = new Users();
+var users = new Users();
 
 /*
 * Vars
@@ -51,15 +51,15 @@ io.on('connection', function(socket) {
     // je transforme les queryString en URL en objet
     // ?name=Nom&room=roomName => {name:'Nom',room:'roomName'}
     socket.join(param.roomId);
-  //   users.removeUser(socket.id);
-  //   users.addUser(Number(parsed.id), parsed.name, parsed.room);
-  //   console.log(users.users);
+    users.removeUser(socket.id);
+    users.addUser(1, param.userName, param.roomId);
+    console.log(users);
   //   // console.log('voici la vérité :', paramJson)
     socket.on('send_message', function(messageString) {
-      console.log(message, 'on send_message');
       var message = {};
       message.message = messageString;
-      message.author = 'JOHNRAMBO';
+      message.author = users.getUser(1).name;
+      console.log(message, 'on send_message');
       io.to(param.roomId).emit('send_message', message);
     });
   });
