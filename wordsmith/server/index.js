@@ -57,8 +57,8 @@ io.on('connection', function(socket) {
   //   // console.log('voici la vérité :', paramJson)
     socket.on('send_message', function(messageString) {
       var message = {};
-      message.message = messageString;
-      message.author = users.getUser(1).name;
+      message.message = messageString.message;
+      message.author = messageString.author;
       console.log(message, 'on send_message');
       io.to(param.roomId).emit('send_message', message);
     });

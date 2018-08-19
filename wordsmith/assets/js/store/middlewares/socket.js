@@ -33,9 +33,12 @@ const socketConnect = store => next => (action) => {
     case ADD_MESSAGE: {
       // Je transfère l'objet entier
       // Découpable par la suite
-      const message = store.getState();
-      console.log(message.textInput.message, 'ADD MESSAGE');
-      socket.emit('send_message', message.textInput.message);
+      const state = store.getState();
+      console.log(state.user.userName, 'ADD MESSAGE');
+      const content = {};
+      content.author = state.user.userName;
+      content.message = state.textInput.message;
+      socket.emit('send_message', content);
     }
       break;
 

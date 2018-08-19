@@ -37,7 +37,7 @@ class Messages extends React.Component {
 
   render() {
     const { messages } = this.props;
-    console.log(messages, 'le seul panomé');
+    console.log(messages, 'ALL MESSAGES');
     return (
       <div
         ref={(element) => {
