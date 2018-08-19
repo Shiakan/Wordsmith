@@ -6,7 +6,6 @@ var join = require('path').join;
 var Server = require('http').Server;
 var socket = require('socket.io');
 var uuidV4 = require('uuid/v4');
-// var queryString = require('query-string');
 // Local import
 var { Users } = require('./utils/users.js');
 // var { isRealString } = require('./utils/validation.js');
@@ -41,20 +40,20 @@ io.on('connection', function(socket) {
   console.log('>> socket.io - connected');
   socket.on('join', function(param, callback) {
     console.log('>> JOINED <<', param);
-    // const parsed = queryString.parse(param);
-    // if (!empty(param)) {
-    //   if (!isRealString(param.name) /*|| !isRealString(param.room)*/) {
-    //     return callback('Vous devez être enregir');
-    //   }
-      
-    // }
-    // je transforme les queryString en URL en objet
-    // ?name=Nom&room=roomName => {name:'Nom',room:'roomName'}
     socket.join(param.roomId);
-    users.removeUser(socket.id);
+    users.removeUser(param.selfId);
     users.addUser(param.selfId, param.userName, param.roomId);
     console.log(users);
-  //   // console.log('voici la vérité :', paramJson)
+
+    socket.on('roll_dice', function(dice) {
+      var message = {};
+      message.message = dice.rolled;
+      message.author = dice.author;
+      message.id = uuidV4();
+      console.log(message, 'on send_message');
+      io.to(param.roomId).emit('send_message', message);
+    });
+    
     socket.on('send_message', function(messageContent) {
       var message = {};
       message.message = messageContent.message;
@@ -62,15 +61,15 @@ io.on('connection', function(socket) {
       message.id = uuidV4();
       console.log(message, 'on send_message');
       io.to(param.roomId).emit('send_message', message);
+    });
 
-      socket.on('disconnect', function () {
-        console.log('DISCONNECTION')
-        var message = {};
-        message.message = 'Vient de se déconnecter';
-        message.author = messageContent.author;
-        message.id = uuidV4();
-        io.to(param.roomId).emit('send_message', message);
-      });
+    socket.on('disconnect', function () {
+      console.log('DISCONNECTION')
+      var message = {};
+      message.message = 'Vient de se déconnecter';
+      message.author = messageContent.author;
+      message.id = uuidV4();
+      io.to(param.roomId).emit('send_message', message);
     });
   });
 });

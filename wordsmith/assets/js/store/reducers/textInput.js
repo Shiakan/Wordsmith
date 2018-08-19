@@ -49,21 +49,21 @@ const reducer = (state = initialState, action = {}) => {
       };
     }
 
-    case ROLL_DICE: {
-    // Je créer un objet dans lequel je range les data recues
-      const newDice = {
-        id: uuidv4(),
-        // auteur: action.auteur,
-        message: action.dice,
-      // userId: action.userId,
-      };
-      // Nouveau state
-      return {
-        ...state,
-        // Je le rajoute au state existant
-        messages: [...state.messages, newDice],
-      };
-    }
+    // case ROLL_DICE: {
+    // // Je créer un objet dans lequel je range les data recues
+    //   const newDice = {
+    //     id: uuidv4(),
+    //     // auteur: action.auteur,
+    //     message: action.dice,
+    //   // userId: action.userId,
+    //   };
+    //   // Nouveau state
+    //   return {
+    //     ...state,
+    //     // Je le rajoute au state existant
+    //     messages: [...state.messages, newDice],
+    //   };
+    // }
 
     case MESSAGE_RECEIVED: {
       // Je créer un objet dans lequel je range les data recues

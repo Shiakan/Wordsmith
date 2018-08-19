@@ -18,9 +18,6 @@ const DICE_CHANGE = 'DICE_CHANGE';
 /**
  * Traitements
  */
-// const numberOfSides = dice.slice(2);
-
-
 
 /**
  * Reducer
@@ -30,7 +27,7 @@ const reducer = (state = initialState, action = {}) => {
     case ROLL_DICE:
       return {
         ...state,
-        rolled: action.dice,
+        // rolled: action.dice,
       };
 
     case DICE_CHANGE:

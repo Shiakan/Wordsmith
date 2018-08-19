@@ -36,7 +36,6 @@ const reducer = (state = initialState, action = {}) => {
       };
 
     case WEBSOCKET_CONNECT:
-      console.log(state.playerId, 'player ID');
       return {
         ...state,
         // A la connexion au socket
