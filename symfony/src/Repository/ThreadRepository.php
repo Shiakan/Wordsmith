@@ -59,7 +59,7 @@ class ThreadRepository extends ServiceEntityRepository
         ->setParameter('subcategory', $subcategory)
         ->addSelect('COUNT(t) AS HIDDEN mycount')
         ->groupBy('t')
-        ->orderBy('t.createdAt', 'ASC')
+        ->orderBy('t.createdAt', 'DESC')
         ->setFirstResult( $offset )
         ->setMaxResults( $limit )
         ->getQuery()

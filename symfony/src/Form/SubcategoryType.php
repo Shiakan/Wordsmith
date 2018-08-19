@@ -15,6 +15,7 @@ class SubcategoryType extends AbstractType
             ->add('name')
             ->add('reminder')
             ->add('description')
+            ->add('isPrivate')
             ->add('category')
         ;
     }

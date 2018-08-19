@@ -45,29 +45,18 @@ class ForumController extends AbstractController
         $pageMax = ceil($totalThreads / $limit); // nombre de page max à afficher (sert pour bouton suivant)
 
         $userUpToDate = [];
-        $threadId = [];
-        // dump($threads);die;
+
         foreach($threads as $currentThread) {
             $repositoryHasRead = $this->getDoctrine()->getRepository(HasReadThread::class);
             $hasReadThread = $repositoryHasRead->findByUserAndThread($user, $currentThread);
 
-            $threadIds [] = $currentThread->getId();
 
-            foreach($threadIds as $threadId) {
+            if($hasReadThread == true) {
 
-                if($hasReadThread == true) {
-                    $blabla = $hasReadThread[0];
-                    
-                    if($blabla->getPostCount() < count($currentThread->getPosts())) {
-                        $userUpToDate [$threadId] = false;
-                    } else {
-                        $userUpToDate [$threadId] = true;
-                    }
+                $userUpToDate [] = true;
 
-                }else{
-                    $userUpToDate [$threadId] = false;
-                }
-                // dump($userUpToDate);die;
+            }else{
+                $userUpToDate [] = false;
             }
         }
 
