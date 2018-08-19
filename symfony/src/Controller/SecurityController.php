@@ -22,10 +22,9 @@ class SecurityController extends Controller
     /**
      * @Route("/inscription", name="security_registration")
      */
-    public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
+    public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder, \Swift_Mailer $mailer)
     {
         $user = new User();
-
         // On récupère le rôle 'utilisateur'
         $repository = $this->getDoctrine()->getRepository(Role::class);
         $role = $repository->findAll();
@@ -34,17 +33,27 @@ class SecurityController extends Controller
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
-            $hash = $encoder->encodePassword($user, $user->getPassword());
-            $user->setRole($roleUser);
-            $user->setPassword($hash);
-            $manager->persist($user);
-            $manager->flush();
-
+        if($form->isSubmitted() && $form->isValid()){ //Si le form est valide et envoyé alors
+            $hash = $encoder->encodePassword($user, $user->getPassword());  //On encode le mot de passe
+            $user->setRole($roleUser); //On set le role de l'utilisateur
+            $user->setPassword($hash); // On set le passeword avec le hash
+            $manager->persist($user); //On persist user
+            $manager->flush(); //On flush le tout
             $this->createSheets($user);
-
-            // On redirige vers le login
-            return $this->redirectToRoute('security_login');
+            $message= (new \Swift_Message('Hello Mail')) //On instancie Swift Mailer
+                    ->setSubject('Bienvenue '.$user->getUsername().'') //On définie le sujet du mail
+                    ->setFrom('projetkelnor@gmail.com') //On définie l'expéditeur
+                    ->setTo($user->getEmail()) //Grâce à l'enregistrement, on définie le destinataire
+                    ->setContentType("text/html") //On définie que le contenue est un mail html
+                    ->setBody(  //On définie le body comme étant
+                        $this->renderView('emails/registration.html.twig', //Ce fichier twig
+                            ['user'=>$user] //On lui passe user
+                        )
+                    );
+                    //On envoie le mail
+                    $mailer->send($message);
+                    // On redirige vers le login
+                    return $this->redirectToRoute('security_login');
         }
         return $this->render('security/inscription.html.twig', [
             'form' => $form->createView()
