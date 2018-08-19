@@ -1,15 +1,16 @@
 import uuidv4 from 'uuid/v4'; // https://www.npmjs.com/package/uuid
 
-const test = document.getElementById('root');
+const rootAnchor = document.getElementById('root');
 
 /**
  * Initial State
  */
 const initialState = {
-  userName: test.dataset.name,
-  role: test.dataset.role,
+  userName: rootAnchor.dataset.name,
+  role: rootAnchor.dataset.role,
   charSheet: 'tempthree',
-  roomId: test.dataset.room,
+  roomId: rootAnchor.dataset.room,
+  selfId: rootAnchor.dataset.playerid,
 };
 
 /**
@@ -40,7 +41,7 @@ const reducer = (state = initialState, action = {}) => {
         // A la connexion au socket
         // J'attribue un id unique à chaque User
         // Afin de permettre de déterminer qui à envoyé le message
-        userId: uuidv4(),
+        // userId: uuidv4(),
       };
     default:
       return state;

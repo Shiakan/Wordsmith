@@ -37,7 +37,7 @@ class Messages extends React.Component {
 
   render() {
     const { messages } = this.props;
-    console.log(messages, 'le seul panomé');
+    console.log(messages, 'ALL MESSAGES');
     return (
       <div
         ref={(element) => {
@@ -47,10 +47,12 @@ class Messages extends React.Component {
       >
         {messages.map((message) => {
           return (
-            <div className="message" key={message.message}>
-              {/* <p className="message-auteur">{message.auteur}</p> */}
+            <div className="message" key={message.id}>
               {console.log(message, 'mess in index.js')}
-              <p className="message-content">{message.author}:{message.message}</p>
+              {message.message
+              && <p className="message-content">{message.author}:{message.message}{message.dice}</p>}
+              {message.dice
+              && <p className="message-content">{message.author} à tiré un {message.dice}</p>}
             </div>
           );
         })}
