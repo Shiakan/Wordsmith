@@ -12,11 +12,11 @@ import { Provider } from 'react-redux';
 import App from './components/App';
 // // store
 import store from './store';
+import { websocketConnect } from './store/reducers/user';
 
 /**
  * Code
  */
-
 const rootComponent = (
   <Provider store={store}>
     <App />
@@ -24,3 +24,4 @@ const rootComponent = (
 );
 
 render(rootComponent, document.getElementById('root'));
+store.dispatch(websocketConnect());
