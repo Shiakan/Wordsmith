@@ -81,7 +81,18 @@ small {
     margin:0;
     letter-spacing:0.075em;
 }
-
+/*Changement de sous catégorie*/
+.moveOn{
+    display: inline-block;
+    padding:1em 1em;
+}
+/*Pagination*/
+.text-center{
+text-align: center;
+}
+.btn-pagination{
+    font-size: 1.8rem;
+}
 /* HEADER  */
 /* Navbar */
 .fixed-navbar {
