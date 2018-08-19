@@ -10,7 +10,7 @@ import Dice from '../components/Panel/Dice';
 
 // Action Creators
 // import { doSomething } from 'src/store/reducer';
-import { rollDice, diceChange } from '../store/reducers/dice';
+import { rollDice, diceChange, diceShare } from '../store/reducers/dice';
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation
@@ -38,6 +38,9 @@ const mapDispatchToProps = dispatch => ({
   diceChange: (value) => {
     dispatch(diceChange(value));
   },
+  diceShare: () => {
+    dispatch(diceShare());
+  }
 });
 
 // Container

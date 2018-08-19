@@ -4,7 +4,7 @@
 import io from 'socket.io-client';
 import { WEBSOCKET_CONNECT } from '../reducers/user';
 import { ADD_MESSAGE, receiveMessage } from '../reducers/textInput';
-import { ROLL_DICE } from '../reducers/dice';
+import { ROLL_DICE, SHARE_DICE } from '../reducers/dice';
 /**
  * Code
  */
@@ -24,11 +24,11 @@ const socketConnect = store => next => (action) => {
       // A la connexion j'active l'écoute sur 'send message'
       socket.on('send_message', (message) => {
         console.log(message, 'Mess in socket');
-      // //   // Si je reçois un 'send message' je dispatch une action
-      // //   // De mon reducer afin d'ajouter ce message à mon state
+        // Si je reçois un 'send message' je dispatch une action
+        // De mon reducer afin d'ajouter ce message à mon state
         store.dispatch(receiveMessage(message));
       });
-    
+
       break;
 
     case ADD_MESSAGE: {
@@ -43,14 +43,23 @@ const socketConnect = store => next => (action) => {
     }
       break;
 
-    case ROLL_DICE:
+    case ROLL_DICE: {
       console.log(action.dice, 'DICE');
       const dice = {};
       dice.role = state.user.role;
       dice.author = state.user.userName;
       dice.rolled = action.dice;
       socket.emit('roll_dice', dice);
+    }
+      break;
 
+    case SHARE_DICE: {
+      console.log(state.user.userName, 'ADD MESSAGE');
+      const dice = {};
+      dice.author = state.user.userName;
+      dice.rolled = state.dice.rolled;
+      socket.emit('share_dice', dice);
+    }
       break;
 
     default:

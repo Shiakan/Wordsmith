@@ -14,11 +14,10 @@ const initialState = {
  */
 export const ROLL_DICE = 'ROLL_DICE';
 const DICE_CHANGE = 'DICE_CHANGE';
-
+export const SHARE_DICE = 'SHARE_DICE';
 /**
  * Traitements
  */
-
 /**
  * Reducer
  */
@@ -52,6 +51,10 @@ export const rollDice = dice => ({
 export const diceChange = value => ({
   type: DICE_CHANGE,
   value,
+});
+
+export const diceShare = () => ({
+  type: SHARE_DICE,
 });
 
 /**

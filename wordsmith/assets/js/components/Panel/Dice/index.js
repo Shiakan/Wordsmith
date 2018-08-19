@@ -22,6 +22,7 @@ import './dice.sass';
 class Dice extends React.Component {
   static propTypes = {
     rollDice: PropTypes.func.isRequired,
+    diceShare: PropTypes.func.isRequired,
     diceChange: PropTypes.func.isRequired,
     diceValue: PropTypes.string,
     rolled: PropTypes.oneOfType([
@@ -85,6 +86,11 @@ class Dice extends React.Component {
     const { value } = evt.target;
     // I dispatch a field value with an action
     diceChange(value);
+  }
+
+  shareRoll = () => {
+    const { diceShare } = this.props;
+    diceShare();
   }
 
   render() {
@@ -161,7 +167,7 @@ class Dice extends React.Component {
           <button
             type="button"
             className="dice-block-share"
-            // onClick={}
+            onClick={this.shareRoll}
           >
             MJ Share
           </button>

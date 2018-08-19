@@ -71,6 +71,7 @@ const reducer = (state = initialState, action = {}) => {
         id: action.id,
         author: action.author,
         message: action.message,
+        dice: action.dice,
         // userId: action.userId,
       };
       // Nouveau state
@@ -107,6 +108,7 @@ export const receiveMessage = message => ({
   message: message.message,
   id: message.id,
   author: message.author,
+  dice: message.dice,
   // userId: message.userId,
 });
 /**

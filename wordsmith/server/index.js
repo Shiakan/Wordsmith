@@ -47,13 +47,20 @@ io.on('connection', function(socket) {
 
     socket.on('roll_dice', function(dice) {
       var message = {};
-      message.message = dice.rolled;
+      message.dice = dice.rolled;
       message.author = dice.author;
       message.id = uuidV4();
-      console.log(message, 'on send_message');
       if (dice.role === 'player') {
         io.to(param.roomId).emit('send_message', message);
       }
+    });
+
+    socket.on('share_dice', function(dice) {
+      var message = {};
+      message.dice = dice.rolled;
+      message.author = dice.author;
+      message.id = uuidV4();
+        io.to(param.roomId).emit('send_message', message);
     });
     
     socket.on('send_message', function(messageContent) {
@@ -69,7 +76,7 @@ io.on('connection', function(socket) {
       console.log('DISCONNECTION')
       var message = {};
       message.message = 'Vient de se déconnecter';
-      message.author = messageContent.author;
+      // message.author = messageContent.author;
       message.id = uuidV4();
       io.to(param.roomId).emit('send_message', message);
     });
