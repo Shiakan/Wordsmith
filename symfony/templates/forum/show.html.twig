@@ -10,6 +10,7 @@
         <p>{{subcategory.description}}</p>
     </div>
 
+    
     {% for thread in threads %}
         <div class="thread">
             <div class="container thread-description">
@@ -18,7 +19,18 @@
                 <h4 style="color:{{thread.author.characterProfile.groupForum.color}};">{{thread.author.username}}</h4>
             </div>
             <div class="container thread-statistic">
-                <img src="{{ asset('image/nonew.png') }}" class="icon">
+            {% for hasReadThread in thread.hasReadThreads %}
+                {% if hasReadThread.user.id is defined and hasReadThread.user.id == app.user.id %}
+                    {% if hasReadThread.postCount < thread.posts|length %} 
+                        <img src="{{ asset('image/new.png') }}" class="icon">
+                    {% else %}
+                        <img src="{{ asset('image/nonew.png') }}" class="icon">
+                    {% endif %}
+                {% else %}
+                        <img src="{{ asset('image/new.png') }}" class="icon">
+                 {% endif %}
+            {% endfor %}
+
                 <small> {{thread.posts|length}} Réponses</small>
             </div>
             <div class="container thread-last-message">
@@ -26,6 +38,7 @@
                 <a href="#">Prénom Nom</a>
             </div>
         </div>
+        
         {% endfor %}
     </div>
         <div class="text-center">

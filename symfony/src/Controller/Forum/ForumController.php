@@ -2,6 +2,7 @@
 
 namespace App\Controller\Forum;
 
+use App\Entity\Post;
 use App\Entity\Thread;
 use App\Entity\Category;
 use App\Form\SubjectType;
@@ -36,21 +37,48 @@ class ForumController extends AbstractController
     /**
      * @Route("/forum/{name}/page/{page}", name="forum_subcategory", requirements={"page" = "\d+"}, defaults={"page" = 1}, methods="GET|POST")
      */
-    public function showSubcategory(Subcategory $subcategory,ThreadRepository $threadRepository , Request $request, $page)
+    public function showSubcategory(Subcategory $subcategory,ThreadRepository $threadRepository , Request $request, $page, UserInterface $user)
     {
         $limit = 10; //limite de questions par page (pagination)
         $threads = $threadRepository->findByAll($page,$limit,$subcategory); //requête où on passe la page actuelle, le seeBanned et la limite de questions
         $totalThreads = $threadRepository->findCountMax($subcategory); //requête qui compte le nombre total de questions avec ou sans les banned
         $pageMax = ceil($totalThreads / $limit); // nombre de page max à afficher (sert pour bouton suivant)
-        //dump($totalThreads);die;
-        
-        //$threads = $subcategory->getThreads();
-        //dump($threads);die;
+
+        $userUpToDate = [];
+        $threadId = [];
+        // dump($threads);die;
+        foreach($threads as $currentThread) {
+            $repositoryHasRead = $this->getDoctrine()->getRepository(HasReadThread::class);
+            $hasReadThread = $repositoryHasRead->findByUserAndThread($user, $currentThread);
+
+            $threadIds [] = $currentThread->getId();
+
+            foreach($threadIds as $threadId) {
+
+                if($hasReadThread == true) {
+                    $blabla = $hasReadThread[0];
+                    
+                    if($blabla->getPostCount() < count($currentThread->getPosts())) {
+                        $userUpToDate [$threadId] = false;
+                    } else {
+                        $userUpToDate [$threadId] = true;
+                    }
+
+                }else{
+                    $userUpToDate [$threadId] = false;
+                }
+                // dump($userUpToDate);die;
+            }
+        }
+
+        // dump($userUpToDate);die;
+
         return $this->render('forum/show.html.twig', [
             'subcategory'=> $subcategory,
             'page'=>$page,
             'pageMax'=>$pageMax,
-            'threads' => $threads
+            'threads' => $threads,
+            'userUpToDate' => $userUpToDate
         ]);
     }
 

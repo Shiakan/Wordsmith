@@ -31,6 +31,11 @@ class HasReadThread
      */
     private $thread;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $postCount;
+
     public function getId()
     {
         return $this->id;
@@ -68,6 +73,18 @@ class HasReadThread
     public function setThread(?Thread $thread): self
     {
         $this->thread = $thread;
+
+        return $this;
+    }
+
+    public function getPostCount(): ?int
+    {
+        return $this->postCount;
+    }
+
+    public function setPostCount(?int $postCount): self
+    {
+        $this->postCount = $postCount;
 
         return $this;
     }

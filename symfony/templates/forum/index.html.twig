@@ -9,7 +9,6 @@
     </div>
 
     {% for category in categories %}
-    {% for hasReadThread in hasReadThreads %}
     <div class="container container-forum">
         <div class="category-header">
             <h2>{{category.name}}</h2>
@@ -32,7 +31,6 @@
         </div>
     {% endfor %}
     </div>
-    {% endfor %}
     {% endfor %}
 </div>
 {% endblock %}

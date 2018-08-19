@@ -113,29 +113,38 @@ class ThreadController extends Controller
     public function hasRead($thread, $user)
     {
         $hasReadThread = new HasReadThread();
+
+        $postCount = count($thread->getPosts());
+        
+
+        // dump(count($postCount));die;
         
         // We need to check if the user visiting the page has already read 
         // this thread
+
         $repositoryThread = $this->getDoctrine()->getRepository(HasReadThread::class);
         $readThread = $repositoryThread->findTimeStamp($user, $thread);
 
-        $repositoryPost = $this->getDoctrine()->getRepository(Post::class);
-        $readPost = $repositoryPost->findByThread($thread);
-        $lastPost = $readPost->getCreatedAt();
+        // $repositoryPost = $this->getDoctrine()->getRepository(Post::class);
+        // $readPost = $repositoryPost->findByThread($thread);
+        // $lastPost = $readPost->getCreatedAt();
 
         if($readThread == false) {
             $em = $this->getDoctrine()->getManager();
             $hasReadThread->setThread($thread);
             $hasReadThread->setUser($user);
+            $hasReadThread->setPostCount($postCount);
             $hasReadThread->setTimestamp(new \DateTime());
             $em->persist($hasReadThread);
             $em->flush();
         } else{
-            $currentTimestamp = $readThread->getTimestamp();
+            $currentCount = $readThread->getpostCount();
 
-            if($lastPost > $currentTimestamp) {
+            if($currentCount == null || $currentCount < $postCount) {
+                // $newPostCount = $postCount + 1;
+                // dump($postCount);die;
                 $em = $this->getDoctrine()->getManager();
-                $readThread->setTimestamp(new \DateTime());
+                $readThread->setPostCount($postCount);
                 $em->persist($readThread);
                 $em->flush();
             }
