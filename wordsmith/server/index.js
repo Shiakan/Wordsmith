@@ -58,7 +58,7 @@ io.on('connection', function(socket) {
     socket.on('share_dice', function(dice) {
       var message = {};
       message.dice = dice.rolled;
-      message.author = dice.author;
+      message.author = `[MJ] ${dice.author}`;
       message.id = uuidV4();
         io.to(param.roomId).emit('send_message', message);
     });
@@ -66,7 +66,11 @@ io.on('connection', function(socket) {
     socket.on('send_message', function(messageContent) {
       var message = {};
       message.message = messageContent.message;
-      message.author = messageContent.author;
+      if (messageContent.role === 'player') {
+        message.author = messageContent.author;
+      } else {
+        message.author = `[MJ] ${messageContent.author}`;
+      }
       message.id = uuidV4();
       console.log(message, 'on send_message');
       io.to(param.roomId).emit('send_message', message);
