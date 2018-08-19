@@ -23,13 +23,13 @@ class SecurityController extends Controller
      * @Route("/inscription", name="security_registration")
      */
     public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
-    {
+    {   
         $user = new User();
 
-        // On récupère le rôle 'utilisateur'
+        // On récupère le rôle 'membre' pour le donner automatiquement à chaque nouvel inscrit
+        $code = 'ROLE_USER';
         $repository = $this->getDoctrine()->getRepository(Role::class);
-        $role = $repository->findAll();
-        $roleUser = $role[2];
+        $roleUser = $repository->findOneByCode($code);
 
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
@@ -41,6 +41,7 @@ class SecurityController extends Controller
             $manager->persist($user);
             $manager->flush();
 
+            //On crée automatiquement un profil forum & une charactersheet à l'utilisateur lorsqu'il s'inscrit
             $this->createSheets($user);
 
             // On redirige vers le login
@@ -67,9 +68,10 @@ class SecurityController extends Controller
             $form = $this->createForm(LoginType::class, $defaultData);
 
             if (!is_null($authenticationUtils->getLastAuthenticationError(false))) {
-                $form->addError(new FormError(
-                    $authenticationUtils->getLastAuthenticationError()->getMessageKey()
-                ));
+                $this->addFlash('warning', 'nope');
+                // $form->addError(new FormError(
+                //     $authenticationUtils->getLastAuthenticationError()->getMessageKey()
+                // ));
             }
             $form->handleRequest($request);
             return $this->render('security/login.html.twig',[
@@ -81,12 +83,13 @@ class SecurityController extends Controller
     }
 
     public function createSheets($user)
-    {
+    {   
         $characterProfile = new CharacterProfile();
         $charactersheet = new Charactersheet();
 
         $em = $this->getDoctrine()->getManager();
         $characterProfile->setUser($user);
+        // On donne un avatar, un groupe et un rang par défaut à chaque nouvel utilisateur
         $characterProfile->setAvatar('rdgregz');
         $em->persist($characterProfile);
         $em->flush();
