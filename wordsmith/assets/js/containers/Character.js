@@ -41,7 +41,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(movePlayer(value));
   },
   deletePlayer: () => {
-    dispatch(deletePlayer(ownProps.id));
+    dispatch(deletePlayer(ownProps));
   },
 });
 

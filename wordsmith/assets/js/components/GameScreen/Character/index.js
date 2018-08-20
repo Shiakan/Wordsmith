@@ -73,10 +73,11 @@ class Character extends React.Component {
               color,
             }}
           >{name}
-            <TiDelete
+          {mjCheck 
+            && <TiDelete
               className="character-nickname-delete"
               onClick={deletePlayer}
-            />
+                />}
           </div>
           <div
             className={userClass}
