@@ -2,7 +2,7 @@
 
 {% block main %}
     <div class="wrapper"> 
-        <div class="navbar navbar-codex">
+        <div class="navbar-codex">
             <ul>
                 {% for tag in tags %}
                 <li>
@@ -12,10 +12,21 @@
             </ul>
         </div>
         <div class="header-codex">
-
         </div>
         <div class="last-article">
-            <h2>Les dernières publications</h2>
+            <h2>Les dernières publications</h2> 
+            <div class="burger-navbar-codex">
+                <div class="dropdown">
+                    <button class="dropbtn dropbtn-codex"> Parcourir les tags
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content content-codex">
+                    {% for tag in tags %}
+                        <a href="{{path('search_by_tags',{'id':tag.id})}}">{{tag.name}}</a>
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
             {{ form_start(form, {'action': path('search_article'), 'method': 'POST', 'attr' : { 'class': 'search-form' }}) }}
             {{ form_row(form.title) }}
             <button type="submit"><i class="fas fa-search"></i></button>

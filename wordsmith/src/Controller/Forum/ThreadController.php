@@ -30,7 +30,7 @@ class ThreadController extends Controller
     /**
      * @Route("/thread/{subcategory_id}/new", name="thread_new", methods="GET|POST")
      */
-    public function new(Request $request, UserInterface $user, $subcategory_id): Response
+    public function new(Request $request, UserInterface $user=null, $subcategory_id): Response
     {   
         $thread = new Thread();
         
