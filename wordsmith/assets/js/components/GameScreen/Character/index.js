@@ -5,6 +5,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Draggable from 'react-draggable';
 import { TiDelete } from 'react-icons/ti';
+import classNames from 'classnames';
+
 
 /**
  * Local import
@@ -26,6 +28,8 @@ class Character extends React.Component {
     deletePlayer: PropTypes.func.isRequired,
     coordX: PropTypes.number.isRequired,
     coordY: PropTypes.number.isRequired,
+    userName: PropTypes.string.isRequired,
+    role: PropTypes.string.isRequired,
   }
 
   componentDidMount() {
@@ -39,14 +43,26 @@ class Character extends React.Component {
 
   render() {
     const {
-      name, color, id, deletePlayer, coordX, coordY,
+      name, color, id, deletePlayer, coordX, coordY, userName, role,
     } = this.props;
+    console.log(userName, role);
+    const mjCheck = (role === 'dm' && true);
+    const userCheck = (name === userName && true);
+    console.log('bool :', userCheck);
+
+    const userClass = classNames(
+      'character-cursor',
+      {
+        'character-cursor-other': !userCheck && !mjCheck,
+
+      },
+    );
     return (
       <Draggable
         onStop={this.movePlayer}
         bounds="parent"
         defaultPosition={{ x: coordX, y: coordY }}
-        handle=".character-cursor"
+        cancel=".character-cursor-other"
       >
         <div
           className="character"
@@ -57,13 +73,14 @@ class Character extends React.Component {
               color,
             }}
           >{name}
-            <TiDelete
-              className="character-nickname-delete"
-              onClick={deletePlayer}
-            />
-          </div>
+            {mjCheck 
+              && <TiDelete
+                className="character-nickname-delete"
+                onClick={deletePlayer}
+                  />}
+            </div>
           <div
-            className="character-cursor"
+            className={userClass}
             id={id}
             style={{
               backgroundColor: color,
