@@ -34,6 +34,12 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         diceValue: action.value,
       };
+
+    case SHARE_DICE:
+      return {
+        ...state,
+        diceValue: '',
+      };
     default:
       return state;
   }
