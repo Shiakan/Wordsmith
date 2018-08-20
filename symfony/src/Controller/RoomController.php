@@ -28,7 +28,7 @@ class RoomController extends Controller
     /**
      * @Route("room/new", name="room_new", methods="GET|POST")
      */
-    public function new(Request $request, UserInterface $user)
+    public function new(Request $request, UserInterface $user, \Swift_Mailer $mailer)
     {   
         $room = new Room();
         $form = $this->createForm(RoomType::class, $room);
@@ -42,7 +42,24 @@ class RoomController extends Controller
             $room->setCode($code);
             $em->persist($room);
             $em->flush();
-
+            /*MAIL TO PARTICIPANTS*/
+            foreach ($room->getParticipants() as $participant) {
+                $message= (new \Swift_Message('Hello Mail')) //On instancie Swift Mailer
+                        ->setSubject('Vous avez été invité par '.$room->getDungeonmaster()->getUsername().'') //On définie le sujet du mail
+                        ->setFrom('projetkelnor@gmail.com') //On définie l'expéditeur
+                        ->setTo($participant->getEmail()) //Grâce à l'enregistrement, on définie le destinataire
+                        ->setContentType("text/html") //On définie que le contenue est un mail html
+                        ->setBody(  //On définie le body comme étant
+                            $this->renderView('emails/roomJoined.html.twig', //Ce fichier twig
+                                ['user'=>$user,
+                                 'participant'=>$participant,
+                                 'code'=>$code,
+                                ] //On lui passe user
+                            )
+                        );
+                        //On envoie le mail
+                        $mailer->send($message);
+            }
             return $this->redirectToRoute('room_show', ['code' => $code ]);
         }
 
