@@ -24,13 +24,8 @@ class ForumController extends AbstractController
         $repositoryCategory = $this->getDoctrine()->getRepository(Category::class);
         $categories = $repositoryCategory ->findAll();
 
-        $repositoryHasRead = $this->getDoctrine()->getRepository(HasReadThread::class);
-        $hasReadThreads = $repositoryHasRead->findByUser($user);
-
-
         return $this->render('forum/index.html.twig', [
             'categories' => $categories,
-            'hasReadThreads' => $hasReadThreads
         ]);
     }
 
@@ -40,37 +35,15 @@ class ForumController extends AbstractController
     public function showSubcategory(Subcategory $subcategory,ThreadRepository $threadRepository , Request $request, $page, UserInterface $user)
     {
         $limit = 10; //limite de questions par page (pagination)
-        $threads = $threadRepository->findByAll($page,$limit,$subcategory); //requête où on passe la page actuelle, le seeBanned et la limite de questions
+        $threads = $threadRepository->findByAll($page,$limit,$subcategory,$user); //requête où on passe la page actuelle, le seeBanned et la limite de questions
         $totalThreads = $threadRepository->findCountMax($subcategory); //requête qui compte le nombre total de questions avec ou sans les banned
         $pageMax = ceil($totalThreads / $limit); // nombre de page max à afficher (sert pour bouton suivant)
-
-        $userUpToDate = [];
-
-        $repositoryHasRead = $this->getDoctrine()->getRepository(HasReadThread::class);
-        $hasReadThreads = $repositoryHasRead->findByUserAndThread($user, $threads);
-
-        // foreach($threads as $currentThread) {
-        //     $repositoryHasRead = $this->getDoctrine()->getRepository(HasReadThread::class);
-        //     $hasReadThread = $repositoryHasRead->findByUserAndThread($user, $currentThread);
-
-
-        //     if($hasReadThread == true) {
-
-        //         $userUpToDate [] = true;
-
-        //     }else{
-        //         $userUpToDate [] = false;
-        //     }
-        // }
-
-        // dump($hasReadThreads);die;
-
+        
         return $this->render('forum/show.html.twig', [
             'subcategory'=> $subcategory,
             'page'=>$page,
             'pageMax'=>$pageMax,
             'threads' => $threads,
-            'hasReadThreads' => $hasReadThreads
         ]);
     }
 

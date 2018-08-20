@@ -49,11 +49,17 @@ class Subcategory
      */
     private $isPrivate;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\HasReadThread", mappedBy="subcategory")
+     */
+    private $hasReadThreads;
+
 
     public function __construct()
     {
         $this->threads = new ArrayCollection();
         $this->isPrivate = 0;
+        $this->hasReadThreads = new ArrayCollection();
     }
 
     public function getId()
@@ -153,5 +159,36 @@ class Subcategory
     }
     public function __toString(){
     return $this->name;
+    }
+
+    /**
+     * @return Collection|HasReadThread[]
+     */
+    public function getHasReadThreads(): Collection
+    {
+        return $this->hasReadThreads;
+    }
+
+    public function addHasReadThread(HasReadThread $hasReadThread): self
+    {
+        if (!$this->hasReadThreads->contains($hasReadThread)) {
+            $this->hasReadThreads[] = $hasReadThread;
+            $hasReadThread->setSubcategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHasReadThread(HasReadThread $hasReadThread): self
+    {
+        if ($this->hasReadThreads->contains($hasReadThread)) {
+            $this->hasReadThreads->removeElement($hasReadThread);
+            // set the owning side to null (unless already changed)
+            if ($hasReadThread->getSubcategory() === $this) {
+                $hasReadThread->setSubcategory(null);
+            }
+        }
+
+        return $this;
     }
 }

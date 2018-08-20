@@ -50,13 +50,14 @@ class ThreadRepository extends ServiceEntityRepository
     /**
     * @return Thread[] Returns an array of Thread objects
     */
-        public function findByAll($page,$limit,$subcategory)
+    public function findByAll($page,$limit,$subcategory,$user)
     {
-         $offset = ($page == 0)? 0 : ($page-1) * $limit;
+         $offset = ($page == 0)? 0 : ($page-1) * $limit; //Définition de offset via un calcul
 
-         $qb = $this->createQueryBuilder('t')
-            ->where('t.subcategory = :subcategory')
-            ->setParameter('subcategory', $subcategory)
+         $qb = $this->createQueryBuilder('t') //On créé une query qui séléctionne tous les threads
+            ->where('t.subcategory = :subcategory')//Ou subcategory  est égale au parametre :subcategory
+            ->leftJoin('t.hasReadThreads','h')
+            ->setParameters(array('subcategory' => $subcategory))
             ->addSelect('COUNT(t) AS HIDDEN mycount')
             ->groupBy('t')
             ->orderBy('t.createdAt', 'DESC')
