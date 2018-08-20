@@ -64,10 +64,11 @@ io.on('connection', function(socket) {
 
     socket.on('share_dice', function(dice) {
       var message = {};
+      message.diceValue = dice.diceValue;
       message.dice = dice.rolled;
       message.author = `[MJ] ${dice.author}`;
       message.id = uuidV4();
-        io.to(param.roomId).emit('send_message', message);
+      io.to(param.roomId).emit('send_message', message);
     });
     
     socket.on('send_message', function(messageContent) {

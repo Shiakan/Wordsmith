@@ -58,6 +58,7 @@ const socketConnect = store => next => (action) => {
     case SHARE_DICE: {
       console.log(state.user.userName, 'ADD MESSAGE');
       const dice = {};
+      dice.diceValue = state.dice.diceValue;
       dice.author = state.user.userName;
       dice.rolled = state.dice.rolled;
       socket.emit('share_dice', dice);
