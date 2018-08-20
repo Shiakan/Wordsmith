@@ -25,7 +25,10 @@ class Messages extends React.Component {
   // };
 
   componentDidUpdate() {
-    this.messageDiv.scrollTo(0, this.messageDiv.scrollHeight);
+    // if (this.messageDiv.scrollTop + this.messageDiv.clientHeight === this.messageDiv.scrollHeight) {
+      // this.messageDiv.scrollTop = this.messageDiv.scrollHeight;
+      // }
+      this.messageDiv.scrollTo(0, this.messageDiv.scrollHeight);
   }
 
   // saveRef = (domElement) => {
@@ -34,7 +37,7 @@ class Messages extends React.Component {
 
   render() {
     const { messages } = this.props;
-    console.log(messages);
+    console.log(messages, 'ALL MESSAGES');
     return (
       <div
         ref={(element) => {
@@ -45,9 +48,11 @@ class Messages extends React.Component {
         {messages.map((message) => {
           return (
             <div className="message" key={message.id}>
-              {/* <p className="message-auteur">{message.auteur}</p> */}
-              {console.log(message)}
-              <p className="message-content">{message.message}</p>
+              {console.log(message, 'mess in index.js')}
+              {message.message
+              && <p className="message-content">{message.author}:{message.message}{message.dice}</p>}
+              {message.dice
+              && <p className="message-content">{message.author} à tiré un {message.dice}</p>}
             </div>
           );
         })}

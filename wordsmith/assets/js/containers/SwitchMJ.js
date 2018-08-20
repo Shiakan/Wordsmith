@@ -10,7 +10,7 @@ import SwitchMJ from '../components/GameScreen/SwitchMJ';
 
 // Action Creators
 import {
-  togglePicker, changeColor, changeInput, movePlayer, createPlayer,
+  togglePicker, changeColor, changeInput, movePlayer, createPlayer, changeMap,
 } from '../store/reducers/gameScreen';
 
 /* === State (données) ===
@@ -24,6 +24,7 @@ const mapStateToProps = state => ({
   color: state.gameScreen.color,
   toggle: state.gameScreen.toggle,
   typingName: state.gameScreen.typingName,
+  maps: state.gameScreen.maps,
 });
 
 /* === Actions ===
@@ -48,6 +49,9 @@ const mapDispatchToProps = dispatch => ({
   },
   onDisplayPlayer: (value) => {
     dispatch(movePlayer(value));
+  },
+  changeMap: (value) => {
+    dispatch(changeMap(value));
   },
 });
 

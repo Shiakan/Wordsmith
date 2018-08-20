@@ -12,6 +12,7 @@ import gameScreen from './gameScreen';
 import sheet from './sheet';
 import textInput from './textInput';
 import messages from './messages';
+import user from './user';
 
 
 const reducers = combineReducers({
@@ -21,6 +22,7 @@ const reducers = combineReducers({
   sheet,
   textInput,
   messages,
+  user,
 });
 
 /**

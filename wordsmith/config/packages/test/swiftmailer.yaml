@@ -1,2 +1,2 @@
 swiftmailer:
-    disable_delivery: ['mattngtn@gmail.com']
+    disable_delivery: true

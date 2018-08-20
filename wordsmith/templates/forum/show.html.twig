@@ -10,71 +10,25 @@
         <p>{{subcategory.description}}</p>
     </div>
 
-    
-    {% for thread in threads %}
+    {% for thread in subcategory.threads %}
         <div class="thread">
             <div class="container thread-description">
+
                 <h3><a href="{{path('thread_show', {'id': thread.id })}}">{{thread.title}}</a></h3>
                 <small>{{thread.subtitle}}</small>
-                <h4 style="color:{{thread.author.characterProfile.groupForum.color}};">{{thread.author.username}}</h4>
+                <h4>{{thread.author.username}}</h4>
             </div>
             <div class="container thread-statistic">
-            {% for hasReadThread in thread.hasReadThreads %}
-                {% if hasReadThread.user.id is defined %}
-                    {% if hasReadThread.user.id == app.user.id and hasReadThread.thread.id == thread.id %} {# On vérifie que le user id de la thread actuelle est bien celui du user actuellement connecté, DONC PAS TOUCHE ET PAS DE ELSE #}
-                        {% if hasReadThread.postCount < thread.posts|length %} 
-                            <img src="{{ asset('image/new.png') }}" class="icon">
-                        {% else %}
-                            <img src="{{ asset('image/nonew.png') }}" class="icon">
-                        {% endif  %}
-                    {% endif %} 
-                {% endif %} 
-            {% endfor %}
-            <small> {{thread.posts|length}} Réponses</small>
+                <img src="{{ asset('image/nonew.png') }}" class="icon">
+                <small> {{thread.posts|length}} Réponses</small>
             </div>
             <div class="container thread-last-message">
                 <small>15/08/2018</small>
                 <a href="#">Prénom Nom</a>
             </div>
         </div>
-    {% endfor %}
-        {# {% for hasReadThread in hasReadThreads %}
-        <div class="thread">
-            <div class="container thread-description">
-                <h3><a href="{{path('thread_show', {'id': hasReadThread.thread.id })}}">{{hasReadThread.thread.title}}</a></h3>
-                <small>{{hasReadThread.thread.subtitle}}</small>
-                <h4 style="color:{{hasReadThread.user.characterProfile.groupForum.color}};">{{hasReadThread.user.username}}</h4>
-            </div>
-            <div class="container thread-statistic">
-                {% if hasReadThread.user.id is defined %}
-                    {% if hasReadThread.user.id == app.user.id %}
-                        {% if hasReadThread.postCount < hasReadThread.thread.posts|length %} 
-                            <img src="{{ asset('image/new.png') }}" class="icon">
-                        {% else %}
-                            <img src="{{ asset('image/nonew.png') }}" class="icon">
-                        {% endif %}
-                    {% endif %} 
-                {% endif %}
-                <small> {{hasReadThread.thread.posts|length}} Réponses</small>
-            </div>
-            <div class="container thread-last-message">
-                <small>15/08/2018</small>
-                <a href="#">Prénom Nom</a>
-            </div>
-        </div>
-        {% endfor %} #}
     </div>
-        <div class="text-center">
-            {# Si page supérieure à 1 on affiche un bouton précédent qui mène à la page-1 #} 
-            {% if page > 1 %}
-            <a href="{{path('forum_subcategory',{'name':subcategory.name,'page':page -1})}}" class="btn-pagination"><i class="fas fa-arrow-left"></i> Précédent</a>
-            {% endif %} {# si page inférieure à la page max calculée alors on affiche un bouton suivant qui mène à la page +1 #} 
-            {% if page < pageMax %}
-            <a href="{{path('forum_subcategory',{'name':subcategory.name,'page':page +1})}}" class="btn-pagination">Suivant
-            <i class="fas fa-arrow-right"></i></a>  
-            {% endif %}
-        </div>
-    <a class="btn" href="{{path('thread_new', {'subcategory_id' : subcategory.id})}}">Poster un nouveau sujet</a>
+    {% endfor %}
+    <a class="btn" href="{{path('thread_new', {'subcategory_id' : subcategory.id})}}">Poster un nouvea sujet</a>
  </div>
-
 {% endblock %}

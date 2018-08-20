@@ -5,9 +5,7 @@ namespace App\Controller;
 use App\Entity\Role;
 use App\Entity\User;
 
-use App\Entity\Thread;
 use App\Form\LoginType;
-use App\Entity\HasReadThread;
 use App\Entity\Charactersheet;
 use App\Form\RegistrationType;
 use App\Entity\CharacterProfile;
@@ -24,67 +22,33 @@ class SecurityController extends Controller
     /**
      * @Route("/inscription", name="security_registration")
      */
-    public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder, \Swift_Mailer $mailer)
-    {   
+    public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
+    {
         $user = new User();
 
-        // On récupère le rôle 'membre' pour le donner automatiquement à chaque nouvel inscrit
-        $code = 'ROLE_USER';
+        // On récupère le rôle 'utilisateur'
         $repository = $this->getDoctrine()->getRepository(Role::class);
-        $roleUser = $repository->findOneByCode($code);
+        $role = $repository->findAll();
+        $roleUser = $role[2];
 
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){ //Si le form est valide et envoyé alors
-            $hash = $encoder->encodePassword($user, $user->getPassword());  //On encode le mot de passe
-            $user->setRole($roleUser); //On set le role de l'utilisateur
-            $user->setPassword($hash); // On set le passeword avec le hash
-            $manager->persist($user); //On persist user
-            $manager->flush(); //On flush le tout
-            //On crée automatiquement un profil forum & une charactersheet à l'utilisateur lorsqu'il s'inscrit
+        if($form->isSubmitted() && $form->isValid()){
+            $hash = $encoder->encodePassword($user, $user->getPassword());
+            $user->setRole($roleUser);
+            $user->setPassword($hash);
+            $manager->persist($user);
+            $manager->flush();
+
             $this->createSheets($user);
-            $this->createHasRead($user);
-            $message= (new \Swift_Message('Hello Mail')) //On instancie Swift Mailer
-                    ->setSubject('Bienvenue '.$user->getUsername().'') //On définie le sujet du mail
-                    ->setFrom('projetkelnor@gmail.com') //On définie l'expéditeur
-                    ->setTo($user->getEmail()) //Grâce à l'enregistrement, on définie le destinataire
-                    ->setContentType("text/html") //On définie que le contenue est un mail html
-                    ->setBody(  //On définie le body comme étant
-                        $this->renderView('emails/registration.html.twig', //Ce fichier twig
-                            ['user'=>$user] //On lui passe user
-                        )
-                    );
-                    //On envoie le mail
-                    $mailer->send($message);
-                    // On redirige vers le login
-                    return $this->redirectToRoute('security_login');
+
+            // On redirige vers le login
+            return $this->redirectToRoute('security_login');
         }
         return $this->render('security/inscription.html.twig', [
             'form' => $form->createView()
         ]);
-    }
-
-    public function createHasRead($user) {
-
-        $repository = $this->getDoctrine()->getRepository(Thread::class);
-        $threads = $repository->findAll();
-
-        foreach($threads as $thread) {
-            $hasReadThread = new HasReadThread();
-            $em = $this->getDoctrine()->getManager();
-            $hasReadThread->setSubcategory($thread->getSubcategory());
-            $hasReadThread->setThread($thread);
-            $hasReadThread->setUser($user);
-            $hasReadThread->setThreadCount(0);
-            $hasReadThread->setPostCount(0);
-            $hasReadThread->setTimestamp(new \Datetime());
-            $em->persist($hasReadThread);
-        }
-        
-        $em->flush(); //Persist objects that did not make up an entire batch
-        $em->clear();
-
     }
 
       /**
@@ -103,10 +67,9 @@ class SecurityController extends Controller
             $form = $this->createForm(LoginType::class, $defaultData);
 
             if (!is_null($authenticationUtils->getLastAuthenticationError(false))) {
-                $this->addFlash('warning', 'nope');
-                // $form->addError(new FormError(
-                //     $authenticationUtils->getLastAuthenticationError()->getMessageKey()
-                // ));
+                $form->addError(new FormError(
+                    $authenticationUtils->getLastAuthenticationError()->getMessageKey()
+                ));
             }
             $form->handleRequest($request);
             return $this->render('security/login.html.twig',[
@@ -118,13 +81,12 @@ class SecurityController extends Controller
     }
 
     public function createSheets($user)
-    {   
+    {
         $characterProfile = new CharacterProfile();
         $charactersheet = new Charactersheet();
 
         $em = $this->getDoctrine()->getManager();
         $characterProfile->setUser($user);
-        // On donne un avatar, un groupe et un rang par défaut à chaque nouvel utilisateur
         $characterProfile->setAvatar('rdgregz');
         $em->persist($characterProfile);
         $em->flush();

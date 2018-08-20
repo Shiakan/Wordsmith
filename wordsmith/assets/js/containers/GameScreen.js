@@ -21,7 +21,8 @@ import {
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
 const mapStateToProps = state => ({
-  board: state.gameScreen.board,
+  isBoard: state.gameScreen.isBoard,
+  isMap: state.gameScreen.isMap,
   map: state.gameScreen.map,
   grid: state.gameScreen.grid,
   characters: state.gameScreen.characters,

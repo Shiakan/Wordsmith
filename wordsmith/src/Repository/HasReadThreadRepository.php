@@ -19,48 +19,22 @@ class HasReadThreadRepository extends ServiceEntityRepository
         parent::__construct($registry, HasReadThread::class);
     }
 
-
-    public function findTimeStamp($user, $thread): ?HasReadThread
+//    /**
+//     * @return HasReadThread[] Returns an array of HasReadThread objects
+//     */
+    /*
+    public function findByExampleField($value)
     {
         return $this->createQueryBuilder('h')
-            ->where('h.user = :user')
-            ->andWhere('h.thread = :thread')
-            ->setParameters(array('user'=> $user, 'thread' => $thread))
+            ->andWhere('h.exampleField = :val')
+            ->setParameter('val', $value)
+            ->orderBy('h.id', 'ASC')
+            ->setMaxResults(10)
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
-
-    /**
-     * @return HasReadThread[] Returns an array of HasReadThread objects
-     */
-    public function findByUserAndThread($user, $thread)
-    {
-        return $this->createQueryBuilder('h') //On créé une requete sql qui cherche tous les hasreadthread
-            ->where('h.user = :user') //Qui ont pour user id celui du user qui visite actuellement la page
-            ->andWhere('h.thread = :thread') //Qui ont pour thread_id celui des threads dans la subcategory que l'on visite
-            ->setParameters(array('user'=> $user, 'thread' => $thread)) //On définit les paramètres précédemment sortie soit user est $user et thread est un array de $threads
-            ->orderBy('h.id', 'ASC')//On range les threads par id croissant
-            ->getQuery()
-            ->getResult()
-            ;
-    }
-
-    /**
-     * @return HasReadThread[] Returns an array of HasReadThread objects
-     */
-
-    public function findByUser($user) 
-    {
-        return $this->createQueryBuilder('h')
-            ->andWhere('h.user = :user')
-            ->setParameter('user', $user)
-            ->orderBy('h.id', 'ASC')
-            ->getQuery()
-            ->getResult()
-            ;
-    }
-   
+    */
 
     /*
     public function findOneBySomeField($value): ?HasReadThread
@@ -73,5 +47,4 @@ class HasReadThreadRepository extends ServiceEntityRepository
         ;
     }
     */
-
 }
