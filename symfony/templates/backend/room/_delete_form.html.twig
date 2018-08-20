@@ -1,5 +1,0 @@
-<form method="post" action="{{ path('backend_room_delete', {'id': room.id}) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer cette room?');"class="btn-delete">
-    <input type="hidden" name="_method" value="DELETE">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ room.id) }}">
-    <button title="Supprimer le rang" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-</form>
