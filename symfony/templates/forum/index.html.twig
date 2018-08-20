@@ -23,9 +23,9 @@
                     <p>{{subcategory.reminder}}</p>
                 </div>
                 <div class="container statistic">
-                {% for hasReadThread in subcategory.hasReadThreads %}
+                {# {% for hasReadThread in subcategory.hasReadThreads %}
                     {% if hasReadThread.user.id is defined %}
-                        {% if hasReadThread.user.id == app.user.id and hasReadThread.subcategory.id == subcategory.id %} {# On vérifie que le user id de la thread actuelle est bien celui du user actuellement connecté, DONC PAS TOUCHE ET PAS DE ELSE #}
+                        {% if hasReadThread.user.id == app.user.id and hasReadThread.subcategory.id == subcategory.id %}
                             {% if subcategory.threads|length == 0  %} 
                                 <img src="{{ asset('image/nonew.png') }}" class="icon">
                             {% elseif hasReadThread.threadCount < subcategory.threads|length %}
@@ -35,7 +35,7 @@
                             {% endif  %}
                         {% endif %} 
                     {% endif %} 
-                {% endfor %}
+                {% endfor %} #}
                     <small>{{subcategory.threads|length}} Sujets</small>
                 </div>
                 <div class="container last-message">
