@@ -29,7 +29,7 @@ const initialState = {
     },
     {
       id: uuidv4(),
-      name: 'orc',
+      name: 'Varang',
       color: '#008b02',
       coordX: 10,
       coordY: 240,
@@ -43,7 +43,7 @@ const initialState = {
     },
     {
       id: uuidv4(),
-      name: 'nain',
+      name: 'Test2',
       color: '#b80000',
       coordX: 10,
       coordY: 380,

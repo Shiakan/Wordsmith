@@ -20,8 +20,9 @@ import {
  *  - ownProps : les props passées au container
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
-const mapStateToProps = () => ({
-  // positioning: state.gameScreen.positioning,
+const mapStateToProps = state => ({
+  userName: state.user.userName,
+  role: state.user.role,
   // color: state.gameScreen.color,
   // name: state.gameScreen.name,
   // coordX: state.gameScreen.coordX,
