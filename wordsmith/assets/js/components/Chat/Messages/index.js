@@ -46,13 +46,14 @@ class Messages extends React.Component {
         className="messages"
       >
         {messages.map((message) => {
+          console.log(message, 'MESSAGE');
           return (
             <div className="message" key={message.id}>
               {console.log(message, 'mess in index.js')}
               {message.message
-              && <p className="message-content">{message.author}:{message.message}{message.dice}</p>}
+              && <p className="message-content">{message.author} : {message.message}{message.dice}</p>}
               {message.dice
-              && <p className="message-content">{message.author} à tiré un {message.dice}</p>}
+              && <p className="message-content">{message.author} à lancé un {message.diceValue} et a obtenu un {message.dice}</p>}
             </div>
           );
         })}

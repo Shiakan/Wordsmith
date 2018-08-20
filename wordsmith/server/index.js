@@ -43,6 +43,11 @@ io.on('connection', function(socket) {
     socket.join(param.roomId);
     users.removeUser(param.selfId);
     users.addUser(param.selfId, param.userName, param.roomId);
+    var message = {};
+    message.message = 'Vient de se connecter';
+    message.author = param.userName;
+    message.id = uuidV4();
+    io.to(param.roomId).emit('send_message', message);
     console.log(users);
 
     var tokenToAdd = {};
@@ -54,7 +59,9 @@ io.on('connection', function(socket) {
       message.dice = dice.rolled;
       message.author = dice.author;
       message.id = uuidV4();
-      if (dice.role === 'player') {
+      message.diceValue = dice.diceValue;
+      console.log(message, 'DICE IN SERVER')
+      if (dice.role === 'player' && !isNaN(dice.rolled)) {
         io.to(param.roomId).emit('send_message', message);
       }
     });
@@ -66,10 +73,13 @@ io.on('connection', function(socket) {
 
     socket.on('share_dice', function(dice) {
       var message = {};
+      message.diceValue = dice.diceValue;
       message.dice = dice.rolled;
       message.author = `[MJ] ${dice.author}`;
       message.id = uuidV4();
+      if (!isNaN(dice.rolled)) {
         io.to(param.roomId).emit('send_message', message);
+      }
     });
     
     socket.on('send_message', function(messageContent) {
@@ -89,7 +99,7 @@ io.on('connection', function(socket) {
       console.log('DISCONNECTION')
       var message = {};
       message.message = 'Vient de se déconnecter';
-      // message.author = messageContent.author;
+      message.author = param.userName;
       message.id = uuidV4();
       io.to(param.roomId).emit('send_message', message);
       var tokenToKill = {};

@@ -24,6 +24,7 @@ class Dice extends React.Component {
     rollDice: PropTypes.func.isRequired,
     diceShare: PropTypes.func.isRequired,
     diceChange: PropTypes.func.isRequired,
+    role: PropTypes.string,
     diceValue: PropTypes.string,
     rolled: PropTypes.oneOfType([
       PropTypes.string,
@@ -34,10 +35,12 @@ class Dice extends React.Component {
   static defaultProps = {
     diceValue: '',
     rolled: '',
+    role: '',
   }
 
   componentDidMount() {
-    console.log('Dice cDM');
+    const { role } = this.props;
+    console.log('Dice cDM', role);
   }
 
   roll = (dice) => {
@@ -97,6 +100,7 @@ class Dice extends React.Component {
     const {
       diceValue,
       rolled,
+      role,
     } = this.props;
     const toolTip = classNames(
       'tooltip',
@@ -164,13 +168,16 @@ class Dice extends React.Component {
           {rolled && rolled !== 'wrong'
           && <p className="dice-block-result">Vous avez tiré un {rolled}</p>
           }
+          {role === 'dm'
+          && (
           <button
             type="button"
             className="dice-block-share"
             onClick={this.shareRoll}
           >
             MJ Share
-          </button>
+          </button>)
+          }
 
         </div>
       </div>
