@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controller;
-
 use App\Entity\Room;
 use App\Entity\User;
 use App\Form\RoomType;
@@ -12,8 +11,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-
-
 class RoomController extends Controller
 {
     /**
@@ -24,7 +21,6 @@ class RoomController extends Controller
         return $this->render('room/index.html.twig', [
             'rooms' => $roomRepository->findAll()]);
     }
-
     /**
      * @Route("room/new", name="room_new", methods="GET|POST")
      */
@@ -33,7 +29,6 @@ class RoomController extends Controller
         $room = new Room();
         $form = $this->createForm(RoomType::class, $room);
         $form->handleRequest($request);
-
         $code = $this->createRandomCode();
         
         if ($form->isSubmitted() && $form->isValid()) {
@@ -62,15 +57,12 @@ class RoomController extends Controller
             }
             return $this->redirectToRoute('room_show', ['code' => $code ]);
         }
-
         return $this->render('room/new.html.twig', [
             'room' => $room,
             'form' => $form->createView(),
         ]);
     }
-
     private function createRandomCode() { 
-
         $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ023456789"; 
         srand((double)microtime()*1000000); 
         $i = 0; 
@@ -85,7 +77,6 @@ class RoomController extends Controller
     
         return $pass; 
     } 
-
     /**
      * @Route("room/{code}", name="room_show", methods="GET")
      */
@@ -95,7 +86,6 @@ class RoomController extends Controller
                 'room' => $room
             ]);
     }
-
     /**
      * @Route("room/{id}/edit", name="room_edit", methods="GET|POST")
      */
@@ -103,19 +93,15 @@ class RoomController extends Controller
     {
         $form = $this->createForm(RoomType::class, $room);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
             return $this->redirectToRoute('room_edit', ['id' => $room->getId()]);
         }
-
         return $this->render('room/edit.html.twig', [
             'room' => $room,
             'form' => $form->createView(),
         ]);
     }
-
     /**
      * @Route("room/{id}", name="room_delete", methods="DELETE")
      */
@@ -126,7 +112,6 @@ class RoomController extends Controller
             $em->remove($room);
             $em->flush();
         }
-
         return $this->redirectToRoute('room_index');
     }
 }

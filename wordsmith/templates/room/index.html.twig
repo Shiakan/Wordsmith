@@ -1,8 +1,3 @@
-<<<<<<< HEAD:wordsmith/templates/room/index.html.twig
-<title>{% block title %}{{room.name}}{% endblock %}</title>
-
-<div id="root"></div>
-=======
 <div
  {% if app.user.id == room.dungeonMaster.id %}
  data-role="dm"
@@ -13,7 +8,6 @@
   data-name={{app.user.username}}
   data-room={{room.id}}
   id="root"></div>
->>>>>>> f78e91ca981b57713578a7eceef60f0fdd2627a5:wordsmith/templates/room/index.html.twig
 {% block stylesheets %}
    <link rel="stylesheet" href="{{ asset('build/main.css') }}">      
    <link rel="stylesheet" href="{{ asset('build/app.css') }}">      
