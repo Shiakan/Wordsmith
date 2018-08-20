@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Role;
 use App\Entity\User;
 
+use App\Entity\Thread;
 use App\Form\LoginType;
+use App\Entity\HasReadThread;
 use App\Entity\Charactersheet;
 use App\Form\RegistrationType;
 use App\Entity\CharacterProfile;
@@ -42,6 +44,7 @@ class SecurityController extends Controller
             $manager->flush(); //On flush le tout
             //On crée automatiquement un profil forum & une charactersheet à l'utilisateur lorsqu'il s'inscrit
             $this->createSheets($user);
+            $this->createHasRead($user);
             $message= (new \Swift_Message('Hello Mail')) //On instancie Swift Mailer
                     ->setSubject('Bienvenue '.$user->getUsername().'') //On définie le sujet du mail
                     ->setFrom('projetkelnor@gmail.com') //On définie l'expéditeur
@@ -60,6 +63,28 @@ class SecurityController extends Controller
         return $this->render('security/inscription.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    public function createHasRead($user) {
+
+        $repository = $this->getDoctrine()->getRepository(Thread::class);
+        $threads = $repository->findAll();
+
+        foreach($threads as $thread) {
+            $hasReadThread = new HasReadThread();
+            $em = $this->getDoctrine()->getManager();
+            $hasReadThread->setSubcategory($thread->getSubcategory());
+            $hasReadThread->setThread($thread);
+            $hasReadThread->setUser($user);
+            $hasReadThread->setThreadCount(0);
+            $hasReadThread->setPostCount(0);
+            $hasReadThread->setTimestamp(new \Datetime());
+            $em->persist($hasReadThread);
+        }
+        
+        $em->flush(); //Persist objects that did not make up an entire batch
+        $em->clear();
+
     }
 
       /**
