@@ -26,7 +26,9 @@
                 {% for hasReadThread in subcategory.hasReadThreads %}
                     {% if hasReadThread.user.id is defined %}
                         {% if hasReadThread.user.id == app.user.id and hasReadThread.subcategory.id == subcategory.id %} {# On vérifie que le user id de la thread actuelle est bien celui du user actuellement connecté, DONC PAS TOUCHE ET PAS DE ELSE #}
-                            {% if hasReadThread.threadCount < subcategory.threads|length %} 
+                            {% if subcategory.threads|length == 0  %} 
+                                <img src="{{ asset('image/nonew.png') }}" class="icon">
+                            {% elseif hasReadThread.threadCount < subcategory.threads|length %}
                                 <img src="{{ asset('image/new.png') }}" class="icon">
                             {% else %}
                                 <img src="{{ asset('image/nonew.png') }}" class="icon">
