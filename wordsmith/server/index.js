@@ -57,7 +57,7 @@ io.on('connection', function(socket) {
       message.id = uuidV4();
       message.diceValue = dice.diceValue;
       console.log(message, 'DICE IN SERVER')
-      if (dice.role === 'player') {
+      if (dice.role === 'player' && !isNaN(dice.rolled)) {
         io.to(param.roomId).emit('send_message', message);
       }
     });
@@ -68,7 +68,9 @@ io.on('connection', function(socket) {
       message.dice = dice.rolled;
       message.author = `[MJ] ${dice.author}`;
       message.id = uuidV4();
-      io.to(param.roomId).emit('send_message', message);
+      if (!isNaN(dice.rolled)) {
+        io.to(param.roomId).emit('send_message', message);
+      }
     });
     
     socket.on('send_message', function(messageContent) {
