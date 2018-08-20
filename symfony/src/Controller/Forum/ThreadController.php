@@ -63,6 +63,7 @@ class ThreadController extends Controller
             $em->persist($thread);
             $em->flush();
             $this->createPost($thread, $content, $user);
+            $this->createHasRead($thread);
 
             return $this->redirectToRoute('thread_show', [
                 'id' => $thread->getId()
@@ -74,6 +75,26 @@ class ThreadController extends Controller
             'form' => $form->createView(),
             'subcategory' => $currentSubcategory
         ]);
+    }
+
+    public function createHasRead($thread) {
+
+        $repository = $this->getDoctrine()->getRepository(User::class);
+        $users = $repository->findAll();
+
+        foreach($users as $user) {
+            $hasReadThread = new HasReadThread();
+            $em = $this->getDoctrine()->getManager();
+            $hasReadThread->setThread($thread);
+            $hasReadThread->setUser($user);
+            $hasReadThread->setPostCount(0);
+            $hasReadThread->setTimestamp(new \Datetime());
+            $em->persist($hasReadThread);
+        }
+        
+        $em->flush(); //Persist objects that did not make up an entire batch
+        $em->clear();
+
     }
 
     public function createPost($thread, $content, $user)

@@ -22,12 +22,12 @@ class HasReadThread
     private $timestamp;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="hasReadThreads")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="hasReadThreads", cascade={"persist"})
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Thread", inversedBy="hasReadThreads")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Thread", inversedBy="hasReadThreads", cascade={"persist"})
      */
     private $thread;
 
