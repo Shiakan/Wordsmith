@@ -85,8 +85,10 @@ class ThreadController extends Controller
         foreach($users as $user) {
             $hasReadThread = new HasReadThread();
             $em = $this->getDoctrine()->getManager();
+            $hasReadThread->setSubcategory($thread->getSubcategory());
             $hasReadThread->setThread($thread);
             $hasReadThread->setUser($user);
+            $hasReadThread->setThreadCount(0);
             $hasReadThread->setPostCount(0);
             $hasReadThread->setTimestamp(new \Datetime());
             $em->persist($hasReadThread);
@@ -139,22 +141,16 @@ class ThreadController extends Controller
 
         $postCount = count($thread->getPosts());
         
-
-        // dump(count($postCount));die;
-        
         // We need to check if the user visiting the page has already read 
         // this thread
 
         $repositoryThread = $this->getDoctrine()->getRepository(HasReadThread::class);
         $readThread = $repositoryThread->findTimeStamp($user, $thread);
 
-        // $repositoryPost = $this->getDoctrine()->getRepository(Post::class);
-        // $readPost = $repositoryPost->findByThread($thread);
-        // $lastPost = $readPost->getCreatedAt();
-
         if($readThread == false) {
             $em = $this->getDoctrine()->getManager();
             $hasReadThread->setThread($thread);
+            $hasReadThread->setThreadCount(count($thread->getSubcategory()->getThreads()));
             $hasReadThread->setUser($user);
             $hasReadThread->setPostCount($postCount);
             $hasReadThread->setTimestamp(new \DateTime());
@@ -164,10 +160,9 @@ class ThreadController extends Controller
             $currentCount = $readThread->getpostCount();
 
             if($currentCount == null || $currentCount < $postCount) {
-                // $newPostCount = $postCount + 1;
-                // dump($postCount);die;
                 $em = $this->getDoctrine()->getManager();
                 $readThread->setPostCount($postCount);
+                $readThread->setThreadCount(count($thread->getSubcategory()->getThreads()));
                 $em->persist($readThread);
                 $em->flush();
             }

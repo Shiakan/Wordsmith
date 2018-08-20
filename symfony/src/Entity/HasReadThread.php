@@ -36,6 +36,16 @@ class HasReadThread
      */
     private $postCount;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Subcategory", inversedBy="hasReadThreads")
+     */
+    private $subcategory;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $threadCount;
+
     public function getId()
     {
         return $this->id;
@@ -85,6 +95,30 @@ class HasReadThread
     public function setPostCount(?int $postCount): self
     {
         $this->postCount = $postCount;
+
+        return $this;
+    }
+
+    public function getSubcategory(): ?Subcategory
+    {
+        return $this->subcategory;
+    }
+
+    public function setSubcategory(?Subcategory $subcategory): self
+    {
+        $this->subcategory = $subcategory;
+
+        return $this;
+    }
+
+    public function getThreadCount(): ?int
+    {
+        return $this->threadCount;
+    }
+
+    public function setThreadCount(?int $threadCount): self
+    {
+        $this->threadCount = $threadCount;
 
         return $this;
     }

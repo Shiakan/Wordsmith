@@ -24,13 +24,8 @@ class ForumController extends AbstractController
         $repositoryCategory = $this->getDoctrine()->getRepository(Category::class);
         $categories = $repositoryCategory ->findAll();
 
-        $repositoryHasRead = $this->getDoctrine()->getRepository(HasReadThread::class);
-        $hasReadThreads = $repositoryHasRead->findByUser($user);
-
-
         return $this->render('forum/index.html.twig', [
             'categories' => $categories,
-            'hasReadThreads' => $hasReadThreads
         ]);
     }
 
