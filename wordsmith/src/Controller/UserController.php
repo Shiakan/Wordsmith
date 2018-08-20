@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controller;
-
 use App\Enity\Room;
 use App\Entity\User;
 use App\Form\RegistrationType;
@@ -11,7 +10,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
 class UserController extends Controller
 {
     /**
@@ -26,7 +24,6 @@ class UserController extends Controller
             'rooms' => $roomRepository->findAll()
         ]);
     }
-
      /**
      * @Route("/profil/{id}/edit", name="user_profile_edit", methods="GET|POST")
      */

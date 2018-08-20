@@ -2,6 +2,9 @@ import uuidv4 from 'uuid/v4'; // https://www.npmjs.com/package/uuid
 
 import maps from '../../data/maps';
 
+const rootAnchor = document.getElementById('root');
+
+
 /**
  * Initial State
  */
@@ -22,32 +25,32 @@ const initialState = {
   characters: [
     {
       id: uuidv4(),
-      name: 'troll',
+      name: rootAnchor.dataset.name,
       color: '#b80000',
       coordX: 10,
       coordY: 170,
     },
-    {
-      id: uuidv4(),
-      name: 'orc',
-      color: '#008b02',
-      coordX: 10,
-      coordY: 240,
-    },
-    {
-      id: uuidv4(),
-      name: 'ben',
-      color: '#fccb00',
-      coordX: 10,
-      coordY: 310,
-    },
-    {
-      id: uuidv4(),
-      name: 'nain',
-      color: '#b80000',
-      coordX: 10,
-      coordY: 380,
-    },
+    // {
+    //   id: uuidv4(),
+    //   name: 'Varang',
+    //   color: '#008b02',
+    //   coordX: 10,
+    //   coordY: 240,
+    // },
+    // {
+    //   id: uuidv4(),
+    //   name: 'ben',
+    //   color: '#fccb00',
+    //   coordX: 10,
+    //   coordY: 310,
+    // },
+    // {
+    //   id: uuidv4(),
+    //   name: 'Test2',
+    //   color: '#b80000',
+    //   coordX: 10,
+    //   coordY: 380,
+    // },
   ],
 };
 console.log(initialState.characters);
@@ -61,10 +64,12 @@ const TOGGLE_PICKER = 'TOGGLE_PICKER';
 const CHANGE_COLOR = 'CHANGE_COLOR';
 const CREATE_PLAYER = 'CREATE_PLAYER';
 const INPUT_CHAR_CHANGE = 'INPUT_CHAR_CHANGE';
-const MOVE_PLAYER = 'MOVE_PLAYER';
+export const MOVE_PLAYER = 'MOVE_PLAYER';
+const RECEIVE_MOVE = 'RECEIVE_MOVE';
 const DELETE_PLAYER = 'DELETE_PLAYER';
 const HANDLE_SLIDE = 'HANDLE_SLIDE';
 const CHANGE_MAP = 'CHANGE_MAP';
+const AUTO_PLAYER = 'AUTO_PLAYER';
 
 /**
  * Traitements
@@ -113,6 +118,11 @@ const reducer = (state = initialState, action = {}) => {
         map: action.value,
       };
 
+    case AUTO_PLAYER:
+      return {
+
+      };
+
     case CREATE_PLAYER: {
       if (state.characters.length < 20) {
         console.log(state.characters.length);
@@ -149,23 +159,27 @@ const reducer = (state = initialState, action = {}) => {
         typingName: action.value,
       };
 
-    case MOVE_PLAYER: {
-      const movedChars = state.characters.map((char) => {
-        if (char.id === action.value.target.id) {
-          console.log('old coords :', char.coordX, char.coordY);
-          char.coordX = (action.value.pageX - action.value.offsetX) - 10;
-          char.coordY = (action.value.pageY - action.value.offsetY) - 10;
-          console.log('new coords :', char.coordX, char.coordY);
-        }
-        return char;
-      });
+    case RECEIVE_MOVE: {
+      console.log('receive move action :', action);
+      
+      // const movedChars = state.characters.map((char) => {
+      //   if (char.id === action.value.target.id) {
+      //     console.log('old coords :', char.coordX, char.coordY);
+      //     char.coordX = (action.value.pageX - action.value.offsetX) - 10;
+      //     char.coordY = (action.value.pageY - action.value.offsetY) - 10;
+      //     console.log('new coords :', char.coordX, char.coordY);
+      //   }
+      //   return char;
+      // });
       return {
         ...state,
-        characters: movedChars,
+        characters: action.characters,
       };
     }
     case DELETE_PLAYER: {
-      const remainingChars = state.characters.filter(char => char.id !== action.id);
+      console.log(action);
+      
+      const remainingChars = state.characters.filter(char => char.name !== action.value.name);
 
       return {
         ...state,
@@ -207,14 +221,24 @@ export const createPlayer = () => ({
   type: CREATE_PLAYER,
 });
 
+export const autoAddPlayer = tokenToAdd => ({
+  type: AUTO_PLAYER,
+  name: tokenToAdd,
+})
+
 export const movePlayer = value => ({
   type: MOVE_PLAYER,
   value,
 });
 
-export const deletePlayer = id => ({
+export const receiveMove = characters => ({
+  type: RECEIVE_MOVE,
+  characters,
+});
+
+export const deletePlayer = value => ({
   type: DELETE_PLAYER,
-  id,
+  value,
 });
 
 export const handleSlide = () => ({

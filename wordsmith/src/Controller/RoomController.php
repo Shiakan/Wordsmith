@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controller;
-
 use App\Entity\Room;
 use App\Entity\User;
 use App\Form\RoomType;
@@ -12,8 +11,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-
-
 class RoomController extends Controller
 {
     /**
@@ -24,16 +21,14 @@ class RoomController extends Controller
         return $this->render('room/index.html.twig', [
             'rooms' => $roomRepository->findAll()]);
     }
-
     /**
      * @Route("room/new", name="room_new", methods="GET|POST")
      */
-    public function new(Request $request, UserInterface $user)
+    public function new(Request $request, UserInterface $user, \Swift_Mailer $mailer)
     {   
         $room = new Room();
         $form = $this->createForm(RoomType::class, $room);
         $form->handleRequest($request);
-
         $code = $this->createRandomCode();
         
         if ($form->isSubmitted() && $form->isValid()) {
@@ -42,40 +37,32 @@ class RoomController extends Controller
             $room->setCode($code);
             $em->persist($room);
             $em->flush();
-
+            /*MAIL TO PARTICIPANTS*/
+            foreach ($room->getParticipants() as $participant) {
+                $message= (new \Swift_Message('Hello Mail')) //On instancie Swift Mailer
+                        ->setSubject('Vous avez été invité par '.$room->getDungeonmaster()->getUsername().'') //On définie le sujet du mail
+                        ->setFrom('projetkelnor@gmail.com') //On définie l'expéditeur
+                        ->setTo($participant->getEmail()) //Grâce à l'enregistrement, on définie le destinataire
+                        ->setContentType("text/html") //On définie que le contenue est un mail html
+                        ->setBody(  //On définie le body comme étant
+                            $this->renderView('emails/roomJoined.html.twig', //Ce fichier twig
+                                ['user'=>$user,
+                                 'participant'=>$participant,
+                                 'code'=>$code,
+                                ] //On lui passe user
+                            )
+                        );
+                        //On envoie le mail
+                        $mailer->send($message);
+            }
             return $this->redirectToRoute('room_show', ['code' => $code ]);
         }
-
         return $this->render('room/new.html.twig', [
             'room' => $room,
             'form' => $form->createView(),
         ]);
     }
-
-    // /**
-    //  * @Route("enter_room/{code}", name="room_show", methods="GET")
-    //  */
-    // public function getRoomLink(Room $room) {
-        
-    //     return $this->render('room/show.html.twig', array(
-    //         'room' => $room
-    //     ));
-    // }
-
-    // /**
-    //  * @Route("room_access", name="room_access", methods="GET")
-    //  */
-
-    //  public function roomAccess(Request $request)
-    // {
-    //     $code = $request->request->get('code');
-    //     $id = $request->request->get('id');
-
-    //     dump($code);die;
-    // }
-
     private function createRandomCode() { 
-
         $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ023456789"; 
         srand((double)microtime()*1000000); 
         $i = 0; 
@@ -90,17 +77,15 @@ class RoomController extends Controller
     
         return $pass; 
     } 
-
     /**
      * @Route("room/{code}", name="room_show", methods="GET")
      */
     public function show(Room $room): Response
     {
         return $this->render('room/index.html.twig', [
-            'room' => $room
+                'room' => $room
             ]);
     }
-
     /**
      * @Route("room/{id}/edit", name="room_edit", methods="GET|POST")
      */
@@ -108,19 +93,15 @@ class RoomController extends Controller
     {
         $form = $this->createForm(RoomType::class, $room);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
             return $this->redirectToRoute('room_edit', ['id' => $room->getId()]);
         }
-
         return $this->render('room/edit.html.twig', [
             'room' => $room,
             'form' => $form->createView(),
         ]);
     }
-
     /**
      * @Route("room/{id}", name="room_delete", methods="DELETE")
      */
@@ -131,7 +112,6 @@ class RoomController extends Controller
             $em->remove($room);
             $em->flush();
         }
-
         return $this->redirectToRoute('room_index');
     }
 }

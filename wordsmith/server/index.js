@@ -50,6 +50,10 @@ io.on('connection', function(socket) {
     io.to(param.roomId).emit('send_message', message);
     console.log(users);
 
+    var tokenToAdd = {};
+    tokenToAdd.userName = param.userName,
+    io.to(param.roomId).emit('add_token', tokenToAdd);
+
     socket.on('roll_dice', function(dice) {
       var message = {};
       message.dice = dice.rolled;
@@ -60,6 +64,11 @@ io.on('connection', function(socket) {
       if (dice.role === 'player' && !isNaN(dice.rolled)) {
         io.to(param.roomId).emit('send_message', message);
       }
+    });
+
+    socket.on('move_player', function(movedChars) {
+      console.log('RECEIVE MOVE', movedChars);
+      io.to(param.roomId).emit('receive_move', movedChars);
     });
 
     socket.on('share_dice', function(dice) {
@@ -93,6 +102,9 @@ io.on('connection', function(socket) {
       message.author = param.userName;
       message.id = uuidV4();
       io.to(param.roomId).emit('send_message', message);
+      var tokenToKill = {};
+      tokenToKill.userName = param.userName,
+      io.to(param.roomId).emit('delete_token', tokenToKill);
     });
   });
 });
