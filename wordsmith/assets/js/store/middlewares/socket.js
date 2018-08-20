@@ -75,7 +75,7 @@ const socketConnect = store => next => (action) => {
 
     case MOVE_PLAYER: {
       
-      console.log('ACTION', action);
+      console.log('ACTION', action.value);
       const movedChars = state.gameScreen.characters.map((char) => {
         console.log('Char', char);
           if (char.id === action.value.target.id) {

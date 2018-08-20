@@ -160,6 +160,8 @@ const reducer = (state = initialState, action = {}) => {
       };
 
     case RECEIVE_MOVE: {
+      console.log('receive move action :', action);
+      
       // const movedChars = state.characters.map((char) => {
       //   if (char.id === action.value.target.id) {
       //     console.log('old coords :', char.coordX, char.coordY);

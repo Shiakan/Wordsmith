@@ -46,14 +46,14 @@ class Character extends React.Component {
       name, color, id, deletePlayer, coordX, coordY, userName, role,
     } = this.props;
     console.log(userName, role);
-    const mjCheck = (role === 'dm' && true)
-    const userCheck = ( name === userName && true )
+    const mjCheck = (role === 'dm' && true);
+    const userCheck = (name === userName && true);
     console.log('bool :', userCheck);
-    
+
     const userClass = classNames(
       'character-cursor',
       {
-        'character-cursor-other': !userCheck && !mjCheck
+        'character-cursor-other': !userCheck && !mjCheck,
 
       },
     );
@@ -73,12 +73,12 @@ class Character extends React.Component {
               color,
             }}
           >{name}
-          {mjCheck 
-            && <TiDelete
-              className="character-nickname-delete"
-              onClick={deletePlayer}
-                />}
-          </div>
+            {mjCheck 
+              && <TiDelete
+                className="character-nickname-delete"
+                onClick={deletePlayer}
+                  />}
+            </div>
           <div
             className={userClass}
             id={id}
