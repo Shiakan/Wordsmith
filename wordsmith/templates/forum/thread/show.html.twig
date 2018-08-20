@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Thread{% endblock %}
+
+{% block main %}
+<div class="wrapper">
+    <div class="container container-forum">
+        <div class="category-header">
+            <h2>{{ thread.title }}</h2>
+            <h3>{{ thread.subtitle }}</h3>
+        </div>
+        {% for post in posts %}
+            {% if post.status == true %}
+            <div class="wrapper-flex">
+                <div class="left-side">
+                    {{ post.author.username }}
+
+                <div id="blocAVA">
+                    <div class="blocAVA">
+                        <div class="avaPOST">
+                            <img src="{{ post.author.characterProfile.avatar }}">
+                        </div>
+                        <div class="abtPOST">
+                            <div>
+                                contenu profil
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    
+                </div>
+                <div class="right-side">
+                    <div class="container container-post">
+                        {% if (app.user.id == post.author.id) or (is_granted('ROLE_MODERATOR')) %}
+                            <a href="{{path('post_edit', {'id' : post.id})}}">Editer</a>
+                        {% endif %}
+                        {% if is_granted('ROLE_MODERATOR') %}
+                                <a title="Masquer le post" class="btn-mod hide" href="{{path('hide_post', {'id' : post.id }) }}"><i class="far fa-eye-slash"></i></a>
+                            {% endif %}
+                        {{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}
+                        {{ post.content|raw }}
+                    </div>
+                </div>
+            </div>
+            {% elseif post.status == false and is_granted('ROLE_MODERATOR') %}
+            <div class="wrapper-flex">
+                <div class="left-side">
+                    {{ post.author.username }}
+
+                <div id="blocAVA">
+                    <div class="blocAVA">
+                        <div class="avaPOST">
+                            <img src="{{ post.author.characterProfile.avatar }}">
+                        </div>
+                        <div class="abtPOST">
+                            <div>
+                                contenu profil
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    
+                </div>
+                <div class="right-side">
+                    <div class="container container-post">
+                        <a href="{{path('post_edit', {'id' : post.id})}}">Editer</a>
+                        {% if is_granted('ROLE_MODERATOR') %}
+                            <a title="Afficher le post" class="btn-mod show" href="{{path('hide_post', {'id' : post.id }) }}"><i class="far fa-eye"></i></a>
+                        {% endif %}
+                        {{ post.content|raw }}
+                        {{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+        {% if is_granted('ROLE_MODERATOR') %}
+            <div class="moveOn">
+                {{ form_start(form, {'action': path('thread_move', {'id' : thread.id }), 'method': 'POST'}) }}
+                {{form_row(form.subcategory,{'label':false, 'id' : 'select' ~ thread.id })}}
+                    <button class="btn btn-success mb-2">{{ button_label|default('Modifier') }}</button>
+                {{form_end(form)}}
+            </div>
+        {% endif %}
+    </div>
+            <div class="text-center">
+                {# Si page supérieure à 1 on affiche un bouton précédent qui mène à la page-1 #} 
+                {% if page > 1 %}
+                    <a href="{{path('thread_show',{'id':thread.id,'page':page -1})}}" class="btn-pagination"><i class="fas fa-arrow-left"></i></a>
+                {% endif %} {# si page inférieure à la page max calculée alors on affiche un bouton suivant qui mène à la page +1 #} 
+                {% if page < pageMax %} 
+                    <a href="{{path('thread_show',{'id':thread.id,'page':page +1})}}" class="btn-pagination"><i class="fas fa-arrow-right"></i></a>
+                {% endif %}
+            </div>
+    <a href="{{path('post_new', {'thread_id' : thread.id})}}">Répondre</a>
+</div>
+
+{% endblock %}

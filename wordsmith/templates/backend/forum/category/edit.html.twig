@@ -1,0 +1,9 @@
+{% extends 'backend/basebackend.html.twig' %}
+
+{% block title %}Modifier la catégorie{% endblock %}
+
+{% block main %}
+    <h1 class="mb-3 mt-3">Modifier la catégorie</h1>
+
+    {{ include('backend/forum/category/_form.html.twig', {'button_label': 'Modifier'}) }}
+{% endblock %}

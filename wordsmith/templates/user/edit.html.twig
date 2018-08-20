@@ -1,0 +1,16 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block main %}
+<div class="wrapper-homepage">
+    <div class="container container-width">
+        <h1>{{ user.username }}</h1>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit">Poster</button>
+        {{ form_end(form) }}
+    </div>
+ </div>
+{% endblock %}

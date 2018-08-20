@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Thread{% endblock %}
+
+{% block body %}
+    <h1>Edit Thread</h1>
+
+    {{ include('thread/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('thread_index') }}">back to list</a>
+
+    {{ include('thread/_delete_form.html.twig') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('javascript/ckeditor-forum/ckeditor.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('javascript/ckeditor-forum/adapters/jquery.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+        CKEDITOR.replace( 'thread_content' );
+    </script>
+{% endblock %}
