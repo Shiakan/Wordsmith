@@ -56,6 +56,7 @@
   &-error
     animation-name: toolTipError
     animation-duration: .7s
+    animation-fill-mode: forwards
     animation-timing-function: linear
   &-text
     padding: .5em 0
@@ -78,6 +79,8 @@
     color: black
   75%
     transform: rotate(-45deg)
-    color: red
   100% 
     transform: rotate(0deg)
+    color: red
+    border: 2px solid black
+    border-radius: 50%
