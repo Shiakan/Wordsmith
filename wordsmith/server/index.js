@@ -43,6 +43,11 @@ io.on('connection', function(socket) {
     socket.join(param.roomId);
     users.removeUser(param.selfId);
     users.addUser(param.selfId, param.userName, param.roomId);
+    var message = {};
+    message.message = 'Vient de se connecter';
+    message.author = param.userName;
+    message.id = uuidV4();
+    io.to(param.roomId).emit('send_message', message);
     console.log(users);
 
     socket.on('roll_dice', function(dice) {
@@ -50,6 +55,8 @@ io.on('connection', function(socket) {
       message.dice = dice.rolled;
       message.author = dice.author;
       message.id = uuidV4();
+      message.diceValue = dice.diceValue;
+      console.log(message, 'DICE IN SERVER')
       if (dice.role === 'player') {
         io.to(param.roomId).emit('send_message', message);
       }
@@ -80,7 +87,7 @@ io.on('connection', function(socket) {
       console.log('DISCONNECTION')
       var message = {};
       message.message = 'Vient de se déconnecter';
-      // message.author = messageContent.author;
+      message.author = param.userName;
       message.id = uuidV4();
       io.to(param.roomId).emit('send_message', message);
     });
