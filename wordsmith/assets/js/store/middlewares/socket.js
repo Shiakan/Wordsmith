@@ -57,11 +57,12 @@ const socketConnect = store => next => (action) => {
       break;
 
     case ROLL_DICE: {
-      console.log(action.dice, 'DICE');
       const dice = {};
+      dice.diceValue = state.dice.diceValue;
       dice.role = state.user.role;
       dice.author = state.user.userName;
       dice.rolled = action.dice;
+      console.log(dice, 'DICE IN SOCKET');
       socket.emit('roll_dice', dice);
     }
       break;
@@ -69,6 +70,7 @@ const socketConnect = store => next => (action) => {
     case SHARE_DICE: {
       console.log(state.user.userName, 'ADD MESSAGE');
       const dice = {};
+      dice.diceValue = state.dice.diceValue;
       dice.author = state.user.userName;
       dice.rolled = state.dice.rolled;
       socket.emit('share_dice', dice);
