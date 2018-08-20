@@ -1,8 +1,9 @@
 /**
  * Initial State
  */
+
 const initialState = {
-  charSheet: 'Votre personnage',
+  charSheet: 'Veuillez patienter',
 };
 
 /**

@@ -5,8 +5,10 @@
   data-role="player"
 {% endif %}
   data-playerid={{app.user.id}}
+  data-sheetid={{app.user.charactersheet.id}}
   data-name={{app.user.username}}
   data-room={{room.id}}
+  {# data-sheet={{app.user.charactersheet.content}} #}
   id="root"></div>
 {% block stylesheets %}
    <link rel="stylesheet" href="{{ asset('build/main.css') }}">      
