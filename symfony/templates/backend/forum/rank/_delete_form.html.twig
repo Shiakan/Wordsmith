@@ -1,5 +1,0 @@
-<form method="post" action="{{ path('backend_rank_delete', {'id': rank.id}) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer ce rang?');"class="btn-delete">
-    <input type="hidden" name="_method" value="DELETE">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ rank.id) }}">
-    <button title="Supprimer le rang" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-</form>
