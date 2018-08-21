@@ -19,6 +19,7 @@ const initialState = {
  */
 const DO_SOMETHING = 'DO_SOMETHING';
 const SHEET_CHANGE = 'SHEET_CHANGE';
+export const SHEET_UPDATE = 'SHEET_UPDATE';
 export const WEBSOCKET_CONNECT = 'WEBSOCKET_CONNECT';
 
 /**
@@ -67,6 +68,11 @@ export const doSomething = () => ({
 
 export const sheetChange = value => ({
   type: SHEET_CHANGE,
+  value,
+});
+
+export const sheetUpdate = value => ({
+  type: SHEET_UPDATE,
   value,
 });
 
