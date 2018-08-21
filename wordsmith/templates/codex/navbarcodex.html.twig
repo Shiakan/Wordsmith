@@ -1,10 +1,9 @@
-<div class="tagbar">
-    <h2>Sommaire</h2>
-    <ol>
+<div class="navbar navbar-codex">
+    <ul>
         {% for tag in tags %}
         <li>
             <a href="{{path('search_by_tags',{'id':tag.id})}}">{{tag.name}}</a>
         </li>
         {% endfor %}
-    </ol>   
-</div>   
+    </ul>
+</div>

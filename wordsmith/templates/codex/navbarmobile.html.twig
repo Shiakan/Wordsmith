@@ -1,0 +1,12 @@
+<div class="burger-navbar-codex">
+    <div class="dropdown">
+        <button class="dropbtn dropbtn-codex"> Parcourir les tags
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content content-codex">
+        {% for tag in tags %}
+            <a href="{{path('search_by_tags',{'id':tag.id})}}">{{tag.name}}</a>
+        {% endfor %}
+        </div>
+    </div>
+</div>

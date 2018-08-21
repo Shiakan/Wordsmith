@@ -54,7 +54,7 @@ class PostController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-            return $this->redirectToRoute('post_edit', ['id' => $post->getId()]);
+            return $this->redirectToRoute('thread_show', ['id' => $post->getThread()->getId()]);
         }
         return $this->render('forum/post/edit.html.twig', [
             'post' => $post,

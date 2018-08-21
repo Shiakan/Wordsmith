@@ -36,7 +36,7 @@ Profil de {{user.username}}
                     {% if user.id == app.user.id %}
                     <div class="profile-title">
                         <h2>Informations générales</h2> 
-                        <a class="btn btn-edit" href="{{path('user_profile_edit', {'id': app.user.id })}}">Modifier</a>
+                        <a title="Modifier le profil" class="btn btn-edit" href="{{path('user_profile_edit', {'id': app.user.id })}}"><i class="far fa-edit"></i></a>
                     </div>
                     <ul>
                         <li>

@@ -3,6 +3,7 @@
 
 {% block main %}
 <div class="wrapper wrapper-list">
+{{ include('codex/navbarcodex.html.twig') }}
 <h2 class="taglist-title">Articles de la section <em>{{tag.name}}</em> :</h2>
 {% for article in articles %}
     <section class="container container-article">
@@ -18,6 +19,6 @@
         </div>
     </section>
     {% endfor %}
-    <a class="btn" href="{{path('codex')}}">Retour</a>
+    <a class="btn btn-return" href="{{path('codex')}}">Retour</a>
 </div>
 {% endblock %}
