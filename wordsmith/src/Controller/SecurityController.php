@@ -59,6 +59,7 @@ class SecurityController extends Controller
         ]);
     }
     public function createHasRead($user) {
+        
         $repository = $this->getDoctrine()->getRepository(Thread::class);
         $threads = $repository->findAll();
         foreach($threads as $thread) {
