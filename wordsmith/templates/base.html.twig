@@ -40,7 +40,7 @@
                         {% endif %}
                     </div>
                 </div>
-                <a href="{{ path('homepage') }}"><img class="logo-burger" src="https://nsa39.casimages.com/img/2018/08/12//180812035308814067.png" alt="logo"></a> 
+                <a href="{{ path('homepage') }}"><img class="logo-burger" src="https://nsa39.casimages.com/img/2018/08/12//180812035308814067.png" alt="Logo"></a> 
             </div>
 
             <div class="fixed-navbar">
@@ -59,6 +59,11 @@
                             <li>
                                 <a href="{{ path('room_new') }}">Room</a>
                             </li>
+                            {% if is_granted('ROLE_MODERATOR') %}
+                            <li>
+                                <a href="{{path('home_backend')}}">Administration</a>
+                            </li>
+                            {% endif %}
                         </ul>
                     </div>
                     <div class="navbar-middle">
@@ -90,7 +95,6 @@
         <main>
             {% block main %}
             {% endblock %}
-            <a class="btn btn-admin" href="{{path('home_backend')}}"><i class="fas fa-sign-in-alt"></i> Panneau d'administration</a>
         </main>
         <footer>
         {% block footer %}

@@ -9,16 +9,9 @@
         <h2>{{subcategory.name}}</h2>
         <p>{{subcategory.description}}</p>
     </div>
-
-    
     {% for thread in threads %}
         <div class="thread">
-            <div class="container thread-description">
-                <h3><a href="{{path('thread_show', {'id': thread.id })}}">{{thread.title}}</a></h3>
-                <small>{{thread.subtitle}}</small>
-            <a href="{{path('user_profile',{id:thread.author.id})}}" style="color:{{thread.author.characterProfile.groupForum.color}};">{{thread.author.username}}</a>
-            </div>
-            <div class="container thread-statistic">
+            <div class="thread-icon">
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 {% for hasReadThread in thread.hasReadThreads %}
                     {% if hasReadThread.user.id is defined %}
@@ -34,7 +27,18 @@
             {% else %}
                 <img src="{{ asset('image/nonew.png') }}" class="icon">
             {% endif %}
-            <small> {{thread.posts|length}} Réponses</small>
+            </div>
+            <div class="container thread-description">
+                <h3><a href="{{path('thread_show', {'id': thread.id })}}">{{thread.title}}</a></h3>
+                {% if thread.subtitle is defined %}
+                <small>{{thread.subtitle}}</small>
+                {% endif %}
+            </div>
+            <div class="thread-author">
+                <a href="{{path('user_profile',{id:thread.author.id})}}" style="color:{{thread.author.characterProfile.groupForum.color}};">{{thread.author.username}}</a>
+            </div>
+            <div class="container thread-statistic">
+                <small>{{thread.posts|length}} Rép.</small>
             </div>
             <div class="container thread-last-message">
                 <small>15/08/2018</small>

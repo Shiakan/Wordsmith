@@ -142,7 +142,8 @@ small {
     display:block;
     font-size:1.5em;
     text-transform:uppercase;
-    margin-bottom:0.2em;
+    margin-bottom:0.5em;
+    margin-top:0.5em;
 }
 
 .form-error-icon {
@@ -666,7 +667,7 @@ a.ui-button:active, .ui-button:active,
 .thread {
     display:flex;
     justify-content: space-between;
-    padding:1em;
+    align-items: center;
 
 }
 
@@ -678,29 +679,53 @@ a.ui-button:active, .ui-button:active,
     background-color:#0b0b0b;
     border:1px solid black;
 }
-
+.thread-icon,
 .thread-description,
+.thread-author,
 .thread-statistic,
 .thread-last-message {
-    margin-bottom:0;
+    margin:0.075em;
     padding:0.5em;
     background-color:#0b0b0b;
-    border:1px solid black;
+    border:0;
+    height:3.5em;
+    box-shadow: inset 0px 0px 14px 5px #050505;
+    -webkit-box-shadow: inset 0px 0px 14px 5px #080808;
+    -moz-box-shadow: inset 0px 0px 14px 5px #050505;
+    -o-box-shadow: inset 0px 0px 14px 5px #050505;
+}
+.thread-icon {
+    width:5%;
+}
+.thread-description {
+    width:50%;
 }
 
-.description {
-    width:55%;
+.thread-author {
+    width:23%;
+    text-align:center;
 }
-.statistic {
-    width:20%;
+
+.thread-description a {
+    text-transform:lowercase;
+    font-size:0.8em;
+    font-family: 'Palanquin', sans-serif;
+}
+.thread-statistic {
+    width:10%;
     display:flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-}
+    padding:1em;
 
-.last-message {
-    width:20%;
+}
+/* .thread-statistic small {
+    color:white;
+} */
+
+.thread-last-message {
+    width:17%;
     display:flex;
     flex-direction: column;
     justify-content: space-between;
@@ -725,7 +750,7 @@ a.ui-button:active, .ui-button:active,
 }
 
 .icon {
-    width:25%;
+    width:100%;
     border-radius:50%;
     background-color:#0D0D0D;
     border:2px solid #2b1c0b;
