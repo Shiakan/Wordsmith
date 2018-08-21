@@ -1,11 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon profil{% endblock %}
+{% block title %}
+{% if user.id == app.user.id %}
+Mon profil
+{% endif %}
+Profil de {{user.username}}
+{% endblock %}
 
 {% block main %}
 <div class="wrapper-homepage">
     <div class="container container-width">
+        {% if user.id == app.user.id %}
         <h1>Bienvenue <em>{{ app.user.username }}</em></h1>
+        {% else %}
+        <h1>Vous etes sur le profil de <em>{{user.username}}</em></h1>
+        {% endif %}
+
         <div class="container-profil">
             <div class="left-side">
                 <img src="{{user.characterProfile.avatar}}">
@@ -17,9 +27,13 @@
                     <ul class="tabs-header">
                         <li><a href="#tabs-1">Profil</a></li>
                         <li><a href="#tabs-2">Forum</a></li>
+                        {% if user.id == app.user.id %}
                         <li><a href="#tabs-3">Mes rooms</a></li>
+                        {% endif %}
+                        
                     </ul>
                     <div id="tabs-1">
+                    {% if user.id == app.user.id %}
                     <div class="profile-title">
                         <h2>Informations générales</h2> 
                         <a class="btn btn-edit" href="{{path('user_profile_edit', {'id': app.user.id })}}">Modifier</a>
@@ -31,13 +45,17 @@
                         <li>
                             <span class="profile-label">Email :</span> {{ user.email}}
                         </li>
+                        
                         <li>
                             <span class="profile-label">Date de naissance :</span> {{ user.birthdate|date("d-m-Y")}}
                         </li>
                     </ul>
+                    {% endif %}
                     <div class="profile-title">
                         <h2>Profil du personnage </h2> 
+                        {% if user.id == app.user.id %}
                         <a class="btn btn-edit" href="{{path('characterprofile_edit', {'id': app.user.characterProfile.id })}}">Modifier</a>
+                        {% endif %}
                     </div>
                     <ul>
                         <li>
@@ -98,6 +116,7 @@
                         {% endfor %}
                         </ul>
                     </div>
+                    {% if user.id == app.user.id %}
                     <div id="tabs-3">
                        <div class="profile-title">
                             <h2>J'ai créé les parties</h2>
@@ -136,6 +155,8 @@
                         {% endfor %}
                         {% endfor %}
                     </div>
+                    {% endif %}
+                    
                 </div>
             </div>                            
         </div>

@@ -7,6 +7,7 @@ use App\Entity\Thread;
 use App\Form\ThreadType;
 use App\Form\SubjectType;
 use App\Entity\Subcategory;
+use App\Form\EditThreadType;
 use App\Entity\HasReadThread;
 use App\Repository\PostRepository;
 use App\Repository\ThreadRepository;
@@ -165,15 +166,15 @@ class ThreadController extends Controller
      */
     public function edit(Request $request, Thread $thread): Response
     {
-        $form = $this->createForm(ThreadType::class, $thread);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        $editForm = $this->createForm(EditThreadType::class, $thread);
+        $editForm->handleRequest($request);
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-            return $this->redirectToRoute('thread_edit', ['id' => $thread->getId()]);
+            return $this->redirectToRoute('thread_show', ['id' => $thread->getId()]);
         }
         return $this->render('forum/thread/edit.html.twig', [
             'thread' => $thread,
-            'form' => $form->createView(),
+            'editForm' => $editForm->createView(),
         ]);
     }
 }
