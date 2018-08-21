@@ -18,6 +18,7 @@ const initialState = {
  * Types
  */
 const DO_SOMETHING = 'DO_SOMETHING';
+const SHEET_CHANGE = 'SHEET_CHANGE';
 export const WEBSOCKET_CONNECT = 'WEBSOCKET_CONNECT';
 
 /**
@@ -44,6 +45,13 @@ const reducer = (state = initialState, action = {}) => {
         // Afin de permettre de déterminer qui à envoyé le message
         // userId: uuidv4(),
       };
+
+    case SHEET_CHANGE:
+      return {
+        ...state,
+        charSheet: action.value,
+      };
+
     default:
       return state;
   }
@@ -55,6 +63,11 @@ const reducer = (state = initialState, action = {}) => {
 
 export const doSomething = () => ({
   type: DO_SOMETHING,
+});
+
+export const sheetChange = value => ({
+  type: SHEET_CHANGE,
+  value,
 });
 
 export const websocketConnect = () => ({

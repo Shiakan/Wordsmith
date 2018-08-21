@@ -10,7 +10,7 @@ import Sheet from '../components/Panel/Sheet';
 
 // Action Creators
 // import { doSomething } from '../store/reducer';
-import { sheetChange } from '../store/reducers/sheet';
+import { sheetChange } from '../store/reducers/user';
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation

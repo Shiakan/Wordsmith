@@ -3,14 +3,14 @@
  */
 
 const initialState = {
-  charSheet: 'Veuillez patienter',
+  // charSheet: 'Veuillez patienter',
 };
 
 /**
  * Types
  */
 const DO_SOMETHING = 'DO_SOMETHING';
-const SHEET_CHANGE = 'SHEET_CHANGE';
+// const SHEET_CHANGE = 'SHEET_CHANGE';
 
 
 /**
@@ -27,11 +27,11 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
       };
 
-    case SHEET_CHANGE:
-      return {
-        ...state,
-        charSheet: action.value,
-      };
+      // case SHEET_CHANGE:
+      //   return {
+      //     ...state,
+      //     charSheet: action.value,
+      //   };
 
     default:
       return state;
@@ -45,10 +45,10 @@ export const doSomething = () => ({
   type: DO_SOMETHING,
 });
 
-export const sheetChange = value => ({
-  type: SHEET_CHANGE,
-  value,
-});
+// export const sheetChange = value => ({
+//   type: SHEET_CHANGE,
+//   value,
+// });
 
 
 /**
