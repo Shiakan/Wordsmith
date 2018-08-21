@@ -57,7 +57,6 @@ class Character extends React.Component {
       'character-cursor',
       {
         'character-cursor-other': !userCheck && !mjCheck,
-
       },
     );
     return (
