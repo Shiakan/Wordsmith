@@ -54,6 +54,12 @@ io.on('connection', function(socket) {
     tokenToAdd.userName = param.userName,
     io.to(param.roomId).emit('add_token', tokenToAdd);
 
+    // socket.on('to_update', function(toBeUpdated) {
+    //   console.log('RECEIVE TO UPDATE', toBeUpdated);
+    // });
+    
+    io.to(param.roomId).emit('update', toBeUpdated);
+
     socket.on('roll_dice', function(dice) {
       var message = {};
       message.dice = dice.rolled;
@@ -81,6 +87,11 @@ io.on('connection', function(socket) {
         io.to(param.roomId).emit('send_message', message);
       }
     });
+
+    // socket.on('auto_token', function(newChar) {
+    //   console.log('AUTO TOKEN :', newChar);
+    //   io.to(param.roomId).emit('receive_token', newChar);
+    // });
     
     socket.on('send_message', function(messageContent) {
       var message = {};

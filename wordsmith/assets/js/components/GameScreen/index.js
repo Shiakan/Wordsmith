@@ -35,6 +35,11 @@ class GameScreen extends React.Component {
     console.log('gameScreen loaded');
   }
 
+  shouldComponentUpdate = (nextProps, nextState) => {
+    console.log('CSU CSU CSU', nextProps, nextState);
+    return true;
+  }
+
   render() {
     const {
       toggleScreen, isBoard, map, isMap,

@@ -8,7 +8,7 @@ const rootAnchor = document.getElementById('root');
 const initialState = {
   userName: rootAnchor.dataset.name,
   role: rootAnchor.dataset.role,
-  charSheet: 'tempthree',
+  sheetId: rootAnchor.dataset.sheetid,
   roomId: rootAnchor.dataset.room,
   selfId: rootAnchor.dataset.playerid,
 };

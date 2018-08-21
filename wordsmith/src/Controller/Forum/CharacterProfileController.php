@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CharacterProfileController extends AbstractController
 {
     /**
-     * @Route("/characterprofile/{id}/edit", name="characterprofile_edit", methods="GET|POST")
+     * @Route("/profil/forum/{id}/edit", name="characterprofile_edit", methods="GET|POST")
      */
     public function edit(Request $request, CharacterProfile $characterProfile): Response
     {
