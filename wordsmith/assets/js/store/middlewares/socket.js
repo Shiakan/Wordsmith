@@ -85,8 +85,8 @@ const socketConnect = store => next => (action) => {
         console.log('action.value.target.id', action.value.target.id);
         if (char.id === action.value.target.id) {
           console.log('old coords :', char.coordX, char.coordY);
-          char.coordX = action.value.layerX + 32;
-          char.coordY = action.value.layerY;
+          char.coordX = action.value.layerX - action.value.offsetX;
+          char.coordY = action.value.layerY - action.value.offsetY;
           console.log('new coords :', char.coordX, char.coordY);
         }
         return char;
