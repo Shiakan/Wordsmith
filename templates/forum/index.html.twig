@@ -5,7 +5,7 @@
 {% block main %}
 <div class="wrapper"> 
     <div class="jumbotron">
-        <p>ANNONCES</p>
+        test
     </div>
 
     {% for category in categories %}
@@ -18,17 +18,14 @@
             <div class="container-subcategory">
                 <div class="container description">
                     <h3>
-                        <a href="{{path('forum_subcategory', {'name': subcategory.name })}}">{{subcategory.name}}</a>
+                        <a href="{{path('forum_subcategory', {'id': subcategory.id })}}">{{subcategory.name}}</a>
                     </h3>
                     <p>{{subcategory.reminder}}</p>
                 </div>
                 <div class="container statistic">
-                {# {% for hasReadThread in subcategory.hasReadThreads %}
-                    {% if hasReadThread.user.id is defined %}
+                    {# {% if hasReadThread.user.id is defined %}
                         {% if hasReadThread.user.id == app.user.id and hasReadThread.subcategory.id == subcategory.id %}
-                            {% if subcategory.threads|length == 0  %} 
-                                <img src="{{ asset('image/nonew.png') }}" class="icon">
-                            {% elseif hasReadThread.threadCount < subcategory.threads|length %}
+                            {% if hasReadThread.threadCount < subcategory.threads|length %} 
                                 <img src="{{ asset('image/new.png') }}" class="icon">
                             {% else %}
                                 <img src="{{ asset('image/nonew.png') }}" class="icon">
@@ -48,7 +45,7 @@
         {% if is_granted('ROLE_MODERATOR') %}
             <div class="container-subcategory">
                 <div class="container description">
-                    <h3><a href="{{path('forum_subcategory', {'name': subcategory.name })}}">{{subcategory.name}}</a></h3>
+                    <h3><a href="{{path('forum_subcategory', {'id': subcategory.id })}}">{{subcategory.name}}</a></h3>
                     <p>{{subcategory.reminder}}</p>
                 </div>
                 <div class="container statistic">

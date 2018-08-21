@@ -1,0 +1,118 @@
+ .container-width {
+    width:40%;
+    margin:0 auto 3.5em;
+} 
+
+.logo-burger {
+    display:none;
+}
+
+.burger-navbar-codex {
+    display:none;
+}
+.wrapper {
+    width:75%;
+}
+.container-width {
+    width:70%;
+}
+
+/* Codex Aside = Sommaire */
+.tagbar {
+    position:fixed;
+    margin-top:5.2em;
+    min-width:12%;
+    padding:0.3em 0.8em;
+    background-color:#0D0D0D;  
+    border:1px solid  #503415;
+    margin-left:1em;
+}
+.tagbar ol {
+    margin-left:1.2em;
+    color:#125C38;
+    list-style-type: upper-roman;
+}
+.tagbar h2 {
+    border-bottom: 1px solid  #503415; 
+    margin-bottom:0.2em;
+}
+.taglist-title em {
+    color: #A56E3A;
+}
+/* Fin sommaire Codex */
+
+/* Codex commentaires */
+.comment-header {
+    display:flex;
+    align-items: center;
+}
+
+/*JUMBOTRON FORUM*/
+.jumbotron{
+    width: 100%;
+    height: 40vh;
+    background-color: #206c77;
+    color: white;
+}
+
+/* FORUM PROFIL SOUS AVATAR */
+#blocAVA {
+    width:200px; 
+    height:320px; 
+    margin:8 auto 0; 
+    overflow:hidden;
+
+}
+.blocAVA {
+    position:relative; 
+    width:200px; 
+    height:320px; 
+    overflow:hidden;
+    border:1px solid #503415;
+}
+/* AVATAR */
+.avaPOST {
+    width:200px; 
+    height:320px;
+    transition:transform 0.75s linear; 
+    -webkit-transition:transform 0.75s linear;
+
+}
+#blocAVA:hover .avaPOST {
+    transform:translateX(200px); 
+    -webkit-transform:translateX(200px);
+}
+/* BLOC INFORMATIONS JOUEUR */
+.abtPOST {
+    position:absolute; 
+    margin-top:-320px;padding:5px; 
+    width:200px; height:320px; 
+    overflow:auto;
+    transform:translateX(-200px); 
+    -webkit-transform:translateX(-200px);
+    transition:transform 0.75s linear; 
+    -webkit-transition:transform 0.75s linear;
+} 
+#blocAVA:hover .abtPOST {
+    transform:translateX(0px); 
+    -webkit-transform:translateX(0px);
+}
+/* CONTENU INFORMATIONS JOUEUR */
+.abtPOST div{
+    font-size:0.8em;
+    margin:2px auto;
+    width:100%;
+    padding:5px; 
+    text-align:justify;
+    color:#A3A3A3; 
+    background-color:#0B0B0B;
+}
+/* TITRES INFORMATIONS JOUEUR */
+.abtPOST div span{
+
+    letter-spacing:2px;
+    text-transform:uppercase; 
+    color: #3f7a5d;
+    font-family: 'BenchNine', sans-serif;
+    font-weight:bold;
+}

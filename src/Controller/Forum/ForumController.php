@@ -26,9 +26,9 @@ class ForumController extends AbstractController
         ]);
     }
     /**
-     * @Route("/forum/{name}/page/{page}", name="forum_subcategory", requirements={"page" = "\d+"}, defaults={"page" = 1}, methods="GET|POST")
+     * @Route("/forum/subcategory/{id}/page/{page}", name="forum_subcategory", requirements={"page" = "\d+"}, defaults={"page" = 1}, methods="GET|POST")
      */
-    public function showSubcategory(Subcategory $subcategory,ThreadRepository $threadRepository , Request $request, $page, UserInterface $user)
+    public function showSubcategory(Subcategory $subcategory,ThreadRepository $threadRepository , Request $request, $page, UserInterface $user=null)
     {
         $limit = 10; //limite de questions par page (pagination)
         $threads = $threadRepository->findByAll($page,$limit,$subcategory,$user); //requête où on passe la page actuelle, le seeBanned et la limite de questions

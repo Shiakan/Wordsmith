@@ -59,6 +59,7 @@ class SecurityController extends Controller
         ]);
     }
     public function createHasRead($user) {
+        
         $repository = $this->getDoctrine()->getRepository(Thread::class);
         $threads = $repository->findAll();
         foreach($threads as $thread) {
@@ -68,7 +69,7 @@ class SecurityController extends Controller
             $hasReadThread->setThread($thread);
             $hasReadThread->setUser($user);
             $hasReadThread->setThreadCount(0);
-            $hasReadThread->setPostCount(0);
+            $hasReadThread->setPostCount(count($thread->getPosts()));
             $hasReadThread->setTimestamp(new \Datetime());
             $em->persist($hasReadThread);
         }
@@ -88,15 +89,12 @@ class SecurityController extends Controller
             $authenticationUtils = $this->get('security.authentication_utils');
             $defaultData = array('username' => $authenticationUtils->getLastUsername());
             $form = $this->createForm(LoginType::class, $defaultData);
-            if (!is_null($authenticationUtils->getLastAuthenticationError(false))) {
-                $this->addFlash('warning', 'nope');
-                // $form->addError(new FormError(
-                //     $authenticationUtils->getLastAuthenticationError()->getMessageKey()
-                // ));
-            }
+
+            $error = $authenticationUtils->getLastAuthenticationError();
             $form->handleRequest($request);
             return $this->render('security/login.html.twig',[
                 'form' => $form->createView(),
+                'error' => $error
             ]
                     
             );

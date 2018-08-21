@@ -1,16 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Room{% endblock %}
+{% block title %}Créer une room{% endblock %}
 
 {% block main %}
 <div class="wrapper-list">
     <div class="container">
 
-        <h1>Create new Room</h1>
+        <h1>Créer une room</h1>
         
         {{ include('room/_form.html.twig') }}
         
-        <a href="{{ path('room_index') }}">back to list</a>
     </div>
 </div>
 {% endblock %}
