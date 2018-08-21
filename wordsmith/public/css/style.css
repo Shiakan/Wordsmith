@@ -124,10 +124,18 @@ small {
 }
  /* FIN BARRE DE DÉFILEMENT */
 /* Formulaires */
-.form-group {
+
+.login-error {
+    color: rgb(218, 57, 57);
+    font-family:'Nunito Sans', sans-serif;
+    text-transform:uppercase;
+    text-align:center;
+
+}
+/* .form-group {
     width:90%;
     margin:0.5em auto;
-}
+} */
 .form-group label, legend {
     font-family: 'Forum', cursive;
     color: #A56E3A;
@@ -194,25 +202,51 @@ form button {
     cursor:pointer;
 }
 
-.search-form {
-    /* width:31%; à remettre sur plus grand écran*/
+.search-form,
+.move-form {
+    /* width:31%;  */
     display:flex;
     flex-flow:row wrap;
     align-items: center;
 }
-.search-form .form-group, input {
+.search-form .form-group, 
+input {
     display:inline-block;
-    /* width:85%; à remettre sur plus grand écran */
+    width:85%;
     border-color:#125C38;
     border-top-left-radius: 0.3em;
     border-bottom-left-radius: 0.3em;
 }
 
+.move-form .form-group {
+    display:inline-block;
+    width:62%;
+    border-color:#125C38;
+    border-top-left-radius: 0.3em;
+    border-bottom-left-radius: 0.3em;
+}
+.move-form .form-control {
+    width:100%;
+    padding:0.2em;
+    margin:0;
+}
 
 .search-form button {
-    display:inline-block;
+    /* display:inline-block; */
     padding: 0.505em;
     margin-left:-0.315em;
+    border-radius: 0 0.3em 0.3em 0;
+    border-width: 1px 1px 1px 0;
+    border-style: solid;
+    border-color: #125C38;
+    background-color:#125C38;
+    font-size:1em;
+}
+
+.move-form .btn-flex {
+    /* display:inline-block; */
+    padding: 0.6em;
+    margin-left:-0.2em;
     border-radius: 0 0.3em 0.3em 0;
     border-width: 1px 1px 1px 0;
     border-style: solid;
@@ -249,6 +283,7 @@ form button {
 .fixed-navbar {
     position:fixed;
     width: 100%;
+    z-index:1;
 }
 .navbar {
     font-family: 'Forum', cursive;
@@ -305,6 +340,7 @@ form button {
     padding:5em 1em 5em 1em;
 }
 .wrapper-homepage {
+    min-height:100%;
     padding:5em 1em 1em 1em;
     background-color:none;
 }
@@ -344,6 +380,7 @@ form button {
     display:flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom:0.6em;
 }
 .article-content {
     margin:0.5em;
@@ -713,9 +750,11 @@ a.ui-button:active, .ui-button:active,
     color:rgb(27, 136, 83);
 }
 
+/* Affichage d'un sujet */
 .wrapper-flex {
     display:flex;
     justify-content: space-between;
+    padding:0.5em;
 
 }
 
@@ -725,10 +764,8 @@ a.ui-button:active, .ui-button:active,
 }
 
 .wrapper-flex .left-side {
-    margin:0.7em;
+    margin:0.5em 0.5em 0.5em 1.3em;
 }
-
-/* Affichage d'un sujet */
 .author-info {
     background-color:#0B0B0B;
     border:1px solid #503415;
@@ -750,6 +787,28 @@ a.ui-button:active, .ui-button:active,
     letter-spacing:0.1em;
     color:#BDBDBD;
     text-transform:uppercase;
+}
+
+.container-post{
+    padding: 0 1em 1em 1em;
+    border:0;
+}
+
+.container-post p {
+    margin:0.3em 0.5em;
+}
+
+.post-information {
+    text-align:center;
+    margin:0.3em 0.5em;
+    border-bottom:1px solid #503415;
+    text-transform:uppercase;
+}
+
+.thread-action {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* @media screen and (max-width: 900px) {

@@ -88,15 +88,12 @@ class SecurityController extends Controller
             $authenticationUtils = $this->get('security.authentication_utils');
             $defaultData = array('username' => $authenticationUtils->getLastUsername());
             $form = $this->createForm(LoginType::class, $defaultData);
-            if (!is_null($authenticationUtils->getLastAuthenticationError(false))) {
-                $this->addFlash('warning', 'nope');
-                // $form->addError(new FormError(
-                //     $authenticationUtils->getLastAuthenticationError()->getMessageKey()
-                // ));
-            }
+
+            $error = $authenticationUtils->getLastAuthenticationError();
             $form->handleRequest($request);
             return $this->render('security/login.html.twig',[
                 'form' => $form->createView(),
+                'error' => $error
             ]
                     
             );

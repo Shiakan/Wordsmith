@@ -54,16 +54,18 @@
                 </div>
                     
                 </div>
-                <div class="right-side">
+                <div class="right-side" id="post{{ post.id }}">
                     <div class="container container-post">
-                        <div class="post-action">
+                        <div class="post-information">
+                            <small><a href="#post{{ post.id }}">{{post.thread.title}}</a> posté le {{ post.createdAt|date('d-m-Y') }} à {{ post.createdAt|date('H:i') }}</small>
+                            <div class="post-action">
                                 {% if (app.user.id == post.author.id) or (is_granted('ROLE_MODERATOR')) %}
-                                    <a href="{{path('post_edit', {'id' : post.id})}}">Editer</a>
+                                    <a class="link-post-action" href="{{path('post_edit', {'id' : post.id})}}">Editer</a>
                                 {% endif %}
                                 {% if is_granted('ROLE_MODERATOR') %}
-                                        <a title="Masquer le post" class="btn-mod hide" href="{{path('hide_post', {'id' : post.id }) }}"><i class="far fa-eye-slash"></i></a>
-                                    {% endif %}
-                                {{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}
+                                    <a title="Masquer le post" class="btn-mod hide" href="{{path('hide_post', {'id' : post.id }) }}"><i class="far fa-eye-slash"></i></a>
+                                {% endif %}
+                            </div>
                         </div>
                         {{ post.content|raw }}
                     </div>
@@ -102,22 +104,28 @@
             {% endif %}
         {% endfor %}
     </div>
-        {% if is_granted('ROLE_MODERATOR') %}
-                {{ form_start(form, {'action': path('thread_move', {'id' : thread.id }), 'method': 'POST', 'attr' : { 'class': 'search-form' }}) }}
-                {{form_row(form.subcategory,{'label':false})}}
-                    <button class="btn btn-success mb-2">{{ button_label|default('Modifier') }}</button>
-                {{form_end(form)}}
+    <div class="thread-action">
+        <a href="{{path('forum_subcategory', {'id' : thread.subcategory.id})}}">
+            {{ thread.subcategory.name }}
+        </a>
+        {# Si page supérieure à 1 on affiche un bouton précédent qui mène à la page-1 #} 
+        {% if page > 1 %}
+            <a href="{{path('thread_show',{'id':thread.id,'page':page -1})}}" class="btn-pagination"><i class="fas fa-arrow-left"></i></a>
+        {% endif %} {# si page inférieure à la page max calculée alors on affiche un bouton suivant qui mène à la page +1 #} 
+        {% if page < pageMax %} 
+            <a href="{{path('thread_show',{'id':thread.id,'page':page +1})}}" class="btn-pagination"><i class="fas fa-arrow-right"></i></a>
         {% endif %}
-            <div class="text-center">
-                {# Si page supérieure à 1 on affiche un bouton précédent qui mène à la page-1 #} 
-                {% if page > 1 %}
-                    <a href="{{path('thread_show',{'id':thread.id,'page':page -1})}}" class="btn-pagination"><i class="fas fa-arrow-left"></i></a>
-                {% endif %} {# si page inférieure à la page max calculée alors on affiche un bouton suivant qui mène à la page +1 #} 
-                {% if page < pageMax %} 
-                    <a href="{{path('thread_show',{'id':thread.id,'page':page +1})}}" class="btn-pagination"><i class="fas fa-arrow-right"></i></a>
-                {% endif %}
-            </div>
-    <a href="{{path('post_new', {'thread_id' : thread.id})}}">Répondre</a>
+    </div>
+        
+    <div class="thread-action">
+        <a class="btn" href="{{path('post_new', {'thread_id' : thread.id})}}">Répondre</a>
+        {% if is_granted('ROLE_MODERATOR') %}
+                {{ form_start(form, {'action': path('thread_move', {'id' : thread.id }), 'method': 'POST', 'attr' : { 'class': 'move-form' }}) }}
+                {{form_row(form.subcategory,{'label':false})}}
+                    <button class="btn-flex">Déplacer</button>
+                {{form_end(form)}}
+        {% endif %} 
+    </div>         
 </div>
 {% endblock %}
 
