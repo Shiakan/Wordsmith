@@ -5,7 +5,7 @@
 {% block main %}
 <div class="wrapper-homepage">
     <div class="container container-width">
-        <h1>Bienvenue <em>{{ app.user.username }}</em></h1>
+        <h1>Bienvenue <strong>{{ app.user.username }}</strong></h1>
         <div class="container-profil">
             <div class="left-side">
                 <img src="{{user.characterProfile.avatar}}">
@@ -22,7 +22,7 @@
                     <div id="tabs-1">
                     <div class="profile-title">
                         <h2>Informations générales</h2> 
-                        <a class="btn btn-edit" href="{{path('user_profile_edit', {'id': app.user.id })}}">Modifier</a>
+                        <a title="Modifier le profil" class="btn btn-edit" href="{{path('user_profile_edit', {'id': app.user.id })}}"><i class="far fa-edit"></i></a>
                     </div>
                     <ul>
                         <li>
@@ -37,7 +37,7 @@
                     </ul>
                     <div class="profile-title">
                         <h2>Profil du personnage </h2> 
-                        <a class="btn btn-edit" href="{{path('characterprofile_edit', {'id': app.user.characterProfile.id })}}">Modifier</a>
+                        <a title="Modifier le profil forum" class="btn btn-edit" href="{{path('characterprofile_edit', {'id': app.user.characterProfile.id })}}"><i class="far fa-edit"></i></a>
                     </div>
                     <ul>
                         <li>

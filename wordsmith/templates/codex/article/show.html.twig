@@ -11,12 +11,17 @@
                 {% endfor %}
             </ul>
         </div>
+        <div class="navigation-article">
+            {{ include('codex/navbarmobile.html.twig') }}
+        </div>
         <article class="container container-article">
             <h1>{{article.title}}</h1>
             <div class="article-content">
                 {{article.content|filter_black_listed()|raw }}
             </div>
-            <small>Publié le {{article.dateInserted|date("d/m/Y")}}.</small>
+            <div class="article-footer">
+                <small>Publié le {{article.dateInserted|date("d/m/Y")}}.</small>
+            </div>
         </article>
         <div class="article-tags">
             {% for tag in article.tags %}

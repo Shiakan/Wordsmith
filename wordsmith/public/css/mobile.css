@@ -1,0 +1,217 @@
+/* Général */
+h1 {
+    font-size:1.6em;
+}
+
+h2 {
+    font-size:1.2em;
+}
+
+/* footer {
+    margin-top: 2em;
+} */
+.fixed-navbar {
+    display:none;
+}
+.wrapper-homepage {
+    margin-top:0;
+    padding:0.8em 1em 2.5em 1em;
+}
+
+.wrapper-list {
+    padding:0.8em 1em 2.5em 1em;
+    margin-bottom:1.7em;
+}
+
+.wrapper-codex {
+    display:block;
+}
+
+.container-index {
+    width:100%;
+}
+/* Navbar container */
+.navigation-article {
+    text-align:center;
+    padding-bottom:0.5em;
+}
+.burger-navbar {
+    overflow: hidden;
+    background-color: #0D0D0D;
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+    padding:0.3em;
+}
+.logo-burger {
+    height:30px;
+    margin-right:1em;
+}
+
+.btn-admin {
+    display:none;
+}
+
+.taglist-title {
+    font-size:1.3em;
+    margin-bottom:0.5em;
+    color:#A56E3A;
+}
+
+.taglist-title em {
+    font-style:italic;
+}
+
+.article-preview h2 {
+    font-size:1.3em;
+    text-align:center;
+}
+
+.container {
+    padding:1em;
+}
+
+/* Container du menu burger */
+.dropdown {
+    margin-left:1em;
+    overflow: hidden;
+}
+/* Bouton du menu burger */
+.dropdown .dropbtn {
+    font-family: 'Forum', cursive;
+    font-size:1.2em;
+    color: #A56E3A;
+    text-transform:uppercase;
+    border: none;
+    outline: none;
+    padding: 0.5em;
+    background-color: inherit;
+    font-family: inherit; 
+    margin: 0; 
+}
+.burger-navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: #125C38;
+    color:#BDBDBD;
+}
+/* Contenu du menu burger */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #0B0B0B;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+/* Liens du menu burger */
+.dropdown-content a {
+    text-transform:uppercase;
+    color: #A56E3A;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    letter-spacing:0.1em;
+}
+.dropdown-content a:hover {
+    color: rgb(197, 137, 80);;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Wrappers & containers */
+.wrapper {
+    margin-bottom:1.7em;
+    padding:0.8em 1em 3em 1em;
+    width:100%;
+    background-image: url('../image/background.png');
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+}
+.wrapper-homepage {
+    width:100%;
+}
+.wrapper-list {
+    width:100%;
+}
+
+/* Codex */
+.content-codex {
+    margin-left:4.5em;
+}
+.dropbtn-codex {
+    font-family: 'Forum', cursive;
+}
+.navbar-codex {
+    display:none;
+}
+.tagbar {
+    display:none;
+}
+.header-codex {
+    display:none;
+}
+
+.last-article {
+    display:inline;
+    text-align:center;
+}
+
+.last-article h2 {
+    display:none;
+}
+.comment p {
+    padding-left:0;
+}
+
+/* Profil */
+
+.profile-title {
+    align-items:flex-start;
+}
+.profile-title h2 {
+    font-size:1.3em;
+}
+.left-side {
+    display:none;
+}
+.right-side {
+    width:100%;
+    padding:0;
+}
+#tabs {
+    min-height:620px;
+}
+
+/* Boutons */
+.btn-return  {
+    margin-bottom:1em;
+}
+
+/* FORUM */
+.container-forum {
+    padding:0;
+}
+.container-subcategory {
+    padding:0;
+    margin:0.5em;
+    display:block;
+}
+.description {
+    width:100%;
+}
+.description h3 {
+    font-size: 1.2em;
+}
+.statistic {
+    display:none;
+}
+
+.description p {
+    display:none;
+}
+
+.last-message {
+    display:none;
+}
