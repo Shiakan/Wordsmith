@@ -26,7 +26,7 @@ class ForumController extends AbstractController
         ]);
     }
     /**
-     * @Route("/forum/{name}/page/{page}", name="forum_subcategory", requirements={"page" = "\d+"}, defaults={"page" = 1}, methods="GET|POST")
+     * @Route("/forum/subcategory/{id}/page/{page}", name="forum_subcategory", requirements={"page" = "\d+"}, defaults={"page" = 1}, methods="GET|POST")
      */
     public function showSubcategory(Subcategory $subcategory,ThreadRepository $threadRepository , Request $request, $page, UserInterface $user=null)
     {

@@ -55,10 +55,14 @@ class ArticleController extends Controller
      */
     public function findArticlesByTag(Tag $tag)
     {
+        $repositoryTag= $this->getDoctrine()->getRepository(Tag::class);
+        $tags = $repositoryTag->findAll();
+
         $articles = $tag->getArticles();
         return $this->render('codex/article/taglist.html.twig', [
             'articles' =>$articles, 
             'tag'=>$tag,
+            'tags' => $tags
         ]);
     }
     

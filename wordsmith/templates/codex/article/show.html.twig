@@ -1,16 +1,7 @@
 {% extends 'base.html.twig' %} 
 {% block main %}
-{{ include('codex/aside.html.twig') }}
     <div class="wrapper">
-        <div class="navbar navbar-codex">
-            <ul>
-                {% for tag in tags %}
-                <li>
-                    <a href="{{path('search_by_tags',{'id':tag.id})}}">{{tag.name}}</a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
+        {{ include('codex/navbarcodex.html.twig') }}
         <div class="navigation-article">
             {{ include('codex/navbarmobile.html.twig') }}
         </div>

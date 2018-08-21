@@ -87,6 +87,42 @@ small {
     letter-spacing:0.075em;
     color:rgb(139, 139, 139);
 }
+
+/* BARRE DE DÉFILEMENT */
+ /* Chrome, Safari */
+ ::-webkit-scrollbar {
+    width: 7px;
+    height: 10px;
+}
+ ::-moz-scrollbar {
+    width: 7px;   
+    height: 10px;
+}
+ ::-webkit-scrollbar-track-piece  {
+    background-color: #0b0b0b;
+}
+ ::-moz-scrollbar-track-piece  {
+    background-color: #0b0b0b;
+    }
+ ::-webkit-scrollbar-thumb:vertical {
+    height: 30px;
+    width:50px;
+    background-color: #125C38;
+    }
+  ::-moz-scrollbar-thumb:vertical {
+    height: 30px;
+    background-color: #125C38;
+    border-radius: 5px;
+}
+ ::-webkit-scrollbar-thumb:horizontal{
+    height: 30px;
+    background-color: #0b0b0b;
+}
+ ::-moz-scrollbar-thumb:horizontal{
+    height: 30px;
+    background-color: #0b0b0b;
+}
+ /* FIN BARRE DE DÉFILEMENT */
 /* Formulaires */
 .form-group {
     width:90%;
@@ -159,14 +195,12 @@ form button {
 }
 
 .search-form {
-    /* width:31%;  */
-    width:60%;
+    /* width:31%; à remettre sur plus grand écran*/
     display:flex;
     flex-flow:row wrap;
     align-items: center;
 }
-.search-form .form-group, 
-input {
+.search-form .form-group, input {
     display:inline-block;
     /* width:85%; à remettre sur plus grand écran */
     border-color:#125C38;
@@ -244,6 +278,7 @@ input {
 
   /* Codex Navbar */
 .navbar-codex {
+    border-bottom:1px solid #503415; 
     background-color:#0D0D0D;
     width:100%;
     margin-top:0;
@@ -252,13 +287,13 @@ input {
 }
 .navbar-codex ul li {
     list-style: none;
+    text-transform:uppercase;
 }
 
 .navbar-codex ul{
     margin-top:0;
     display:flex;
-    /* display:flex;
-    justify-content: space-evenly; */
+    justify-content: space-around;
     width:100%;
 }
 
@@ -691,6 +726,30 @@ a.ui-button:active, .ui-button:active,
 
 .wrapper-flex .left-side {
     margin:0.7em;
+}
+
+/* Affichage d'un sujet */
+.author-info {
+    background-color:#0B0B0B;
+    border:1px solid #503415;
+    width:100%;
+    text-align:center;
+    padding:0.5em;
+    margin-bottom:0.5em;
+}
+.author-info h4 {
+    text-transform:uppercase;
+    font-size: 1.1em;
+    letter-spacing:0.1em;
+
+    border-bottom:1px solid #503415;
+}
+
+.author-rank {
+    font-family: 'BenchNine', sans-serif;
+    letter-spacing:0.1em;
+    color:#BDBDBD;
+    text-transform:uppercase;
 }
 
 /* @media screen and (max-width: 900px) {

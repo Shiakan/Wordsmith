@@ -1,22 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Thread{% endblock %}
+{% block title %}{{ thread.title }}{% endblock %}
 
 {% block main %}
 <div class="wrapper">
+    <a href="{{path('forum_subcategory', {'id' : thread.subcategory.id})}}">
+        {{ thread.subcategory.name }}
+    </a>
     <div class="container container-forum">
         <div class="category-header">
             <h2>{{ thread.title }}</h2>
-            <h3>{{ thread.subtitle }}</h3>
-            <a href="{{path('thread_edit', {'id' : thread.id})}}">
+            {% if thread.author.id == app.user.id or is_granted('ROLE_MODERATOR') %}
+            <a title="Modifier le titre du sujet" href="{{path('thread_edit', {'id' : thread.id})}}">
                 <i class="fas fa-edit"></i>
             </a>
+            {% endif %}
+            <h3>{{ thread.subtitle }}</h3>
+            
         </div>
         {% for post in posts %}
             {% if post.status == true %}
             <div class="wrapper-flex">
                 <div class="left-side">
-                    {{ post.author.username }}
+                <div class="author-info">
+                    <h4><a href="{{path('user_profile',{id:post.author.id})}}" style="color:{{post.author.characterProfile.groupForum.color}};">
+                        {{ post.author.username }}
+                    </a></h4>
+                    <span class="author-rank">{{post.author.characterProfile.rank}}</span>
+                </div>
 
                 <div id="blocAVA">
                     <div class="blocAVA">
@@ -24,8 +35,19 @@
                             <img src="{{ post.author.characterProfile.avatar }}">
                         </div>
                         <div class="abtPOST">
-                            <div>
-                                contenu profil
+                            <div class="player-info">
+                                <span class="profile-label">Pseudo Discord :</span>
+                                <span class="profile-label">Date de naissance :</span>
+                                <span class="profile-label">Date d'inscription :</span>
+                                <span class="profile-label">Date de naissance :</span>
+                            </div>
+                            <div class="character-info">
+                                <span class="profile-label">Age :</span> {{ post.author.characterProfile.age }}
+                                <span class="profile-label">Race :</span> {{ post.author.characterProfile.race }}
+                                <span class="profile-label">Classe :</span> {{ post.author.characterProfile.class }}
+                                <span class="profile-label">Classe sociale :</span> {{ post.author.characterProfile.socialCast}}
+                                <span class="profile-label">Localisation :</span> {{ post.author.characterProfile.localisation }}
+                                <span class="profile-label">Faits divers :</span> {{ post.author.characterProfile.miscellaneous }}
                             </div>
                         </div>
                     </div>
@@ -34,13 +56,15 @@
                 </div>
                 <div class="right-side">
                     <div class="container container-post">
-                        {% if (app.user.id == post.author.id) or (is_granted('ROLE_MODERATOR')) %}
-                            <a href="{{path('post_edit', {'id' : post.id})}}">Editer</a>
-                        {% endif %}
-                        {% if is_granted('ROLE_MODERATOR') %}
-                                <a title="Masquer le post" class="btn-mod hide" href="{{path('hide_post', {'id' : post.id }) }}"><i class="far fa-eye-slash"></i></a>
-                            {% endif %}
-                        {{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}
+                        <div class="post-action">
+                                {% if (app.user.id == post.author.id) or (is_granted('ROLE_MODERATOR')) %}
+                                    <a href="{{path('post_edit', {'id' : post.id})}}">Editer</a>
+                                {% endif %}
+                                {% if is_granted('ROLE_MODERATOR') %}
+                                        <a title="Masquer le post" class="btn-mod hide" href="{{path('hide_post', {'id' : post.id }) }}"><i class="far fa-eye-slash"></i></a>
+                                    {% endif %}
+                                {{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}
+                        </div>
                         {{ post.content|raw }}
                     </div>
                 </div>
@@ -95,5 +119,5 @@
             </div>
     <a href="{{path('post_new', {'thread_id' : thread.id})}}">Répondre</a>
 </div>
-
 {% endblock %}
+

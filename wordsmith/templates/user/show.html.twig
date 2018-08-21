@@ -10,16 +10,12 @@ Profil de {{user.username}}
 {% block main %}
 <div class="wrapper-homepage">
     <div class="container container-width">
-<<<<<<< HEAD
-        <h1>Bienvenue <strong>{{ app.user.username }}</strong></h1>
-=======
         {% if user.id == app.user.id %}
         <h1>Bienvenue <em>{{ app.user.username }}</em></h1>
         {% else %}
         <h1>Vous etes sur le profil de <em>{{user.username}}</em></h1>
         {% endif %}
 
->>>>>>> cca13dbc1834fd46154e10c25e1ff675ab28aebb
         <div class="container-profil">
             <div class="left-side">
                 <img src="{{user.characterProfile.avatar}}">
@@ -57,13 +53,9 @@ Profil de {{user.username}}
                     {% endif %}
                     <div class="profile-title">
                         <h2>Profil du personnage </h2> 
-<<<<<<< HEAD
-                        <a title="Modifier le profil forum" class="btn btn-edit" href="{{path('characterprofile_edit', {'id': app.user.characterProfile.id })}}"><i class="far fa-edit"></i></a>
-=======
                         {% if user.id == app.user.id %}
                         <a class="btn btn-edit" href="{{path('characterprofile_edit', {'id': app.user.characterProfile.id })}}">Modifier</a>
                         {% endif %}
->>>>>>> cca13dbc1834fd46154e10c25e1ff675ab28aebb
                     </div>
                     <ul>
                         <li>
