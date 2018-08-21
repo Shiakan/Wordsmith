@@ -16,7 +16,7 @@
             <div class="container thread-description">
                 <h3><a href="{{path('thread_show', {'id': thread.id })}}">{{thread.title}}</a></h3>
                 <small>{{thread.subtitle}}</small>
-                <h4 style="color:{{thread.author.characterProfile.groupForum.color}};">{{thread.author.username}}</h4>
+            <a href="{{path('user_profile',{id:thread.author.id})}}" style="color:{{thread.author.characterProfile.groupForum.color}};">{{thread.author.username}}</a>
             </div>
             <div class="container thread-statistic">
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}

@@ -8,6 +8,9 @@
         <div class="category-header">
             <h2>{{ thread.title }}</h2>
             <h3>{{ thread.subtitle }}</h3>
+            <a href="{{path('thread_edit', {'id' : thread.id})}}">
+                <i class="fas fa-edit"></i>
+            </a>
         </div>
         {% for post in posts %}
             {% if post.status == true %}
