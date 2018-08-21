@@ -6,7 +6,7 @@ import { WEBSOCKET_CONNECT } from '../reducers/user';
 import { ADD_MESSAGE, receiveMessage } from '../reducers/textInput';
 import { ROLL_DICE, SHARE_DICE } from '../reducers/dice';
 import {
- createPlayer, deletePlayer, MOVE_PLAYER, receiveMove 
+  autoAddPlayer, deletePlayer, MOVE_PLAYER, UPDATE_CHARS, receiveMove, receiveUpdate,
 } from '../reducers/gameScreen';
 /**
  * Code
@@ -20,9 +20,9 @@ const socketConnect = store => next => (action) => {
   const state = store.getState();
   switch (action.type) {
     case WEBSOCKET_CONNECT:
+      socket.emit('join', state.user, state.gameScreen.characters);
       // socket = io('87.98.154.146:3000');
-      console.log(state.user, 'ROOM ID');
-      socket.emit('join', state.user);
+      // connexion au WebSocket TODO localhost window.io(adresseIpDuServ:3000)
       // A la connexion j'active l'écoute sur 'send message'
       socket.on('send_message', (message) => {
         console.log(message, 'Mess in socket');
@@ -31,8 +31,12 @@ const socketConnect = store => next => (action) => {
         store.dispatch(receiveMessage(message));
       });
       socket.on('add_token', (tokenToAdd) => {
-        store.dispatch(createPlayer(tokenToAdd));
+        console.log('token to add :', tokenToAdd);
+        store.dispatch(autoAddPlayer(tokenToAdd));
       });
+      socket.on('update', (updatedChars) => {
+        store.dispatch(receiveUpdate(updatedChars));
+      })
       socket.on('delete_token', (tokenToKill) => {
         store.dispatch(deletePlayer(tokenToKill));
       });
@@ -76,9 +80,8 @@ const socketConnect = store => next => (action) => {
       break;
 
     case MOVE_PLAYER: {
-      console.log('ACTION', action.value);
+      const movedChar = state.gameScreen.characters.filter(char => char.id === action.value.target.id);
       const movedChars = state.gameScreen.characters.map((char) => {
-        console.log('Char', char);
         console.log('action.value.target.id', action.value.target.id);
         if (char.id === action.value.target.id) {
           console.log('old coords :', char.coordX, char.coordY);
@@ -88,16 +91,16 @@ const socketConnect = store => next => (action) => {
         }
         return char;
       });
+      console.log('moved char ', movedChar[0]);
       console.log('movedchars ', movedChars);
-      socket.emit('move_player', movedChars);
+      socket.emit('move_player', movedChar[0]);
     }
-    // case ADD_TOKEN: {
-    //   console.log(state.user.userName, '=> ADD token');
-    //   const dice = {};
-    //   dice.author = state.user.userName;
-    //   dice.rolled = state.dice.rolled;
-    //   socket.emit('share_dice', dice);
-    // }
+
+      break;
+
+    case UPDATE_CHARS:
+      console.log('A ENVOYER AUX AUTRES : ', state.gameScreen.characters);
+      socket.emit('to_update', state.gameScreen.characters);
       break;
 
     default:

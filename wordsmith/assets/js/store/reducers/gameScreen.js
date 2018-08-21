@@ -70,6 +70,7 @@ const DELETE_PLAYER = 'DELETE_PLAYER';
 const HANDLE_SLIDE = 'HANDLE_SLIDE';
 const CHANGE_MAP = 'CHANGE_MAP';
 const AUTO_PLAYER = 'AUTO_PLAYER';
+const UPDATE_CHARS = 'UPDATE_CHARS';
 
 /**
  * Traitements
@@ -175,25 +176,18 @@ const reducer = (state = initialState, action = {}) => {
       };
 
     case RECEIVE_MOVE: {
-      console.log('receive move action :', action);
-      
-      // const movedChars = state.characters.map((char) => {
-      //   if (char.id === action.value.target.id) {
-      //     console.log('old coords :', char.coordX, char.coordY);
-      //     char.coordX = (action.value.pageX - action.value.offsetX) - 10;
-      //     char.coordY = (action.value.pageY - action.value.offsetY) - 10;
-      //     console.log('new coords :', char.coordX, char.coordY);
-      //   }
-      //   return char;
-      // });
+      console.log('receive move action :', action.characters);
+      const filteredChars = state.characters.filter(char => char.name !== action.characters.name);
+      console.log('FILTERED :', filteredChars);
+
       return {
         ...state,
-        characters: action.characters,
+        characters: [...filteredChars, action.characters],
       };
     }
     case DELETE_PLAYER: {
       console.log(action);
-      
+
       const remainingChars = state.characters.filter(char => char.name !== action.value.name);
 
       return {
@@ -238,8 +232,13 @@ export const createPlayer = () => ({
 
 export const autoAddPlayer = tokenToAdd => ({
   type: AUTO_PLAYER,
-  name: tokenToAdd,
-})
+  char: tokenToAdd,
+});
+
+export const updateChars = value => ({
+  type: UPDATE_CHARS,
+  value,
+});
 
 export const movePlayer = value => ({
   type: MOVE_PLAYER,
