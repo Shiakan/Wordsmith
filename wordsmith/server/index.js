@@ -58,7 +58,7 @@ io.on('connection', function(socket) {
     //   console.log('RECEIVE TO UPDATE', toBeUpdated);
     // });
     
-    io.to(param.roomId).emit('update', toBeUpdated);
+    // io.to(param.roomId).emit('update', toBeUpdated);
 
     socket.on('roll_dice', function(dice) {
       var message = {};

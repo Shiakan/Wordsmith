@@ -49,7 +49,6 @@ const socketConnect = store => next => (action) => {
     case ADD_MESSAGE: {
       // Je transfère l'objet entier
       // Découpable par la suite
-      // const state = store.getState();
       console.log(state.user.userName, 'ADD MESSAGE');
       const content = {};
       content.role = state.user.role;
@@ -86,8 +85,8 @@ const socketConnect = store => next => (action) => {
         console.log('action.value.target.id', action.value.target.id);
         if (char.id === action.value.target.id) {
           console.log('old coords :', char.coordX, char.coordY);
-          char.coordX = (action.value.pageX - action.value.offsetX) - 10;
-          char.coordY = (action.value.pageY - action.value.offsetY) - 10;
+          char.coordX = action.value.layerX + 32;
+          char.coordY = action.value.layerY;
           console.log('new coords :', char.coordX, char.coordY);
         }
         return char;

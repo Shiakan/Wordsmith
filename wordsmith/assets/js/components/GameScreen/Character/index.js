@@ -38,6 +38,7 @@ class Character extends React.Component {
 
 
   movePlayer = (e) => {
+    console.log(e, 'EEE');
     const { movePlayer } = this.props;
     movePlayer(e);
   }
