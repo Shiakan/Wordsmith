@@ -20,6 +20,29 @@
 
         {% block header %}
             {% block nav %}
+            <div class="burger-navbar">
+                <div class="dropdown">
+                    <button class="dropbtn"><i class="fas fa-bars"></i>
+                    <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a class="{{ app.request.get('_route') == 'codex' ? 'active' }}" href="{{path('codex')}}">Codex</a>
+                        <a class="{{ app.request.get('_route') == 'forum_index' ? 'active' }}" href="{{path('forum_index')}}">Forum</a>
+                        {% if is_granted('ROLE_MODERATOR') %}
+                            <a href="{{path('home_backend')}}">Panneau d'administration</a>
+                        {% endif %}
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <a href="{{path('user_profile', {'id': app.user.id })}}">Mon profil</a>
+                            <a href="{{path('security_logout')}}">Déconnexion</a>
+                        {% else %}
+                            <a href="{{path('security_registration')}}">Inscription</a>
+                            <a href="{{path('security_login')}}">Connexion</a>
+                        {% endif %}
+                    </div>
+                </div>
+                <a href="{{ path('homepage') }}"><img class="logo-burger" src="https://nsa39.casimages.com/img/2018/08/12//180812035308814067.png" alt="logo"></a> 
+            </div>
+
             <div class="fixed-navbar">
                 <nav class="navbar">
                     <div class="navbar-left">

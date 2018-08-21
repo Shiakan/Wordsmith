@@ -23,12 +23,9 @@
                     <p>{{subcategory.reminder}}</p>
                 </div>
                 <div class="container statistic">
-                {# {% for hasReadThread in subcategory.hasReadThreads %}
-                    {% if hasReadThread.user.id is defined %}
+                    {# {% if hasReadThread.user.id is defined %}
                         {% if hasReadThread.user.id == app.user.id and hasReadThread.subcategory.id == subcategory.id %}
-                            {% if subcategory.threads|length == 0  %} 
-                                <img src="{{ asset('image/nonew.png') }}" class="icon">
-                            {% elseif hasReadThread.threadCount < subcategory.threads|length %}
+                            {% if hasReadThread.threadCount < subcategory.threads|length %} 
                                 <img src="{{ asset('image/new.png') }}" class="icon">
                             {% else %}
                                 <img src="{{ asset('image/nonew.png') }}" class="icon">
