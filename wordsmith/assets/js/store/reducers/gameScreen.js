@@ -118,10 +118,25 @@ const reducer = (state = initialState, action = {}) => {
         map: action.value,
       };
 
-    case AUTO_PLAYER:
-      return {
-
+    case AUTO_PLAYER: {
+      console.log('token reducer', action.char.userName);
+      const newChar = {
+        id: uuidv4(),
+        name: action.char.userName,
+        color: state.color,
+        coordX: state.cptX,
+        coordY: state.cptY,
       };
+      if (state.cptY >= 380) {
+        state.cptY = 100;
+        state.cptX += 70;
+      }
+      state.cptY += 70;
+      return {
+        ...state,
+        characters: [...state.characters, newChar],
+      };
+    };
 
     case CREATE_PLAYER: {
       if (state.characters.length < 20) {
