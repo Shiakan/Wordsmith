@@ -11,6 +11,7 @@ const initialState = {
   sheetId: rootAnchor.dataset.sheetid,
   roomId: rootAnchor.dataset.room,
   selfId: rootAnchor.dataset.playerid,
+  charSheet: rootAnchor.dataset.sheet,
 };
 
 /**

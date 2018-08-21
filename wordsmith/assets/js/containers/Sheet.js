@@ -20,7 +20,8 @@ import { sheetChange } from '../store/reducers/sheet';
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
 const mapStateToProps = state => ({
-  charSheet: state.sheet.charSheet,
+  charSheet: state.user.charSheet,
+  sheetId: state.user.sheetId,
 });
 
 /* === Actions ===

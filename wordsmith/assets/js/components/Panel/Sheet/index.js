@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 /**
  * Local import
@@ -19,6 +20,7 @@ class Sheet extends React.Component {
   static propTypes = {
     charSheet: PropTypes.string.isRequired,
     sheetChange: PropTypes.func.isRequired,
+    sheetId: PropTypes.string.isRequired,
   }
 
   componentDidMount() {
