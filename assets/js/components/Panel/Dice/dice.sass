@@ -9,9 +9,9 @@
  */
 .dice
   display: grid
-  grid-template-rows: 5% 35% 55% 5%
-  grid-template-columns: 15% 70% 15%
-  background: url(../../../assets/img/parchment.png) no-repeat
+  grid-template-rows: 15% 30% 50% 5%
+  grid-template-columns: 10% 80% 10%
+  background: url(../../../assets/img/parchment2.png) no-repeat
   background-size: 100% 100%
   height: 100%
   // witdh: 100%
@@ -27,14 +27,14 @@
     grid-column: 2
     grid-row: 3
     display: grid
-    grid-template-areas: ". . ." "Dform Dform Dform" ". . ." "Dresult Dresult Dresult" "Dshare Dshare Dshare"
-    grid-template-rows: auto repeat(3,1/3) 1fr
+    grid-template-areas: "Dform Dform Dform" "Dresult Dresult Dresult" "Dshare Dshare Dshare" ". . ."
+    grid-template-rows: 15% 25% 25% 20%
     grid-template-columns: 20% 50% 30%
     &-result
       grid-area: Dresult
       position: absolute
       font-style: italic
-      top: -.5em
+      top: .5em
     &-share
       grid-area: Dshare
       @extend %click-button
@@ -52,7 +52,7 @@
   margin: auto 0
 
 .tooltip
-  font-size: 1.4em
+  font-size: 1.2em
   &-error
     animation-name: toolTipError
     animation-duration: .7s

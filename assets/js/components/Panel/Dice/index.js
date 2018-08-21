@@ -10,7 +10,7 @@ import classNames from 'classnames';
 /**
  * Local import
  */
-import dicePng from '../../../assets/img/dicesTest1.png';
+import dicePng from '../../../assets/img/d20.png';
 
 // Composants
 
