@@ -8,15 +8,18 @@ const rootAnchor = document.getElementById('root');
 const initialState = {
   userName: rootAnchor.dataset.name,
   role: rootAnchor.dataset.role,
-  charSheet: 'tempthree',
+  sheetId: rootAnchor.dataset.sheetid,
   roomId: rootAnchor.dataset.room,
   selfId: rootAnchor.dataset.playerid,
+  charSheet: JSON.parse(rootAnchor.dataset.sheet),
 };
 
 /**
  * Types
  */
 const DO_SOMETHING = 'DO_SOMETHING';
+const SHEET_CHANGE = 'SHEET_CHANGE';
+export const SHEET_UPDATE = 'SHEET_UPDATE';
 export const WEBSOCKET_CONNECT = 'WEBSOCKET_CONNECT';
 
 /**
@@ -43,6 +46,13 @@ const reducer = (state = initialState, action = {}) => {
         // Afin de permettre de déterminer qui à envoyé le message
         // userId: uuidv4(),
       };
+
+    case SHEET_CHANGE:
+      return {
+        ...state,
+        charSheet: action.value,
+      };
+
     default:
       return state;
   }
@@ -54,6 +64,16 @@ const reducer = (state = initialState, action = {}) => {
 
 export const doSomething = () => ({
   type: DO_SOMETHING,
+});
+
+export const sheetChange = value => ({
+  type: SHEET_CHANGE,
+  value,
+});
+
+export const sheetUpdate = value => ({
+  type: SHEET_UPDATE,
+  value,
 });
 
 export const websocketConnect = () => ({

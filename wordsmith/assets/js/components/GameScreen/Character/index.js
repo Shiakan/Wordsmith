@@ -36,18 +36,21 @@ class Character extends React.Component {
     console.log('Character loaded');
   }
 
+
   movePlayer = (e) => {
+    console.log(e, 'EEE');
     const { movePlayer } = this.props;
     movePlayer(e);
   }
+
 
   render() {
     const {
       name, color, id, deletePlayer, coordX, coordY, userName, role,
     } = this.props;
     console.log(userName, role);
-    const mjCheck = (role === 'dm' && true);
-    const userCheck = (name === userName && true);
+    const mjCheck = (role === 'dm');
+    const userCheck = (name === userName);
     console.log('bool :', userCheck);
 
     const userClass = classNames(
@@ -61,7 +64,7 @@ class Character extends React.Component {
       <Draggable
         onStop={this.movePlayer}
         bounds="parent"
-        defaultPosition={{ x: coordX, y: coordY }}
+        position={{ x: coordX, y: coordY }}
         cancel=".character-cursor-other"
       >
         <div
@@ -73,12 +76,14 @@ class Character extends React.Component {
               color,
             }}
           >{name}
-            {mjCheck 
-              && <TiDelete
+            {mjCheck
+              && (
+              <TiDelete
                 className="character-nickname-delete"
                 onClick={deletePlayer}
-                  />}
-            </div>
+              />
+              )}
+          </div>
           <div
             className={userClass}
             id={id}

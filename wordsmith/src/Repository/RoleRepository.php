@@ -36,15 +36,15 @@ class RoleRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Role
+
+    public function findOneByCode($code): ?Role
     {
         return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('r.code = :code')
+            ->setParameter('code', $code)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
+
 }

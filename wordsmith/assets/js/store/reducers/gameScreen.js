@@ -23,13 +23,13 @@ const initialState = {
   name: '',
   typingName: '',
   characters: [
-    {
-      id: uuidv4(),
-      name: rootAnchor.dataset.name,
-      color: '#b80000',
-      coordX: 10,
-      coordY: 170,
-    },
+    // {
+    //   id: uuidv4(),
+    //   name: rootAnchor.dataset.name,
+    //   color: '#b80000',
+    //   coordX: 10,
+    //   coordY: 170,
+    // },
     // {
     //   id: uuidv4(),
     //   name: 'Varang',

@@ -9,10 +9,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+/**
+     * @Route("/codex")
+     */
+
 class CodexController extends Controller
 {
     /**
-     * @Route("/codex", name="codex")
+     * @Route("/", name="codex")
      */
     public function index(Request $request)
     {
@@ -33,7 +37,7 @@ class CodexController extends Controller
     }
 
     /**
-     * @Route("/article/search", name="search_article")
+     * @Route("/search", name="search_article")
      */
     public function findArticleBySearch(Request $request)
     {

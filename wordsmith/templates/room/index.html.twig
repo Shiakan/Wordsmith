@@ -5,13 +5,26 @@
   data-role="player"
 {% endif %}
   data-playerid={{app.user.id}}
+  data-sheetid={{app.user.charactersheet.id}}
   data-name={{app.user.username}}
   data-room={{room.id}}
+  data-sheet={{app.user.charactersheet.content|json_encode()|e('html_attr')}}
+  
   id="root"></div>
 {% block stylesheets %}
    <link rel="stylesheet" href="{{ asset('build/main.css') }}">      
    <link rel="stylesheet" href="{{ asset('build/app.css') }}">      
 {% endblock %}
 {% block javascripts %}
+{# <script type="text/javascript">
+    var app_name = '{{ app_name }}';
+    var app_url= '{{ app_url }}';
+    var app_description= '{{ app_description }}';
+    var app_email= '{{ app_email }}';
+    var app_title= '{{ app_title }}';
+    var app_dominio= '{{ app_dominio }}';
+    var env = '{{ app.environment }}';
+</script> #}
+
   <script src="{{ asset('build/app.js') }}"></script>
 {% endblock %}

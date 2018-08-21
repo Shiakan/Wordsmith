@@ -1,14 +1,18 @@
-body {
+/* body {
     height:100vh;
-}
+} */
 
 .btn-delete {
     display:inline-block;
 }
 
-/* .row {
-    height: 93vh;
-} */
+ .row {
+    height: 100vh;
+} 
+
+.wrapper {
+    height:100%;
+}
 
 #article_content {
     width:500px;

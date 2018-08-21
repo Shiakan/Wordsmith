@@ -3,8 +3,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FaUserAlt, FaUserTie } from 'react-icons/fa/';
-
+import { FaUser, FaUserTie } from 'react-icons/fa/';
 /**
  * Local import
  */
@@ -42,20 +41,14 @@ class ActionBar extends React.Component {
           <button onClick={showHelp} type="button" className="actionBar-table-help">HELP</button>
         </div>
         <div className="actionBar-player">
-          <FaUserAlt className="actionBar-player-1" />
-          <FaUserAlt className="actionBar-player-2" />
-          <FaUserAlt className="actionBar-player-3" />
-          <FaUserAlt className="actionBar-player-4" />
-          {/* <img className="actionBar-player-1" src="src/assets/img/player.png" alt="player" /> */}
-          {/* <div className="actionBar-player-1">P1</div>
-          <div className="actionBar-player-2">P2</div>
-          <div className="actionBar-player-3">P3</div>
-          <div className="actionBar-player-4">P4</div> */}
+          <FaUser className="actionBar-player-1" />
+          <FaUser className="actionBar-player-2" />
+          <FaUser className="actionBar-player-3" />
+          <FaUser className="actionBar-player-4" />
         </div>
       </div>
-    )
+    );
   }
-
 }
 
 /**

@@ -16,10 +16,14 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+/**
+ * @Route("/codex")
+ */
+
 class ArticleController extends Controller
 {
     /**
-     * @Route("/codex/show/{id}", name="article_show")
+     * @Route("/article/show/{id}", name="article_show")
      */
     public function show(Article $article, Request $request, ObjectManager $manager, UserInterface $user=null)
     {
@@ -47,7 +51,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/codex/show/tag/{id}", name="search_by_tags")
+     * @Route("/show/tag/{id}", name="search_by_tags")
      */
     public function findArticlesByTag(Tag $tag)
     {
