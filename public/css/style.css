@@ -297,6 +297,10 @@ input {
 .logo {
     height:50px;
 }
+.logo-cristal {
+    height:60px;
+}
+
 
   /* Codex Navbar */
 .navbar-codex {
@@ -662,7 +666,6 @@ a.ui-button:active, .ui-button:active,
     justify-content: center;
     width:80%;
     margin:auto;
-
 }
 .category-header .title h2 {
     font-size:1.3em;
@@ -703,6 +706,10 @@ a.ui-button:active, .ui-button:active,
     text-transform: uppercase;
 }
 
+.description h3:before {
+    content: url('../image/angle-double-right-solid.svg');
+    width:5px;
+}
 .description p {
     max-height: 3em;
     text-align:justify;

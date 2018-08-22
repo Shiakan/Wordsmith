@@ -54,10 +54,12 @@
 /*JUMBOTRON FORUM*/
 .jumbotron{
     width: 100%;
-    height: 40vh;
-    background-color: #206c77;
+    height: 30vh;
+    background-color: #0D0D0D;
+    border:1px solid #503415;
     color: white;
     margin-bottom:1em;
+    text-align:center;
 }
 
 /* FORUM PROFIL SOUS AVATAR */
