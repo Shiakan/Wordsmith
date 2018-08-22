@@ -9,12 +9,11 @@
  */
 .dice
   display: grid
-  grid-template-rows: 15% 30% 50% 5%
   grid-template-columns: 10% 80% 10%
+  grid-template-rows: 15% 25% 55% 5%
   background: url(../../../assets/img/parchment2.png) no-repeat
   background-size: 100% 100%
   height: 100%
-  // witdh: 100%
   &-img
     margin: auto auto
     grid-column: 1 / 4
@@ -22,52 +21,51 @@
     height: 85%
     witdh: 85%
   &-block
-    position: relative
     grid-area: Dblock
     grid-column: 2
     grid-row: 3
     display: grid
-    grid-template-areas: "Dform Dform Dform" "Dresult Dresult Dresult" "Dshare Dshare Dshare" ". . ."
-    grid-template-rows: 15% 25% 25% 20%
     grid-template-columns: 20% 50% 30%
+    grid-template-rows: 30% 25% 5% 20% 20%
     &-result
-      grid-area: Dresult
-      position: absolute
+      grid-column: 1 / 4 
+      grid-row: 1
+      width: 100%
       font-style: italic
-      top: .5em
     &-share
-      grid-area: Dshare
+      grid-column: 2 / 3
+      grid-row: 4
+      height: 2em
       @extend %click-button
     &-form
-      grid-area: Dform
       display: flex
-      justify-content: space-between
-      &-input
-        width: 75%
-      &-roll
-        @extend %click-button
-        
-
-.roll-input-flex
-  margin: auto 0
-
-.tooltip
-  font-size: 1.2em
-  &-error
-    animation-name: toolTipError
-    animation-duration: .7s
-    animation-fill-mode: forwards
-    animation-timing-function: linear
-  &-text
-    padding: .5em 0
-  &-ul
-    padding: 0 1em
-    &-li
-      list-style-type: disc
-      padding: .1em 0
+      flex-wrap: nowrap
+      grid-column: 1 / 4
+      grid-row: 2
+    &-input
+      width: 100%
+      margin-top: auto
+    &-roll
+      @extend %click-button
+      height: 2em
+      margin-top: auto
+    &-tooltip
+      font-size: 1.2em
+      margin: auto
+      &-error
+        animation-name: toolTipError
+        animation-duration: .7s
+        animation-fill-mode: forwards
+        animation-timing-function: linear
+      &-text
+        padding: .5em 0
+      &-ul
+        padding: 0 1em
+        &-li
+          list-style-type: disc
+          padding: .1em 0
 
 /** KEYFRAMES **/
-
 @keyframes toolTipError 
   0%
     transform: rotate(0deg)
@@ -82,5 +80,3 @@
   100% 
     transform: rotate(0deg)
     color: red
-    border: 2px solid black
-    border-radius: 50%

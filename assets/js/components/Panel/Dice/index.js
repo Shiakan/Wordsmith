@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 import { FaInfoCircle } from 'react-icons/fa/';
 import classNames from 'classnames';
-
+import TextField from '@material-ui/core/TextField';
 /**
  * Local import
  */
@@ -133,9 +133,9 @@ class Dice extends React.Component {
       role,
     } = this.props;
     const toolTip = classNames(
-      'tooltip',
+      'dice-block-tooltip',
       {
-        'tooltip-error': rolled === 'wrong',
+        'dice-block-tooltip-error': rolled === 'wrong',
       },
     );
     return (
@@ -151,40 +151,38 @@ class Dice extends React.Component {
             autoComplete="off"
             onSubmit={this.handleSubmit}
           >
-            <div className="roll-input-flex">
-              <input
-                type="text"
-                className="dice-block-form-input"
-                onChange={this.diceChange}
-                placeholder="ex : 1d20"
-                value={diceValue}
-              />
-              <FaInfoCircle
-                className={toolTip}
-                data-tip="React-tooltip"
-              />
-              <ReactTooltip
-                place="left"
-                type="dark"
-                effect="float"
-                border
-              >
-                <p className="tooltip-text">
+            <FaInfoCircle
+              className={toolTip}
+              data-tip="React-tooltip"
+            />
+            <ReactTooltip
+              place="left"
+              type="dark"
+              effect="float"
+              border
+            >
+              <p className="dice-block-tooltip-text">
                 Pour lancer un dé, il vous faut écrire sous cette forme xDy où :
-                </p>
-                <ul className="tooltip-ul">
-                  <li className="tooltip-ul-li">x correspond au nombre de dés à lancer</li>
-                  <li className="tooltip-ul-li">D est le séparateur</li>
-                  <li className="tooltip-ul-li">y le nombre de face pour les dés à lancer</li>
-                </ul>
-                <p className="tooltip-text">
+              </p>
+              <ul className="dice-block-tooltip-ul">
+                <li className="dice-block-tooltip-ul-li">x correspond au nombre de dés à lancer</li>
+                <li className="dice-block-tooltip-ul-li">D est le séparateur</li>
+                <li className="dice-block-tooltip-ul-li">y le nombre de face pour les dés à lancer</li>
+              </ul>
+              <p className="dice-block-tooltip-text">
                 Par exemple, la commande 2D100 revient à lancer deux dés à cent faces
-                </p>
-              </ReactTooltip>
-            </div>
+              </p>
+            </ReactTooltip>
+            <TextField
+              label="Jeter les dés"
+              placeholder="ex : 1d20"
+              onChange={this.diceChange}
+              value={diceValue}
+              className="dice-block-input"
+            />
             <button
               type="submit"
-              className="dice-block-form-roll"
+              className="dice-block-roll"
               value="Roll"
             >
               Roll
@@ -192,9 +190,9 @@ class Dice extends React.Component {
           </form>
           {/* if the rolled dices throws an error : */}
           {rolled === 'wrong'
-          && <p className="dice-block-result"> Bravo, vous avez jeté les dés en dehors du plateau... </p>
+          && <p className="dice-block-result">Dans votre empressement vous jetez les dés en dehors du plateau... </p>
           }
-          {/* if there is a result and that this result isn't wrong */}
+          {/* if there is a result and this result isn't wrong */}
           {rolled && rolled !== 'wrong'
           && <p className="dice-block-result">Vous avez tiré un {rolled}</p>
           }
@@ -205,7 +203,7 @@ class Dice extends React.Component {
             className="dice-block-share"
             onClick={this.shareRoll}
           >
-            MJ Share
+            Partager
           </button>)
           }
 
