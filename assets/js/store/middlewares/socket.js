@@ -113,7 +113,7 @@ const socketConnect = store => next => (action) => {
       break;
 
     case CREATE_PLAYER:
-      if (state.gameScreen.characters.length < 20) {
+      if (state.gameScreen.characters.length <= 20) {
         console.log(state.gameScreen.characters.length);
         const newChar = {
           id: uuidv4(),
@@ -122,8 +122,8 @@ const socketConnect = store => next => (action) => {
           coordX: state.gameScreen.cptX,
           coordY: state.gameScreen.cptY,
         };
-        if (state.gameScreen.cptY >= 380) {
-          state.gameScreen.cptY = 100;
+        if (state.gameScreen.cptY >= 250) {
+          state.gameScreen.cptY = 30;
           state.gameScreen.cptX += 70;
         }
         state.gameScreen.cptY += 70;
