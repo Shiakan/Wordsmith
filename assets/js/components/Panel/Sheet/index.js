@@ -53,6 +53,7 @@ class Sheet extends React.Component {
           placeholder="feuille personnage"
           onChange={this.handleChange}
           value={charSheet}
+          // autoFocus
           onBlur={this.focusLeave}
         />
       </div>

@@ -44,7 +44,7 @@ io.on('connection', function(socket) {
     users.removeUser(param.selfId);
     users.addUser(param.selfId, param.userName, param.roomId);
     var message = {};
-    message.message = 'Vient de se connecter';
+    message.message = 'vient de se connecter';
     message.author = param.userName;
     message.id = uuidV4();
     io.to(param.roomId).emit('send_message', message);
@@ -97,9 +97,9 @@ io.on('connection', function(socket) {
       var message = {};
       message.message = messageContent.message;
       if (messageContent.role === 'player') {
-        message.author = messageContent.author;
+        message.author = `${messageContent.author} :`;
       } else {
-        message.author = `[MJ] ${messageContent.author}`;
+        message.author = `[MJ] ${messageContent.author} :`;
       }
       message.id = uuidV4();
       console.log(message, 'on send_message');
@@ -109,7 +109,7 @@ io.on('connection', function(socket) {
     socket.on('disconnect', function () {
       console.log('DISCONNECTION')
       var message = {};
-      message.message = 'Vient de se déconnecter';
+      message.message = 'vient de se déconnecter';
       message.author = param.userName;
       message.id = uuidV4();
       io.to(param.roomId).emit('send_message', message);
