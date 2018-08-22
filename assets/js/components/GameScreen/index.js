@@ -29,6 +29,7 @@ class GameScreen extends React.Component {
     characters: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
     handleSlide: PropTypes.func.isRequired,
     isSlided: PropTypes.bool.isRequired,
+    role: PropTypes.string.isRequired,
   };
 
   componentDidMount() {
@@ -43,18 +44,19 @@ class GameScreen extends React.Component {
   render() {
     const {
       toggleScreen, isBoard, map, isMap,
-      grid, characters, handleSlide, isSlided,
+      grid, characters, handleSlide, isSlided, role,
     } = this.props;
     const classSwitch = classNames(
       'screen-switch',
       {
         'screen-switch--active': isSlided,
+        'screen-switch--notAMj': role !== 'dm',
       },
     );
     const classArrow = classNames(
       'screen-switch-arrow',
       {
-        'screen-switch-arrow--board': isBoard,
+        'screen-switch-arrow--board': isBoard || role !== 'dm',
       },
     );
     return (
@@ -67,7 +69,7 @@ class GameScreen extends React.Component {
             && (
             <div className="screen-switch-form">
               <SwitchMap />
-              <SwitchMJ />
+              {role === 'dm' && <SwitchMJ /> }
             </div>
             ) }
           {isBoard
