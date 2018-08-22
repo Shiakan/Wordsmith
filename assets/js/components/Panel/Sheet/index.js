@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FaHourglassEnd, FaCheck, FaTimes } from 'react-icons/fa/';
 
 /**
  * Local import
@@ -59,14 +60,14 @@ class Sheet extends React.Component {
           && (
             <div>
               {loading
-                && <div> LOADING</div>}
+                && <div> <FaHourglassEnd /> </div>}
               {!loading
               && (
                 <div>
                   {success
-                    && <div>SUCCESS</div>}
+                    && <div className="sheet-axios-success"> <FaCheck /> </div>}
                   {!success
-                    && <div>ERROR</div>}
+                    && <div className="sheet-axios-error"> <FaTimes /> </div>}
                 </div>
               )}
             </div>
