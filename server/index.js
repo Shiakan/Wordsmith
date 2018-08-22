@@ -61,13 +61,13 @@ io.on('connection', function(socket) {
     // io.to(param.roomId).emit('update', toBeUpdated);
 
     socket.on('roll_dice', function(dice) {
-      var message = {};
-      message.dice = dice.rolled;
-      message.author = dice.author;
-      message.id = uuidV4();
-      message.diceValue = dice.diceValue;
-      console.log(message, 'DICE IN SERVER')
       if (dice.role === 'player' && !isNaN(dice.rolled)) {
+        var message = {};
+        message.dice = dice.rolled;
+        message.author = dice.author;
+        message.id = uuidV4();
+        message.diceValue = dice.diceValue;
+        console.log(message, 'DICE IN SERVER')
         io.to(param.roomId).emit('send_message', message);
       }
     });

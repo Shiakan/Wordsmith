@@ -75,12 +75,38 @@ class Dice extends React.Component {
     return 'wrong';
   };
 
+  critic = (rollValue, diceValue) => {
+    // Before d(or D), you'll find the number of dices
+    let numberOfDices = diceValue.split(/d|D/)[0];
+    // After d(or D), you'll find the number of sides for a dice
+    const numberOfSides = diceValue.split(/d|D/)[1];
+
+    if (numberOfDices < 1) {
+      numberOfDices += 1;
+    }
+    const maxPossible = numberOfDices * numberOfSides;
+    let failed = Math.floor(maxPossible * (5 / 100));
+    if (failed < 1) {
+      failed = 1;
+    }
+    const success = Math.floor(maxPossible - (maxPossible * (5 / 100)));
+    if (rollValue <= failed) {
+      return 'failed';
+    }
+    if (rollValue > success) {
+      return 'success';
+    }
+    return 'no';
+  }
+
   handleSubmit = (evt) => {
     evt.preventDefault();
     const { rollDice, diceValue } = this.props;
-    const value = this.roll(diceValue);
+    const rollValue = this.roll(diceValue);
+    const critic = this.critic(rollValue, diceValue);
+    console.log(critic, 'CRITIC FUNC');
     // console.log(rollDice);
-    rollDice(value);
+    rollDice(rollValue, critic);
   }
 
   diceChange = (evt) => {
