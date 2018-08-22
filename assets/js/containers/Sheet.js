@@ -10,7 +10,7 @@ import Sheet from '../components/Panel/Sheet';
 
 // Action Creators
 // import { doSomething } from '../store/reducer';
-import { sheetChange } from '../store/reducers/user';
+import { sheetChange, sheetUpdate } from '../store/reducers/user';
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation
@@ -22,6 +22,10 @@ import { sheetChange } from '../store/reducers/user';
 const mapStateToProps = state => ({
   charSheet: state.user.charSheet,
   sheetId: state.user.sheetId,
+  userName: state.user.userName,
+  loading: state.user.loading,
+  success: state.user.success,
+  showRequestStatus: state.user.showRequestStatus,
 });
 
 /* === Actions ===
@@ -34,6 +38,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   sheetChange: (value) => {
     dispatch(sheetChange(value));
+  },
+  sheetUpdate: (value) => {
+    dispatch(sheetUpdate(value));
   },
 });
 

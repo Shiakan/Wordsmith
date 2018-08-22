@@ -9,7 +9,9 @@ import { createStore, applyMiddleware, compose } from 'redux';
 // Reducer
 import reducers from './reducers';
 
+// Middleware
 import socket from './middlewares/socket';
+import axiosMiddleware from './middlewares/axiosMiddleware';
 /*
  * Code
  */
@@ -18,7 +20,7 @@ if (window.devToolsExtension) {
   devTools.push(window.devToolsExtension());
 }
 
-const appliedMiddleware = applyMiddleware(socket);
+const appliedMiddleware = applyMiddleware(socket, axiosMiddleware);
 const enhancers = compose(appliedMiddleware, ...devTools);
 
 // createStore

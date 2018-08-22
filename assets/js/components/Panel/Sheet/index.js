@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
+import { FaHourglassEnd, FaCheck, FaTimes } from 'react-icons/fa/';
 
 /**
  * Local import
@@ -19,8 +19,12 @@ import './sheet.sass';
 class Sheet extends React.Component {
   static propTypes = {
     charSheet: PropTypes.string.isRequired,
+    userName: PropTypes.string.isRequired,
     sheetChange: PropTypes.func.isRequired,
-    sheetId: PropTypes.string.isRequired,
+    sheetUpdate: PropTypes.func.isRequired,
+    success: PropTypes.bool.isRequired,
+    loading: PropTypes.bool.isRequired,
+    showRequestStatus: PropTypes.bool.isRequired,
   }
 
   componentDidMount() {
@@ -36,22 +40,40 @@ class Sheet extends React.Component {
   }
 
   focusLeave = (evt) => {
-    console.log(evt.target.value);
-    const { sheetId } = this.props;
-    axios.post(`/charactersheet/${sheetId}`, evt.target.value)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const { sheetUpdate } = this.props;
+    console.log('ON FOCUS OUT', evt.target.value);
+    sheetUpdate(evt.target.value);
   }
 
   render() {
-    const { charSheet } = this.props;
+    const {
+      charSheet,
+      userName,
+      success,
+      loading,
+      showRequestStatus,
+    } = this.props;
     return (
       <div className="sheet">
-        <p className="sheet-name">Votre Nom</p>
+        <div className="sheet-axios">
+          {showRequestStatus
+          && (
+            <div>
+              {loading
+                && <div> <FaHourglassEnd /> </div>}
+              {!loading
+              && (
+                <div>
+                  {success
+                    && <div className="sheet-axios-success"> <FaCheck /> </div>}
+                  {!success
+                    && <div className="sheet-axios-error"> <FaTimes /> </div>}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+        <p className="sheet-name">{userName}</p>
         <textarea
           id="sheet-id"
           type="text"
@@ -59,6 +81,7 @@ class Sheet extends React.Component {
           placeholder="feuille personnage"
           onChange={this.handleChange}
           value={charSheet}
+          // autoFocus
           onBlur={this.focusLeave}
         />
       </div>

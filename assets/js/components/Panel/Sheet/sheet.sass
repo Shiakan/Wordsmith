@@ -8,12 +8,19 @@
  */
 .sheet
   display: grid
-  grid-template-rows: 5% auto 80% 5%
-  grid-template-columns: 15% 70% 15%
+  grid-template-rows: 15% auto 63% 17%
+  grid-template-columns: 10% 80% 10%
   height: 100%
   witdh: 100%
-  background: url(../../../assets/img/parchment.png) no-repeat
+  background: url(../../../assets/img/parchment2.png) no-repeat
   background-size: 100% 100%
+  &-axios
+    grid-column: 2 / 3
+    grid-row: 2
+    &-success
+      color: green
+    &-error
+      color: red
   &-name
     grid-column: 1 / 4
     grid-row: 2
@@ -21,7 +28,9 @@
   &-character
     grid-column: 2 / 3
     grid-row: 3 / 4
-    // resize: none
+    background-color: inherit
+    border: none
+    resize: none
     // background: url(../../../assets/img/parchment.png) no-repeat
     // background-position: 50% 50%
     // border: 2px solid $border-color

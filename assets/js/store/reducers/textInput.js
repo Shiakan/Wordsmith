@@ -73,6 +73,7 @@ const reducer = (state = initialState, action = {}) => {
         message: action.message,
         dice: action.dice,
         diceValue: action.diceValue,
+        critic: action.critic,
       };
       // Nouveau state
       return {
@@ -110,6 +111,7 @@ export const receiveMessage = message => ({
   author: message.author,
   dice: message.dice,
   diceValue: message.diceValue,
+  critic: message.diceCritic,
 });
 /**
  * Selectors

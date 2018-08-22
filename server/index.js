@@ -44,7 +44,7 @@ io.on('connection', function(socket) {
     users.removeUser(param.selfId);
     users.addUser(param.selfId, param.userName, param.roomId);
     var message = {};
-    message.message = 'Vient de se connecter';
+    message.message = 'vient de se connecter';
     message.author = param.userName;
     message.id = uuidV4();
     io.to(param.roomId).emit('send_message', message);
@@ -53,23 +53,34 @@ io.on('connection', function(socket) {
     var tokenToAdd = {};
     tokenToAdd.userName = param.userName,
     io.to(param.roomId).emit('add_token', tokenToAdd);
-
-    // socket.on('to_update', function(toBeUpdated) {
-    //   console.log('RECEIVE TO UPDATE', toBeUpdated);
-    // });
     
-    // io.to(param.roomId).emit('update', toBeUpdated);
 
     socket.on('roll_dice', function(dice) {
-      var message = {};
-      message.dice = dice.rolled;
-      message.author = dice.author;
-      message.id = uuidV4();
-      message.diceValue = dice.diceValue;
-      console.log(message, 'DICE IN SERVER')
       if (dice.role === 'player' && !isNaN(dice.rolled)) {
+        var message = {};
+        message.dice = dice.rolled;
+        message.author = dice.author;
+        message.id = uuidV4();
+        message.diceValue = dice.diceValue;
+        message.diceCritic = dice.critic;
+        console.log(message, 'DICE IN SERVER')
         io.to(param.roomId).emit('send_message', message);
       }
+    });
+
+    socket.on('change_map', function(newMap) {
+      console.log('NEW MAP SERVER', newMap);
+      io.to(param.roomId).emit('receive_map', newMap);
+    });
+
+    socket.on('auto_player', function(autoChar) {
+      console.log('NEW AUTO CHAR SERVER', autoChar);
+      io.to(param.roomId).emit('receive_auto', autoChar);
+    });
+
+    socket.on('add_player', function(newChar) {
+      console.log('NEW CHAR SERVER', newChar);
+      io.to(param.roomId).emit('receive_add', newChar);
     });
 
     socket.on('move_player', function(movedChars) {
@@ -88,18 +99,18 @@ io.on('connection', function(socket) {
       }
     });
 
-    // socket.on('auto_token', function(newChar) {
-    //   console.log('AUTO TOKEN :', newChar);
-    //   io.to(param.roomId).emit('receive_token', newChar);
-    // });
+    socket.on('delete_player', function(charToDelete) {
+      console.log('TOKEN TO DELETE :', charToDelete);
+      io.to(param.roomId).emit('receive_delete', charToDelete);
+    });
     
     socket.on('send_message', function(messageContent) {
       var message = {};
       message.message = messageContent.message;
       if (messageContent.role === 'player') {
-        message.author = messageContent.author;
+        message.author = `${messageContent.author} :`;
       } else {
-        message.author = `[MJ] ${messageContent.author}`;
+        message.author = `[MJ] ${messageContent.author} :`;
       }
       message.id = uuidV4();
       console.log(message, 'on send_message');
@@ -109,7 +120,7 @@ io.on('connection', function(socket) {
     socket.on('disconnect', function () {
       console.log('DISCONNECTION')
       var message = {};
-      message.message = 'Vient de se déconnecter';
+      message.message = 'vient de se déconnecter';
       message.author = param.userName;
       message.id = uuidV4();
       io.to(param.roomId).emit('send_message', message);

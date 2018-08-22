@@ -36,8 +36,8 @@ class ActionBar extends React.Component {
       <div className="actionBar">
         <FaUserTie className="actionBar-mj" />
         <div className="actionBar-table">
-          <button onClick={showDice} type="button" className="actionBar-table-dice">DICES</button>
-          <button onClick={showSheet} type="button" className="actionBar-table-sheet">SHEET</button>
+          <button onClick={showDice} type="button" className="actionBar-table-dice">DÉS</button>
+          <button onClick={showSheet} type="button" className="actionBar-table-sheet">FICHE</button>
           <button onClick={showHelp} type="button" className="actionBar-table-help">HELP</button>
         </div>
         <div className="actionBar-player">

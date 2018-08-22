@@ -1,5 +1,3 @@
-import uuidv4 from 'uuid/v4'; // https://www.npmjs.com/package/uuid
-
 const rootAnchor = document.getElementById('root');
 
 /**
@@ -12,6 +10,10 @@ const initialState = {
   roomId: rootAnchor.dataset.room,
   selfId: rootAnchor.dataset.playerid,
   charSheet: JSON.parse(rootAnchor.dataset.sheet),
+  tempSheet: '',
+  showRequestStatus: false,
+  loading: false,
+  success: false,
 };
 
 /**
@@ -19,7 +21,11 @@ const initialState = {
  */
 const DO_SOMETHING = 'DO_SOMETHING';
 const SHEET_CHANGE = 'SHEET_CHANGE';
+export const AXIOS_LOADING = 'AXIOS_LOADING';
+export const AXIOS_LOADED = 'AXIOS_LOADED';
 export const SHEET_UPDATE = 'SHEET_UPDATE';
+export const SHEET_LOADED = 'SHEET_LOADED';
+export const SHEET_FAILED = 'SHEET_FAILED';
 export const WEBSOCKET_CONNECT = 'WEBSOCKET_CONNECT';
 
 /**
@@ -53,6 +59,39 @@ const reducer = (state = initialState, action = {}) => {
         charSheet: action.value,
       };
 
+    case SHEET_UPDATE:
+      return {
+        ...state,
+        tempSheet: action.value,
+      };
+
+    case AXIOS_LOADING:
+      return {
+        ...state,
+        showRequestStatus: true,
+        loading: true,
+      };
+
+    case AXIOS_LOADED:
+      return {
+        ...state,
+        showRequestStatus: false,
+      };
+
+    case SHEET_LOADED:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+      };
+
+    case SHEET_FAILED:
+      return {
+        ...state,
+        loading: false,
+        success: false,
+      };
+
     default:
       return state;
   }
@@ -64,6 +103,23 @@ const reducer = (state = initialState, action = {}) => {
 
 export const doSomething = () => ({
   type: DO_SOMETHING,
+});
+
+export const axiosLoading = () => ({
+  type: AXIOS_LOADING,
+});
+
+export const axiosLoaded = () => ({
+  type: AXIOS_LOADED,
+});
+
+export const sheetLoaded = () => ({
+  type: SHEET_LOADED,
+});
+
+export const sheetFailed = value => ({
+  type: SHEET_FAILED,
+  value,
 });
 
 export const sheetChange = value => ({
