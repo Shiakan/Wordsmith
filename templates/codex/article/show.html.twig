@@ -49,10 +49,10 @@
              {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 {{form_start(form)}}
                  {{ form_widget(form) }}
-                 <button type="submit">Poster</button>
+                 <button class="btn-submit" type="submit">Poster</button>
                 {{form_end(form)}}
             {% endif %}
         </section>
-        <a class="btn" href="{{path('codex')}}">Retour</a>
+        <a class="btn btn-return" href="{{path('codex')}}">Retour</a>
     </div>
 {% endblock %}

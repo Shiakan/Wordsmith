@@ -2,15 +2,7 @@
 
 {% block main %}
     <div class="wrapper"> 
-        <div class="navbar-codex">
-            <ul>
-                {% for tag in tags %}
-                <li>
-                    <a href="{{path('search_by_tags',{'id':tag.id})}}">{{tag.name}}</a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
+        {{ include('codex/navbarcodex.html.twig') }}
         <div class="header-codex">
         </div>
         <div class="last-article">

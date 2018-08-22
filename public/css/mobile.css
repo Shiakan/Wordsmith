@@ -161,12 +161,18 @@ h2 {
 .last-article h2 {
     display:none;
 }
-.comment p {
-    padding-left:0;
+.comment-header {
+    text-align:center;
 }
 
-/* Profil */
+.comment-header h4 {
+    font-size:1.2em;
+}
+/* .comment small {
+    margin-left:1em;
+} */
 
+/* Profil */
 .profile-title {
     align-items:flex-start;
 }

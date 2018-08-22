@@ -47,6 +47,10 @@
     align-items: center;
 }
 
+.comment-header small {
+    margin-left:0.5em;
+}
+
 /*JUMBOTRON FORUM*/
 .jumbotron{
     width: 100%;

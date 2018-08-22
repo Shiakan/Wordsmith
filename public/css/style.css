@@ -265,20 +265,6 @@ input {
     border-color: rgb(15, 49, 33);
 }
 
-/*Changement de sous catégorie*/
-.moveOn{
-    display: inline-block;
-    padding:1em 1em;
-}
-/*Pagination*/
-.text-center{
-    text-align: center;
-}
-.btn-pagination{
-    font-size: 1.5em;
-}
-
-
 /* HEADER  */
 /* Navbar  */
 .fixed-navbar {
@@ -338,11 +324,11 @@ input {
     min-height:100vh;
     margin:auto;
     background-color:#0B0B0B; 
-    padding:5em 1em 5em 1em;
+    padding:2em 1em 5em 1em;
 }
 .wrapper-homepage {
     min-height:100%;
-    padding:5em 1em 1em 1em;
+    padding:3em 1em 1em 1em;
     background-color:none;
 }
 .wrapper-codex {
@@ -351,7 +337,7 @@ input {
     justify-content: space-between;
 }
 .wrapper-list {
-    padding:5em 1em 1em 1em;
+    padding:2em 1em 1em 1em;
     margin:auto;
     background-color:#0B0B0B; 
 }
@@ -366,6 +352,58 @@ input {
 /* .navbar-codex {
     display:none;
 } */
+/* TOUS LES BOUTONS */
+.btn {
+    padding:0.3em 0.5em;
+    border-radius:0.3em;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size:0.8em;
+    font-weight:600;
+    background-color: #125C38;  
+    color:#BDBDBD;
+}
+.btn:hover {
+    background-color: rgb(15, 49, 33);  
+    color: #BDBDBD;
+}
+.btn-tag {
+    padding:0.1em 0.3em;
+    background-color: #125C38;  
+    color: #BDBDBD;
+    border:1px solid rgb(15, 49, 33);
+}
+.btn-mod {
+    margin-left:0.5em;
+}
+.btn-return {
+    padding:0.5em 1em;
+    margin-top:0.5em;
+    font-size:0.9em;
+}
+.show {
+    color:#125C38;
+}
+/*Pagination*/
+.moveOn{
+    display: inline-block;
+    padding:1em 1em;
+}
+.text-center{
+    text-align: center;
+}
+.btn-pagination{
+    font-size: 1.5em;
+}
+/* Bouton submit */
+.btn-submit {
+    padding:0.5em 1em;
+    margin-top:0.5em;
+    font-size:1em;
+}
+.btn-submit:hover {
+    background-color:rgb(15, 49, 33);  
+}
+/* FIN TOUS LES BOUTONS */
 
 /* Codex */
 .header-codex {
@@ -423,8 +461,6 @@ input {
 .article-footer {
     text-align:right;
 }
-
-/* Boutons tags Codex */
 .tags {
     margin-top:0.3em;
     margin-left:1em;
@@ -432,44 +468,6 @@ input {
 
 .article-tags {
     margin-bottom:1.5em;
-}
-.btn {
-    padding:0.3em 0.5em;
-    border-radius:0.3em;
-    font-family: 'Nunito Sans', sans-serif;
-    font-size:0.8em;
-    font-weight:600;
-    background-color: #125C38;  
-    color:#BDBDBD;
-}
-.btn:hover {
-    color:rgb(83, 224, 156); 
-}
-.btn-tag {
-    padding:0.1em 0.3em;
-    background-color: #125C38;  
-    color: #BDBDBD;
-    border:1px solid rgb(15, 49, 33);
-}
-.btn-tag:hover, .btn-admin:hover {
-    background-color: rgb(15, 49, 33);  
-    color: #BDBDBD;
-}
-.btn-admin {
-    position:fixed;
-    bottom:6%;
-    right:2%;
-    background-color:#125C38;  
-    color: #BDBDBD;
-    padding:0.3em 0.5em;
-}
-
-.btn-mod {
-    margin-left:0.5em;
-}
-
-.show {
-    color:#125C38;
 }
 
 /* Commentaires Codex */
@@ -485,17 +483,18 @@ input {
 .comment p {
     margin:0 1em;
     font-size:0.9em;
+    text-align:justify;
 }
 
 .comment h4 {
     font-family: 'Forum', cursive;
-    font-size:1.2em;
+    font-size:1.4em;
     font-weight:400;
     color: #A56E3A;
     text-transform:uppercase;
+    margin-left:0.575em;
 }
 .comment small {
-    /* margin-left:1em; */
     margin-top:0.2em;
     color:rgb(139, 139, 139);
 }
@@ -505,9 +504,6 @@ input {
     text-align:right;
 }
 
-.comment-hidden p {
-    text-align:left;
-}
 .deactivated {
     font-size:0.9em;
     margin-left:0.3em;

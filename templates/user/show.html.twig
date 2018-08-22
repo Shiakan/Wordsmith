@@ -54,7 +54,7 @@ Profil de {{user.username}}
                     <div class="profile-title">
                         <h2>Profil du personnage </h2> 
                         {% if user.id == app.user.id %}
-                        <a class="btn btn-edit" href="{{path('characterprofile_edit', {'id': app.user.characterProfile.id })}}">Modifier</a>
+                        <a class="btn btn-edit" href="{{path('characterprofile_edit', {'id': app.user.characterProfile.id })}}"><i class="far fa-edit"></i></a>
                         {% endif %}
                     </div>
                     <ul>
