@@ -53,12 +53,7 @@ io.on('connection', function(socket) {
     var tokenToAdd = {};
     tokenToAdd.userName = param.userName,
     io.to(param.roomId).emit('add_token', tokenToAdd);
-
-    // socket.on('to_update', function(toBeUpdated) {
-    //   console.log('RECEIVE TO UPDATE', toBeUpdated);
-    // });
     
-    io.to(param.roomId).emit('update');
 
     socket.on('roll_dice', function(dice) {
       var message = {};
@@ -75,6 +70,11 @@ io.on('connection', function(socket) {
     socket.on('change_map', function(newMap) {
       console.log('NEW MAP SERVER', newMap);
       io.to(param.roomId).emit('receive_map', newMap);
+    });
+
+    socket.on('auto_player', function(autoChar) {
+      console.log('NEW AUTO CHAR SERVER', autoChar);
+      io.to(param.roomId).emit('receive_auto', autoChar);
     });
 
     socket.on('add_player', function(newChar) {

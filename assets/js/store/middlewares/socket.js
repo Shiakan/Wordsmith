@@ -7,7 +7,7 @@ import { WEBSOCKET_CONNECT } from '../reducers/user';
 import { ADD_MESSAGE, receiveMessage } from '../reducers/textInput';
 import { ROLL_DICE, SHARE_DICE } from '../reducers/dice';
 import {
-  receiveDelete, autoAddPlayer, deletePlayer, MOVE_PLAYER, DELETE_PLAYER, CREATE_PLAYER, CHANGE_MAP, receiveMove, receiveChar, receiveMap,
+  receiveDelete, autoAddPlayer, deletePlayer, AUTO_PLAYER, MOVE_PLAYER, DELETE_PLAYER, CREATE_PLAYER, CHANGE_MAP, receiveMove, receiveChar, receiveMap, autoReceivePlayer,
 } from '../reducers/gameScreen';
 /**
  * Code
@@ -38,6 +38,9 @@ const socketConnect = store => next => (action) => {
       });
       socket.on('delete_token', (tokenToKill) => {
         store.dispatch(deletePlayer(tokenToKill));
+      });
+      socket.on('receive_auto', (autoChar) => {
+        store.dispatch(autoReceivePlayer(autoChar));
       });
       socket.on('receive_add', (newChar) => {
         console.log('new char received websocket :', newChar);
@@ -100,7 +103,7 @@ const socketConnect = store => next => (action) => {
           console.log('new coords :', char.coordX, char.coordY);
         }
         return char;
-      });
+      }); 
       console.log('moved char ', movedChar[0]);
       console.log('movedchars ', movedChars);
       socket.emit('move_player', movedChar[0]);
@@ -132,9 +135,27 @@ const socketConnect = store => next => (action) => {
       }
       break;
 
-    case DELETE_PLAYER: {
-      console.log('delete ', action);
+    case AUTO_PLAYER: {
+      console.log('token reducer', action.char.userName);
+      const autoChar = {
+        id: uuidv4(),
+        name: state.user.userName,
+        color: state.gameScreen.color,
+        coordX: state.gameScreen.cptX,
+        coordY: state.gameScreen.cptY,
+      };
+      if (state.gameScreen.cptY >= 380) {
+        state.gameScreen.cptY = 100;
+        state.gameScreen.cptX += 70;
+      }
+      state.gameScreen.cptY += 70;
+      console.log('NEW AUTO CHAR SOCKET :', autoChar);
+      socket.emit('auto_player', autoChar);
+    }
 
+      break;
+
+    case DELETE_PLAYER: {
       const charToDelete = state.gameScreen.characters.filter(char => char.name === action.value.name);
       console.log('charlol ', charToDelete);
 
