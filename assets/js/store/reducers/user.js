@@ -10,7 +10,9 @@ const initialState = {
   roomId: rootAnchor.dataset.room,
   selfId: rootAnchor.dataset.playerid,
   charSheet: JSON.parse(rootAnchor.dataset.sheet),
-  tempSheet: JSON.parse(rootAnchor.dataset.sheet),
+  tempSheet: '',
+  loading: false,
+  success: false,
 };
 
 /**
@@ -18,7 +20,9 @@ const initialState = {
  */
 const DO_SOMETHING = 'DO_SOMETHING';
 const SHEET_CHANGE = 'SHEET_CHANGE';
+export const AXIOS_LOADING = 'AXIOS_LOADING';
 export const SHEET_UPDATE = 'SHEET_UPDATE';
+export const SHEET_LOADED = 'SHEET_LOADED';
 export const WEBSOCKET_CONNECT = 'WEBSOCKET_CONNECT';
 
 /**
@@ -58,6 +62,19 @@ const reducer = (state = initialState, action = {}) => {
         tempSheet: action.value,
       };
 
+    case AXIOS_LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case SHEET_LOADED:
+      return {
+        ...state,
+        loading: false,
+        succes: true,
+      };
+
     default:
       return state;
   }
@@ -69,6 +86,14 @@ const reducer = (state = initialState, action = {}) => {
 
 export const doSomething = () => ({
   type: DO_SOMETHING,
+});
+
+export const axiosLoading = () => ({
+  type: AXIOS_LOADING,
+});
+
+export const sheetLoaded = () => ({
+  type: SHEET_LOADED,
 });
 
 export const sheetChange = value => ({

@@ -52,7 +52,7 @@ class Messages extends React.Component {
               {console.log(message, 'mess in index.js')}
               {message.message
               && <p className="message-content">{message.author} {message.message ? message.message : message.dice}</p>}
-              {message.dice
+              {message.diceValue
               && <p className="message-content">{message.author} à lancé un {message.diceValue} et a obtenu un {message.dice}</p>}
             </div>
           );

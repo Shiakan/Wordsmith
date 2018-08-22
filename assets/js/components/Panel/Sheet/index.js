@@ -21,6 +21,8 @@ class Sheet extends React.Component {
     userName: PropTypes.string.isRequired,
     sheetChange: PropTypes.func.isRequired,
     sheetUpdate: PropTypes.func.isRequired,
+    success: PropTypes.bool.isRequired,
+    loading: PropTypes.bool.isRequired,
   }
 
   componentDidMount() {
@@ -42,9 +44,17 @@ class Sheet extends React.Component {
   }
 
   render() {
-    const { charSheet, userName } = this.props;
+    const {
+      charSheet,
+      userName,
+      success,
+      loading,
+    } = this.props;
     return (
       <div className="sheet">
+        {loading
+        && <div className="sheet-axios">ok</div>
+        }
         <p className="sheet-name">{userName}</p>
         <textarea
           id="sheet-id"

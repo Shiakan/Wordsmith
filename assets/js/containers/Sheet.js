@@ -23,6 +23,8 @@ const mapStateToProps = state => ({
   charSheet: state.user.charSheet,
   sheetId: state.user.sheetId,
   userName: state.user.userName,
+  success: state.user.success,
+  loading: state.user.loading,
 });
 
 /* === Actions ===
