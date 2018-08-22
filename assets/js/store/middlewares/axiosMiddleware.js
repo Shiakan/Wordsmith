@@ -14,14 +14,16 @@ const axiosMiddleware = store => next => (action) => {
   const state = store.getState();
   switch (action.type) {
     case SHEET_UPDATE:
-      console.log('RIGHT B4 AXIOS');
-      axios.post(`/charactersheet/${state.user.sheetId}`, action.value)
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      if (state.user.tempSheet !== action.value) {
+        console.log('AXIOS TRIGGERED');
+        axios.post(`/charactersheet/${state.user.sheetId}`, action.value)
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
 
       break;
 

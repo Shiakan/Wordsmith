@@ -1,5 +1,3 @@
-import uuidv4 from 'uuid/v4'; // https://www.npmjs.com/package/uuid
-
 const rootAnchor = document.getElementById('root');
 
 /**
@@ -12,6 +10,7 @@ const initialState = {
   roomId: rootAnchor.dataset.room,
   selfId: rootAnchor.dataset.playerid,
   charSheet: JSON.parse(rootAnchor.dataset.sheet),
+  tempSheet: JSON.parse(rootAnchor.dataset.sheet),
 };
 
 /**
@@ -51,6 +50,12 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         charSheet: action.value,
+      };
+
+    case SHEET_UPDATE:
+      return {
+        ...state,
+        tempSheet: action.value,
       };
 
     default:
