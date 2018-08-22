@@ -60,7 +60,7 @@ class Dice extends React.Component {
     // I assume that he wanted to throw only one dice
     // so typing d20 is like typing 1d20
     if (numberOfDices < 1) {
-      numberOfDices += 1;
+      numberOfDices = 1;
     }
     // I need to verify that numberOfDices & numberOfSides are numbers
     // and that numberOfSiders is greater than zero (a dice has at least 1 face (sphere))
@@ -77,7 +77,7 @@ class Dice extends React.Component {
 
   critic = (rollValue, diceValue) => {
     // Before d(or D), you'll find the number of dices
-    let numberOfDices = diceValue.split(/d|D/)[0];
+    const numberOfDices = diceValue.split(/d|D/)[0];
     // After d(or D), you'll find the number of sides for a dice
     const numberOfSides = Number(diceValue.split(/d|D/)[1]);
     console.log('NUMBER OF SIDES', numberOfSides);
@@ -86,12 +86,12 @@ class Dice extends React.Component {
       if (numberOfDices > 1) {
         return 'no';
       }
-      numberOfDices = 1;
+      // numberOfDices = 1;
       const maxPossible = numberOfDices * numberOfSides;
-      let success = Math.floor(maxPossible * (5 / 100));
-      if (success < 1) {
-        success = 1;
-      }
+      const success = Math.floor(maxPossible * (5 / 100));
+      // if (success < 1) {
+      //   success = 1;
+      // }
       const failed = Math.floor(maxPossible - (maxPossible * (5 / 100)));
       if (rollValue <= success) {
         return 'success';
