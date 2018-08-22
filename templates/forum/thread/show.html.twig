@@ -4,13 +4,15 @@
 
 {% block main %}
 <div class="wrapper">
+    {{ include('forum/jumbotron.html.twig') }}
+    <div id="top"></div>
     {{ include('forum/thread/threadaction.html.twig') }}
     <div class="container container-forum">
         <div class="category-header">
             <div class="title">
                 <h2>{{ thread.title }}</h2>
                 {% if thread.author.id == app.user.id or is_granted('ROLE_MODERATOR') %}
-                <a title="Modifier le titre du sujet" href="{{path('thread_edit', {'id' : thread.id})}}" id="top">
+                <a title="Modifier le titre du sujet" href="{{path('thread_edit', {'id' : thread.id})}}">
                     <i class="fas fa-edit"></i>
                 </a>
                 {% endif %}
@@ -106,9 +108,10 @@
             {% endif %}
         {% endfor %}
     </div>
+    <div id="bottom"></div>
     {{ include('forum/thread/threadaction.html.twig') }}
         
-    <div class="thread-action">
+    <div class="thread-moderation">
         {% if is_granted('ROLE_MODERATOR') %}
                 {{ form_start(form, {'action': path('thread_move', {'id' : thread.id }), 'method': 'POST', 'attr' : { 'class': 'move-form' }}) }}
                 {{form_row(form.subcategory,{'label':false})}}

@@ -702,6 +702,7 @@ a.ui-button:active, .ui-button:active,
     margin: 0;
     text-transform: uppercase;
 }
+
 .description p {
     max-height: 3em;
     text-align:justify;
@@ -799,6 +800,10 @@ a.ui-button:active, .ui-button:active,
     color:rgb(27, 136, 83);
 }
 
+.form-margin {
+    margin:1em;
+}
+
 /* Affichage d'un sujet */
 .wrapper-flex {
     display:flex;
@@ -854,6 +859,11 @@ a.ui-button:active, .ui-button:active,
     justify-content: space-between;
     align-items: center;
     margin-bottom:0.8em;
+}
+
+.thread-moderation {
+    width:40%;
+    margin-left:60%;
 }
 /* @media screen and (max-width: 900px) {
 } */

@@ -4,10 +4,7 @@
 
 {% block main %}
 <div class="wrapper"> 
-    <div class="jumbotron">
-        test
-    </div>
-
+    {{ include('forum/jumbotron.html.twig') }}
     {% for category in categories %}
     <div class="container container-forum">
         <div class="category-header">

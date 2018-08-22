@@ -3,9 +3,18 @@
 {% block title %}Edition du Thread{% endblock %}
 
 {% block main %}
-    <h1>Modificatiion du thread {{thread.title}}</h1>
-    {{ form_start(editForm) }}
-    {{form_widget(editForm)}}
-    <button class="btn">{{ button_label|default('Modifier') }}</button>
-    {{form_end(editForm)}}
+<div class="wrapper">
+    {{ include('forum/jumbotron.html.twig') }}
+    <div class="container container-forum">
+        <div class="category-header">
+            <h2>Editer le sujet </h2>
+        </div>
+        <div class="form-margin">
+            {{ form_start(editForm) }}
+            {{form_widget(editForm)}}
+            <button class="btn btn-submit">{{ button_label|default('Modifier') }}</button>
+            {{form_end(editForm)}}
+        </div>
+    </div>
+</div>
 {% endblock %}
