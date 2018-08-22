@@ -72,6 +72,11 @@ io.on('connection', function(socket) {
       }
     });
 
+    socket.on('add_player', function(newChar) {
+      console.log('NEW CHAR SERVER', newChar);
+      io.to(param.roomId).emit('receive_add', newChar);
+    });
+
     socket.on('move_player', function(movedChars) {
       console.log('RECEIVE MOVE', movedChars);
       io.to(param.roomId).emit('receive_move', movedChars);

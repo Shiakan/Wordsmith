@@ -62,11 +62,12 @@ const TOGGLE_SCREEN = 'TOGGLE_SCREEN';
 const TOGGLE_GRID = 'TOGGLE_GRID';
 const TOGGLE_PICKER = 'TOGGLE_PICKER';
 const CHANGE_COLOR = 'CHANGE_COLOR';
-const CREATE_PLAYER = 'CREATE_PLAYER';
+export const CREATE_PLAYER = 'CREATE_PLAYER';
 const INPUT_CHAR_CHANGE = 'INPUT_CHAR_CHANGE';
 export const MOVE_PLAYER = 'MOVE_PLAYER';
 const RECEIVE_MOVE = 'RECEIVE_MOVE';
 const RECEIVE_DELETE = 'RECEIVE_DELETE';
+const RECEIVE_CHAR = 'RECEIVE_CHAR';
 export const DELETE_PLAYER = 'DELETE_PLAYER';
 const HANDLE_SLIDE = 'HANDLE_SLIDE';
 const CHANGE_MAP = 'CHANGE_MAP';
@@ -138,38 +139,45 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         characters: [...state.characters, newChar],
       };
-    };
+    }
+    case RECEIVE_CHAR:
+      console.log('NEW CHAR REDUCER :', action.newChar);
 
-    case CREATE_PLAYER: {
-      if (state.characters.length < 20) {
-        console.log(state.characters.length);
-        const newChar = {
-          id: uuidv4(),
-          name: state.typingName,
-          color: state.color,
-          coordX: state.cptX,
-          coordY: state.cptY,
-        };
-        if (state.cptY >= 380) {
-          state.cptY = 100;
-          state.cptX += 70;
-        }
-        state.cptY += 70;
-        if (newChar.name.length === 0) {
-          newChar.name = `Opponent#${state.cpt}`;
-          state.cpt += 1;
-        }
-        console.log(newChar.name);
-        return {
-          ...state,
-          characters: [...state.characters, newChar],
-          typingName: '',
-        };
-      }
       return {
         ...state,
+        characters: [...state.characters, action.newChar],
       };
-    }
+
+    // case CREATE_PLAYER: {
+    //   if (state.characters.length < 20) {
+    //     console.log(state.characters.length);
+    //     const newChar = {
+    //       id: uuidv4(),
+    //       name: state.typingName,
+    //       color: state.color,
+    //       coordX: state.cptX,
+    //       coordY: state.cptY,
+    //     };
+    //     if (state.cptY >= 380) {
+    //       state.cptY = 100;
+    //       state.cptX += 70;
+    //     }
+    //     state.cptY += 70;
+    //     if (newChar.name.length === 0) {
+    //       newChar.name = `Opponent#${state.cpt}`;
+    //       state.cpt += 1;
+    //     }
+    //     console.log(newChar.name);
+    //     return {
+    //       ...state,
+    //       characters: [...state.characters, newChar],
+    //       typingName: '',
+    //     };
+    //   }
+    //   return {
+    //     ...state,
+    //   };
+    // }
     case INPUT_CHAR_CHANGE:
       return {
         ...state,
@@ -253,6 +261,11 @@ export const receiveMove = characters => ({
 export const receiveDelete = characters => ({
   type: RECEIVE_DELETE,
   characters,
+});
+
+export const receiveChar = newChar => ({
+  type: RECEIVE_CHAR,
+  newChar,
 });
 
 export const deletePlayer = value => ({

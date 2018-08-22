@@ -1,3 +1,4 @@
+import uuidv4 from 'uuid/v4'; // https://www.npmjs.com/package/uuid
 /**
  * Import
  */
@@ -6,7 +7,7 @@ import { WEBSOCKET_CONNECT } from '../reducers/user';
 import { ADD_MESSAGE, receiveMessage } from '../reducers/textInput';
 import { ROLL_DICE, SHARE_DICE } from '../reducers/dice';
 import {
-  receiveDelete, autoAddPlayer, deletePlayer, MOVE_PLAYER, UPDATE_CHARS, DELETE_PLAYER, receiveMove, receiveUpdate,
+  receiveDelete, autoAddPlayer, deletePlayer, MOVE_PLAYER, DELETE_PLAYER, CREATE_PLAYER, receiveMove, receiveChar,
 } from '../reducers/gameScreen';
 /**
  * Code
@@ -35,7 +36,10 @@ const socketConnect = store => next => (action) => {
         console.log('token to add :', tokenToAdd);
         store.dispatch(autoAddPlayer(tokenToAdd));
       });
-      
+      socket.on('receive_add', (newChar) => {
+        console.log('new char received websocket :', newChar);
+        store.dispatch(receiveChar(newChar));
+      });
       socket.on('receive_delete', (charToKill) => {
         console.log('action websocket :', charToKill);
         store.dispatch(receiveDelete(charToKill));
@@ -101,14 +105,37 @@ const socketConnect = store => next => (action) => {
 
       break;
 
+    case CREATE_PLAYER:
+      if (state.gameScreen.characters.length < 20) {
+        console.log(state.gameScreen.characters.length);
+        const newChar = {
+          id: uuidv4(),
+          name: state.gameScreen.typingName,
+          color: state.gameScreen.color,
+          coordX: state.gameScreen.cptX,
+          coordY: state.gameScreen.cptY,
+        };
+        if (state.gameScreen.cptY >= 380) {
+          state.gameScreen.cptY = 100;
+          state.gameScreen.cptX += 70;
+        }
+        state.gameScreen.cptY += 70;
+        if (newChar.name.length === 0) {
+          newChar.name = `Opponent#${state.gameScreen.cpt}`;
+          state.gameScreen.cpt += 1;
+        }
+        console.log('NEW CHAR SOCKET :', newChar);
+        socket.emit('add_player', newChar);
+      }
+      break;
+
     case DELETE_PLAYER: {
       console.log('delete ', action);
 
       const charToDelete = state.gameScreen.characters.filter(char => char.name === action.value.name);
       console.log('charlol ', charToDelete);
-      
-      socket.emit('delete_player', charToDelete);
 
+      socket.emit('delete_player', charToDelete);
     }
 
     default:
