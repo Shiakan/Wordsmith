@@ -72,6 +72,11 @@ io.on('connection', function(socket) {
       }
     });
 
+    socket.on('change_map', function(newMap) {
+      console.log('NEW MAP SERVER', newMap);
+      io.to(param.roomId).emit('receive_map', newMap);
+    });
+
     socket.on('add_player', function(newChar) {
       console.log('NEW CHAR SERVER', newChar);
       io.to(param.roomId).emit('receive_add', newChar);

@@ -7,7 +7,7 @@ import { WEBSOCKET_CONNECT } from '../reducers/user';
 import { ADD_MESSAGE, receiveMessage } from '../reducers/textInput';
 import { ROLL_DICE, SHARE_DICE } from '../reducers/dice';
 import {
-  receiveDelete, autoAddPlayer, deletePlayer, MOVE_PLAYER, DELETE_PLAYER, CREATE_PLAYER, receiveMove, receiveChar,
+  receiveDelete, autoAddPlayer, deletePlayer, MOVE_PLAYER, DELETE_PLAYER, CREATE_PLAYER, CHANGE_MAP, receiveMove, receiveChar, receiveMap,
 } from '../reducers/gameScreen';
 /**
  * Code
@@ -36,6 +36,9 @@ const socketConnect = store => next => (action) => {
         console.log('token to add :', tokenToAdd);
         store.dispatch(autoAddPlayer(tokenToAdd));
       });
+      socket.on('delete_token', (tokenToKill) => {
+        store.dispatch(deletePlayer(tokenToKill));
+      });
       socket.on('receive_add', (newChar) => {
         console.log('new char received websocket :', newChar);
         store.dispatch(receiveChar(newChar));
@@ -44,11 +47,11 @@ const socketConnect = store => next => (action) => {
         console.log('action websocket :', charToKill);
         store.dispatch(receiveDelete(charToKill));
       });
-      socket.on('delete_token', (tokenToKill) => {
-        store.dispatch(deletePlayer(tokenToKill));
-      });
       socket.on('receive_move', (movedChars) => {
         store.dispatch(receiveMove(movedChars));
+      });
+      socket.on('receive_map', (newMap) => {
+        store.dispatch(receiveMap(newMap));
       });
 
       break;
@@ -137,6 +140,12 @@ const socketConnect = store => next => (action) => {
 
       socket.emit('delete_player', charToDelete);
     }
+      break;
+
+    case CHANGE_MAP:
+      console.log('socket action map : ', action.value);
+      socket.emit('change_map', action.value);
+      break;
 
     default:
   }

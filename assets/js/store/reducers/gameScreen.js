@@ -68,9 +68,10 @@ export const MOVE_PLAYER = 'MOVE_PLAYER';
 const RECEIVE_MOVE = 'RECEIVE_MOVE';
 const RECEIVE_DELETE = 'RECEIVE_DELETE';
 const RECEIVE_CHAR = 'RECEIVE_CHAR';
+const RECEIVE_MAP = 'RECEIVE_MAP';
 export const DELETE_PLAYER = 'DELETE_PLAYER';
 const HANDLE_SLIDE = 'HANDLE_SLIDE';
-const CHANGE_MAP = 'CHANGE_MAP';
+export const CHANGE_MAP = 'CHANGE_MAP';
 const AUTO_PLAYER = 'AUTO_PLAYER';
 const UPDATE_CHARS = 'UPDATE_CHARS';
 
@@ -114,11 +115,10 @@ const reducer = (state = initialState, action = {}) => {
         color: action.value,
       };
 
-    case CHANGE_MAP:
-      console.log(state.map);
+    case RECEIVE_MAP:
       return {
         ...state,
-        map: action.value,
+        map: action.newMap,
       };
 
     case AUTO_PLAYER: {
@@ -266,6 +266,11 @@ export const receiveDelete = characters => ({
 export const receiveChar = newChar => ({
   type: RECEIVE_CHAR,
   newChar,
+});
+
+export const receiveMap = newMap => ({
+  type: RECEIVE_MAP,
+  newMap,
 });
 
 export const deletePlayer = value => ({
