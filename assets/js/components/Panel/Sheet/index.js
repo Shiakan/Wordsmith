@@ -23,6 +23,7 @@ class Sheet extends React.Component {
     sheetUpdate: PropTypes.func.isRequired,
     success: PropTypes.bool.isRequired,
     loading: PropTypes.bool.isRequired,
+    showRequestStatus: PropTypes.bool.isRequired,
   }
 
   componentDidMount() {
@@ -49,12 +50,28 @@ class Sheet extends React.Component {
       userName,
       success,
       loading,
+      showRequestStatus,
     } = this.props;
     return (
       <div className="sheet">
-        {loading
-        && <div className="sheet-axios">ok</div>
-        }
+        <div className="sheet-axios">
+          {showRequestStatus
+          && (
+            <div>
+              {loading
+                && <div> LOADING</div>}
+              {!loading
+              && (
+                <div>
+                  {success
+                    && <div>SUCCESS</div>}
+                  {!success
+                    && <div>ERROR</div>}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
         <p className="sheet-name">{userName}</p>
         <textarea
           id="sheet-id"
