@@ -1,10 +1,4 @@
-import uuidv4 from 'uuid/v4'; // https://www.npmjs.com/package/uuid
-
 import maps from '../../data/maps';
-
-const rootAnchor = document.getElementById('root');
-
-
 /**
  * Initial State
  */
@@ -14,7 +8,7 @@ const initialState = {
   map: 'http://medievalshop.com/parchemin/wp-content/uploads/2013/02/Plan-FG2-Auberge-des-3-anneaux-%C3%A9tage-de-nuit.jpg',
   isMap: true,
   grid: true,
-  color: '#f44336',
+  color: '#4caf50',
   toggle: false,
   isSlided: false,
   cpt: 1,
@@ -22,36 +16,7 @@ const initialState = {
   cptY: 170,
   name: '',
   typingName: '',
-  characters: [
-    // {
-    //   id: uuidv4(),
-    //   name: rootAnchor.dataset.name,
-    //   color: '#b80000',
-    //   coordX: 10,
-    //   coordY: 170,
-    // },
-    // {
-    //   id: uuidv4(),
-    //   name: 'Varang',
-    //   color: '#008b02',
-    //   coordX: 10,
-    //   coordY: 240,
-    // },
-    // {
-    //   id: uuidv4(),
-    //   name: 'ben',
-    //   color: '#fccb00',
-    //   coordX: 10,
-    //   coordY: 310,
-    // },
-    // {
-    //   id: uuidv4(),
-    //   name: 'Test2',
-    //   color: '#b80000',
-    //   coordX: 10,
-    //   coordY: 380,
-    // },
-  ],
+  characters: [],
 };
 console.log(initialState.characters);
 
@@ -62,14 +27,18 @@ const TOGGLE_SCREEN = 'TOGGLE_SCREEN';
 const TOGGLE_GRID = 'TOGGLE_GRID';
 const TOGGLE_PICKER = 'TOGGLE_PICKER';
 const CHANGE_COLOR = 'CHANGE_COLOR';
-const CREATE_PLAYER = 'CREATE_PLAYER';
+export const CREATE_PLAYER = 'CREATE_PLAYER';
 const INPUT_CHAR_CHANGE = 'INPUT_CHAR_CHANGE';
 export const MOVE_PLAYER = 'MOVE_PLAYER';
 const RECEIVE_MOVE = 'RECEIVE_MOVE';
-const DELETE_PLAYER = 'DELETE_PLAYER';
+const RECEIVE_DELETE = 'RECEIVE_DELETE';
+const RECEIVE_CHAR = 'RECEIVE_CHAR';
+const RECEIVE_MAP = 'RECEIVE_MAP';
+export const DELETE_PLAYER = 'DELETE_PLAYER';
 const HANDLE_SLIDE = 'HANDLE_SLIDE';
-const CHANGE_MAP = 'CHANGE_MAP';
-const AUTO_PLAYER = 'AUTO_PLAYER';
+export const CHANGE_MAP = 'CHANGE_MAP';
+export const AUTO_PLAYER = 'AUTO_PLAYER';
+export const AUTO_RECEIVE = 'AUTO_RECEIVE';
 const UPDATE_CHARS = 'UPDATE_CHARS';
 
 /**
@@ -112,63 +81,26 @@ const reducer = (state = initialState, action = {}) => {
         color: action.value,
       };
 
-    case CHANGE_MAP:
-      console.log(state.map);
+    case RECEIVE_MAP:
       return {
         ...state,
-        map: action.value,
+        map: action.newMap,
       };
 
-    case AUTO_PLAYER: {
-      console.log('token reducer', action.char.userName);
-      const newChar = {
-        id: uuidv4(),
-        name: action.char.userName,
-        color: state.color,
-        coordX: state.cptX,
-        coordY: state.cptY,
-      };
-      if (state.cptY >= 380) {
-        state.cptY = 100;
-        state.cptX += 70;
-      }
-      state.cptY += 70;
+    case AUTO_RECEIVE:
       return {
         ...state,
-        characters: [...state.characters, newChar],
+        characters: [...state.characters, action.autoChar],
       };
-    };
 
-    case CREATE_PLAYER: {
-      if (state.characters.length < 20) {
-        console.log(state.characters.length);
-        const newChar = {
-          id: uuidv4(),
-          name: state.typingName,
-          color: state.color,
-          coordX: state.cptX,
-          coordY: state.cptY,
-        };
-        if (state.cptY >= 380) {
-          state.cptY = 100;
-          state.cptX += 70;
-        }
-        state.cptY += 70;
-        if (newChar.name.length === 0) {
-          newChar.name = `Opponent#${state.cpt}`;
-          state.cpt += 1;
-        }
-        console.log(newChar.name);
-        return {
-          ...state,
-          characters: [...state.characters, newChar],
-          typingName: '',
-        };
-      }
+    case RECEIVE_CHAR:
+      console.log('NEW CHAR REDUCER :', action.newChar);
+
       return {
         ...state,
+        characters: [...state.characters, action.newChar],
       };
-    }
+
     case INPUT_CHAR_CHANGE:
       return {
         ...state,
@@ -185,14 +117,13 @@ const reducer = (state = initialState, action = {}) => {
         characters: [...filteredChars, action.characters],
       };
     }
-    case DELETE_PLAYER: {
-      console.log(action);
-
-      const remainingChars = state.characters.filter(char => char.name !== action.value.name);
+    case RECEIVE_DELETE: {
+      const filteredChars = state.characters.filter(char => char.name !== action.characters[0].name);
+      console.log('character to kill :', action.characters[0].name);
 
       return {
         ...state,
-        characters: remainingChars,
+        characters: [...filteredChars],
       };
     }
     default:
@@ -248,6 +179,26 @@ export const movePlayer = value => ({
 export const receiveMove = characters => ({
   type: RECEIVE_MOVE,
   characters,
+});
+
+export const receiveDelete = characters => ({
+  type: RECEIVE_DELETE,
+  characters,
+});
+
+export const autoReceivePlayer = autoChar => ({
+  type: AUTO_RECEIVE,
+  autoChar,
+});
+
+export const receiveChar = newChar => ({
+  type: RECEIVE_CHAR,
+  newChar,
+});
+
+export const receiveMap = newMap => ({
+  type: RECEIVE_MAP,
+  newMap,
 });
 
 export const deletePlayer = value => ({
