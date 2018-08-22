@@ -36,12 +36,6 @@ const socketConnect = store => next => (action) => {
         console.log('token to add :', tokenToAdd);
         store.dispatch(autoAddPlayer(tokenToAdd));
       });
-<<<<<<< HEAD
-      socket.on('update', (updatedChars) => {
-        store.dispatch(receiveUpdate(updatedChars));
-      });
-=======
->>>>>>> gamescreen
       socket.on('delete_token', (tokenToKill) => {
         store.dispatch(deletePlayer(tokenToKill));
       });
