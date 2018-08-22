@@ -22,6 +22,7 @@ import {
  */
 const mapStateToProps = state => ({
   grid: state.gameScreen.grid,
+  role: state.user.role,
 });
 
 /* === Actions ===
