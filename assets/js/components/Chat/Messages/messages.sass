@@ -15,44 +15,11 @@
   &-content
     color: white
     &-success
-      color: green
+      color: lighten(green, 30%)
+      &::after
+        content: ' (Réussite critique)'
     &-failed
-      color: red
-  // &-self
-  //   position: relative
-  //   background-color: #27A11A
-  //   padding: .5em
-  //   border-radius: 1em
-  //   margin: 1.5em 0 0 4em
-  //   & .message-content
-  //     color: white
-  //   & .message-auteur
-  //     color: green
-  //     color: inherit
-  //     font-family: 'Roboto', cursive;
-  //     position: absolute
-  //     bottom: -1em
-  //     right: .5em
-  //     color: lighten(black, 50%)
-  // &-foreign
-  //   position: relative
-  //   background-color: #E5E5EA
-  //   padding: .5em
-  //   border-radius: 1em
-  //   color: black
-  //   margin: 1.5em 4em 0 0
-  //   & .message-content
-  //     color: black
-  //   & .message-auteur
-  //     color: green
-  //     color: inherit
-  //     font-family: 'Roboto', cursive;
-  //     position: absolute
-  //     bottom: -1em
-  //     left: .5em
-  //     color: lighten(black, 50%)
-  // &-content
-  //   font-family: 'Roboto', cursive;
-  //   color: inherit
-    
-
+      &::after
+        content: ' (Echec critique)'
+        color: red
+ 
