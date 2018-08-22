@@ -374,6 +374,10 @@ input {
 }
 .btn-mod {
     margin-left:0.5em;
+    color:rgb(132, 27, 36);
+}
+.btn-mod:hover {
+    color:rgb(104, 19, 26);
 }
 .btn-return {
     padding:0.5em 1em;
@@ -393,6 +397,10 @@ input {
 }
 .btn-pagination{
     font-size: 1.5em;
+}
+.fas .fa-arrow-down,
+.fas .fa-arrow-up {
+    font-size:0.5em;
 }
 /* Bouton submit */
 .btn-submit {
@@ -651,13 +659,19 @@ a.ui-button:active, .ui-button:active,
 }
 .category-header .title {
     display:flex;
+    justify-content: center;
     width:80%;
     margin:auto;
-    text-align:center;
 
 }
-.category-header h2 {
+.category-header .title h2 {
+    font-size:1.3em;
     color:#A56E3A;
+    margin-right:0.5em;
+}
+
+.category-header .title a {
+    color:#125C38;
 }
 
 .category-header p {
@@ -798,6 +812,10 @@ a.ui-button:active, .ui-button:active,
 .wrapper-flex .left-side {
     margin:0.5em 0.5em 0.5em 1.3em;
 }
+.top-link {
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+}
 .author-info {
     background-color:#0B0B0B;
     border:1px solid #503415;
@@ -835,6 +853,7 @@ a.ui-button:active, .ui-button:active,
     display:flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom:0.8em;
 }
 /* @media screen and (max-width: 900px) {
 } */
