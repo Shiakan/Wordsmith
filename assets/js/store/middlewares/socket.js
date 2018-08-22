@@ -36,7 +36,7 @@ const socketConnect = store => next => (action) => {
       });
       socket.on('update', (updatedChars) => {
         store.dispatch(receiveUpdate(updatedChars));
-      })
+      });
       socket.on('delete_token', (tokenToKill) => {
         store.dispatch(deletePlayer(tokenToKill));
       });
@@ -64,6 +64,7 @@ const socketConnect = store => next => (action) => {
       dice.role = state.user.role;
       dice.author = state.user.userName;
       dice.rolled = action.dice;
+      dice.critic = action.critic;
       console.log(dice, 'DICE IN SOCKET');
       socket.emit('roll_dice', dice);
     }

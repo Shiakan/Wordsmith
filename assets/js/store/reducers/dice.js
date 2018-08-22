@@ -27,6 +27,7 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         rolled: action.dice,
+        diceCritic: action.critic,
       };
 
     case DICE_CHANGE:
@@ -49,9 +50,10 @@ const reducer = (state = initialState, action = {}) => {
  * Action Creators
  */
 
-export const rollDice = dice => ({
+export const rollDice = (dice, critic) => ({
   type: ROLL_DICE,
   dice,
+  critic,
 });
 
 export const diceChange = value => ({

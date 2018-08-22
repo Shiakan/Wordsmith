@@ -67,6 +67,7 @@ io.on('connection', function(socket) {
         message.author = dice.author;
         message.id = uuidV4();
         message.diceValue = dice.diceValue;
+        message.diceCritic = dice.critic;
         console.log(message, 'DICE IN SERVER')
         io.to(param.roomId).emit('send_message', message);
       }

@@ -79,22 +79,26 @@ class Dice extends React.Component {
     // Before d(or D), you'll find the number of dices
     let numberOfDices = diceValue.split(/d|D/)[0];
     // After d(or D), you'll find the number of sides for a dice
-    const numberOfSides = diceValue.split(/d|D/)[1];
-
-    if (numberOfDices < 1) {
-      numberOfDices += 1;
-    }
-    const maxPossible = numberOfDices * numberOfSides;
-    let failed = Math.floor(maxPossible * (5 / 100));
-    if (failed < 1) {
-      failed = 1;
-    }
-    const success = Math.floor(maxPossible - (maxPossible * (5 / 100)));
-    if (rollValue <= failed) {
-      return 'failed';
-    }
-    if (rollValue > success) {
-      return 'success';
+    const numberOfSides = Number(diceValue.split(/d|D/)[1]);
+    console.log('NUMBER OF SIDES', numberOfSides);
+    if (numberOfSides === 20 || numberOfSides === 100) {
+      console.log('SIDES FILTERED', numberOfSides);
+      if (numberOfDices > 1) {
+        return 'no';
+      }
+      numberOfDices = 1;
+      const maxPossible = numberOfDices * numberOfSides;
+      let success = Math.floor(maxPossible * (5 / 100));
+      if (success < 1) {
+        success = 1;
+      }
+      const failed = Math.floor(maxPossible - (maxPossible * (5 / 100)));
+      if (rollValue <= success) {
+        return 'success';
+      }
+      if (rollValue > failed) {
+        return 'failed';
+      }
     }
     return 'no';
   }
