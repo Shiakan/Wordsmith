@@ -36,15 +36,14 @@ class SubcategoryRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Subcategory
+    public function findOneById($subcategoryId): ?Subcategory
     {
         return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('s.id = :id')
+            ->setParameter('id', $subcategoryId)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
+
 }

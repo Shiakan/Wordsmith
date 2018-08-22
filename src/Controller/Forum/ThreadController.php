@@ -9,6 +9,7 @@ use App\Form\SubjectType;
 use App\Entity\Subcategory;
 use App\Form\EditThreadType;
 use App\Entity\HasReadThread;
+use App\Entity\HasReadSubcategory;
 use App\Repository\PostRepository;
 use App\Repository\ThreadRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,8 +39,8 @@ class ThreadController extends Controller
         
         // On récupère la sous-catégorie dans laquelle l'utilisateur poste son sujet
         $repository = $this->getDoctrine()->getRepository(Subcategory::class);
-        $subcategory = $repository->findById($subcategory_id);
-        $currentSubcategory = $subcategory[0];
+        $currentSubcategory = $repository->findOneById($subcategory_id);
+
         $form = $this->createForm(ThreadType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -106,7 +107,8 @@ class ThreadController extends Controller
         $pageMax = ceil($totalPosts / $limit); // nombre de page max à afficher (sert pour bouton suivant)
         
         $form = $this->createForm(SubjectType::class, $thread);
-        $this->hasRead($thread, $user);
+        $this->hasReadThread($thread, $user);
+        $this->hasReadSubcategory($thread->getSubcategory(), $user);
         
         return $this->render('forum/thread/show.html.twig', [
             'thread' => $thread,
@@ -115,7 +117,7 @@ class ThreadController extends Controller
             'posts'=>$posts,
             'form' => $form->createView() ]);
     }
-    public function hasRead($thread, $user)
+    public function hasReadThread($thread, $user)
     {
         $hasReadThread = new HasReadThread();
         $postCount = count($thread->getPosts());
@@ -142,6 +144,45 @@ class ThreadController extends Controller
             }
         }
     }
+
+    public function hasReadSubcategory($subcategory, $user)
+    {
+        $hasReadSubcategory = new HasReadSubcategory();
+
+        //On récupère le nombre de sujets et de posts postés dans la sous-catégorie
+        $threadCount = count($subcategory->getThreads());
+        $postCount = count($subcategory->getPosts());
+        
+        // On vérifie si l'utilisateur a déjà visité cette sous-catégorie
+        $repositorySubcategory = $this->getDoctrine()->getRepository(HasReadSubcategory::class);
+        $readSubcategory = $repositorySubcategory->findHasRead($user, $subcategory);
+
+        //Si l'utilisateur n'a jamais visité la sous-catégorie
+        if($readSubcategory == false) {
+            $em = $this->getDoctrine()->getManager();
+            $hasReadSubcategory->setSubcategory($subcategory);
+            $hasReadSubcategory->setUser($user);
+            $hasReadSubcategory->setThreadCount($threadCount);
+            $hasReadSubcategory->setPostCount($postCount);
+            $em->persist($hasReadSubcategory);
+            $em->flush();
+        } else{
+            // Si l'utilisateur a déjà visité la sous-catégorie, on doit vérifier si le nombre de threads
+            //et de posts est le même que la dernière fois qu'il l'a visitée
+            $currentThreadCount = $readSubcategory->getThreadCount();
+            $currentPostCount = $readSubcategory->getPostCount();
+            //Si c'est nul ou inférieur, alors en cliquant sur la sous-catégorie, l'utilisateur la "lit" 
+            // et on update le nombre de posts & de threads
+            if($currentThreadCount == null || $currentThreadCount < $threadCount || $currentPostCount == null || $currentPostCount < $postCount) {
+                $em = $this->getDoctrine()->getManager();
+                $readSubcategory->setThreadCount($threadCount);
+                $readSubcategory->setPostCount($postCount);
+                $em->persist($readSubcategory);
+                $em->flush();
+            }
+        }
+    }
+
     /**
      * @Route("/thread/{id}/move", name="thread_move", methods="POST")
      */

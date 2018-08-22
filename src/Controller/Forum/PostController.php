@@ -25,8 +25,8 @@ class PostController extends Controller
         
         // On récupère la question à laquelle l'utilisateur a répondu
         $repository = $this->getDoctrine()->getRepository(Thread::class);
-        $thread = $repository->findById($thread_id);
-        $currentThread = $thread[0];
+        $currentThread = $repository->findOneById($thread_id);
+        
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
         dump($currentThread->getSubcategory());

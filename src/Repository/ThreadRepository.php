@@ -31,17 +31,17 @@ class ThreadRepository extends ServiceEntityRepository
         ;
     }
     */
-    /*
-    public function findOneBySomeField($value): ?Thread
+    
+    public function findOneById($threadId): ?Thread
     {
         return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('t.id = :id')
+            ->setParameter('id', $threadId)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
+    
     /**
     * @return Thread[] Returns an array of Thread objects
     */
