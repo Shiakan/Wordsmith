@@ -124,3 +124,11 @@
     font-family: 'BenchNine', sans-serif;
     font-weight:bold;
 }
+
+#tabs {
+    min-width:35em;
+    min-height:35em;
+}
+#tabs-1, #tabs-2, #tabs-3, #tabs-4 {
+    min-height:35em;
+}

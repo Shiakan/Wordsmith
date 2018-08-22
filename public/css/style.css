@@ -57,7 +57,7 @@ h2 {
     text-transform: uppercase; 
 }
 em {
-    color:#e6be98;
+    color:#b6804d;
     font-style: normal;
 }
 strong {
@@ -704,11 +704,6 @@ a.ui-button:active, .ui-button:active,
     border-bottom:1px solid #503415;
     margin: 0;
     text-transform: uppercase;
-}
-
-.description h3:before {
-    content: url('../image/angle-double-right-solid.svg');
-    width:5px;
 }
 .description p {
     max-height: 3em;
