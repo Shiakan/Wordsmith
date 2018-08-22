@@ -18,6 +18,7 @@ import './sheet.sass';
 class Sheet extends React.Component {
   static propTypes = {
     charSheet: PropTypes.string.isRequired,
+    userName: PropTypes.string.isRequired,
     sheetChange: PropTypes.func.isRequired,
     sheetUpdate: PropTypes.func.isRequired,
   }
@@ -41,10 +42,10 @@ class Sheet extends React.Component {
   }
 
   render() {
-    const { charSheet } = this.props;
+    const { charSheet, userName } = this.props;
     return (
       <div className="sheet">
-        <p className="sheet-name">Votre Nom</p>
+        <p className="sheet-name">{userName}</p>
         <textarea
           id="sheet-id"
           type="text"

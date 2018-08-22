@@ -22,6 +22,7 @@ import { sheetChange, sheetUpdate } from '../store/reducers/user';
 const mapStateToProps = state => ({
   charSheet: state.user.charSheet,
   sheetId: state.user.sheetId,
+  userName: state.user.userName,
 });
 
 /* === Actions ===
