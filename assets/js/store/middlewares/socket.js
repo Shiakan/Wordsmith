@@ -6,7 +6,7 @@ import { WEBSOCKET_CONNECT } from '../reducers/user';
 import { ADD_MESSAGE, receiveMessage } from '../reducers/textInput';
 import { ROLL_DICE, SHARE_DICE } from '../reducers/dice';
 import {
-  autoAddPlayer, deletePlayer, MOVE_PLAYER, UPDATE_CHARS, receiveMove, receiveUpdate,
+  receiveDelete, autoAddPlayer, deletePlayer, MOVE_PLAYER, UPDATE_CHARS, DELETE_PLAYER, receiveMove, receiveUpdate,
 } from '../reducers/gameScreen';
 /**
  * Code
@@ -21,6 +21,7 @@ const socketConnect = store => next => (action) => {
   switch (action.type) {
     case WEBSOCKET_CONNECT:
       socket.emit('join', state.user, state.gameScreen.characters);
+      // store.dispatch(movePlayer());
       // socket = io('87.98.154.146:3000');
       // connexion au WebSocket TODO localhost window.io(adresseIpDuServ:3000)
       // A la connexion j'active l'écoute sur 'send message'
@@ -34,9 +35,11 @@ const socketConnect = store => next => (action) => {
         console.log('token to add :', tokenToAdd);
         store.dispatch(autoAddPlayer(tokenToAdd));
       });
-      socket.on('update', (updatedChars) => {
-        store.dispatch(receiveUpdate(updatedChars));
-      })
+      
+      socket.on('receive_delete', (charToKill) => {
+        console.log('action websocket :', charToKill);
+        store.dispatch(receiveDelete(charToKill));
+      });
       socket.on('delete_token', (tokenToKill) => {
         store.dispatch(deletePlayer(tokenToKill));
       });
@@ -98,10 +101,15 @@ const socketConnect = store => next => (action) => {
 
       break;
 
-    case UPDATE_CHARS:
-      console.log('A ENVOYER AUX AUTRES : ', state.gameScreen.characters);
-      socket.emit('to_update', state.gameScreen.characters);
-      break;
+    case DELETE_PLAYER: {
+      console.log('delete ', action);
+
+      const charToDelete = state.gameScreen.characters.filter(char => char.name === action.value.name);
+      console.log('charlol ', charToDelete);
+      
+      socket.emit('delete_player', charToDelete);
+
+    }
 
     default:
   }

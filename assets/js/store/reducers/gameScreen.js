@@ -66,7 +66,8 @@ const CREATE_PLAYER = 'CREATE_PLAYER';
 const INPUT_CHAR_CHANGE = 'INPUT_CHAR_CHANGE';
 export const MOVE_PLAYER = 'MOVE_PLAYER';
 const RECEIVE_MOVE = 'RECEIVE_MOVE';
-const DELETE_PLAYER = 'DELETE_PLAYER';
+const RECEIVE_DELETE = 'RECEIVE_DELETE';
+export const DELETE_PLAYER = 'DELETE_PLAYER';
 const HANDLE_SLIDE = 'HANDLE_SLIDE';
 const CHANGE_MAP = 'CHANGE_MAP';
 const AUTO_PLAYER = 'AUTO_PLAYER';
@@ -185,14 +186,13 @@ const reducer = (state = initialState, action = {}) => {
         characters: [...filteredChars, action.characters],
       };
     }
-    case DELETE_PLAYER: {
-      console.log(action);
-
-      const remainingChars = state.characters.filter(char => char.name !== action.value.name);
+    case RECEIVE_DELETE: {
+      const filteredChars = state.characters.filter(char => char.name !== action.characters[0].name);
+      console.log('character to kill :', action.characters[0].name);
 
       return {
         ...state,
-        characters: remainingChars,
+        characters: [...filteredChars],
       };
     }
     default:
@@ -247,6 +247,11 @@ export const movePlayer = value => ({
 
 export const receiveMove = characters => ({
   type: RECEIVE_MOVE,
+  characters,
+});
+
+export const receiveDelete = characters => ({
+  type: RECEIVE_DELETE,
   characters,
 });
 

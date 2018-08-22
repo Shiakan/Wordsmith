@@ -58,7 +58,7 @@ io.on('connection', function(socket) {
     //   console.log('RECEIVE TO UPDATE', toBeUpdated);
     // });
     
-    // io.to(param.roomId).emit('update', toBeUpdated);
+    io.to(param.roomId).emit('update');
 
     socket.on('roll_dice', function(dice) {
       var message = {};
@@ -88,10 +88,10 @@ io.on('connection', function(socket) {
       }
     });
 
-    // socket.on('auto_token', function(newChar) {
-    //   console.log('AUTO TOKEN :', newChar);
-    //   io.to(param.roomId).emit('receive_token', newChar);
-    // });
+    socket.on('delete_player', function(charToDelete) {
+      console.log('TOKEN TO DELETE :', charToDelete);
+      io.to(param.roomId).emit('receive_delete', charToDelete);
+    });
     
     socket.on('send_message', function(messageContent) {
       var message = {};
