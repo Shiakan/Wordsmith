@@ -28,6 +28,8 @@
                         {% if hasReadSubcat.user.id == app.user.id and hasReadSubcat.subcategory.id == subcategory.id %}
                             {% if hasReadSubcat.threadCount < subcategory.threads|length %} 
                                 <img src="{{ asset('image/new.png') }}" class="icon">
+                            {% elseif hasReadSubcat.postCount < subcategory.posts|length %}
+                                <img src="{{ asset('image/new.png') }}" class="icon">
                             {% else %}
                                 <img src="{{ asset('image/nonew.png') }}" class="icon">
                             {% endif  %}

@@ -29,9 +29,11 @@ class PostController extends Controller
         $currentThread = $thread[0];
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
+        dump($currentThread->getSubcategory());
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $post->setThread($currentThread);
+            $post->setSubcategory($currentThread->getSubcategory());
             $post->setAuthor($user);
             $em->persist($post);
             $em->flush();

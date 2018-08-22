@@ -87,6 +87,7 @@ class ThreadController extends Controller
         $post = new Post();
         $em = $this->getDoctrine()->getManager();
         $post->setThread($thread);
+        $post->setSubcategory($thread->getSubcategory());
         $post->setContent($content);
         $post->setAuthor($user);
         $em->persist($post);

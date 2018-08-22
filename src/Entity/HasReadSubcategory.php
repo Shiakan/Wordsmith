@@ -22,14 +22,19 @@ class HasReadSubcategory
     private $threadCount;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="hasReadSubcategories")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="hasReadSubcategories", cascade={"persist"})
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Subcategory", inversedBy="hasReadSubcategories")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Subcategory", inversedBy="hasReadSubcategories", cascade={"persist"})
      */
     private $subcategory;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $postCount;
 
     public function getId(): ?int
     {
@@ -68,6 +73,18 @@ class HasReadSubcategory
     public function setSubcategory(?Subcategory $subcategory): self
     {
         $this->subcategory = $subcategory;
+
+        return $this;
+    }
+
+    public function getPostCount(): ?int
+    {
+        return $this->postCount;
+    }
+
+    public function setPostCount(?int $postCount): self
+    {
+        $this->postCount = $postCount;
 
         return $this;
     }

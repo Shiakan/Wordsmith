@@ -52,26 +52,35 @@ class ForumController extends AbstractController
     public function hasRead($subcategory, $user)
     {
         $hasReadSubcategory = new HasReadSubcategory();
-        $threadCount = count($subcategory->getThreads());
-        
-        // We need to check if the user visiting the page has already read 
-        // this thread
 
+        //On récupère le nombre de sujets et de posts postés dans la sous-catégorie
+        $threadCount = count($subcategory->getThreads());
+        $postCount = count($subcategory->getPosts());
+        
+        // On vérifie si l'utilisateur a déjà visité cette sous-catégorie
         $repositorySubcategory = $this->getDoctrine()->getRepository(HasReadSubcategory::class);
         $readSubcategory = $repositorySubcategory->findHasRead($user, $subcategory);
 
+        //Si l'utilisateur n'a jamais visité la sous-catégorie
         if($readSubcategory == false) {
             $em = $this->getDoctrine()->getManager();
             $hasReadSubcategory->setSubcategory($subcategory);
             $hasReadSubcategory->setUser($user);
             $hasReadSubcategory->setThreadCount($threadCount);
+            $hasReadSubcategory->setPostCount($postCount);
             $em->persist($hasReadSubcategory);
             $em->flush();
         } else{
-            $currentCount = $readSubcategory->getThreadCount();
-            if($currentCount == null || $currentCount < $threadCount) {
+            // Si l'utilisateur a déjà visité la sous-catégorie, on doit vérifier si le nombre de threads
+            //et de posts est le même que la dernière fois qu'il l'a visitée
+            $currentThreadCount = $readSubcategory->getThreadCount();
+            $currentPostCount = $readSubcategory->getPostCount();
+            //Si c'est nul ou inférieur, alors en cliquant sur la sous-catégorie, l'utilisateur la "lit" 
+            // et on update le nombre de posts & de threads
+            if($currentThreadCount == null || $currentThreadCount < $threadCount || $currentPostCount == null || $currentPostCount < $postCount) {
                 $em = $this->getDoctrine()->getManager();
                 $readSubcategory->setThreadCount($threadCount);
+                $readSubcategory->setPostCount($postCount);
                 $em->persist($readSubcategory);
                 $em->flush();
             }

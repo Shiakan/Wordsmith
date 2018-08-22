@@ -46,11 +46,17 @@ class Subcategory
      */
     private $hasReadSubcategories;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="subcategory")
+     */
+    private $posts;
+
     public function __construct()
     {
         $this->threads = new ArrayCollection();
         $this->isPrivate = 0;
         $this->hasReadSubcategories = new ArrayCollection();
+        $this->posts = new ArrayCollection();
     }
     public function getId()
     {
@@ -156,6 +162,37 @@ class Subcategory
             // set the owning side to null (unless already changed)
             if ($hasReadSubcategory->getSubcategory() === $this) {
                 $hasReadSubcategory->setSubcategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Post[]
+     */
+    public function getPosts(): Collection
+    {
+        return $this->posts;
+    }
+
+    public function addPost(Post $post): self
+    {
+        if (!$this->posts->contains($post)) {
+            $this->posts[] = $post;
+            $post->setSubcategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removePost(Post $post): self
+    {
+        if ($this->posts->contains($post)) {
+            $this->posts->removeElement($post);
+            // set the owning side to null (unless already changed)
+            if ($post->getSubcategory() === $this) {
+                $post->setSubcategory(null);
             }
         }
 

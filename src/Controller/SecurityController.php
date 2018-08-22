@@ -31,6 +31,7 @@ class SecurityController extends Controller
         $code = 'ROLE_USER';
         $repository = $this->getDoctrine()->getRepository(Role::class);
         $roleUser = $repository->findOneByCode($code);
+
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){ //Si le form est valide et envoyé alors
@@ -39,10 +40,10 @@ class SecurityController extends Controller
             $user->setPassword($hash); // On set le passeword avec le hash
             $manager->persist($user); //On persist user
             $manager->flush(); //On flush le tout
+
             //On crée automatiquement un profil forum & une charactersheet à l'utilisateur lorsqu'il s'inscrit
             $this->createSheets($user);
-            $this->createHasReadThread($user);
-            $this->createHasReadSubcategory($user);
+            
 
             $message= (new \Swift_Message('Hello Mail')) //On instancie Swift Mailer
                     ->setSubject('Bienvenue '.$user->getUsername().'') //On définie le sujet du mail
@@ -54,10 +55,13 @@ class SecurityController extends Controller
                             ['user'=>$user] //On lui passe user
                         )
                     );
-                    //On envoie le mail
-                    $mailer->send($message);
-                    // On redirige vers le login
-                    return $this->redirectToRoute('security_login');
+                //On envoie le mail
+                $mailer->send($message);
+            
+            $this->createHasReadThread($user);
+            $this->createHasReadSubcategory($user);
+            // On redirige vers le login
+            return $this->redirectToRoute('security_login');
         }
         return $this->render('security/inscription.html.twig', [
             'form' => $form->createView()
@@ -68,23 +72,25 @@ class SecurityController extends Controller
         
         $repository = $this->getDoctrine()->getRepository(Subcategory::class);
         $subcategories = $repository->findAll();
+
         foreach($subcategories as $subcategory) {
             $hasReadSubcategory = new HasReadSubcategory();
-            $em = $this->getDoctrine()->getManager();
+            $manager = $this->getDoctrine()->getManager();
             $hasReadSubcategory->setSubcategory($subcategory);
             $hasReadSubcategory->setUser($user);
             $hasReadSubcategory->setThreadCount(count($subcategory->getThreads()));
-            $em->persist($hasReadSubcategory);
+            $hasReadSubcategory->setPostCount(count($subcategory->getPosts()));
+            $manager->persist($hasReadSubcategory);
         }
         
-        $em->flush(); //Persist objects that did not make up an entire batch
-        $em->clear();
+        $manager->flush(); //Persist objects that did not make up an entire batch
     }
 
     public function createHasReadThread($user) {
         
         $repository = $this->getDoctrine()->getRepository(Thread::class);
         $threads = $repository->findAll();
+
         foreach($threads as $thread) {
             $hasReadThread = new HasReadThread();
             $em = $this->getDoctrine()->getManager();
@@ -96,7 +102,7 @@ class SecurityController extends Controller
         }
         
         $em->flush(); //Persist objects that did not make up an entire batch
-        $em->clear();
+        // $em->clear();
     }
       /**
      * @Route("/login", name="security_login")
