@@ -22,7 +22,7 @@
                     </h3>
                     <p>{{subcategory.reminder}}</p>
                 </div>
-                <div class="container statistic">
+                <div class="container last-message">
                 {% for hasReadSubcat in subcategory.hasReadSubcategories %}
                     {% if hasReadSubcat.user.id is defined %}
                         {% if hasReadSubcat.user.id == app.user.id and hasReadSubcat.subcategory.id == subcategory.id %}
@@ -36,13 +36,12 @@
                         {% endif %} 
                     {% endif %} 
                 {% endfor %}
+                </div>
+                <div class="container statistic">
                     <small>{{subcategory.threads|length}} Sujets</small>
+                    <small>{{subcategory.posts|length}} Réponses</small>
                 </div>
-                <div class="container last-message">
-                    <a href="#">Dernier sujet</a>
-                    <small>15/08/2018</small>
-                    <a href="#">Prénom Nom</a>
-                </div>
+                
             </div>
         {% else %}
         {% if is_granted('ROLE_MODERATOR') %}

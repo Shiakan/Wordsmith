@@ -670,14 +670,6 @@ a.ui-button:active, .ui-button:active,
     margin:1em;
     background-color:#0D0D0D;
 }
-
-.thread {
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-
-}
-
 .description,
 .statistic,
 .last-message {
@@ -685,6 +677,46 @@ a.ui-button:active, .ui-button:active,
     padding:0;
     background-color:#0b0b0b;
     border:1px solid black;
+    min-height:6em;
+}
+.description {
+    width:70%;
+    padding:0.2em;
+}
+.description h3 {
+    font-family: 'Forum', cursive;
+    font-size:1.5em;
+    font-weight:400;
+    color: #125C38; 
+    border-bottom:1px solid #503415;
+    margin: 0;
+    text-transform: uppercase;
+}
+.description p {
+    max-height: 3em;
+    text-align:justify;
+    font-size:0.775em;
+    padding: 0.1em 0.5em;
+    line-height:1;
+}
+.statistic {
+    width:20%;
+    padding:0.5em;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+.last-message {
+    width:10%;
+    background-color:none;
+    border:0;
+}
+.thread {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .thread-icon,
 .thread-description,
@@ -702,6 +734,7 @@ a.ui-button:active, .ui-button:active,
     -o-box-shadow: inset 0px 0px 14px 5px #050505;
 }
 .thread-icon {
+    padding-top:1em;
     width:5%;
 }
 .thread-description {
@@ -711,6 +744,7 @@ a.ui-button:active, .ui-button:active,
 .thread-author {
     width:23%;
     text-align:center;
+    padding-top:1em;
 }
 
 .thread-description a {
@@ -724,13 +758,9 @@ a.ui-button:active, .ui-button:active,
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding:1em;
+    padding-top:1em;
 
 }
-/* .thread-statistic small {
-    color:white;
-} */
-
 .thread-last-message {
     width:17%;
     display:flex;
@@ -738,46 +768,23 @@ a.ui-button:active, .ui-button:active,
     justify-content: space-between;
     align-items: center;
 }
-
-.description h3 {
-    font-family: 'Forum', cursive;
-    font-size:1.5em;
-    font-weight:400;
-    color: #125C38; 
-    border-bottom:1px solid #503415;
-    margin: 0;
-    text-transform: uppercase;
-}
-
-.description p {
-    max-height: 3em;
-    text-align:justify;
-    font-size:0.8em;
-    padding: 0.1em 0.5em;
-}
-
 .icon {
     width:100%;
     border-radius:50%;
     background-color:#0D0D0D;
-    border:2px solid #2b1c0b;
 }
-
 .container-index{
     width:49%;
     display:flex;
     flex-direction: column;
     justify-content: space-between;
 }
-
 .container-article {
     margin-top:1em;
 }
-
 .description a {
     color:#125C38;
 }
-
 .description a:hover {
     color:rgb(27, 136, 83);
 }
@@ -787,14 +794,11 @@ a.ui-button:active, .ui-button:active,
     display:flex;
     justify-content: space-between;
     padding:0.5em;
-
 }
-
 .wrapper-flex .right-side {
     width:70%;
     margin:0.5em;
 }
-
 .wrapper-flex .left-side {
     margin:0.5em 0.5em 0.5em 1.3em;
 }
@@ -810,39 +814,32 @@ a.ui-button:active, .ui-button:active,
     text-transform:uppercase;
     font-size: 1.1em;
     letter-spacing:0.1em;
-
     border-bottom:1px solid #503415;
 }
-
 .author-rank {
     font-family: 'BenchNine', sans-serif;
     letter-spacing:0.1em;
     color:#BDBDBD;
     text-transform:uppercase;
 }
-
 .container-post{
     padding: 0 1em 1em 1em;
     border:0;
 }
-
 .container-post p {
     margin:0.3em 0.5em;
 }
-
 .post-information {
     text-align:center;
     margin:0.3em 0.5em;
     border-bottom:1px solid #503415;
     text-transform:uppercase;
 }
-
 .thread-action {
     display:flex;
     justify-content: space-between;
     align-items: center;
 }
-
 /* @media screen and (max-width: 900px) {
 } */
 
