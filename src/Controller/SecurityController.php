@@ -5,10 +5,12 @@ use App\Entity\Role;
 use App\Entity\User;
 use App\Entity\Thread;
 use App\Form\LoginType;
+use App\Entity\Subcategory;
 use App\Entity\HasReadThread;
 use App\Entity\Charactersheet;
 use App\Form\RegistrationType;
 use App\Entity\CharacterProfile;
+use App\Entity\HasReadSubcategory;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -16,6 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
 class SecurityController extends Controller
 {
     /**
@@ -38,7 +41,9 @@ class SecurityController extends Controller
             $manager->flush(); //On flush le tout
             //On crée automatiquement un profil forum & une charactersheet à l'utilisateur lorsqu'il s'inscrit
             $this->createSheets($user);
-            $this->createHasRead($user);
+            $this->createHasReadThread($user);
+            $this->createHasReadSubcategory($user);
+
             $message= (new \Swift_Message('Hello Mail')) //On instancie Swift Mailer
                     ->setSubject('Bienvenue '.$user->getUsername().'') //On définie le sujet du mail
                     ->setFrom('projetkelnor@gmail.com') //On définie l'expéditeur
@@ -58,17 +63,33 @@ class SecurityController extends Controller
             'form' => $form->createView()
         ]);
     }
-    public function createHasRead($user) {
+
+    public function createHasReadSubcategory($user) {
+        
+        $repository = $this->getDoctrine()->getRepository(Subcategory::class);
+        $subcategories = $repository->findAll();
+        foreach($subcategories as $subcategory) {
+            $hasReadSubcategory = new HasReadSubcategory();
+            $em = $this->getDoctrine()->getManager();
+            $hasReadSubcategory->setSubcategory($subcategory);
+            $hasReadSubcategory->setUser($user);
+            $hasReadSubcategory->setThreadCount(count($subcategory->getThreads()));
+            $em->persist($hasReadSubcategory);
+        }
+        
+        $em->flush(); //Persist objects that did not make up an entire batch
+        $em->clear();
+    }
+
+    public function createHasReadThread($user) {
         
         $repository = $this->getDoctrine()->getRepository(Thread::class);
         $threads = $repository->findAll();
         foreach($threads as $thread) {
             $hasReadThread = new HasReadThread();
             $em = $this->getDoctrine()->getManager();
-            $hasReadThread->setSubcategory($thread->getSubcategory());
             $hasReadThread->setThread($thread);
             $hasReadThread->setUser($user);
-            $hasReadThread->setThreadCount(0);
             $hasReadThread->setPostCount(count($thread->getPosts()));
             $hasReadThread->setTimestamp(new \Datetime());
             $em->persist($hasReadThread);
@@ -113,6 +134,7 @@ class SecurityController extends Controller
         $charactersheet->setUser($user);
         $em->persist($charactersheet);
         $em->flush();
+
     }
     /**
      * @Route("/logout", name="security_logout")

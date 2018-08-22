@@ -72,10 +72,8 @@ class ThreadController extends Controller
         foreach($users as $user) {
             $hasReadThread = new HasReadThread();
             $em = $this->getDoctrine()->getManager();
-            $hasReadThread->setSubcategory($thread->getSubcategory());
             $hasReadThread->setThread($thread);
             $hasReadThread->setUser($user);
-            $hasReadThread->setThreadCount(0);
             $hasReadThread->setPostCount(0);
             $hasReadThread->setTimestamp(new \Datetime());
             $em->persist($hasReadThread);
@@ -128,7 +126,6 @@ class ThreadController extends Controller
         if($readThread == false) {
             $em = $this->getDoctrine()->getManager();
             $hasReadThread->setThread($thread);
-            $hasReadThread->setThreadCount(count($thread->getSubcategory()->getThreads()));
             $hasReadThread->setUser($user);
             $hasReadThread->setPostCount($postCount);
             $hasReadThread->setTimestamp(new \DateTime());
@@ -139,7 +136,6 @@ class ThreadController extends Controller
             if($currentCount == null || $currentCount < $postCount) {
                 $em = $this->getDoctrine()->getManager();
                 $readThread->setPostCount($postCount);
-                $readThread->setThreadCount(count($thread->getSubcategory()->getThreads()));
                 $em->persist($readThread);
                 $em->flush();
             }

@@ -9,13 +9,15 @@
     </a>
     <div class="container container-forum">
         <div class="category-header">
-            <h2>{{ thread.title }}</h2>
-            {% if thread.author.id == app.user.id or is_granted('ROLE_MODERATOR') %}
-            <a title="Modifier le titre du sujet" href="{{path('thread_edit', {'id' : thread.id})}}">
-                <i class="fas fa-edit"></i>
-            </a>
-            {% endif %}
-            <h3>{{ thread.subtitle }}</h3>
+            <div class="title">
+                <h2>{{ thread.title }}</h2>
+                {% if thread.author.id == app.user.id or is_granted('ROLE_MODERATOR') %}
+                <a title="Modifier le titre du sujet" href="{{path('thread_edit', {'id' : thread.id})}}">
+                    <i class="fas fa-edit"></i>
+                </a>
+                {% endif %}
+            </div>
+            <p>{{ thread.subtitle }}</p>
             
         </div>
         {% for post in posts %}

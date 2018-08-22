@@ -653,6 +653,13 @@ a.ui-button:active, .ui-button:active,
     border-bottom:1px solid  #503415; 
     padding:1em;
 }
+.category-header .title {
+    display:flex;
+    width:80%;
+    margin:auto;
+    text-align:center;
+
+}
 .category-header h2 {
     color:#A56E3A;
 }

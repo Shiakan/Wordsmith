@@ -40,15 +40,17 @@ class Subcategory
      * @ORM\Column(type="boolean")
      */
     private $isPrivate;
+
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\HasReadThread", mappedBy="subcategory")
+     * @ORM\OneToMany(targetEntity="App\Entity\HasReadSubcategory", mappedBy="subcategory")
      */
-    private $hasReadThreads;
+    private $hasReadSubcategories;
+
     public function __construct()
     {
         $this->threads = new ArrayCollection();
         $this->isPrivate = 0;
-        $this->hasReadThreads = new ArrayCollection();
+        $this->hasReadSubcategories = new ArrayCollection();
     }
     public function getId()
     {
@@ -128,30 +130,35 @@ class Subcategory
     public function __toString(){
     return $this->name;
     }
+
     /**
-     * @return Collection|HasReadThread[]
+     * @return Collection|HasReadSubcategory[]
      */
-    public function getHasReadThreads(): Collection
+    public function getHasReadSubcategories(): Collection
     {
-        return $this->hasReadThreads;
+        return $this->hasReadSubcategories;
     }
-    public function addHasReadThread(HasReadThread $hasReadThread): self
+
+    public function addHasReadSubcategory(HasReadSubcategory $hasReadSubcategory): self
     {
-        if (!$this->hasReadThreads->contains($hasReadThread)) {
-            $this->hasReadThreads[] = $hasReadThread;
-            $hasReadThread->setSubcategory($this);
+        if (!$this->hasReadSubcategories->contains($hasReadSubcategory)) {
+            $this->hasReadSubcategories[] = $hasReadSubcategory;
+            $hasReadSubcategory->setSubcategory($this);
         }
+
         return $this;
     }
-    public function removeHasReadThread(HasReadThread $hasReadThread): self
+
+    public function removeHasReadSubcategory(HasReadSubcategory $hasReadSubcategory): self
     {
-        if ($this->hasReadThreads->contains($hasReadThread)) {
-            $this->hasReadThreads->removeElement($hasReadThread);
+        if ($this->hasReadSubcategories->contains($hasReadSubcategory)) {
+            $this->hasReadSubcategories->removeElement($hasReadSubcategory);
             // set the owning side to null (unless already changed)
-            if ($hasReadThread->getSubcategory() === $this) {
-                $hasReadThread->setSubcategory(null);
+            if ($hasReadSubcategory->getSubcategory() === $this) {
+                $hasReadSubcategory->setSubcategory(null);
             }
         }
+
         return $this;
     }
 }
