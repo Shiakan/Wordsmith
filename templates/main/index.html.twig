@@ -1,11 +1,116 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+            <link rel="stylesheet" media="screen and (max-width:900px" href="{{ asset('css/mobile.css') }}">
+            <link rel="stylesheet" media="screen and (min-width:1024px" href="{{ asset('css/medium.css') }}">
+            <link rel="stylesheet" media="screen and (min-width:1700px" href="{{ asset('css/large.css') }}">
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+        {% endblock %}
+        <title>
+            {% block title %}Aetherlust{% endblock %}
+        </title>
+    </head>
 
-{% block main %}
-<div class="wrapper-homepage">
-    <div class="container">
-        <a href="{{path('codex')}}">Codex</a>
-        <a href="{{path('backend_article_index')}}">Backend Article</a>
-        <a href="{{path('backend_tag_index')}}">Backend Tag</a>
-    </div>
-</div>
-{% endblock %}
+    <body class="homepage">
+        {% block body %}
+
+            {% block header %}
+                <div class="navbar-middle">
+                    <a href="{{ path('homepage') }}"><img class="logo" src="https://nsa39.casimages.com/img/2018/08/12//180812035308814067.png" alt="logo"></a>
+                </div>
+            {% endblock %}
+            <main>
+                {% block main %}
+                    <div class="wra">
+                        <div class="con">
+                        {# A centré #}
+                            <div class="centering">
+                                <div>
+                                <ul>
+                                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                        <li class="ul-li-connexion">
+                                            Bienvenue
+                                            <a href="{{path('user_profile', {'id': app.user.id })}}">{{ app.user.username }}</a>
+                                        </li>
+                                        <li class="ul-li-connexion">
+                                            <a href="{{path('security_logout')}}">Déconnexion</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="ul-li-connexion">
+                                            <a href="{{path('security_registration')}}">Inscription</a>
+                                        </li>
+                                        <li class="ul-li-connexion">
+                                            <a href="{{path('security_login')}}">Connexion</a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                                </div>
+                                    <div class="nav-wrap">
+                                    <ul>
+                                        <li class="ul-li-home">
+                                            <a class="{{ app.request.get('_route') == 'codex' ? 'active' }}" href="{{path('codex')}}">Codex</a>
+                                        </li>
+                                        <li class="ul-li-home">
+                                            <a class="{{ app.request.get('_route') == 'forum_index' ? 'active' }}" href="{{path('forum_index')}}">Forum</a>
+                                        </li>
+                                        <li class="ul-li-home">
+                                            <a href="{{ path('room_new') }}">Room</a>
+                                        </li>
+                                        {% if is_granted('ROLE_MODERATOR') %}
+                                        <li class="ul-li-home">
+                                            <a href=" {{path('home_backend')}}">Administration</a>
+                                        </li>
+                                        {% endif %}
+                                    </ul>
+                            </div>
+                        </div>
+
+                        {# fin de A centré #}
+                        <div class="content">
+                            <p>Aetherlust est une aventure JDR en deux temps. Vous retrouverez un forum sur lequel vous pourrez faire vivre vos récits dans une grande hsitoire commune. Egalement, nous proposons un jeu de plateau en ligne pour vous faire vivre des aventures à plusieurs face à u maitre du jeu</p>
+                        </div>
+                            <div class='logo-place'>
+                                <a href="{{path('about')}}#nous">
+                                    <img class='logo-rs'src="{{asset('image/34227.svg')}}"></img>
+                                </a>
+                                <a href="https://discord.gg/Xk8sWJ4">
+                                    <img class='logo-rs'src="{{asset('image/Discord-Logo-Black.svg')}}"></img>
+                                </a>
+                                <a href="https://www.twitch.tv/projet_wordsmith">
+                                    <img class='logo-rs' src=" {{asset('image/twitch.svg')}} "></img>
+                                </a>
+                                <a href="https://twitter.com/ProjetWordsmith">
+                                    <img class='logo-rs'src="{{asset('image/twitter-3.svg')}}"></img>
+                                </a>
+                            </div>
+                            {#<a href="{{path('codex')}}">Codex</a>
+                            <a href="{{path('backend_article_index')}}">Backend Article</a>
+                            <a href="{{path('backend_tag_index')}}">Backend Tag</a>#}
+                            <div class="foot-content">
+                                <small>Copyright Wordsmith-2018. Tous droits réservés</small>
+                                <br>
+                                <a href="{{ path('about') }}">A propos</a>
+                                |
+                                <a href="{{ path('CGU') }}">Conditions Générales d'UItilisation</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endblock %}
+            </main>
+            <footer>
+                {% block footer %}
+
+                {% endblock %}
+            </footer>
+        {% endblock %}
+        {% block javascripts %}
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        {% endblock %}
+    </body>
+</html>

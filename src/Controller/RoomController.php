@@ -48,6 +48,7 @@ class RoomController extends Controller
                         ->setBody(  //On définie le body comme étant
                             $this->renderView('emails/roomJoined.html.twig', //Ce fichier twig
                                 ['user'=>$user,
+                                'room'=>$room,
                                  'participant'=>$participant,
                                  'code'=>$code,
                                 ] //On lui passe user

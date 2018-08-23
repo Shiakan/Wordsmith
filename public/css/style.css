@@ -868,6 +868,54 @@ a.ui-button:active, .ui-button:active,
     align-items: center;
     margin-bottom:0.8em;
 }
+/*
+ * Homepage
+ */
+ .homepage{
+     height: 100vh;
+ }
+ .ul-li-home{
+     display: inline-block;
+     margin: 1em;
+     flex-wrap: wrap;
+ }
+ .nav-wrap{
+    background-color:#20202033;
+ }
+  .ul-li-connexion{
+     display: inline;
+     justify-self: center;
+     margin: 1em;
+     padding: 1em;
+     background-color:#20202033;
+ }
+  .centering{
+display: flex;
+justify-content: center;
+ }
+ .content{
+     width: 50%;
+     text-align: center;
+     margin-left: auto;
+     margin-right: auto;
+     margin-top: 5em;
+     font-size: 1.2em;
+ }
+ .logo-rs{
+     width:4em;
+     height:4em;
+     margin-left:2em;
+     color: #FFFFFF;
+ }
+ .logo-place{
+display: flex;
+justify-content: center;
+margin-top:5em;
+margin-bottom: 5em;
+ } 
+ .foot-content{
+     text-align: center;
+ }
 
 .thread-moderation {
     width:40%;
