@@ -24,9 +24,12 @@ class PostController extends Controller
         $post = new Post();
         
         // On récupère la question à laquelle l'utilisateur a répondu
-        $repository = $this->getDoctrine()->getRepository(Thread::class);
-        $currentThread = $repository->findOneById($thread_id);
+        $repositoryThread = $this->getDoctrine()->getRepository(Thread::class);
+        $currentThread = $repositoryThread->findOneById($thread_id);
         
+        $repositoryPost = $this->getDoctrine()->getRepository(Post::class);
+        $posts = $repositoryPost->findLastFive($currentThread);
+
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
         dump($currentThread->getSubcategory());
@@ -44,6 +47,7 @@ class PostController extends Controller
         return $this->render('forum/post/new.html.twig', [
             'thread' => $currentThread,
             'post' => $post,
+            'posts' => $posts,
             'form' => $form->createView(),
         ]);
     }
