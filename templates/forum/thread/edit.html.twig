@@ -3,9 +3,13 @@
 {% block title %}Edition du Thread{% endblock %}
 
 {% block main %}
-    <h1>Modificatiion du thread {{thread.title}}</h1>
-    {{ form_start(editForm) }}
-    {{form_widget(editForm)}}
-    <button class="btn">{{ button_label|default('Modifier') }}</button>
-    {{form_end(editForm)}}
+<div class='wrapper'>
+    <div class='container'>
+        <h1>Modificatiion du thread {{thread.title}}</h1>
+        {{ form_start(editForm) }}
+        {{form_widget(editForm)}}
+        <button class="btn">{{ button_label|default('Modifier') }}</button>
+        {{form_end(editForm)}}
+    <div>
+</div>
 {% endblock %}
