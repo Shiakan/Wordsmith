@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-class CharacterProfileType extends AbstractType
+class BackendCharacterProfileType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -44,6 +44,9 @@ class CharacterProfileType extends AbstractType
                 'required'   => false,
                 'empty_data' => ' ',
             ])
+            
+            ->add('rank')
+            ->add('groupForum')
         ;
     }
 
