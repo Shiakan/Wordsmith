@@ -1,7 +1,7 @@
-var Encore = require('@symfony/webpack-encore');
+const Encore = require('@symfony/webpack-encore');
 
 Encore
-  // .configureRuntimeEnvironment('dev-server')
+  .configureRuntimeEnvironment('dev-server')
   // directory where compiled assets will be stored
   .setOutputPath('public/build/')
   // public path used by the web server to access the output path
