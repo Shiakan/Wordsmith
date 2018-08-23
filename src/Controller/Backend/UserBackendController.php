@@ -82,7 +82,7 @@ class UserBackendController extends Controller
             $this->getDoctrine()->getManager()->flush();
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('backend_user_edit', ['id' => $user->getId()]);
+            return $this->redirectToRoute('backend_user_index');
         }
 
         return $this->render('backend/user/edit.html.twig', [

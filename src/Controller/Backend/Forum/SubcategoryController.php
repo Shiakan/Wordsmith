@@ -70,7 +70,7 @@ class SubcategoryController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('subcategory_edit', ['id' => $subcategory->getId()]);
+            return $this->redirectToRoute('subcategory_index');
         }
 
         return $this->render('backend/forum/subcategory/edit.html.twig', [

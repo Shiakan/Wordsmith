@@ -78,7 +78,7 @@ class ArticleController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('backend_article_edit', ['id' => $article->getId()]);
+            return $this->redirectToRoute('backend_article_index');
         }
 
         return $this->render('backend/codex/article/edit.html.twig', [
