@@ -56,12 +56,14 @@ class RoomController extends Controller
                         $mailer->send($message);
             }
             return $this->redirectToRoute('room_show', ['code' => $code ]);
+        
         }
         return $this->render('room/new.html.twig', [
             'room' => $room,
             'form' => $form->createView(),
         ]);
     }
+    
     private function createRandomCode() { 
         $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ023456789"; 
         srand((double)microtime()*1000000); 
@@ -77,6 +79,7 @@ class RoomController extends Controller
     
         return $pass; 
     } 
+
     /**
      * @Route("room/{code}", name="room_show", methods="GET")
      */

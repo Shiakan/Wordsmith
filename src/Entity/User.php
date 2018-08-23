@@ -97,6 +97,11 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\HasReadThread", mappedBy="user")
      */
     private $hasReadThreads;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\HasReadSubcategory", mappedBy="user")
+     */
+    private $hasReadSubcategories;
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -109,6 +114,7 @@ class User implements UserInterface
         $this->dateUpdated = new \DateTime();
         $this->playerRooms = new ArrayCollection();
         $this->hasReadThreads = new ArrayCollection();
+        $this->hasReadSubcategories = new ArrayCollection();
     }
     public function getSalt()
     {
@@ -427,6 +433,37 @@ class User implements UserInterface
                 $hasReadThread->setUser(null);
             }
         }
+        return $this;
+    }
+
+    /**
+     * @return Collection|HasReadSubcategory[]
+     */
+    public function getHasReadSubcategories(): Collection
+    {
+        return $this->hasReadSubcategories;
+    }
+
+    public function addHasReadSubcategory(HasReadSubcategory $hasReadSubcategory): self
+    {
+        if (!$this->hasReadSubcategories->contains($hasReadSubcategory)) {
+            $this->hasReadSubcategories[] = $hasReadSubcategory;
+            $hasReadSubcategory->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHasReadSubcategory(HasReadSubcategory $hasReadSubcategory): self
+    {
+        if ($this->hasReadSubcategories->contains($hasReadSubcategory)) {
+            $this->hasReadSubcategories->removeElement($hasReadSubcategory);
+            // set the owning side to null (unless already changed)
+            if ($hasReadSubcategory->getUser() === $this) {
+                $hasReadSubcategory->setUser(null);
+            }
+        }
+
         return $this;
     }
 }

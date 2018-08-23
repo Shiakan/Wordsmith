@@ -7,7 +7,9 @@ use App\Entity\Thread;
 use App\Form\ThreadType;
 use App\Form\SubjectType;
 use App\Entity\Subcategory;
+use App\Form\EditThreadType;
 use App\Entity\HasReadThread;
+use App\Entity\HasReadSubcategory;
 use App\Repository\PostRepository;
 use App\Repository\ThreadRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 /**
  * @Route("/forum")
  */
@@ -30,14 +33,14 @@ class ThreadController extends Controller
     /**
      * @Route("/thread/{subcategory_id}/new", name="thread_new", methods="GET|POST")
      */
-    public function new(Request $request, UserInterface $user, $subcategory_id): Response
+    public function new(Request $request, UserInterface $user=null, $subcategory_id): Response
     {   
         $thread = new Thread();
         
         // On récupère la sous-catégorie dans laquelle l'utilisateur poste son sujet
         $repository = $this->getDoctrine()->getRepository(Subcategory::class);
-        $subcategory = $repository->findById($subcategory_id);
-        $currentSubcategory = $subcategory[0];
+        $currentSubcategory = $repository->findOneById($subcategory_id);
+
         $form = $this->createForm(ThreadType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -70,10 +73,8 @@ class ThreadController extends Controller
         foreach($users as $user) {
             $hasReadThread = new HasReadThread();
             $em = $this->getDoctrine()->getManager();
-            $hasReadThread->setSubcategory($thread->getSubcategory());
             $hasReadThread->setThread($thread);
             $hasReadThread->setUser($user);
-            $hasReadThread->setThreadCount(0);
             $hasReadThread->setPostCount(0);
             $hasReadThread->setTimestamp(new \Datetime());
             $em->persist($hasReadThread);
@@ -87,6 +88,7 @@ class ThreadController extends Controller
         $post = new Post();
         $em = $this->getDoctrine()->getManager();
         $post->setThread($thread);
+        $post->setSubcategory($thread->getSubcategory());
         $post->setContent($content);
         $post->setAuthor($user);
         $em->persist($post);
@@ -105,7 +107,8 @@ class ThreadController extends Controller
         $pageMax = ceil($totalPosts / $limit); // nombre de page max à afficher (sert pour bouton suivant)
         
         $form = $this->createForm(SubjectType::class, $thread);
-        $this->hasRead($thread, $user);
+        $this->hasReadThread($thread, $user);
+        $this->hasReadSubcategory($thread->getSubcategory(), $user);
         
         return $this->render('forum/thread/show.html.twig', [
             'thread' => $thread,
@@ -114,7 +117,7 @@ class ThreadController extends Controller
             'posts'=>$posts,
             'form' => $form->createView() ]);
     }
-    public function hasRead($thread, $user)
+    public function hasReadThread($thread, $user)
     {
         $hasReadThread = new HasReadThread();
         $postCount = count($thread->getPosts());
@@ -126,7 +129,6 @@ class ThreadController extends Controller
         if($readThread == false) {
             $em = $this->getDoctrine()->getManager();
             $hasReadThread->setThread($thread);
-            $hasReadThread->setThreadCount(count($thread->getSubcategory()->getThreads()));
             $hasReadThread->setUser($user);
             $hasReadThread->setPostCount($postCount);
             $hasReadThread->setTimestamp(new \DateTime());
@@ -137,12 +139,50 @@ class ThreadController extends Controller
             if($currentCount == null || $currentCount < $postCount) {
                 $em = $this->getDoctrine()->getManager();
                 $readThread->setPostCount($postCount);
-                $readThread->setThreadCount(count($thread->getSubcategory()->getThreads()));
                 $em->persist($readThread);
                 $em->flush();
             }
         }
     }
+
+    public function hasReadSubcategory($subcategory, $user)
+    {
+        $hasReadSubcategory = new HasReadSubcategory();
+
+        //On récupère le nombre de sujets et de posts postés dans la sous-catégorie
+        $threadCount = count($subcategory->getThreads());
+        $postCount = count($subcategory->getPosts());
+        
+        // On vérifie si l'utilisateur a déjà visité cette sous-catégorie
+        $repositorySubcategory = $this->getDoctrine()->getRepository(HasReadSubcategory::class);
+        $readSubcategory = $repositorySubcategory->findHasRead($user, $subcategory);
+
+        //Si l'utilisateur n'a jamais visité la sous-catégorie
+        if($readSubcategory == false) {
+            $em = $this->getDoctrine()->getManager();
+            $hasReadSubcategory->setSubcategory($subcategory);
+            $hasReadSubcategory->setUser($user);
+            $hasReadSubcategory->setThreadCount($threadCount);
+            $hasReadSubcategory->setPostCount($postCount);
+            $em->persist($hasReadSubcategory);
+            $em->flush();
+        } else{
+            // Si l'utilisateur a déjà visité la sous-catégorie, on doit vérifier si le nombre de threads
+            //et de posts est le même que la dernière fois qu'il l'a visitée
+            $currentThreadCount = $readSubcategory->getThreadCount();
+            $currentPostCount = $readSubcategory->getPostCount();
+            //Si c'est nul ou inférieur, alors en cliquant sur la sous-catégorie, l'utilisateur la "lit" 
+            // et on update le nombre de posts & de threads
+            if($currentThreadCount == null || $currentThreadCount < $threadCount || $currentPostCount == null || $currentPostCount < $postCount) {
+                $em = $this->getDoctrine()->getManager();
+                $readSubcategory->setThreadCount($threadCount);
+                $readSubcategory->setPostCount($postCount);
+                $em->persist($readSubcategory);
+                $em->flush();
+            }
+        }
+    }
+
     /**
      * @Route("/thread/{id}/move", name="thread_move", methods="POST")
      */
@@ -165,15 +205,15 @@ class ThreadController extends Controller
      */
     public function edit(Request $request, Thread $thread): Response
     {
-        $form = $this->createForm(ThreadType::class, $thread);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        $editForm = $this->createForm(EditThreadType::class, $thread);
+        $editForm->handleRequest($request);
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-            return $this->redirectToRoute('thread_edit', ['id' => $thread->getId()]);
+            return $this->redirectToRoute('thread_show', ['id' => $thread->getId()]);
         }
         return $this->render('forum/thread/edit.html.twig', [
             'thread' => $thread,
-            'form' => $form->createView(),
+            'editForm' => $editForm->createView(),
         ]);
     }
 }

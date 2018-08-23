@@ -26,7 +26,8 @@ class ThreadType extends AbstractType
                 ]
             ])
             ->add('subtitle', TextType::class, [
-                'label' => 'Sous-titre'
+                'label' => 'Sous-titre',
+                'required' => false
             ])
             ->add('content', TextareaType::class, array('attr' => array('class' => 'ckeditor'))
             );

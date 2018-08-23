@@ -1,0 +1,22 @@
+<div class="thread-action">
+    <div>
+        <a class="btn btn-return" href="{{path('thread_new', {'subcategory_id' : thread.subcategory.id})}}">Nouveau</a> 
+        <a class="btn btn-return" href="{{path('post_new', {'thread_id' : thread.id})}}">Répondre</a>
+    </div>
+    <div>
+        <a class="top-link" href="{{path('forum_index')}}">
+            Aetherlust
+        </a>
+        <i class="fas fa-angle-double-right"></i>
+        <a class="top-link" href="{{path('forum_subcategory', {'id' : thread.subcategory.id})}}">
+            {{ thread.subcategory.name }}
+        </a>
+    </div>
+    {# Si page supérieure à 1 on affiche un bouton précédent qui mène à la page-1 #} 
+    {% if page > 1 %}
+        <a title="Précédent" href="{{path('thread_show',{'id':thread.id,'page':page -1})}}" class="btn-pagination"><i class="fas fa-arrow-left"></i></a>
+    {% endif %} {# si page inférieure à la page max calculée alors on affiche un bouton suivant qui mène à la page +1 #} 
+    {% if page < pageMax %} 
+        <a title="Suivant" href="{{path('thread_show',{'id':thread.id,'page':page +1})}}" class="btn-pagination"><i class="fas fa-arrow-right"></i></a>
+    {% endif %}
+</div>

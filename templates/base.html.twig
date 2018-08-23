@@ -5,10 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         {% block stylesheets %}
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
-            {# <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> #}
-            {# <link rel="stylesheet" href="/resources/demos/style.css"> #}
-
             <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+            <link rel="stylesheet" media="screen and (max-width:900px" href="{{ asset('css/mobile.css') }}">
+            <link rel="stylesheet" media="screen and (min-width:1024px" href="{{ asset('css/medium.css') }}">
+            <link rel="stylesheet" media="screen and (min-width:1700px" href="{{ asset('css/large.css') }}">
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
                 crossorigin="anonymous">
         {% endblock %}
@@ -20,13 +20,33 @@
 
         {% block header %}
             {% block nav %}
+            <div class="burger-navbar">
+                <div class="dropdown">
+                    <button class="dropbtn"><i class="fas fa-bars"></i>
+                    <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a class="{{ app.request.get('_route') == 'codex' ? 'active' }}" href="{{path('codex')}}">Codex</a>
+                        <a class="{{ app.request.get('_route') == 'forum_index' ? 'active' }}" href="{{path('forum_index')}}">Forum</a>
+                        {% if is_granted('ROLE_MODERATOR') %}
+                            <a href="{{path('home_backend')}}">Panneau d'administration</a>
+                        {% endif %}
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <a href="{{path('user_profile', {'id': app.user.id })}}">Mon profil</a>
+                            <a href="{{path('security_logout')}}">Déconnexion</a>
+                        {% else %}
+                            <a href="{{path('security_registration')}}">Inscription</a>
+                            <a href="{{path('security_login')}}">Connexion</a>
+                        {% endif %}
+                    </div>
+                </div>
+                <a href="{{ path('homepage') }}"><img class="logo-burger" src="https://nsa39.casimages.com/img/2018/08/12//180812035308814067.png" alt="Logo"></a> 
+            </div>
+
             <div class="fixed-navbar">
                 <nav class="navbar">
                     <div class="navbar-left">
                         <ul>
-                            <li>
-                                <a class="{{ app.request.get('_route') == 'homepage' ? 'active' }}" href="{{path('homepage')}}">Portail</a>
-                            </li>
                             <li>
                                 <a class="{{ app.request.get('_route') == 'codex' ? 'active' }}" href="{{path('codex')}}">Codex</a>
                             </li>
@@ -36,10 +56,16 @@
                             <li>
                                 <a href="{{ path('room_new') }}">Room</a>
                             </li>
+                            {% if is_granted('ROLE_MODERATOR') %}
+                            <li>
+                                <a href="{{path('home_backend')}}">Admin</a>
+                            </li>
+                        {% endif %}
+                            
                         </ul>
                     </div>
                     <div class="navbar-middle">
-                        <a href="{{ path('homepage') }}"><img class="logo" src="https://nsa39.casimages.com/img/2018/08/12//180812035308814067.png" alt="logo"></a>
+                        <a href="{{ path('homepage') }}"><img class="logo" src="{{ asset('image/titlelogo.png') }}" alt="logo"></a>
                     </div>
                     <div class="navbar-right">
                         <ul>
@@ -67,17 +93,16 @@
         <main>
             {% block main %}
             {% endblock %}
-            <a class="btn btn-admin" href="{{path('home_backend')}}"><i class="fas fa-sign-in-alt"></i> Panneau d'administration</a>
         </main>
         <footer>
         {% block footer %}
         <a href="https://twitter.com/KelProjet?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @KelProjet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             <ul>
                 <li>
-                    <a href="{{path('CGU')}}">About</a>
+                    <a href="{{path('CGU')}}">CGU</a>
                 </li>
                 <li>
-                    <a href="{{path('about')}}">CGU</a>
+                    <a href="{{path('about')}}">About</a>
                 </li>
             </ul>
         {% endblock %}

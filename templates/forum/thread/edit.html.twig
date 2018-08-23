@@ -1,22 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Thread{% endblock %}
+{% block title %}Edition du Thread{% endblock %}
 
-{% block body %}
-    <h1>Edit Thread</h1>
-
-    {{ include('thread/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('thread_index') }}">back to list</a>
-
-    {{ include('thread/_delete_form.html.twig') }}
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('javascript/ckeditor-forum/ckeditor.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('javascript/ckeditor-forum/adapters/jquery.js') }}" type="text/javascript"></script>
-    <script type="text/javascript">
-        CKEDITOR.replace( 'thread_content' );
-    </script>
+{% block main %}
+<div class="wrapper">
+    {{ include('forum/jumbotron.html.twig') }}
+    <div class="container container-forum">
+        <div class="category-header">
+            <h2>Editer le sujet </h2>
+        </div>
+        <div class="form-margin">
+            {{ form_start(editForm) }}
+            {{form_widget(editForm)}}
+            <button class="btn btn-submit">{{ button_label|default('Modifier') }}</button>
+            {{form_end(editForm)}}
+        </div>
+    </div>
+</div>
 {% endblock %}

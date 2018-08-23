@@ -15,6 +15,7 @@ class HasReadThreadRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, HasReadThread::class);
     }
+    
     public function findTimeStamp($user, $thread): ?HasReadThread
     {
         return $this->createQueryBuilder('h')

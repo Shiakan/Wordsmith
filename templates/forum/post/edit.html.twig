@@ -5,16 +5,16 @@
 {% block main %}
 
 <div class="wrapper">
+{{ include('forum/jumbotron.html.twig') }}
     <div class="container container-forum">
         <div class="category-header">
             <h2>Editer le post</h2>
         </div>
-
-    {{ include('forum/post/_form.html.twig') }}
-
+        <div class="form-margin">
+            {{ include('forum/post/_form.html.twig') }}
+        </div>
     </div>
 </div>
-
 {% endblock %}
 
 {% block javascripts %}

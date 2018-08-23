@@ -2,20 +2,12 @@
 
 {% block main %}
     <div class="wrapper"> 
-        <div class="navbar navbar-codex">
-            <ul>
-                {% for tag in tags %}
-                <li>
-                    <a href="{{path('search_by_tags',{'id':tag.id})}}">{{tag.name}}</a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
+        {{ include('codex/navbarcodex.html.twig') }}
         <div class="header-codex">
-
         </div>
         <div class="last-article">
-            <h2>Les dernières publications</h2>
+            <h2>Les dernières publications</h2> 
+            {{ include('codex/navbarmobile.html.twig') }}
             {{ form_start(form, {'action': path('search_article'), 'method': 'POST', 'attr' : { 'class': 'search-form' }}) }}
             {{ form_row(form.title) }}
             <button type="submit"><i class="fas fa-search"></i></button>

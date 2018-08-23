@@ -1,22 +1,18 @@
 {% extends 'base.html.twig' %} 
 {% block main %}
-{{ include('codex/aside.html.twig') }}
     <div class="wrapper">
-        <div class="navbar navbar-codex">
-            <ul>
-                {% for tag in tags %}
-                <li>
-                    <a href="{{path('search_by_tags',{'id':tag.id})}}">{{tag.name}}</a>
-                </li>
-                {% endfor %}
-            </ul>
+        {{ include('codex/navbarcodex.html.twig') }}
+        <div class="navigation-article">
+            {{ include('codex/navbarmobile.html.twig') }}
         </div>
         <article class="container container-article">
             <h1>{{article.title}}</h1>
             <div class="article-content">
                 {{article.content|filter_black_listed()|raw }}
             </div>
-            <small>Publié le {{article.dateInserted|date("d/m/Y")}}.</small>
+            <div class="article-footer">
+                <small>Publié le {{article.dateInserted|date("d/m/Y")}}.</small>
+            </div>
         </article>
         <div class="article-tags">
             {% for tag in article.tags %}
@@ -53,10 +49,10 @@
              {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 {{form_start(form)}}
                  {{ form_widget(form) }}
-                 <button type="submit">Poster</button>
+                 <button class="btn-submit" type="submit">Poster</button>
                 {{form_end(form)}}
             {% endif %}
         </section>
-        <a class="btn" href="{{path('codex')}}">Retour</a>
+        <a class="btn btn-return" href="{{path('codex')}}">Retour</a>
     </div>
 {% endblock %}

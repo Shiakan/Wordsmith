@@ -43,6 +43,12 @@ class Post
      */
     private $createdAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Subcategory", inversedBy="posts")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $subcategory;
+
     public function __construct()
     {
         $this->status = 1;
@@ -110,6 +116,18 @@ class Post
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getSubcategory(): ?Subcategory
+    {
+        return $this->subcategory;
+    }
+
+    public function setSubcategory(?Subcategory $subcategory): self
+    {
+        $this->subcategory = $subcategory;
 
         return $this;
     }
