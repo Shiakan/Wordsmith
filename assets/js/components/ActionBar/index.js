@@ -37,7 +37,7 @@ class ActionBar extends React.Component {
     return (
       <div className="actionBar">
         {help
-        && <div className="help-over" />}
+        && <div onClick={showHelp} className="help-over" />}
         <FaUserTie className="actionBar-mj" />
         <div className="actionBar-table">
           <button onClick={showDice} type="button" className="actionBar-table-dice">DÉS</button>
