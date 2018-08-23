@@ -41,6 +41,7 @@ export const AUTO_PLAYER = 'AUTO_PLAYER';
 export const AUTO_RECEIVE = 'AUTO_RECEIVE';
 const UPDATE_CHARS = 'UPDATE_CHARS';
 
+
 /**
  * Traitements
  */

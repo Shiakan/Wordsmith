@@ -12,6 +12,8 @@ import { FaAngleDoubleRight, FaAngleDoubleLeft } from 'react-icons/fa';
 import Character from '../../containers/Character';
 import SwitchMap from '../../containers/SwitchMap';
 import SwitchMJ from '../../containers/SwitchMJ';
+import Board from '../../containers/Board';
+
 
 // Styles et assets
 import './gamescreen.sass';
@@ -111,7 +113,7 @@ class GameScreen extends React.Component {
 
         </div>
         ) }
-        {isBoard && <div className="screen-board">THIS IS THE BOARD</div> }
+        {isBoard && <Board /> }
       </div>
     );
   }

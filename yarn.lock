@@ -78,6 +78,10 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
+"@ohtomi/react-whiteboard@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@ohtomi/react-whiteboard/-/react-whiteboard-0.1.1.tgz#040abe8528c487c9af19088001ed3ec3efd7956c"
+
 "@symfony/webpack-encore@^0.19.0":
   version "0.19.0"
   resolved "https://registry.yarnpkg.com/@symfony/webpack-encore/-/webpack-encore-0.19.0.tgz#f0725dbbede5ff9d9fdbd7a07f84accafc83ca14"
