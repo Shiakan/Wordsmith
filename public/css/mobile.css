@@ -7,6 +7,15 @@ h2 {
     font-size:1.2em;
 }
 
+/* FORMULAIRES */
+.search-form {
+    
+}
+.search-form .form-group, 
+input { 
+    width:90%;
+}
+
 /* footer {
     margin-top: 2em;
 } */

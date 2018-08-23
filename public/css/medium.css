@@ -11,14 +11,16 @@
     display:none;
 }
 .wrapper {
-    width:75%;
+    width:60%;
 }
 .container-width {
     width:70%;
 }
-
+.search-form {
+    width:40%;
+}
 /* Codex Aside = Sommaire */
-.tagbar {
+/* .tagbar {
     position:fixed;
     margin-top:5.2em;
     min-width:12%;
@@ -38,7 +40,7 @@
 }
 .taglist-title em {
     color: #A56E3A;
-}
+} */
 /* Fin sommaire Codex */
 
 /* Codex commentaires */

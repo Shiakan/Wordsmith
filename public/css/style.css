@@ -209,6 +209,8 @@ form button {
     display:flex;
     flex-flow:row wrap;
     align-items: center;
+    justify-content: center;
+    margin-bottom:0.5em;
 }
 .search-form .form-group, 
 input {
@@ -424,7 +426,7 @@ input {
     background-position:center;
     background-size:100% 100%;
     margin:1em;
-    height:20em;
+    height:20vh;
     border-radius:0.3em;
 }
 .last-article {
