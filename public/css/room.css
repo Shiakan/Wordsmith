@@ -1,0 +1,36 @@
+/* BARRE DE DÉFILEMENT */
+ /* Chrome, Safari */
+ ::-webkit-scrollbar {
+    width: 7px;
+    height: 10px;
+}
+ ::-moz-scrollbar {
+    width: 7px;   
+    height: 10px;
+}
+ ::-webkit-scrollbar-track-piece  {
+    background-color: rgba(117, 190, 218, .2);
+}
+ ::-moz-scrollbar-track-piece  {
+    background-color: rgba(117, 190, 218, .2);
+    }
+ ::-webkit-scrollbar-thumb:vertical {
+    height: 30px;
+    width:50px;
+    background-color: #3f7a5d;
+    }
+  ::-moz-scrollbar-thumb:vertical {
+    height: 30px;
+    background-color:#3f7a5d;
+    border-radius: 5px;
+}
+ ::-webkit-scrollbar-thumb:horizontal{
+    height: 30px;
+    background-color: #0b0b0b;
+}
+ ::-moz-scrollbar-thumb:horizontal{
+    height: 30px;
+    background-color: #0b0b0b;
+}
+ /* FIN BARRE DE DÉFILEMENT */
+ 

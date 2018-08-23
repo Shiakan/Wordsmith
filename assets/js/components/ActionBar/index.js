@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FaUser, FaUserTie } from 'react-icons/fa/';
+import { FaChessPawn, FaUserTie } from 'react-icons/fa/';
 /**
  * Local import
  */
@@ -41,10 +41,10 @@ class ActionBar extends React.Component {
           <button onClick={showHelp} type="button" className="actionBar-table-help">HELP</button>
         </div>
         <div className="actionBar-player">
-          <FaUser className="actionBar-player-1" />
-          <FaUser className="actionBar-player-2" />
-          <FaUser className="actionBar-player-3" />
-          <FaUser className="actionBar-player-4" />
+          <FaChessPawn className="actionBar-player-1" />
+          <FaChessPawn className="actionBar-player-2" />
+          <FaChessPawn className="actionBar-player-3" />
+          <FaChessPawn className="actionBar-player-4" />
         </div>
       </div>
     );
