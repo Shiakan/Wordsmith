@@ -108,6 +108,11 @@ input {
     font-weight:bold;
 }
 
+.player-info {
+    border-bottom:1px solid #503415;
+    margin-bottom:0.2em;
+}
+
 #tabs {
     min-width:35em;
     min-height:35em;

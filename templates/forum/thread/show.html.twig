@@ -25,9 +25,15 @@
             <div class="wrapper-flex">
                 <div class="left-side">
                     <div class="author-info">
+                        {% if post.author.characterProfile.characterName is defined %}
                         <h4><a href="{{path('user_profile',{id:post.author.id})}}" style="color:{{post.author.characterProfile.groupForum.color}};">
+                            {{ post.author.characterProfile.characterName }}
+                        </a></h4>
+                        {% else %}
+                        <h4><a href="{{path('user_profile',{id:post.author.id})}}">
                             {{ post.author.username }}
                         </a></h4>
+                        {% endif %}
                         <span class="author-rank">{{post.author.characterProfile.rank}}</span>
                     </div>
 
@@ -38,10 +44,9 @@
                             </div>
                             <div class="abtPOST">
                                 <div class="player-info">
-                                    <span class="profile-label">Pseudo Discord :</span>
-                                    <span class="profile-label">Date de naissance :</span>
-                                    <span class="profile-label">Date d'inscription :</span>
-                                    <span class="profile-label">Date de naissance :</span>
+                                    <span class="profile-label">Pseudo :</span> {{ post.author.username }}
+                                    <span class="profile-label">Date de naissance :</span> {{post.author.birthdate|date('d-m-Y')}}
+                                    <span class="profile-label">Date d'inscription :</span> {{post.author.dateInserted|date('d-m-Y')}}
                                 </div>
                                 <div class="character-info">
                                     <span class="profile-label">Age :</span> {{ post.author.characterProfile.age }}

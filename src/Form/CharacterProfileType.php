@@ -15,7 +15,10 @@ class CharacterProfileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('avatar')
+            ->add('characterName', TextType::class, [
+                'required' => false,
+                'label' => 'Nom de votre personnage'
+            ])
             ->add('age')
             ->add('race')
             ->add('class', TextType::class, [
@@ -24,7 +27,7 @@ class CharacterProfileType extends AbstractType
                 'empty_data' => ' ',
             ])
             ->add('socialCast', TextType::class, [
-                'label' => 'Caste sociale',
+                'label' => 'Classe sociale',
                 'required'   => false,
                 'empty_data' => ' ',
             ])
@@ -38,12 +41,26 @@ class CharacterProfileType extends AbstractType
                 'label' => 'Fiche de présentation',
                 'required'   => false,
                 'empty_data' => ' ',
+                'attr' => [
+                    'placeholder' => 'Insérez le lien vers votre fiche de présentation'
+                    ]
             ])
             ->add('link2', TextType::class, [
                 'label' => 'Relations',
                 'required'   => false,
                 'empty_data' => ' ',
+                'attr' => [
+                    'placeholder' => 'Insérez le lien vers votre fiche de relations'
+                    ]
             ])
+            ->add('avatar', TextType::class, [
+                'label' => 'Avatar',
+                'required'   => false,
+                'empty_data' => ' ',
+                'attr' => [
+                    'placeholder' => 'Insérez le lien direct vers votre image'
+                    ]
+                ])
         ;
     }
 

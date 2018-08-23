@@ -15,6 +15,10 @@ class BackendCharacterProfileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('characterName', TextType::class, [
+                'required' => false,
+                'label' => 'Nom du personnage'
+            ])
             ->add('avatar')
             ->add('age')
             ->add('race')

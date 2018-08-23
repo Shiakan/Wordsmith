@@ -40,7 +40,7 @@ Profil de {{user.username}}
                     </div>
                     <ul>
                         <li>
-                            <span class="profile-label">Nom d'utilisateur :</span> {{ user.username }}
+                            <span class="profile-label">Pseudo :</span> {{ user.username }}
                         </li>
                         <li>
                             <span class="profile-label">Email :</span> {{ user.email}}
@@ -58,6 +58,9 @@ Profil de {{user.username}}
                         {% endif %}
                     </div>
                     <ul>
+                        <li>
+                            <span class="profile-label">Nom du personnage :</span> {{user.characterProfile.characterName}}
+                        </li>
                         <li>
                             <span class="profile-label">Age :</span> {{ user.characterProfile.age}}
                         </li>

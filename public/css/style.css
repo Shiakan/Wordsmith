@@ -136,6 +136,10 @@ small {
     width:90%;
     margin:0.5em auto;
 } */
+
+textarea {
+    padding:0.5em;
+}
 .form-group label, legend {
     font-family: 'Forum', cursive;
     color: #A56E3A;

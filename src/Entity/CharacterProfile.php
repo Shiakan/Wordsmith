@@ -77,6 +77,11 @@ class CharacterProfile
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $characterName;
+
 
     public function getId()
     {
@@ -223,6 +228,18 @@ class CharacterProfile
     public function setUser(User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getCharacterName(): ?string
+    {
+        return $this->characterName;
+    }
+
+    public function setCharacterName(?string $characterName): self
+    {
+        $this->characterName = $characterName;
 
         return $this;
     }
