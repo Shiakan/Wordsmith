@@ -11,6 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
 class RoomController extends Controller
 {
     /**
@@ -83,11 +84,25 @@ class RoomController extends Controller
     /**
      * @Route("room/{code}", name="room_show", methods="GET")
      */
-    public function show(Room $room): Response
+    public function show(Room $room, UserInterface $user): Response
     {
-        return $this->render('room/index.html.twig', [
-                'room' => $room
-            ]);
+
+        // $repository = $this->getDoctrine()->getRepository(Room::class);
+        $participants = $room->getParticipants();
+
+        foreach($participants as $participant ) {
+            if($participant->getId() == $user->getId() || $room->getDungeonmaster()->getId()  == $user->getId()){
+
+                return $this->render('room/index.html.twig', [
+                        'room' => $room
+                    ]);
+            }
+            else{
+                return $this->render('room/error.html.twig');
+            }
+        };
+
+
     }
     /**
      * @Route("room/{id}/edit", name="room_edit", methods="GET|POST")
