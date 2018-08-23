@@ -20,6 +20,7 @@ class ActionBar extends React.Component {
     showDice: PropTypes.func.isRequired,
     showSheet: PropTypes.func.isRequired,
     showHelp: PropTypes.func.isRequired,
+    help: PropTypes.bool.isRequired,
   };
 
   componentDidMount() {
@@ -31,9 +32,12 @@ class ActionBar extends React.Component {
       showDice,
       showSheet,
       showHelp,
+      help,
     } = this.props;
     return (
       <div className="actionBar">
+        {help
+        && <div className="help-over" />}
         <FaUserTie className="actionBar-mj" />
         <div className="actionBar-table">
           <button onClick={showDice} type="button" className="actionBar-table-dice">DÉS</button>

@@ -34,7 +34,6 @@ const Help = () => (
           </a>
         </li>
       </ol>
-
     </div>
   </div>
 );

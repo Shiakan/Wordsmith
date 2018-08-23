@@ -24,7 +24,7 @@ import {
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
 const mapStateToProps = state => ({
-
+  help: state.actionBar.help,
 });
 
 /* === Actions ===

@@ -35,7 +35,6 @@ class Panel extends React.Component {
       <div className="panel">
         {dice && <Dice />}
         {sheet && <Sheet />}
-        {help && <Help />}
       </div>
     );
   }

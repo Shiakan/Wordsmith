@@ -31,7 +31,6 @@ const App = () => (
     <Logo />
     <ActionBar />
     {/* <Footer /> */}
-    {/* <div id="help" /> */}
   </div>
 );
 
