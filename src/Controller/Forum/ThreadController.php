@@ -201,7 +201,7 @@ class ThreadController extends Controller
         return $this->redirectToRoute('forum_subcategory', ['name' => $newSubcategory->getName()]);
     }
     /**
-     * @Route("/{id}/edit", name="thread_edit", methods="GET|POST")
+     * @Route("/thread/{id}/edit", name="thread_edit", methods="GET|POST")
      */
     public function edit(Request $request, Thread $thread): Response
     {

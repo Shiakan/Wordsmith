@@ -87,8 +87,6 @@ class RoomController extends Controller
      */
     public function show(Room $room, UserInterface $user): Response
     {
-
-        // $repository = $this->getDoctrine()->getRepository(Room::class);
         $participants = $room->getParticipants();
 
         foreach($participants as $participant ) {
@@ -102,9 +100,8 @@ class RoomController extends Controller
                 return $this->render('room/error.html.twig');
             }
         };
-
-
     }
+
     /**
      * @Route("room/{id}/edit", name="room_edit", methods="GET|POST")
      */
@@ -121,6 +118,7 @@ class RoomController extends Controller
             'form' => $form->createView(),
         ]);
     }
+    
     /**
      * @Route("room/{id}", name="room_delete", methods="DELETE")
      */
