@@ -61,7 +61,7 @@ class Messages extends React.Component {
               {message.message
               && <p className="message-content">{message.author} {message.message ? message.message : message.dice}</p>}
               {message.diceValue
-              && <p className="message-content">{message.author} à lancé un {message.diceValue} et a obtenu un <span className={rollCrit}> {message.dice} </span></p>}
+              && <p className="message-content">{message.author} a lancé un {message.diceValue} et a obtenu un <span className={rollCrit}> {message.dice} </span></p>}
             </div>
           );
         })}
