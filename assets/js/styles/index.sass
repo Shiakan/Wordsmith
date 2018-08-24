@@ -14,3 +14,41 @@
   background: url(./assets/img/appBg.png) no-repeat
   background-size: cover
   display: flex
+
+.question
+  animation-name: question-animation
+  animation-duration: 2s
+  animation-fill-mode: forwards
+  animation-timing-function: linear
+  position: absolute
+  color: red
+  // font-size: 1.3em
+  top: 0
+  z-index: 2004
+  // margin: auto
+  cursor: help
+  &-bg
+  &-text
+    color: red
+    z-index: 3000
+    padding: .5em 0
+  &-ul
+    padding: 0 1em
+    z-index: 2003
+    color: $font-color
+    &-li
+      list-style-type: disc
+      padding: .1em 0
+
+.__react_component_tooltip
+  z-index: 2004
+
+  /** KEYFRAMES **/
+@keyframes question-animation 
+  0%
+    font-size: .1em
+  25%
+  50%
+  75%
+  100% 
+    font-size: 1em

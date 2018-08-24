@@ -3,6 +3,8 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FaQuestionCircle } from 'react-icons/fa/';
+import ReactTooltip from 'react-tooltip';
 
 /**
  * Local import
@@ -10,7 +12,7 @@ import PropTypes from 'prop-types';
 // Composants
 import Dice from '../../containers/Dice';
 import Sheet from '../../containers/Sheet';
-import Help from './Help';
+// import Help from './Help';
 
 // Styles et assets
 import './panel.sass';
@@ -35,7 +37,35 @@ class Panel extends React.Component {
       <div className="panel">
         {dice && <Dice />}
         {sheet && <Sheet />}
-        {help && <Help />}
+        {help
+        && (
+          <div className="toolTip">
+            <FaQuestionCircle data-tip="panel-tooltip" data-for="panel-tooltip" className="question" />
+            <ReactTooltip
+              id="panel-tooltip"
+              place="left"
+              type="dark"
+              effect="float"
+              border
+            >
+              <p className="question-text">
+                    Dés
+              </p>
+              <ul className="question-ul">
+                <li className="question-ul-li">Tapez 1D20 pour lancer 1 dé à 20 faces</li>
+                <li className="question-ul-li">2D6 pour lancer 2 dés à 6 faces</li>
+                <li className="question-ul-li">le résultat du lancer sera automatiquement partagé dans le chat</li>
+              </ul>
+              <p className="question-text">
+                    Fiche personnage
+              </p>
+              <ul className="question-ul">
+                <li className="question-ul-li">Votre fiche personnage est sauvegardé dès lors que vous cliquez en dehors du texte</li>
+                <li className="question-ul-li">Vous allez la retrouver dans la prochaine partie à laquelle vous participerez</li>
+              </ul>
+            </ReactTooltip>
+          </div>
+        )}
       </div>
     );
   }

@@ -2,7 +2,6 @@
     "devDependencies": {
         "@symfony/webpack-encore": "^0.20.1",
         "babel-preset-react": "^6.24.1",
-        "react-dom": "^16.4.2",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",
@@ -16,8 +15,6 @@
         "clean": "rm -rf dist"
     },
     "dependencies": {
-        "prop-types": "^15.6.2",
-        "react": "^16.4.2",
         "@material-ui/core": "^1.5.1",
         "@ohtomi/react-whiteboard": "^0.1.1",
         "autoprefixer": "^9.1.1",
@@ -51,7 +48,10 @@
         "optimize-css-assets-webpack-plugin": "^5.0.0",
         "postcss": "^7.0.2",
         "postcss-loader": "^3.0.0",
+        "prop-types": "^15.6.2",
+        "react": "^16.4.2",
         "react-color": "^2.14.1",
+        "react-dom": "^16.4.2",
         "react-draggable": "^3.0.5",
         "react-icons": "^3.0.5",
         "react-redux": "^5.0.7",

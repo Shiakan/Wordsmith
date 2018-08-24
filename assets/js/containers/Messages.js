@@ -13,6 +13,7 @@ import Messages from '../components/Chat/Messages';
 /* === State (données) === */
 const mapStateToProps = state => ({
   messages: state.textInput.messages,
+  help: state.actionBar.help,
 });
 
 /* === Actions === */

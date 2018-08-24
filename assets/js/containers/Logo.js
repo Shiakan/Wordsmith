@@ -6,15 +6,10 @@ import { connect } from 'react-redux';
 /**
  * Local import
  */
-import ActionBar from '../components/ActionBar';
-
+import Logo from '../components/Logo';
+import { showHelp } from '../store/reducers/actionBar';
 // Action Creators
-import {
-  doSomething,
-  showDice,
-  showSheet,
-  showHelp,
-} from '../store/reducers/actionBar';
+// import { doSomething } from 'src/store/reducer';
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation
@@ -35,15 +30,6 @@ const mapStateToProps = state => ({
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
 const mapDispatchToProps = dispatch => ({
-  doSomething: () => {
-    dispatch(doSomething());
-  },
-  showDice: () => {
-    dispatch(showDice());
-  },
-  showSheet: () => {
-    dispatch(showSheet());
-  },
   showHelp: () => {
     dispatch(showHelp());
   },
@@ -51,12 +37,12 @@ const mapDispatchToProps = dispatch => ({
 
 // Container
 // connect(Ce dont j'ai besoin)(Qui en a besoin)
-const ActionBarContainer = connect(
+const LogoContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(ActionBar);
+)(Logo);
 
 /**
  * Export
  */
-export default ActionBarContainer;
+export default LogoContainer;
