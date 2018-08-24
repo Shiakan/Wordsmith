@@ -7,7 +7,18 @@ import { WEBSOCKET_CONNECT } from '../reducers/user';
 import { ADD_MESSAGE, receiveMessage } from '../reducers/textInput';
 import { ROLL_DICE, SHARE_DICE } from '../reducers/dice';
 import {
-  receiveDelete, autoAddPlayer, deletePlayer, AUTO_PLAYER, MOVE_PLAYER, DELETE_PLAYER, CREATE_PLAYER, CHANGE_MAP, receiveMove, receiveChar, receiveMap, autoReceivePlayer,
+  receiveDelete,
+  autoAddPlayer,
+  deletePlayer,
+  AUTO_PLAYER,
+  MOVE_PLAYER,
+  DELETE_PLAYER,
+  CREATE_PLAYER,
+  CHANGE_MAP,
+  receiveMove,
+  receiveChar,
+  receiveMap,
+  autoReceivePlayer,
 } from '../reducers/gameScreen';
 /**
  * Code
@@ -60,8 +71,6 @@ const socketConnect = store => next => (action) => {
       break;
 
     case ADD_MESSAGE: {
-      // Je transfère l'objet entier
-      // Découpable par la suite
       console.log(state.user.userName, 'ADD MESSAGE');
       const content = {};
       content.role = state.user.role;
@@ -104,7 +113,7 @@ const socketConnect = store => next => (action) => {
           console.log('new coords :', char.coordX, char.coordY);
         }
         return char;
-      }); 
+      });
       console.log('moved char ', movedChar[0]);
       console.log('movedchars ', movedChars);
       socket.emit('move_player', movedChar[0]);

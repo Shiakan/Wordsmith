@@ -34,9 +34,6 @@ app.use(function(req, res, next) {
 * Socket.io
  */
 io.on('connection', function(socket) {
-  // users.addUser(12, 'Jackson', 'Chambre');
-  
-  // console.log(users);
   console.log('>> socket.io - connected');
   socket.on('join', function(param, callback) {
     console.log('>> JOINED <<', param);
@@ -53,7 +50,6 @@ io.on('connection', function(socket) {
     var tokenToAdd = {};
     tokenToAdd.userName = param.userName,
     io.to(param.roomId).emit('add_token', tokenToAdd);
-    
 
     socket.on('roll_dice', function(dice) {
       if (dice.role === 'player' && !isNaN(dice.rolled)) {
