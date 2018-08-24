@@ -4,7 +4,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { FaAngleDoubleRight, FaAngleDoubleLeft } from 'react-icons/fa';
+import { FaAngleDoubleRight, FaAngleDoubleLeft, FaQuestionCircle } from 'react-icons/fa';
+import ReactTooltip from 'react-tooltip';
 /**
  * Local import
 */
@@ -31,6 +32,7 @@ class GameScreen extends React.Component {
     characters: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
     handleSlide: PropTypes.func.isRequired,
     isSlided: PropTypes.bool.isRequired,
+    help: PropTypes.bool.isRequired,
     role: PropTypes.string.isRequired,
   };
 
@@ -46,7 +48,7 @@ class GameScreen extends React.Component {
   render() {
     const {
       toggleScreen, isBoard, map, isMap,
-      grid, characters, handleSlide, isSlided, role,
+      grid, characters, handleSlide, isSlided, role, help,
     } = this.props;
     const classSwitch = classNames(
       'screen-switch',
@@ -98,6 +100,35 @@ class GameScreen extends React.Component {
         </div>
         {isMap && (
         <div className="screen-map">
+          {help
+              && (
+                <div className="toolTip">
+                  <FaQuestionCircle data-tip="Gamescreen-tooltip" data-for="Gamescreen-tooltip" className="question" />
+                  <ReactTooltip
+                    id="Gamescreen-tooltip"
+                    place="left"
+                    type="dark"
+                    effect="float"
+                    border
+                  >
+                    <p className="question-text">
+                          Vous pouvez déplacez vos pions sur la map pour faire savoir à vos compagnons où vous vous rendez
+                    </p>
+                    <ul className="question-ul">
+                      <li className="question-ul-li">Vous pouvez déplacez vos pions sur la map pour faire savoir à vos compagnons où vous vous rendez</li>
+                      <li className="question-ul-li">Le Maître du jeu peut déplacer tous les pions</li>
+                    </ul>
+                    <p className="question-text">
+                    Grâce au menu sur la gauche de l'écran vous pouvez :
+                    </p>
+                    <ul className="question-ul">
+                      <li className="question-ul-li">Voir qui est présent avec vous dans la partie</li>
+                      <li className="question-ul-li">Ajouter ou enlever un quadrillage sur la map</li>
+                      <li className="question-ul-li">Affiche automatiquement les lancers critiques sur les D20 et D100</li>
+                    </ul>
+                  </ReactTooltip>
+                </div>
+              )}
           {characters.map(character => (
             <Character
               key={character.id}

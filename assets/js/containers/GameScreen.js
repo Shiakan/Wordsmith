@@ -28,6 +28,7 @@ const mapStateToProps = state => ({
   characters: state.gameScreen.characters,
   isSlided: state.gameScreen.isSlided,
   role: state.user.role,
+  help: state.actionBar.help,
 });
 
 /* === Actions ===
