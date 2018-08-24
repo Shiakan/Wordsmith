@@ -40,24 +40,29 @@ class Panel extends React.Component {
         {help
         && (
           <div className="toolTip">
-            <FaQuestionCircle data-tip="React-tooltip" className="question" />
+            <FaQuestionCircle data-tip="panel-tooltip" data-for="panel-tooltip" className="question" />
             <ReactTooltip
+              id="panel-tooltip"
               place="left"
               type="dark"
               effect="float"
               border
             >
-              <p className="dice-block-tooltip-text">
-                    TEST TEST
+              <p className="question-text">
+                    Dés
               </p>
-              <ul className="dice-block-tooltip-ul">
-                <li className="dice-block-tooltip-ul-li">x correspond au nombre de dés à lancer</li>
-                <li className="dice-block-tooltip-ul-li">D est le séparateur</li>
-                <li className="dice-block-tooltip-ul-li">y le nombre de face pour les dés à lancer</li>
+              <ul className="question-ul">
+                <li className="question-ul-li">Tapez 1D20 pour lancer 1 dé à 20 faces</li>
+                <li className="question-ul-li">2D6 pour lancer 2 dés à 6 faces</li>
+                <li className="question-ul-li">le résultat du lancer sera automatiquement partagé dans le chat</li>
               </ul>
-              <p className="dice-block-tooltip-text">
-                    TEST TEST
+              <p className="question-text">
+                    Fiche personnage
               </p>
+              <ul className="question-ul">
+                <li className="question-ul-li">Votre fiche personnage est sauvegardé dès lors que vous cliquez en dehors du texte</li>
+                <li className="question-ul-li">Vous allez la retrouver dans la prochaine partie à laquelle vous participerez</li>
+              </ul>
             </ReactTooltip>
           </div>
         )}
