@@ -163,6 +163,7 @@ const socketConnect = store => next => (action) => {
       break;
 
     case DELETE_PLAYER: {
+      // fixed delete targetting, now with ID instead of name
       const charToDelete = state.gameScreen.characters.filter(char => char.id === action.value.id);
       console.log('charlol ', charToDelete);
 
