@@ -123,6 +123,8 @@ io.on('connection', function(socket) {
       var tokenToKill = {};
       tokenToKill.userName = param.userName,
       io.to(param.roomId).emit('delete_token', tokenToKill);
+      users.removeUser(param.selfId);
+      console.log(users);
     });
   });
 });
