@@ -7,7 +7,9 @@ import { WEBSOCKET_CONNECT } from '../reducers/user';
 import { ADD_MESSAGE, receiveMessage } from '../reducers/textInput';
 import { ROLL_DICE, SHARE_DICE } from '../reducers/dice';
 import {
-  receiveDelete, autoAddPlayer, deletePlayer, AUTO_PLAYER, MOVE_PLAYER, DELETE_PLAYER, CREATE_PLAYER, CHANGE_MAP, receiveMove, receiveChar, receiveMap, autoReceivePlayer,
+  receiveDelete, autoAddPlayer, deletePlayer,
+  AUTO_PLAYER, MOVE_PLAYER, DELETE_PLAYER, CREATE_PLAYER, CHANGE_MAP,
+  receiveMove, receiveChar, receiveMap, autoReceivePlayer,
 } from '../reducers/gameScreen';
 /**
  * Code
@@ -94,7 +96,9 @@ const socketConnect = store => next => (action) => {
       break;
 
     case MOVE_PLAYER: {
-      const movedChar = state.gameScreen.characters.filter(char => char.id === action.value.target.id);
+      const movedChar = state.gameScreen.characters.filter(
+        char => char.id === action.value.target.id,
+      );
       const movedChars = state.gameScreen.characters.map((char) => {
         console.log('action.value.target.id', action.value.target.id);
         if (char.id === action.value.target.id) {
@@ -104,7 +108,7 @@ const socketConnect = store => next => (action) => {
           console.log('new coords :', char.coordX, char.coordY);
         }
         return char;
-      }); 
+      });
       console.log('moved char ', movedChar[0]);
       console.log('movedchars ', movedChars);
       socket.emit('move_player', movedChar[0]);
@@ -127,8 +131,10 @@ const socketConnect = store => next => (action) => {
           state.gameScreen.cptX += 70;
         }
         state.gameScreen.cptY += 70;
-        console.log('test1 :', newChar.name.startsWith('test'));
-        const compareChars = state.gameScreen.characters.filter(char => char.name.startsWith(newChar.name));
+
+        const compareChars = state.gameScreen.characters.filter(
+          char => char.name.startsWith(newChar.name),
+        );
         if (compareChars.length >= 1) {
           newChar.name = `${newChar.name}#${compareChars.length + 1}`;
           console.log('compare :', compareChars);
@@ -163,7 +169,6 @@ const socketConnect = store => next => (action) => {
       break;
 
     case DELETE_PLAYER: {
-      // fixed delete targetting, now with ID instead of name
       const charToDelete = state.gameScreen.characters.filter(char => char.id === action.value.id);
       console.log('charlol ', charToDelete);
 
