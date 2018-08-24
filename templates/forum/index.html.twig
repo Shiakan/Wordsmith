@@ -42,6 +42,12 @@
                     <small>{{subcategory.threads|length}} Sujets</small>
                     <small>{{subcategory.posts|length}} Réponses</small>
                 </div>
+                <div class="container last-message">
+                {% if subcategory.lastPost != null %}
+                    <small>{{subcategory.lastPost.thread.title}}</small>
+                    <small>{{subcategory.lastPost.author.username}}</small>
+                {% endif %}
+                </div>
             </div>
         {% else %}
         {% if is_granted('ROLE_MODERATOR') %}

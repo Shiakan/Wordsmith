@@ -42,8 +42,10 @@
                 <small>{{thread.posts|length}} Rép.</small>
             </div>
             <div class="container thread-last-message">
-                <small>15/08/2018</small>
-                <a href="#">Prénom Nom</a>
+            {% if thread.lastPost != null %}
+                <small>{{thread.lastPost.createdAt|date('d-m-Y')}}</small>
+                <a href="#">{{thread.lastPost.author.username}}</a>
+            {% endif %}
             </div>
         </div>
     {% endfor %}

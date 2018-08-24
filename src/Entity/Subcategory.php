@@ -51,6 +51,11 @@ class Subcategory
      */
     private $posts;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Post", inversedBy="forum", cascade={"persist", "remove"})
+     */
+    private $lastPost;
+
     public function __construct()
     {
         $this->threads = new ArrayCollection();
@@ -195,6 +200,18 @@ class Subcategory
                 $post->setSubcategory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLastPost(): ?Post
+    {
+        return $this->lastPost;
+    }
+
+    public function setLastPost(?Post $lastPost): self
+    {
+        $this->lastPost = $lastPost;
 
         return $this;
     }

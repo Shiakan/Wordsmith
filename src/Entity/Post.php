@@ -49,6 +49,16 @@ class Post
      */
     private $subcategory;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Thread", mappedBy="lastPost", cascade={"persist", "remove"})
+     */
+    private $topic;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Subcategory", mappedBy="lastPost", cascade={"persist", "remove"})
+     */
+    private $forum;
+
     public function __construct()
     {
         $this->status = 1;
@@ -128,6 +138,41 @@ class Post
     public function setSubcategory(?Subcategory $subcategory): self
     {
         $this->subcategory = $subcategory;
+
+        return $this;
+    }
+
+    public function getTopic(): ?Thread
+    {
+        return $this->topic;
+    }
+
+    public function setTopic(Thread $topic): self
+    {
+        $this->topic = $topic;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $topic->getLastPost()) {
+            $topic->setLastPost($this);
+        }
+
+        return $this;
+    }
+
+    public function getForum(): ?Subcategory
+    {
+        return $this->forum;
+    }
+
+    public function setForum(?Subcategory $forum): self
+    {
+        $this->forum = $forum;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newLastPost = $forum === null ? null : $this;
+        if ($newLastPost !== $forum->getLastPost()) {
+            $forum->setLastPost($newLastPost);
+        }
 
         return $this;
     }

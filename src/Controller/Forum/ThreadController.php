@@ -93,6 +93,14 @@ class ThreadController extends Controller
         $post->setAuthor($user);
         $em->persist($post);
         $em->flush();
+
+        $thread = $post->getThread();
+        $thread->setLastPost($post);
+        $em->flush();
+
+        $subcategory = $post->getSubcategory();
+        $subcategory->setLastPost($post);
+        $em->flush();
         
     }
     /**

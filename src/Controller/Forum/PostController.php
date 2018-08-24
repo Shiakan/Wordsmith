@@ -32,7 +32,7 @@ class PostController extends Controller
 
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
-        dump($currentThread->getSubcategory());
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $post->setThread($currentThread);
@@ -40,6 +40,14 @@ class PostController extends Controller
             $post->setAuthor($user);
             $em->persist($post);
             $em->flush();
+
+            $currentThread->setLastPost($post);
+            $em->flush();
+
+            $subcategory = $post->getSubcategory();
+            $subcategory->setLastPost($post);
+            $em->flush();
+
             return $this->redirectToRoute('thread_show', [
                 'id' => $currentThread->getId()
             ]);
