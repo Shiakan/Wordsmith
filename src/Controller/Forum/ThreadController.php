@@ -76,7 +76,6 @@ class ThreadController extends Controller
             $hasReadThread->setThread($thread);
             $hasReadThread->setUser($user);
             $hasReadThread->setPostCount(0);
-            $hasReadThread->setTimestamp(new \Datetime());
             $em->persist($hasReadThread);
         }
         

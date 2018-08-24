@@ -97,7 +97,6 @@ class SecurityController extends Controller
             $hasReadThread->setThread($thread);
             $hasReadThread->setUser($user);
             $hasReadThread->setPostCount(count($thread->getPosts()));
-            $hasReadThread->setTimestamp(new \Datetime());
             $em->persist($hasReadThread);
         }
         

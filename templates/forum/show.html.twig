@@ -5,6 +5,7 @@
 {% block main %}
 <div class="wrapper">
     {{ include('forum/jumbotron.html.twig') }}
+    {{ include('forum/subcategoryaction.html.twig') }}
     <div class="container container-forum">
     <div class="category-header">
         <h2>{{subcategory.name}}</h2>
@@ -36,7 +37,7 @@
                 {% endif %}
             </div>
             <div class="thread-author">
-                <a href="{{path('user_profile',{id:thread.author.id})}}" style="color:{{thread.author.characterProfile.groupForum.color}};">{{thread.author.username}}</a>
+                <a href="{{path('user_profile',{id:thread.author.id})}}" style="color:{{thread.author.characterProfile.groupForum.color}};">{{thread.author.characterProfile.characterName}}</a>
             </div>
             <div class="container thread-statistic">
                 <small>{{thread.posts|length}} Rép.</small>
@@ -44,23 +45,13 @@
             <div class="container thread-last-message">
             {% if thread.lastPost != null %}
                 <small>{{thread.lastPost.createdAt|date('d-m-Y')}}</small>
-                <a href="#">{{thread.lastPost.author.username}}</a>
+                <a href="#">{{thread.lastPost.author.characterProfile.characterName}}</a>
             {% endif %}
             </div>
         </div>
     {% endfor %}
     </div>
-        <div class="text-center">
-            {# Si page supérieure à 1 on affiche un bouton précédent qui mène à la page-1 #} 
-            {% if page > 1 %}
-            <a href="{{path('forum_subcategory',{'id':subcategory.id,'page':page -1})}}" class="btn-pagination"><i class="fas fa-arrow-left"></i> Précédent</a>
-            {% endif %} {# si page inférieure à la page max calculée alors on affiche un bouton suivant qui mène à la page +1 #} 
-            {% if page < pageMax %}
-            <a href="{{path('forum_subcategory',{'id':subcategory.id,'page':page +1})}}" class="btn-pagination">Suivant
-            <i class="fas fa-arrow-right"></i></a>  
-            {% endif %}
-        </div>
-    <a class="btn btn-return" href="{{path('thread_new', {'subcategory_id' : subcategory.id})}}">Nouveau</a>
+    {{ include('forum/subcategoryaction.html.twig') }}
  </div>
 
 {% endblock %}
