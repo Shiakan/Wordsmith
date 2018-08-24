@@ -21,55 +21,56 @@
 
             {% block header %}
                 <div class="navbar-middle">
-                    <a href="{{ path('homepage') }}"><img class="logo" src="https://nsa39.casimages.com/img/2018/08/12//180812035308814067.png" alt="logo"></a>
                 </div>
             {% endblock %}
             <main>
                 {% block main %}
-                    <div class="wra">
-                        <div class="con">
                         {# A centré #}
                             <div class="centering">
-                                <div>
-                                <ul>
-                                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                                        <li class="ul-li-connexion">
-                                            Bienvenue
-                                            <a href="{{path('user_profile', {'id': app.user.id })}}">{{ app.user.username }}</a>
-                                        </li>
-                                        <li class="ul-li-connexion">
-                                            <a href="{{path('security_logout')}}">Déconnexion</a>
-                                        </li>
-                                    {% else %}
-                                        <li class="ul-li-connexion">
-                                            <a href="{{path('security_registration')}}">Inscription</a>
-                                        </li>
-                                        <li class="ul-li-connexion">
-                                            <a href="{{path('security_login')}}">Connexion</a>
-                                        </li>
-                                    {% endif %}
-                                </ul>
-                                </div>
+                                <div class="wrapping">
+                                    <a href="{{ path('homepage') }}">
+                                        <img class='logo-center' src="{{asset('image/bigtitle.png')}}" alt="logo">
+                                    </a>
+                                    <div class='log-nav'>
+                                        <ul>
+                                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                                <li class="ul-li-connexion">
+                                                    Bienvenue
+                                                    <a href="{{path('user_profile', {'id': app.user.id })}}">{{ app.user.username }}</a>
+                                                </li>
+                                                <li class="ul-li-connexion">
+                                                    <a href="{{path('security_logout')}}">Déconnexion</a>
+                                                </li>
+                                            {% else %}
+                                                <li class="ul-li-connexion">
+                                                    <a href="{{path('security_registration')}}">Inscription</a>
+                                                </li>
+                                                <li class="ul-li-connexion">
+                                                    <a href="{{path('security_login')}}">Connexion</a>
+                                                </li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
                                     <div class="nav-wrap">
-                                    <ul>
-                                        <li class="ul-li-home">
-                                            <a class="{{ app.request.get('_route') == 'codex' ? 'active' }}" href="{{path('codex')}}">Codex</a>
-                                        </li>
-                                        <li class="ul-li-home">
-                                            <a class="{{ app.request.get('_route') == 'forum_index' ? 'active' }}" href="{{path('forum_index')}}">Forum</a>
-                                        </li>
-                                        <li class="ul-li-home">
-                                            <a href="{{ path('room_new') }}">Room</a>
-                                        </li>
-                                        {% if is_granted('ROLE_MODERATOR') %}
-                                        <li class="ul-li-home">
-                                            <a href=" {{path('home_backend')}}">Administration</a>
-                                        </li>
-                                        {% endif %}
-                                    </ul>
+                                        <ul>
+                                            <li class="ul-li-home">
+                                                <a class="{{ app.request.get('_route') == 'codex' ? 'active' }}" href="{{path('codex')}}">Codex</a>
+                                            </li>
+                                            <li class="ul-li-home">
+                                                <a class="{{ app.request.get('_route') == 'forum_index' ? 'active' }}" href="{{path('forum_index')}}">Forum</a>
+                                            </li>
+                                            <li class="ul-li-home">
+                                                <a href="{{ path('room_new') }}">Room</a>
+                                            </li>
+                                            {% if is_granted('ROLE_MODERATOR') %}
+                                                <li class="ul-li-home">
+                                                    <a href=" {{path('home_backend')}}">Administration</a>
+                                                </li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-
                         {# fin de A centré #}
                         <div class="content">
                             <p>Aetherlust est une aventure JDR en deux temps. Vous retrouverez un forum sur lequel vous pourrez faire vivre vos récits dans une grande hsitoire commune. Egalement, nous proposons un jeu de plateau en ligne pour vous faire vivre des aventures à plusieurs face à u maitre du jeu</p>

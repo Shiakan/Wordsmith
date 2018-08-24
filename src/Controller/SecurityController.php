@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+
 use App\Entity\Role;
 use App\Entity\User;
 use App\Entity\Thread;
@@ -55,8 +56,8 @@ class SecurityController extends Controller
                             ['user'=>$user] //On lui passe user
                         )
                     );
-                //On envoie le mail
-                $mailer->send($message);
+            //On envoie le mail
+            $mailer->send($message);
             
             $this->createHasReadThread($user);
             $this->createHasReadSubcategory($user);
@@ -112,7 +113,8 @@ class SecurityController extends Controller
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             $this->addFlash('warning', 'Vous êtes déjà connecté');
             return $this->redirectToRoute('homepage');
-        } else {
+        } 
+        else {
             $authenticationUtils = $this->get('security.authentication_utils');
             $defaultData = array('username' => $authenticationUtils->getLastUsername());
             $form = $this->createForm(LoginType::class, $defaultData);
@@ -122,8 +124,7 @@ class SecurityController extends Controller
             return $this->render('security/login.html.twig',[
                 'form' => $form->createView(),
                 'error' => $error
-            ]
-                    
+                ]    
             );
         }
     }
