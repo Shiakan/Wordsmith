@@ -112,19 +112,19 @@ class GameScreen extends React.Component {
                     border
                   >
                     <p className="question-text">
-                          Vous pouvez déplacez vos pions sur la map pour faire savoir à vos compagnons où vous vous rendez
+                          Déplacements :
                     </p>
                     <ul className="question-ul">
                       <li className="question-ul-li">Vous pouvez déplacez vos pions sur la map pour faire savoir à vos compagnons où vous vous rendez</li>
                       <li className="question-ul-li">Le Maître du jeu peut déplacer tous les pions</li>
                     </ul>
                     <p className="question-text">
-                    Grâce au menu sur la gauche de l'écran vous pouvez :
+                    Grâce au menu sur la gauche de l'écran :
                     </p>
                     <ul className="question-ul">
-                      <li className="question-ul-li">Voir qui est présent avec vous dans la partie</li>
-                      <li className="question-ul-li">Ajouter ou enlever un quadrillage sur la map</li>
-                      <li className="question-ul-li">Affiche automatiquement les lancers critiques sur les D20 et D100</li>
+                      <li className="question-ul-li">Vous savez qui est présent avec vous dans la partie</li>
+                      <li className="question-ul-li">Vous affichez ou non un quadrillage sur la map</li>
+                      <li className="question-ul-li">Le Maître de jeu peut créer de nouveaux pions et téléporter les joueurs sur une autre carte</li>
                     </ul>
                   </ReactTooltip>
                 </div>
