@@ -24,6 +24,9 @@ input {
     width:85%;
 }
 
+/* PROFIL */
+
+
 /* Codex commentaires */
 .comment-header {
     display:flex;
@@ -111,12 +114,4 @@ input {
 .player-info {
     border-bottom:1px solid #503415;
     margin-bottom:0.2em;
-}
-
-#tabs {
-    min-width:35em;
-    min-height:35em;
-}
-#tabs-1, #tabs-2, #tabs-3, #tabs-4 {
-    min-height:35em;
 }

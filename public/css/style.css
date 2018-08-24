@@ -542,12 +542,13 @@ input {
 }
 .container-profil .left-side img {
     margin-bottom:1em;
-    max-width:200px;
+    width:100%;
 }
 .container-profil .right-side {
     padding-left:1em;
     padding-right:1em;
-    /* width:70%; A REMETTRE SUR GRAND ECRAN */
+    width:100%;
+    min-height:20em;
 }
 #tabs {
     background-color:#0b0b0b;
@@ -590,6 +591,9 @@ a.ui-button:active, .ui-button:active,
     color: #BDBDBD;
     padding:0.8em;
     text-align:justify;
+    min-height:330px;
+    max-height:330px;
+    overflow:auto;
 }
 #tabs-1 ul, 
 #tabs-2 ul {

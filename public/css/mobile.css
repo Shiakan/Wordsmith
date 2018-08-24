@@ -174,10 +174,6 @@ input {
 .comment-header h4 {
     font-size:1.2em;
 }
-/* .comment small {
-    margin-left:1em;
-} */
-
 /* Profil */
 .profile-title {
     align-items:flex-start;
@@ -187,13 +183,6 @@ input {
 }
 .left-side {
     display:none;
-}
-.right-side {
-    width:100%;
-    padding:0;
-}
-#tabs {
-    min-height:620px;
 }
 
 /* Boutons */

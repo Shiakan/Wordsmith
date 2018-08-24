@@ -51,7 +51,8 @@ class ThreadRepository extends ServiceEntityRepository
          $qb = $this->createQueryBuilder('t') //On créé une query qui séléctionne tous les threads
             ->where('t.subcategory = :subcategory')//Ou subcategory  est égale au parametre :subcategory
             ->leftJoin('t.hasReadThreads','h')
-            ->setParameters(array('subcategory' => $subcategory))
+            ->andWhere('h.user = :user')
+            ->setParameters(array('subcategory' => $subcategory, 'user' => $user))
             ->addSelect('COUNT(t) AS HIDDEN mycount')
             ->groupBy('t')
             ->orderBy('t.createdAt', 'DESC')
