@@ -2,6 +2,9 @@
     width:40%;
     margin:0 auto 3.5em;
 } 
+.container-index {
+    width:100%;
+}
 
 .logo-burger {
     display:none;
@@ -11,35 +14,15 @@
     display:none;
 }
 .wrapper {
-    width:75%;
+    width:65%;
 }
 .container-width {
     width:70%;
 }
-
-/* Codex Aside = Sommaire */
-.tagbar {
-    position:fixed;
-    margin-top:5.2em;
-    min-width:12%;
-    padding:0.3em 0.8em;
-    background-color:#0D0D0D;  
-    border:1px solid  #503415;
-    margin-left:1em;
+.search-form .form-group, 
+input {
+    width:85%;
 }
-.tagbar ol {
-    margin-left:1.2em;
-    color:#125C38;
-    list-style-type: upper-roman;
-}
-.tagbar h2 {
-    border-bottom: 1px solid  #503415; 
-    margin-bottom:0.2em;
-}
-.taglist-title em {
-    color: #A56E3A;
-}
-/* Fin sommaire Codex */
 
 /* Codex commentaires */
 .comment-header {

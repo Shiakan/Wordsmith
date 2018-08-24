@@ -12,7 +12,62 @@
         <div class="form-margin">
             {{ include('forum/post/_form.html.twig') }}
         </div>
+    </div>
+    <div class="container container-forum">
+        <div class="category-header">
+            <h2>Réponses précédentes</h2>
+        </div>
+        {% for post in posts %}
+        {% if post.status == true %}
+            <div class="wrapper-flex">
+                <div class="left-side">
+                    <div class="author-info">
+                        <h4><a href="{{path('user_profile',{id:post.author.id})}}" style="color:{{post.author.characterProfile.groupForum.color}};">
+                            {{ post.author.username }}
+                        </a></h4>
+                        <span class="author-rank">{{post.author.characterProfile.rank}}</span>
+                    </div>
 
+                    <div id="blocAVA">
+                        <div class="blocAVA">
+                            <div class="avaPOST">
+                                <img src="{{ post.author.characterProfile.avatar }}">
+                            </div>
+                            <div class="abtPOST">
+                                <div class="player-info">
+                                    <span class="profile-label">Pseudo Discord :</span>
+                                    <span class="profile-label">Date de naissance :</span>
+                                    <span class="profile-label">Date d'inscription :</span>
+                                    <span class="profile-label">Date de naissance :</span>
+                                </div>
+                                <div class="character-info">
+                                    <span class="profile-label">Age :</span> {{ post.author.characterProfile.age }}
+                                    <span class="profile-label">Race :</span> {{ post.author.characterProfile.race }}
+                                    <span class="profile-label">Classe :</span> {{ post.author.characterProfile.class }}
+                                    <span class="profile-label">Classe sociale :</span> {{ post.author.characterProfile.socialCast}}
+                                    <span class="profile-label">Localisation :</span> {{ post.author.characterProfile.localisation }}
+                                    <span class="profile-label">Faits divers :</span> {{ post.author.characterProfile.miscellaneous }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="author-info">
+                        <a href="{{post.author.characterProfile.link1 }}">Présentation</a> <a href="{{post.author.characterProfile.link2 }}">Relations</a>
+                    </div>
+                </div>
+                <div class="right-side" id="post{{ post.id }}">
+                    <div class="container container-post">
+                        <div class="post-information">
+                            <small><a href="#post{{ post.id }}">{{post.thread.title}}</a> posté le {{ post.createdAt|date('d-m-Y') }} à {{ post.createdAt|date('H:i') }}</small>
+                            <a href="#top" title="Aller en haut de la page"><i class="fas fa-arrow-up"></i></a> <a href="#bottom" title="Aller en bas de la page"><i class="fas fa-arrow-down"></i></a>
+                           
+                        </div>
+                        {{ post.content|raw }}
+                    </div>
+                </div>    
+            </div>
+            {% endif %}
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

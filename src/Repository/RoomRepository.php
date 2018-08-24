@@ -36,17 +36,19 @@ class RoomRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Room
+    
+    public function findParticipantByRoom($room, $user): ?Room
     {
         return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
+            ->leftJoin('r.user', 'u')
+            ->where('r.user = :user')
+            ->andWhere('r.id = :roomId')
+            ->setParameters(array('roomId' => $room, 'user' => $user))
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
+    
         /**
          * @return Room[] Returns an array of Room objects
          */

@@ -4,13 +4,16 @@
     <div class="wrapper"> 
         {{ include('codex/navbarcodex.html.twig') }}
         <div class="header-codex">
+            <img src="{{ asset('image/old-books.jpg') }}" class="icon">
         </div>
         <div class="last-article">
             <h2>Les dernières publications</h2> 
             {{ include('codex/navbarmobile.html.twig') }}
             {{ form_start(form, {'action': path('search_article'), 'method': 'POST', 'attr' : { 'class': 'search-form' }}) }}
-            {{ form_row(form.title) }}
-            <button type="submit"><i class="fas fa-search"></i></button>
+            <div class="search">
+                {{ form_row(form.title) }}
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
             {{ form_end(form) }}       
         </div>
     <div class="wrapper-codex">

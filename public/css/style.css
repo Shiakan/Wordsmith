@@ -202,13 +202,26 @@ form button {
     border:1px solid rgb(15, 49, 33);
     cursor:pointer;
 }
+.search-form {
+    text-align:center;
+    display:flex;
+    justify-content: center;
+}
+.search {
+    display:flex;
+    flex-flow:row wrap;
+    align-items: center;
+    justify-content: center;
+    margin-bottom:0.5em;
+}
 
-.search-form,
 .move-form {
     /* width:31%;  */
     display:flex;
     flex-flow:row wrap;
     align-items: center;
+    justify-content: center;
+    margin-bottom:0.5em;
 }
 .search-form .form-group, 
 input {
@@ -335,11 +348,6 @@ input {
     padding:3em 1em 1em 1em;
     background-color:none;
 }
-.wrapper-codex {
-    display:flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
 .wrapper-list {
     padding:2em 1em 1em 1em;
     margin:auto;
@@ -424,14 +432,12 @@ input {
     background-position:center;
     background-size:100% 100%;
     margin:1em;
-    height:20em;
+    height:100%;
     border-radius:0.3em;
 }
 .last-article {
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom:0.6em;
+    display:inline;
+    text-align:center;
 }
 .article-content {
     margin:0.5em;

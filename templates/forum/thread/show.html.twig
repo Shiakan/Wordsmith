@@ -11,10 +11,12 @@
         <div class="category-header">
             <div class="title">
                 <h2>{{ thread.title }}</h2>
-                {% if thread.author.id == app.user.id or is_granted('ROLE_MODERATOR') %}
-                <a title="Modifier le titre du sujet" href="{{path('thread_edit', {'id' : thread.id})}}">
-                    <i class="fas fa-edit"></i>
-                </a>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {% if thread.author.id == app.user.id or is_granted('ROLE_MODERATOR') %}
+                    <a title="Modifier le titre du sujet" href="{{path('thread_edit', {'id' : thread.id})}}">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    {% endif %}
                 {% endif %}
             </div>            
         </div>
@@ -62,8 +64,10 @@
                             <small><a href="#post{{ post.id }}">{{post.thread.title}}</a> posté le {{ post.createdAt|date('d-m-Y') }} à {{ post.createdAt|date('H:i') }}</small>
                             <a href="#top" title="Aller en haut de la page"><i class="fas fa-arrow-up"></i></a> <a href="#bottom" title="Aller en bas de la page"><i class="fas fa-arrow-down"></i></a>
                             <div class="post-action">
-                                {% if (app.user.id == post.author.id) or (is_granted('ROLE_MODERATOR')) %}
-                                    <a class="link-post-action" href="{{path('post_edit', {'id' : post.id})}}">Editer</a>
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                    {% if (app.user.id == post.author.id) or (is_granted('ROLE_MODERATOR')) %}
+                                        <a class="link-post-action" href="{{path('post_edit', {'id' : post.id})}}">Editer</a>
+                                    {% endif %}
                                 {% endif %}
                                 {% if is_granted('ROLE_MODERATOR') %}
                                     <a title="Masquer le post" class="btn-mod" href="{{path('hide_post', {'id' : post.id }) }}"><i class="far fa-eye-slash"></i></a>

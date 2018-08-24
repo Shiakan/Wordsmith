@@ -15,6 +15,21 @@ class PostRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Post::class);
     }
+
+    /**
+     * @return Post[] Returns an array of Post objects
+     */
+    public function findLastFive($thread)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.thread = :thread')
+            ->setParameter('thread', $thread)
+            ->orderBy('p.createdAt', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     
     public function findByThread($thread): ?Post
     {

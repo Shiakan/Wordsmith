@@ -7,6 +7,15 @@ h2 {
     font-size:1.2em;
 }
 
+/* FORMULAIRES */
+.search-form {
+    
+}
+.search-form .form-group, 
+input { 
+    width:90%;
+}
+
 /* footer {
     margin-top: 2em;
 } */
@@ -153,10 +162,7 @@ h2 {
     display:none;
 }
 
-.last-article {
-    display:inline;
-    text-align:center;
-}
+
 
 .last-article h2 {
     display:none;
