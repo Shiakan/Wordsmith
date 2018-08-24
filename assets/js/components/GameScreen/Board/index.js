@@ -22,7 +22,6 @@ class Board extends React.Component {
     drawing: PropTypes.bool.isRequired,
     startDrawing: PropTypes.func.isRequired,
     stopDrawing: PropTypes.func.isRequired,
-
   }
 
   componentDidMount() {
@@ -39,9 +38,9 @@ class Board extends React.Component {
         className="board"
         // onMouseDown={startDrawing}
         // onMouseUp={stopDrawing}
-        onMouseMove={(e) => {
-            console.log(e.clientX, e.clientY);
-          }}
+        // onMouseMove={(e) => {
+        //   console.log(e.clientX, e.clientY);
+        // }}
       >
         <Whiteboard
           width="100%"

@@ -127,7 +127,13 @@ const socketConnect = store => next => (action) => {
           state.gameScreen.cptX += 70;
         }
         state.gameScreen.cptY += 70;
-        if (newChar.name.length === 0) {
+        console.log('test1 :', newChar.name.startsWith('test'));
+        const compareChars = state.gameScreen.characters.filter(char => char.name.startsWith(newChar.name));
+        if (compareChars.length >= 1) {
+          newChar.name = `${newChar.name}#${compareChars.length + 1}`;
+          console.log('compare :', compareChars);
+        }
+        if (newChar.name.startsWith('#')) {
           newChar.name = `Opponent#${state.gameScreen.cpt}`;
           state.gameScreen.cpt += 1;
         }
@@ -157,7 +163,7 @@ const socketConnect = store => next => (action) => {
       break;
 
     case DELETE_PLAYER: {
-      const charToDelete = state.gameScreen.characters.filter(char => char.name === action.value.name);
+      const charToDelete = state.gameScreen.characters.filter(char => char.id === action.value.id);
       console.log('charlol ', charToDelete);
 
       socket.emit('delete_player', charToDelete);
