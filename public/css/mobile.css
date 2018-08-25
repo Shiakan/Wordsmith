@@ -236,3 +236,25 @@ input {
     margin-top:-0.2em;
     border-radius: 50%;
 }
+
+
+.breadcrumb {
+    display:none;
+}
+.wrapper-flex .right-side {
+    width:100%;
+}
+.post-information {
+    width:100%;
+    margin:0;
+    padding:0;
+}
+
+.container-post {
+    padding:0;
+    margin:0;
+}
+
+.thread-moderation {
+    display:none;
+}
