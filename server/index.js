@@ -68,6 +68,21 @@ io.on('connection', function(socket) {
       console.log('NEW MAP SERVER', newMap);
       io.to(param.roomId).emit('receive_map', newMap);
     });
+    socket.on('share_dice', function(dice) {
+      var message = {};
+      message.diceValue = dice.diceValue;
+      message.dice = dice.rolled;
+      message.author = `[MJ] ${dice.author}`;
+      message.id = uuidV4();
+      if (!isNaN(dice.rolled)) {
+        io.to(param.roomId).emit('send_message', message);
+      }
+    });
+
+    socket.on('move_player', function(movedChars) {
+      console.log('RECEIVE MOVE', movedChars);
+      io.to(param.roomId).emit('receive_move', movedChars);
+    });
 
     socket.on('auto_player', function(autoChar) {
       console.log('NEW AUTO CHAR SERVER', autoChar);
@@ -79,21 +94,6 @@ io.on('connection', function(socket) {
       io.to(param.roomId).emit('receive_add', newChar);
     });
 
-    socket.on('move_player', function(movedChars) {
-      console.log('RECEIVE MOVE', movedChars);
-      io.to(param.roomId).emit('receive_move', movedChars);
-    });
-
-    socket.on('share_dice', function(dice) {
-      var message = {};
-      message.diceValue = dice.diceValue;
-      message.dice = dice.rolled;
-      message.author = `[MJ] ${dice.author}`;
-      message.id = uuidV4();
-      if (!isNaN(dice.rolled)) {
-        io.to(param.roomId).emit('send_message', message);
-      }
-    });
 
     socket.on('delete_player', function(charToDelete) {
       console.log('TOKEN TO DELETE :', charToDelete);
