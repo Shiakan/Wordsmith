@@ -1,17 +1,20 @@
 import uuidv4 from 'uuid/v4'; // https://www.npmjs.com/package/uuid
+import { EventStream, EventStore } from '@ohtomi/react-whiteboard';
 /**
  * Initial State
  */
 const initialState = {
   drawColor: 'black',
   drawing: false,
+  eventStore: new EventStore(),
+  eventStream: new EventStream(),
 };
 
 /**
  * Types
  */
-const START_DRAW = 'START_DRAW';
-const STOP_DRAW = 'STOP_DRAW';
+export const SHARE_DRAWING = 'SHARE_DRAWING';
+export const RECEIVE_DRAWING = 'RECEIVE_DRAWING';
 
 
 /**
@@ -24,16 +27,15 @@ const STOP_DRAW = 'STOP_DRAW';
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     // input controllé
-    case START_DRAW:
+    case RECEIVE_DRAWING: {
+      const newGoodEvents = action.drawingStore;
+      const newEventStore = state.eventStore;
+      newEventStore.goodEvents = newGoodEvents;
       return {
         ...state,
-        drawing: true,
+        eventStore: newEventStore,
       };
-    case STOP_DRAW:
-      return {
-        ...state,
-        drawing: false,
-      };
+    }
     default:
       return state;
   }
@@ -42,12 +44,13 @@ const reducer = (state = initialState, action = {}) => {
 /**
  * Action Creators
  */
-export const startDrawing = () => ({
-  type: START_DRAW,
+export const shareDrawing = () => ({
+  type: SHARE_DRAWING,
 });
 
-export const stopDrawing = () => ({
-  type: STOP_DRAW,
+export const receiveDrawing = drawingStore => ({
+  type: RECEIVE_DRAWING,
+  drawingStore,
 });
 /**
  * Selectors

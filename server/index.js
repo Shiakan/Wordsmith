@@ -84,6 +84,11 @@ io.on('connection', function(socket) {
       io.to(param.roomId).emit('receive_move', movedChars);
     });
 
+    socket.on('share_drawing', function(drawingEvents) {
+      console.log('drawing obj server side', drawingEvents);
+      io.to(param.roomId).emit('receive_drawing', drawingEvents);
+    });
+
     socket.on('auto_player', function(autoChar) {
       console.log('NEW AUTO CHAR SERVER', autoChar);
       io.to(param.roomId).emit('receive_auto', autoChar);

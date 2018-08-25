@@ -32,6 +32,8 @@ class GameScreen extends React.Component {
     handleSlide: PropTypes.func.isRequired,
     isSlided: PropTypes.bool.isRequired,
     role: PropTypes.string.isRequired,
+    shareDrawing: PropTypes.func.isRequired,
+
   };
 
   componentDidMount() {
@@ -46,7 +48,7 @@ class GameScreen extends React.Component {
   render() {
     const {
       toggleScreen, isBoard, map, isMap,
-      grid, characters, handleSlide, isSlided, role,
+      grid, characters, handleSlide, isSlided, role, shareDrawing,
     } = this.props;
     const classSwitch = classNames(
       'screen-switch',
@@ -76,13 +78,21 @@ class GameScreen extends React.Component {
             ) }
           {isBoard
             && (
-            <button
-              type="button"
-              className="screen-switch-button"
-              onClick={toggleScreen}
-            >
+            <div>
+              <button
+                type="button"
+                className="screen-switch-button"
+                onClick={toggleScreen}
+              >
             Switch to Map
-            </button>
+              </button>
+              <button
+                type="button"
+                className="screen-switch-button"
+                onClick={shareDrawing}
+              >Share Board
+              </button>
+            </div>
             ) }
           {isSlided ? (
             <FaAngleDoubleLeft

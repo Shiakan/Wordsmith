@@ -66,7 +66,6 @@ class SwitchMJ extends React.Component {
     const {
       togglePicker, color, toggle, typingName, maps,
     } = this.props;
-    console.log('MAPS :', maps);
     return (
       <div className="mjSwitch">
         {toggle

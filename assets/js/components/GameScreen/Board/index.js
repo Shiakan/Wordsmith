@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Whiteboard, EventStream, EventStore } from '@ohtomi/react-whiteboard';
+import { Whiteboard } from '@ohtomi/react-whiteboard';
 
 /**
  * Local import
@@ -18,10 +18,9 @@ import './board.sass';
  */
 class Board extends React.Component {
   static propTypes = {
-    drawColor: PropTypes.string.isRequired,
     drawing: PropTypes.bool.isRequired,
-    startDrawing: PropTypes.func.isRequired,
-    stopDrawing: PropTypes.func.isRequired,
+    eventStream: PropTypes.object.isRequired,
+    eventStore: PropTypes.object.isRequired,
   }
 
   componentDidMount() {
@@ -30,22 +29,18 @@ class Board extends React.Component {
 
   render() {
     const {
-      drawColor, drawing, startDrawing, stopDrawing,
+      drawing, eventStore, eventStream,
     } = this.props;
     console.log(drawing ? 'start drawing' : 'stop drawing');
     return (
       <div
         className="board"
-        // onMouseDown={startDrawing}
-        // onMouseUp={stopDrawing}
-        // onMouseMove={(e) => {
-        //   console.log(e.clientX, e.clientY);
-        // }}
       >
         <Whiteboard
+          events={eventStream}
+          eventStore={eventStore}
           width="100%"
           height="100%"
-          // events={new EventStream()} eventStore={new EventStore()}
         />
       </div>
     );

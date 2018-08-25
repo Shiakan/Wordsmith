@@ -4,6 +4,7 @@ import uuidv4 from 'uuid/v4'; // https://www.npmjs.com/package/uuid
  */
 import io from 'socket.io-client';
 import { WEBSOCKET_CONNECT } from '../reducers/user';
+import { SHARE_DRAWING, receiveDrawing } from '../reducers/board';
 import { ADD_MESSAGE, receiveMessage } from '../reducers/textInput';
 import { ROLL_DICE, SHARE_DICE } from '../reducers/dice';
 import {
@@ -47,6 +48,10 @@ const socketConnect = store => next => (action) => {
         console.log('token to add :', tokenToAdd);
         store.dispatch(autoAddPlayer(tokenToAdd));
       });
+      socket.on('receive_drawing', (drawingStore) => {
+        console.log('received drawing socket :', drawingStore);
+        store.dispatch(receiveDrawing(drawingStore));
+      });
       socket.on('delete_token', (tokenToKill) => {
         store.dispatch(deletePlayer(tokenToKill));
       });
@@ -89,6 +94,16 @@ const socketConnect = store => next => (action) => {
       dice.critic = action.critic;
       console.log(dice, 'DICE IN SOCKET');
       socket.emit('roll_dice', dice);
+    }
+      break;
+
+    case SHARE_DRAWING: {
+      let drawingStore = {};
+      let drawingStream = {};
+      drawingStore = state.board.eventStore;
+      drawingStream = state.board.eventStream;
+      console.log('drawing object socket :', drawingStore.goodEvents, drawingStream);
+      socket.emit('share_drawing', drawingStore.goodEvents);
     }
       break;
 

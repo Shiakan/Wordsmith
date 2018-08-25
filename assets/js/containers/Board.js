@@ -10,7 +10,7 @@ import Board from '../components/GameScreen/Board';
 
 // Action Creators
 import {
-  startDrawing, stopDrawing,
+
 } from '../store/reducers/board';
 
 /* === State (données) ===
@@ -23,6 +23,8 @@ import {
 const mapStateToProps = state => ({
   drawColor: state.board.drawColor,
   drawing: state.board.drawing,
+  eventStream: state.board.eventStream,
+  eventStore: state.board.eventStore,
   // color: state.gameScreen.color,
   // name: state.gameScreen.name,
   // coordX: state.gameScreen.coordX,
@@ -37,12 +39,6 @@ const mapStateToProps = state => ({
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
 const mapDispatchToProps = dispatch => ({
-  startDrawing: () => {
-    dispatch(startDrawing());
-  },
-  stopDrawing: () => {
-    dispatch(stopDrawing());
-  },
 });
 
 // Container

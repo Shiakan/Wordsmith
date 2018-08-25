@@ -12,6 +12,10 @@ import GameScreen from '../components/GameScreen';
 import {
   toggleScreen, handleSlide,
 } from '../store/reducers/gameScreen';
+import {
+  shareDrawing,
+} from '../store/reducers/board';
+
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation
@@ -43,6 +47,9 @@ const mapDispatchToProps = dispatch => ({
   },
   handleSlide: () => {
     dispatch(handleSlide());
+  },
+  shareDrawing: () => {
+    dispatch(shareDrawing());
   },
 });
 
