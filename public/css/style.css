@@ -944,7 +944,6 @@ a.ui-button:active, .ui-button:active,
      background-color: rgba(0, 0, 0, 0.233);
  }
  .ul-li-home{
-<<<<<<< HEAD
      display: inline;
      margin: 1em;
      padding-right: -50%;
@@ -961,23 +960,6 @@ a.ui-button:active, .ui-button:active,
      font-size: 1.2em;
  }
 .centering{
-=======
-    display: inline-block;
-    margin: 1em;
-    flex-wrap: wrap;
- }
- .nav-wrap{
-    background-color:#20202033;
- }
-  .ul-li-connexion{
-    display: inline;
-    justify-self: center;
-    margin: 1em;
-    padding: 1em;
-    background-color:#20202033;
- }
-  .centering{
->>>>>>> integration
     display: flex;
     justify-content: center;
  }
@@ -990,16 +972,9 @@ a.ui-button:active, .ui-button:active,
     font-size: 1.2em;
  }
  .logo-rs{
-<<<<<<< HEAD
      width:4em;
      height:4em;
      margin-left:2em;
-=======
-    width:4em;
-    height:4em;
-    margin-left:2em;
-    color: #FFFFFF;
->>>>>>> integration
  }
  .logo-place{
     display: flex;

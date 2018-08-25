@@ -58,9 +58,7 @@ class ThreadRepository extends ServiceEntityRepository
          $offset = ($page == 0)? 0 : ($page-1) * $limit; //Définition de offset via un calcul
          $qb = $this->createQueryBuilder('t') //On créé une query qui séléctionne tous les threads
             ->where('t.subcategory = :subcategory')//Ou subcategory  est égale au parametre :subcategory
-            ->leftJoin('t.hasReadThreads','h')
-            ->andWhere('h.user = :user')
-            ->setParameters(array('subcategory' => $subcategory, 'user' => $user))
+            ->setParameters(array('subcategory' => $subcategory))
             ->addSelect('COUNT(t) AS HIDDEN mycount')
             ->groupBy('t')
             ->orderBy('t.createdAt', 'DESC')

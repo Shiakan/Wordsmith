@@ -17,7 +17,7 @@
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 {% for hasReadThread in thread.hasReadThreads %}
                     {% if hasReadThread.user.id is defined %}
-                        {% if hasReadThread.user.id == app.user.id and hasReadThread.thread.id == thread.id %} {# On vérifie que le user id de la thread actuelle est bien celui du user actuellement connecté, DONC PAS TOUCHE ET PAS DE ELSE #}
+                        {% if hasReadThread.user.id == app.user.id and hasReadThread.thread.id == thread.id %}
                             {% if hasReadThread.postCount < thread.posts|length %} 
                                 <img src="{{ asset('image/new.png') }}" class="icon">
                             {% else %}

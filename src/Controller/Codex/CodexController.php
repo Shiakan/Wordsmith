@@ -37,7 +37,7 @@ class CodexController extends Controller
     }
 
     /**
-     * @Route("/search", name="search_article")
+     * @Route("/search/article", name="search_article")
      */
     public function findArticleBySearch(Request $request)
     {

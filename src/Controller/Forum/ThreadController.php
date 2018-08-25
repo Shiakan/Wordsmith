@@ -144,7 +144,6 @@ class ThreadController extends Controller
             $hasReadThread->setThread($thread);
             $hasReadThread->setUser($user);
             $hasReadThread->setPostCount($postCount);
-            $hasReadThread->setTimestamp(new \DateTime());
             $em->persist($hasReadThread);
             $em->flush();
         } else{
