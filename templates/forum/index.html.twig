@@ -13,63 +13,110 @@
         {% for subcategory in category.subCategories %}
         {% if subcategory.isPrivate == 0 %}
             <div class="container-subcategory">
+                <div class="container statistic">
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        {% for hasReadSubcat in subcategory.hasReadSubcategories %}
+                            {% if hasReadSubcat.user.id is defined %}
+                                {% if hasReadSubcat.user.id == app.user.id and hasReadSubcat.subcategory.id == subcategory.id %}
+                                    {% if hasReadSubcat.threadCount < subcategory.threads|length %} 
+                                        <img src="{{ asset('image/new.png') }}" class="icon-pa">
+                                    {% elseif hasReadSubcat.postCount < subcategory.posts|length %}
+                                        <img src="{{ asset('image/new.png') }}" class="icon-pa">
+                                    {% else %}
+                                        <img src="{{ asset('image/nonew.png') }}" class="icon-pa">
+                                    {% endif  %}
+                                {% endif %} 
+                            {% endif %} 
+                        {% endfor %}
+                    {% else %}
+                        <img src="{{ asset('image/nonew.png') }}" class="icon-pa">
+                    {% endif %} 
+                    <small>{{subcategory.threads|length}} Sujets &amp; {{subcategory.posts|length}} Réponses</small>
+                </div>
                 <div class="container description">
                     <h3>
-                        <a href="{{path('forum_subcategory', {'id': subcategory.id })}}">{{subcategory.name}}</a>
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            {% for hasReadSubcat in subcategory.hasReadSubcategories %}
+                                {% if hasReadSubcat.user.id is defined %}
+                                    {% if hasReadSubcat.user.id == app.user.id and hasReadSubcat.subcategory.id == subcategory.id %}
+                                        {% if hasReadSubcat.threadCount < subcategory.threads|length %} 
+                                            <img src="{{ asset('image/new.png') }}" class="icon-pa-mobile">
+                                        {% elseif hasReadSubcat.postCount < subcategory.posts|length %}
+                                            <img src="{{ asset('image/new.png') }}" class="icon-pa-mobile">
+                                        {% else %}
+                                            <img src="{{ asset('image/nonew.png') }}" class="icon-pa-mobile">
+                                        {% endif  %}
+                                    {% endif %} 
+                                {% endif %} 
+                            {% endfor %}
+                        {% else %}
+                            <img src="{{ asset('image/nonew.png') }}" class="icon-pa-mobile">
+                        {% endif %} 
+                    <a href="{{path('forum_subcategory', {'subcategory_slug': subcategory.slug })}}">{{subcategory.name}}</a>
                     </h3>
                     <p>{{subcategory.reminder}}</p>
+                    <div class="last-message-mobile">
+                    {% if subcategory.lastPost != null %}
+                        <span class="post-link"><i class="fas fa-angle-double-right"></i> {{subcategory.lastPost.thread.title|slice(0,15)}}...</span>
+                        <small>
+                            dernier message par <a class="author-name" href="{{path('user_profile',{id:subcategory.lastPost.author.id})}}" style="color:{{subcategory.lastPost.author.characterProfile.groupForum.color}};">{{subcategory.lastPost.author.characterProfile.characterName}}</a> 
+                            le {{subcategory.lastPost.createdAt|date('d-m-Y')}} à {{subcategory.lastPost.createdAt|date('H:i')}}
+                        </small>
+                        
+                    {% endif %}
+                    </div>
                 </div>
+
                 <div class="container last-message">
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    {% for hasReadSubcat in subcategory.hasReadSubcategories %}
-                        {% if hasReadSubcat.user.id is defined %}
-                            {% if hasReadSubcat.user.id == app.user.id and hasReadSubcat.subcategory.id == subcategory.id %}
-                                {% if hasReadSubcat.threadCount < subcategory.threads|length %} 
-                                    <img src="{{ asset('image/new.png') }}" class="icon">
-                                {% elseif hasReadSubcat.postCount < subcategory.posts|length %}
-                                    <img src="{{ asset('image/new.png') }}" class="icon">
-                                {% else %}
-                                    <img src="{{ asset('image/nonew.png') }}" class="icon">
-                                {% endif  %}
-                            {% endif %} 
-                        {% endif %} 
-                    {% endfor %}
-                {% else %}
-                    <img src="{{ asset('image/nonew.png') }}" class="icon">
-                {% endif %} 
-                </div>
-                <div class="container statistic">
-                    <small>{{subcategory.threads|length}} Sujets</small>
-                    <small>{{subcategory.posts|length}} Réponses</small>
+                {% if subcategory.lastPost != null %}
+                    <div id="avatar-small">
+                        <img src="{{subcategory.lastPost.author.characterProfile.avatar}}" id="image">
+                    </div>
+                    <a class="post-link" href="{{path('thread_show', {'thread_slug': subcategory.lastPost.thread.slug })}}">{{subcategory.lastPost.thread.title|slice(0,15)}}...</a>
+                    <small>{{subcategory.lastPost.createdAt|date('d-m-Y')}} à {{subcategory.lastPost.createdAt|date('H:i')}}</small>
+                    <a class="author-name" href="{{path('user_profile',{id:subcategory.lastPost.author.id})}}" style="color:{{subcategory.lastPost.author.characterProfile.groupForum.color}};">{{subcategory.lastPost.author.characterProfile.characterName}}</a>
+                {% endif %}
                 </div>
             </div>
         {% else %}
         {% if is_granted('ROLE_MODERATOR') %}
             <div class="container-subcategory">
+                <div class="container statistic">
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {% for hasReadSubcat in subcategory.hasReadSubcategories %}
+                        {% if hasReadSubcat.user.id is defined %}
+                            {% if hasReadSubcat.user.id == app.user.id and hasReadSubcat.subcategory.id == subcategory.id %}
+                                {% if hasReadSubcat.threadCount < subcategory.threads|length %} 
+                                    <img src="{{ asset('image/new.png') }}" class="icon-pa">
+                                {% elseif hasReadSubcat.postCount < subcategory.posts|length %}
+                                    <img src="{{ asset('image/new.png') }}" class="icon-pa">
+                                {% else %}
+                                    <img src="{{ asset('image/nonew.png') }}" class="icon-pa">
+                                {% endif  %}
+                            {% endif %} 
+                        {% endif %} 
+                    {% endfor %}
+                {% else %}
+                    <img src="{{ asset('image/nonew.png') }}" class="icon-pa">
+                {% endif %} 
+                    <small>{{subcategory.threads|length}} Sujets &amp; {{subcategory.posts|length}} Réponses</small>
+                </div>
                 <div class="container description">
                     <h3>
-                        <a href="{{path('forum_subcategory', {'id': subcategory.id })}}">{{subcategory.name}}</a>
+                        <a href="{{path('forum_subcategory', {'subcategory_slug': subcategory.slug })}}">{{subcategory.name}}</a>
                     </h3>
                     <p>{{subcategory.reminder}}</p>
                 </div>
+
                 <div class="container last-message">
-                {% for hasReadSubcat in subcategory.hasReadSubcategories %}
-                    {% if hasReadSubcat.user.id is defined and app.user.id is defined %}
-                        {% if hasReadSubcat.user.id == app.user.id and hasReadSubcat.subcategory.id == subcategory.id %}
-                            {% if hasReadSubcat.threadCount < subcategory.threads|length %} 
-                                <img src="{{ asset('image/new.png') }}" class="icon">
-                            {% elseif hasReadSubcat.postCount < subcategory.posts|length %}
-                                <img src="{{ asset('image/new.png') }}" class="icon">
-                            {% else %}
-                                <img src="{{ asset('image/nonew.png') }}" class="icon">
-                            {% endif  %}
-                        {% endif %} 
-                    {% endif %} 
-                {% endfor %}
-                </div>
-                <div class="container statistic">
-                    <small>{{subcategory.threads|length}} Sujets</small>
-                    <small>{{subcategory.posts|length}} Réponses</small>
+                {% if subcategory.lastPost != null %}
+                    <div id="avatar-small">
+                        <img src="{{subcategory.lastPost.author.characterProfile.avatar}}" id="image">
+                    </div>
+                    <a class="post-link" href="{{path('thread_show', {'thread_slug': subcategory.lastPost.thread.slug })}}">{{subcategory.lastPost.thread.title|slice(0,15)}}...</a>
+                    <small>{{subcategory.lastPost.createdAt|date('d-m-Y')}} à {{subcategory.lastPost.createdAt|date('H:i')}}</small>
+                    <a class="author-name" href="{{path('user_profile',{id:subcategory.lastPost.author.id})}}" style="color:{{subcategory.lastPost.author.characterProfile.groupForum.color}};">{{subcategory.lastPost.author.characterProfile.characterName}}</a>
+                {% endif %}
                 </div>
             </div>
         {% endif %}

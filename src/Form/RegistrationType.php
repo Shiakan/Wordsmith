@@ -24,7 +24,7 @@ class RegistrationType extends AbstractType
     {
         $builder
             ->add('username', TextType::class, [
-                'label' => 'Nom de votre personnage',
+                'label' => 'Pseudo',
                 'constraints' => [
                     New NotBlank([
                         'message' => 'Veuillez saisir le nom de votre personnage'
@@ -102,10 +102,10 @@ class RegistrationType extends AbstractType
                         ],
                         'required' => false,
                         'first_options' => [
-                            'label' => 'Laisser vide si inchangé'
+                            'label' => 'Modifier le mot de passe'
                         ],
                         'second_options' => [
-                            'label' => 'Laisser vide si inchangé'
+                            'label' => 'Répéter le mot de passe'
                         ],
                         'required' => false 
                     ]);

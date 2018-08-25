@@ -32,14 +32,13 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: '^/profil/[0-9]{0-10}/edit', roles: ROLE_USER }
-        - { path: '^/forum/thread/[0-9]{0-10}/new', roles: ROLE_USER } 
-        - { path: '^/forum/post/[0-9]{0-10}/new', roles: ROLE_USER } 
+        - { path: '^/forum/thread/[0-9]+/new', roles: ROLE_USER }
+        - { path: '^/forum/thread/[0-9]+/edit', roles: ROLE_USER }
+        - { path: '^/forum/thread/[0-9]+/move', roles: ROLE_MODERATOR } 
+        - { path: '^/forum/post', roles: ROLE_USER } 
         - { path: '^/profil', roles: ROLE_USER }
         - { path: ^/room, roles: ROLE_USER } 
         - { path: ^/backend/user, roles: ROLE_ADMINISTRATOR }
-        # - { path: ^/backend/codex/article, roles: ROLE_MODERATOR }
-        # - { path: ^/backend/codex/tag, roles: ROLE_MODERATOR }
         - { path: ^/backend, roles: ROLE_MODERATOR }
     role_hierarchy:
         ROLE_MODERATOR: ROLE_USER

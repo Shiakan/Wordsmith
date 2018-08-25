@@ -5,6 +5,7 @@ namespace App\Controller\Backend\Codex;
 use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Form\SearchingType;
+use App\Service\Slugger;
 use App\Repository\ArticleRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,7 +39,7 @@ class ArticleController extends Controller
     /**
      * @Route("/new", name="backend_article_new", methods="GET|POST")
      */
-    public function new(Request $request, UserInterface $user): Response
+    public function new(Request $request, UserInterface $user, Slugger $slugger): Response
     {
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
@@ -47,6 +48,8 @@ class ArticleController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $article->setAuthor($user);
+            $article->setSlug(
+                $slugger->slugify($article->getTitle()));
             $em->persist($article);
             $em->flush();
 
@@ -70,13 +73,16 @@ class ArticleController extends Controller
     /**
      * @Route("/{id}/edit", name="backend_article_edit", methods="GET|POST")
      */
-    public function edit(Request $request, Article $article): Response
+    public function edit(Request $request, Article $article, Slugger $slugger): Response
     {
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $em = $this->getDoctrine()->getManager();
+            $article->setSlug(
+                $slugger->slugify($article->getTitle()));
+            $em->flush();
 
             return $this->redirectToRoute('backend_article_index');
         }

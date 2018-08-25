@@ -18,25 +18,33 @@ class ThreadRepository extends ServiceEntityRepository
 //    /**
 //     * @return Thread[] Returns an array of Thread objects
 //     */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-    
+
+    // public function findByExampleField($value)
+    // {
+    //     return $this->createQueryBuilder('t')
+    //         ->andWhere('t.exampleField = :val')
+    //         ->setParameter('val', $value)
+    //         ->orderBy('t.id', 'ASC')
+    //         ->setMaxResults(10)
+    //         ->getQuery()
+    //         ->getResult()
+    //     ;
+    // }
+
     public function findOneById($threadId): ?Thread
     {
         return $this->createQueryBuilder('t')
             ->andWhere('t.id = :id')
             ->setParameter('id', $threadId)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+    public function findOneBySlug($slug): ?Thread
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.slug = :slug')
+            ->setParameter('slug', $slug)
             ->getQuery()
             ->getOneOrNullResult()
         ;
@@ -51,7 +59,8 @@ class ThreadRepository extends ServiceEntityRepository
          $qb = $this->createQueryBuilder('t') //On créé une query qui séléctionne tous les threads
             ->where('t.subcategory = :subcategory')//Ou subcategory  est égale au parametre :subcategory
             ->leftJoin('t.hasReadThreads','h')
-            ->setParameters(array('subcategory' => $subcategory))
+            ->andWhere('h.user = :user')
+            ->setParameters(array('subcategory' => $subcategory, 'user' => $user))
             ->addSelect('COUNT(t) AS HIDDEN mycount')
             ->groupBy('t')
             ->orderBy('t.createdAt', 'DESC')

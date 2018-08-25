@@ -3,7 +3,7 @@
 namespace App\Controller\Backend\Forum;
 
 use App\Entity\CharacterProfile;
-use App\Form\CharacterProfileType;
+use App\Form\BackendCharacterProfileType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,7 +19,7 @@ class CharacterProfileController extends AbstractController
      */
     public function edit(Request $request, CharacterProfile $characterProfile): Response
     {
-        $form = $this->createForm(CharacterProfileType::class, $characterProfile);
+        $form = $this->createForm(BackendCharacterProfileType::class, $characterProfile);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -51,6 +51,16 @@ class Subcategory
      */
     private $posts;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Post", inversedBy="forum", cascade={"persist", "remove"})
+     */
+    private $lastPost;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $slug;
+
     public function __construct()
     {
         $this->threads = new ArrayCollection();
@@ -195,6 +205,30 @@ class Subcategory
                 $post->setSubcategory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLastPost(): ?Post
+    {
+        return $this->lastPost;
+    }
+
+    public function setLastPost(?Post $lastPost): self
+    {
+        $this->lastPost = $lastPost;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

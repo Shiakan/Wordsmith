@@ -32,7 +32,7 @@ class PostController extends Controller
 
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
-        dump($currentThread->getSubcategory());
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $post->setThread($currentThread);
@@ -40,8 +40,16 @@ class PostController extends Controller
             $post->setAuthor($user);
             $em->persist($post);
             $em->flush();
+
+            $currentThread->setLastPost($post);
+            $em->flush();
+
+            $subcategory = $post->getSubcategory();
+            $subcategory->setLastPost($post);
+            $em->flush();
+
             return $this->redirectToRoute('thread_show', [
-                'id' => $currentThread->getId()
+                'thread_slug' => $currentThread->getSlug()
             ]);
         }
         return $this->render('forum/post/new.html.twig', [
@@ -60,7 +68,7 @@ class PostController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-            return $this->redirectToRoute('thread_show', ['id' => $post->getThread()->getId()]);
+            return $this->redirectToRoute('thread_show', ['thread_slug' => $post->getThread()->getSlug()]);
         }
         return $this->render('forum/post/edit.html.twig', [
             'post' => $post,

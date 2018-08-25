@@ -40,7 +40,7 @@ Profil de {{user.username}}
                     </div>
                     <ul>
                         <li>
-                            <span class="profile-label">Nom d'utilisateur :</span> {{ user.username }}
+                            <span class="profile-label">Pseudo :</span> {{ user.username }}
                         </li>
                         <li>
                             <span class="profile-label">Email :</span> {{ user.email}}
@@ -58,6 +58,9 @@ Profil de {{user.username}}
                         {% endif %}
                     </div>
                     <ul>
+                        <li>
+                            <span class="profile-label">Nom du personnage :</span> {{user.characterProfile.characterName}}
+                        </li>
                         <li>
                             <span class="profile-label">Age :</span> {{ user.characterProfile.age}}
                         </li>
@@ -87,7 +90,7 @@ Profil de {{user.username}}
                         <ul>
                         {% for thread in user.threads %}
                             <li>
-                                <a href="{{path('thread_show', {'id': thread.id }) }}">{{ thread.title}}</a>
+                                <a href="{{path('thread_show', {'thread_slug': thread.slug }) }}">{{ thread.title}}</a>
                                 <small>{{thread.posts|length}} 
                                 {% if thread.posts|length > 1 %}
                                     réponses
@@ -104,7 +107,7 @@ Profil de {{user.username}}
                          <ul>
                         {% for post in user.posts %}
                             <li>
-                                <a href="{{path('thread_show', {'id': post.thread.id }) }}">{{ post.thread.title}}</a>
+                                <a href="{{path('thread_show', {'thread_slug': post.thread.slug }) }}">{{ post.thread.title}}</a>
                              <small>{{post|length}} 
                              {% if post|length > 1 %}
                                 réponses

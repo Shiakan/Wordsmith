@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
+    slugger_to_lower: true
 
 services:
     # default configuration for services in *this* file
@@ -27,11 +28,16 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
-    App\EventListener\LoginListener:
-        tags:
-            - { name: 'kernel.event_listener', event: 'security.interactive_login' }
-
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
     App\Twig\FilterBlackListedExtension:
         tags: ['twig.extension']
+
+    slugger.de.mon.app: # alias visible dans la console
+        class: App\Service\Slugger # la classe sur laquel je relie mon alias
+        public: true 
+        arguments:
+            # pour appeler une constante definie dans parameters j'utilise la syntaxe '%maConstante%
+            $isLowerConf: '%slugger_to_lower%'
+
+    App\Service\Slugger: '@slugger.de.mon.app'

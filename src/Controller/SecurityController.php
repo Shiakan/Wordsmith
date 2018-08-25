@@ -98,7 +98,6 @@ class SecurityController extends Controller
             $hasReadThread->setThread($thread);
             $hasReadThread->setUser($user);
             $hasReadThread->setPostCount(count($thread->getPosts()));
-            $hasReadThread->setTimestamp(new \Datetime());
             $em->persist($hasReadThread);
         }
         
@@ -135,7 +134,7 @@ class SecurityController extends Controller
         $em = $this->getDoctrine()->getManager();
         $characterProfile->setUser($user);
         // On donne un avatar, un groupe et un rang par défaut à chaque nouvel utilisateur
-        $characterProfile->setAvatar('rdgregz');
+        $characterProfile->setAvatar('https://nsa39.casimages.com/img/2018/08/22/mini_180822112250709313.png');
         $em->persist($characterProfile);
         $em->flush();
         $charactersheet->setUser($user);
