@@ -761,6 +761,7 @@ a.ui-button:active, .ui-button:active,
     font-size:0.7em;
     margin-top:0.8em;
     color:#BDBDBD;
+    text-align:center;
 }
 
 .last-message small {

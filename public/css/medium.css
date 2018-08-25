@@ -48,6 +48,13 @@ input {
     text-align:center;
 }
 
+.last-message-mobile {
+    display:none;
+}
+.icon-pa-mobile {
+    display:none;
+}
+
 /* FORUM PROFIL SOUS AVATAR */
 #blocAVA {
     width:200px; 
