@@ -23,7 +23,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class ArticleController extends Controller
 {
     /**
-     * @Route("/article/show/{id}", name="article_show")
+     * @Route("/{slug}", name="article_show")
      */
     public function show(Article $article, Request $request, ObjectManager $manager, UserInterface $user=null)
     {   

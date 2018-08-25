@@ -31,7 +31,7 @@
             {% endif %}
             </div>
             <div class="container thread-description">
-                <h3><a href="{{path('thread_show', {'id': thread.id })}}">{{thread.title}}</a></h3>
+                <h3><a href="{{path('thread_show', {'thread_slug': thread.slug })}}">{{thread.title}}</a></h3>
                 {% if thread.subtitle is defined %}
                 <small>{{thread.subtitle}}</small>
                 {% endif %}

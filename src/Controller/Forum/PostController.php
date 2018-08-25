@@ -49,7 +49,7 @@ class PostController extends Controller
             $em->flush();
 
             return $this->redirectToRoute('thread_show', [
-                'id' => $currentThread->getId()
+                'thread_slug' => $currentThread->getSlug()
             ]);
         }
         return $this->render('forum/post/new.html.twig', [
@@ -68,7 +68,7 @@ class PostController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-            return $this->redirectToRoute('thread_show', ['id' => $post->getThread()->getId()]);
+            return $this->redirectToRoute('thread_show', ['thread_slug' => $post->getThread()->getSlug()]);
         }
         return $this->render('forum/post/edit.html.twig', [
             'post' => $post,

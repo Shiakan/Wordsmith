@@ -40,6 +40,15 @@ class ThreadRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+    public function findOneBySlug($slug): ?Thread
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
     
     /**
     * @return Thread[] Returns an array of Thread objects

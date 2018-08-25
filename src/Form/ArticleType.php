@@ -19,7 +19,6 @@ class ArticleType extends AbstractType
             ])
             ->add('description')
             ->add('content', TextareaType::class, array('attr' => array('class' => 'ckeditor')))
-            ->add('slug')
             ->add('tags')
         ;
     }

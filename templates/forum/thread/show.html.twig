@@ -13,7 +13,7 @@
                 <h2>{{ thread.title }}</h2>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     {% if thread.author.id == app.user.id or is_granted('ROLE_MODERATOR') %}
-                    <a title="Modifier le titre du sujet" href="{{path('thread_edit', {'id' : thread.id})}}">
+                    <a title="Modifier le titre du sujet" href="{{path('thread_edit', {'slug' : thread.slug})}}">
                         <i class="fas fa-edit"></i>
                     </a>
                     {% endif %}

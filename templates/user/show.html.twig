@@ -90,7 +90,7 @@ Profil de {{user.username}}
                         <ul>
                         {% for thread in user.threads %}
                             <li>
-                                <a href="{{path('thread_show', {'id': thread.id }) }}">{{ thread.title}}</a>
+                                <a href="{{path('thread_show', {'thread_slug': thread.slug }) }}">{{ thread.title}}</a>
                                 <small>{{thread.posts|length}} 
                                 {% if thread.posts|length > 1 %}
                                     réponses
@@ -107,7 +107,7 @@ Profil de {{user.username}}
                          <ul>
                         {% for post in user.posts %}
                             <li>
-                                <a href="{{path('thread_show', {'id': post.thread.id }) }}">{{ post.thread.title}}</a>
+                                <a href="{{path('thread_show', {'thread_slug': post.thread.slug }) }}">{{ post.thread.title}}</a>
                              <small>{{post|length}} 
                              {% if post|length > 1 %}
                                 réponses

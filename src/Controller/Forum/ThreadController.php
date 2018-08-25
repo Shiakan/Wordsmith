@@ -5,6 +5,7 @@ use App\Entity\Post;
 use App\Entity\User;
 use App\Entity\Thread;
 use App\Form\ThreadType;
+use App\Service\Slugger;
 use App\Form\SubjectType;
 use App\Entity\Subcategory;
 use App\Form\EditThreadType;
@@ -33,7 +34,7 @@ class ThreadController extends Controller
     /**
      * @Route("/thread/{subcategory_id}/new", name="thread_new", methods="GET|POST")
      */
-    public function new(Request $request, UserInterface $user=null, $subcategory_id): Response
+    public function new(Request $request, UserInterface $user=null, $subcategory_id, Slugger $slugger): Response
     {   
         $thread = new Thread();
         
@@ -45,20 +46,24 @@ class ThreadController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $request->request->get('thread');
+
             $title = $data['title'];
             $subtitle = $data['subtitle'];
             $content = $data['content'];
+
             $em = $this->getDoctrine()->getManager();
             $thread->setAuthor($user);
             $thread->setTitle($title);
             $thread->setSubcategory($currentSubcategory);
             $thread->setSubtitle($subtitle);
+            $thread->setSlug(
+                $slugger->slugify($thread->getTitle()));
             $em->persist($thread);
             $em->flush();
             $this->createPost($thread, $content, $user);
             $this->createHasRead($thread);
             return $this->redirectToRoute('thread_show', [
-                'id' => $thread->getId()
+                'thread_slug' => $thread->getSlug()
             ]);
         }
         return $this->render('forum/thread/new.html.twig', [
@@ -103,10 +108,11 @@ class ThreadController extends Controller
         
     }
     /**
-     * @Route("/thread/{id}/page/{page}", name="thread_show", requirements={"page" = "\d+"}, defaults={"page" = 1}, methods="GET|POST")
+     * @Route("/topic/{thread_slug}/page/{page}", name="thread_show", requirements={"page" = "\d+"}, defaults={"page" = 1}, methods="GET|POST")
      */
-    public function show(Thread $thread, Request $request, UserInterface $user=null, $page): Response
-    {   
+    public function show($thread_slug, ThreadRepository $threadRepository, Request $request, UserInterface $user=null, $page): Response
+    {    
+        $thread = $threadRepository->findOneBySlug($thread_slug);
         $limit = 10; //limite de questions par page (pagination)
         $postRepository = $this->getDoctrine()->getRepository(Post::class);
         $posts = $postRepository->findByAll($page,$limit, $thread); //requête où on passe la page actuelle, le seeBanned et la limite de questions
@@ -205,18 +211,21 @@ class ThreadController extends Controller
         $thread->setSubcategory($newSubcategory);
         $em->persist($thread);
         $em->flush();
-        return $this->redirectToRoute('forum_subcategory', ['name' => $newSubcategory->getName()]);
+        return $this->redirectToRoute('forum_subcategory', ['subcategory_slug' => $newSubcategory->getSlug()]);
     }
     /**
-     * @Route("/thread/{id}/edit", name="thread_edit", methods="GET|POST")
+     * @Route("/{slug}/edit", name="thread_edit", methods="GET|POST")
      */
-    public function edit(Request $request, Thread $thread): Response
+    public function edit(Request $request, Thread $thread, Slugger $slugger): Response
     {
         $editForm = $this->createForm(EditThreadType::class, $thread);
         $editForm->handleRequest($request);
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-            return $this->redirectToRoute('thread_show', ['id' => $thread->getId()]);
+            $em = $this->getDoctrine()->getManager();
+            $thread->setSlug(
+                $slugger->slugify($thread->getTitle()));
+            $em->flush();
+            return $this->redirectToRoute('thread_show', ['thread_slug' => $thread->getSlug()]);
         }
         return $this->render('forum/thread/edit.html.twig', [
             'thread' => $thread,

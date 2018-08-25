@@ -2,13 +2,14 @@
 
 namespace App\Controller\Backend\Forum;
 
+use App\Service\Slugger;
 use App\Entity\Subcategory;
 use App\Form\SubcategoryType;
 use App\Repository\SubcategoryRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * @Route("/backend/forum/subcategory")
@@ -31,7 +32,7 @@ class SubcategoryController extends Controller
     /**
      * @Route("/new", name="subcategory_new", methods="GET|POST")
      */
-    public function new(Request $request): Response
+    public function new(Request $request, Slugger $slugger): Response
     {
         $subcategory = new Subcategory();
         $form = $this->createForm(SubcategoryType::class, $subcategory);
@@ -39,6 +40,8 @@ class SubcategoryController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $subcategory->setSlug(
+                $slugger->slugify($subcategory->getName()));
             $em->persist($subcategory);
             $em->flush();
 
@@ -62,13 +65,17 @@ class SubcategoryController extends Controller
     /**
      * @Route("/{id}/edit", name="subcategory_edit", methods="GET|POST")
      */
-    public function edit(Request $request, Subcategory $subcategory): Response
+    public function edit(Request $request, Subcategory $subcategory, Slugger $slugger): Response
     {
         $form = $this->createForm(SubcategoryType::class, $subcategory);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $em = $this->getDoctrine()->getManager();
+            $subcategory->setSlug(
+                $slugger->slugify($subcategory->getName()));
+                
+            $em->flush();
 
             return $this->redirectToRoute('subcategory_edit', ['id' => $subcategory->getId()]);
         }

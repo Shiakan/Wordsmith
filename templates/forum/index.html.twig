@@ -35,7 +35,7 @@
                 </div>
                 <div class="container description">
                     <h3>
-                        <a href="{{path('forum_subcategory', {'id': subcategory.id })}}">{{subcategory.name}}</a>
+                        <a href="{{path('forum_subcategory', {'subcategory_slug': subcategory.slug })}}">{{subcategory.name}}</a>
                     </h3>
                     <p>{{subcategory.reminder}}</p>
                 </div>
@@ -45,7 +45,7 @@
                     <div id="avatar-small">
                         <img src="{{subcategory.lastPost.author.characterProfile.avatar}}" id="image">
                     </div>
-                    <a class="post-link" href="{{path('thread_show', {'id': subcategory.lastPost.thread.id })}}">{{subcategory.lastPost.thread.title|slice(0,15)}}...</a>
+                    <a class="post-link" href="{{path('thread_show', {'thread_slug': subcategory.lastPost.thread.slug })}}">{{subcategory.lastPost.thread.title|slice(0,15)}}...</a>
                     <small>{{subcategory.lastPost.createdAt|date('d-m-Y')}} à {{subcategory.lastPost.createdAt|date('H:i')}}</small>
                     <a class="author-name" href="{{path('user_profile',{id:subcategory.lastPost.author.id})}}" style="color:{{subcategory.lastPost.author.characterProfile.groupForum.color}};">{{subcategory.lastPost.author.characterProfile.characterName}}</a>
                 {% endif %}
@@ -76,7 +76,7 @@
                 </div>
                 <div class="container description">
                     <h3>
-                        <a href="{{path('forum_subcategory', {'id': subcategory.id })}}">{{subcategory.name}}</a>
+                        <a href="{{path('forum_subcategory', {'subcategory_slug': subcategory.slug })}}">{{subcategory.name}}</a>
                     </h3>
                     <p>{{subcategory.reminder}}</p>
                 </div>
@@ -86,7 +86,7 @@
                     <div id="avatar-small">
                         <img src="{{subcategory.lastPost.author.characterProfile.avatar}}" id="image">
                     </div>
-                    <a class="post-link" href="{{path('thread_show', {'id': subcategory.lastPost.thread.id })}}">{{subcategory.lastPost.thread.title|slice(0,15)}}...</a>
+                    <a class="post-link" href="{{path('thread_show', {'thread_slug': subcategory.lastPost.thread.slug })}}">{{subcategory.lastPost.thread.title|slice(0,15)}}...</a>
                     <small>{{subcategory.lastPost.createdAt|date('d-m-Y')}} à {{subcategory.lastPost.createdAt|date('H:i')}}</small>
                     <a class="author-name" href="{{path('user_profile',{id:subcategory.lastPost.author.id})}}" style="color:{{subcategory.lastPost.author.characterProfile.groupForum.color}};">{{subcategory.lastPost.author.characterProfile.characterName}}</a>
                 {% endif %}

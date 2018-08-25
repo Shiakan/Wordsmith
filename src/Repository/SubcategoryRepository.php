@@ -30,4 +30,14 @@ class SubcategoryRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findOneBySlug($slug): ?Subcategory
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
 }

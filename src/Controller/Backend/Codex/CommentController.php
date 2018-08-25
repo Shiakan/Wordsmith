@@ -28,6 +28,6 @@ class CommentController extends Controller
             $em->flush();
         }
         // On redirige vers la page de la question concernée
-        return $this->redirectToRoute('article_show', ['id' => $comment->getArticle()->getId()]);
+        return $this->redirectToRoute('article_show', ['slug' => $comment->getArticle()->getSlug()]);
     }
 }

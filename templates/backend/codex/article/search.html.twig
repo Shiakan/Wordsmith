@@ -20,7 +20,7 @@
             <td>{{ article.dateInserted ? article.dateInserted|date('d-m-Y H:i:s') : '' }}</td>
             <td>{{ article.status ? 'Visible' : 'Non visible' }}</td>
             <td>
-                <a title="Voir l'article" class="btn btn-info" href="{{ path('backend_article_show', {'id': article.id}) }}">
+                <a title="Voir l'article" class="btn btn-info" href="{{ path('backend_article_show', {'slug': article.slug}) }}">
                     <i class="fab fa-readme"></i>
                 </a>
                 <a title="Editer l'article" class="btn btn-primary" href="{{ path('backend_article_edit', {'id': article.id}) }}">
