@@ -20,7 +20,7 @@ class CharacterProfileType extends AbstractType
                 'required' => false,
                 'label' => 'Nom de votre personnage',
                 'constraints' => New Length([
-                    'max' => 32,
+                    'max' => 24,
                     'maxMessage' => 'Le nom de votre personnage est trop long, il doit faire 24 caractères maximum'
                 ])
             ])
@@ -43,7 +43,10 @@ class CharacterProfileType extends AbstractType
                 'label' => 'Classe sociale',
                 'required'   => false,
             ])
-            ->add('localisation')
+            ->add('localisation', TextType::class, [
+                'label' => 'Localisation',
+                'required'   => false,
+            ])
             ->add('miscellaneous', TextareaType::class, [
                 'label' => 'Faits divers',
                 'required'   => false,

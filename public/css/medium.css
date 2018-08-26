@@ -124,3 +124,8 @@ input {
     border-bottom:1px solid #503415;
     margin-bottom:0.2em;
 }
+/* AFFICHAGE SUJET */
+
+.post-information-mobile {
+    display:none;
+}

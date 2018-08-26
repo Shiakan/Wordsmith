@@ -56,14 +56,13 @@
                     </h3>
                     <p>{{subcategory.reminder}}</p>
                     <div class="last-message-mobile">
-                    {% if subcategory.lastPost != null %}
-                        <span class="post-link"><i class="fas fa-angle-double-right"></i> {{subcategory.lastPost.thread.title|slice(0,15)}}...</span>
-                        <small>
-                            dernier message par <a class="author-name" href="{{path('user_profile',{id:subcategory.lastPost.author.id})}}" style="color:{{subcategory.lastPost.author.characterProfile.groupForum.color}};">{{subcategory.lastPost.author.characterProfile.characterName}}</a> 
-                            le {{subcategory.lastPost.createdAt|date('d-m-Y')}} à {{subcategory.lastPost.createdAt|date('H:i')}}
-                        </small>
-                        
-                    {% endif %}
+                        {% if subcategory.lastPost != null %}
+                            <span class="post-link"><i class="fas fa-angle-double-right"></i> {{subcategory.lastPost.thread.title|slice(0,15)}}...</span>
+                            <small>
+                                dernier message par <a class="author-name" href="{{path('user_profile',{id:subcategory.lastPost.author.id})}}" style="color:{{subcategory.lastPost.author.characterProfile.groupForum.color}};">{{subcategory.lastPost.author.characterProfile.characterName}}</a> 
+                                le {{subcategory.lastPost.createdAt|date('d-m-Y')}} à {{subcategory.lastPost.createdAt|date('H:i')}}
+                            </small>
+                        {% endif %}
                     </div>
                 </div>
 

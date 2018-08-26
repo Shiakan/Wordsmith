@@ -33,11 +33,18 @@
             <div class="container thread-description">
                 <h3><a href="{{path('thread_show', {'thread_slug': thread.slug })}}">{{thread.title}}</a></h3>
                 {% if thread.subtitle is defined %}
-                <small>{{thread.subtitle}}</small>
+                    <p>{{thread.subtitle}}</p>
                 {% endif %}
+                <div class="last-message-mobile">
+                    {% if thread.lastPost != null %}
+                        <small>
+                            dernier message par <a class="author-name" href="{{path('user_profile',{id:thread.lastPost.author.id})}}" style="color:{{thread.lastPost.author.characterProfile.groupForum.color}};">{{subcategory.lastPost.author.characterProfile.characterName}}</a> 
+                            le {{thread.lastPost.createdAt|date('d-m-Y')}} à {{thread.lastPost.createdAt|date('H:i')}}
+                        </small>
+                    {% endif %}
+                </div>
             </div>
             <div class="thread-author">
-                
                 <a href="{{path('user_profile',{id:thread.author.id})}}" style="color:{{thread.author.characterProfile.groupForum.color}};">
                 {% if thread.author.characterProfile.characterName != null %}
                     {{thread.author.characterProfile.characterName}}
@@ -45,7 +52,6 @@
                     {{thread.author.username}}
                 {% endif %}
                 </a>
-                
             </div>
             <div class="container thread-statistic">
                 <small>{{thread.posts|length}} Rép.</small>

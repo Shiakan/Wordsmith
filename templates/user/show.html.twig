@@ -18,9 +18,9 @@ Profil de {{user.username}}
 
         <div class="container-profil">
             <div class="left-side">
-                <img src="{{user.characterProfile.avatar}}">
-                <a class="btn" href="{{ user.characterProfile.link1}}">Fiche de présentation</a> 
-                <a class="btn" href="{{ user.characterProfile.link2}}">Liens</a>
+                <img src="{{user.characterProfile.avatar}}" class="avatar-profil">
+                <a href="{{ user.characterProfile.link1}}"><img src="{{ asset('image/presentation.png') }}"></a> 
+                <a href="{{ user.characterProfile.link2}}"><img src="{{ asset('image/liens.png') }}"></a>
             </div>
             <div class="right-side">
                 <div id="tabs">
