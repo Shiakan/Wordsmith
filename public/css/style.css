@@ -868,40 +868,51 @@ a.ui-button:active, .ui-button:active,
     align-items: center;
     margin-bottom:0.8em;
 }
+.thread-moderation {
+    width:40%;
+    margin-left:60%;
+}
 /*
- * Homepage
+ * Homepage START
  */
  .homepage{
      height: 100vh;
  }
 
- .log-nav{
-     display: block;
-     margin-bottom: 3em; 
-     padding: 1em;
+    .log-nav{
+     display: flex;
+     justify-content: space-evenly;
+     margin-bottom: 3em;
      background-color: rgba(0, 0, 0, 0.233);
+    }
+    .ul-li-home{
+        display: inline;
+        margin: 1em;
+        padding-right: -50%;
+        font-size: 2em;
+        flex-wrap: wrap;
+    }
+    .nav-wrap{
+        display: flex;
+        justify-content: space-evenly;
+        padding: 1em;
+        background-color: rgba(0, 0, 0, 0.233); 
  }
- .ul-li-home{
-     display: inline;
-     margin: 1em;
-     padding-right: -50%;
-     font-size: 2em;
-     flex-wrap: wrap;
- }
-  .nav-wrap{
-     padding: 1em;
-     background-color: rgba(0, 0, 0, 0.233); 
-  }
-  .ul-li-connexion{
+    .ul-li-connexion{
      display: inline-block;
-     margin-left: 2em;
+     margin-right: 1em;
+     padding: 1em;
      font-size: 1.2em;
  }
-.centering{
-    display: flex;
-    justify-content: center;
+    .logo-center{
+     display: flex;
+     justify-content: center;
  }
- .content{
+    .centering{
+     display: flex;
+     justify-content: center;
+ }
+    .content{
      width: 50%;
      text-align: center;
      margin-left: auto;
@@ -909,25 +920,22 @@ a.ui-button:active, .ui-button:active,
      margin-top: 5em;
      font-size: 1.2em;
  }
- .logo-rs{
+    .logo-rs{
      width:4em;
      height:4em;
      margin-left:2em;
  }
- .logo-place{
-display: flex;
-justify-content: center;
-margin-top:5em;
-margin-bottom: 5em;
+    .logo-place{
+     display: flex;
+     justify-content: center;
+     margin-right: 1%; 
+     margin-top:5em;
+     margin-bottom: 5em;
  } 
- .foot-content{
+    .foot-content{
      text-align: center;
  }
-
-.thread-moderation {
-    width:40%;
-    margin-left:60%;
-}
+    /* HOMEPAGE END*/
 /* @media screen and (max-width: 900px) {
 } */
 

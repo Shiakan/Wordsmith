@@ -28,15 +28,15 @@
                         {# A centré #}
                             <div class="centering">
                                 <div class="wrapping">
-                                    <a href="{{ path('homepage') }}">
-                                        <img class='logo-center' src="{{asset('image/bigtitle.png')}}" alt="logo">
+                                    <a class='logo-center' href="{{ path('homepage') }}">
+                                        <img src="{{asset('image/bigtitle.png')}}" alt="logo">
                                     </a>
                                     <div class='log-nav'>
                                         <ul>
                                             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                                                 <li class="ul-li-connexion">
-                                                    Bienvenue
-                                                    <a href="{{path('user_profile', {'id': app.user.id })}}">{{ app.user.username }}</a>
+                                                    <p>Bienvenue
+                                                    <a href="{{path('user_profile', {'id': app.user.id })}}">{{ app.user.username }}</a></p>
                                                 </li>
                                                 <li class="ul-li-connexion">
                                                     <a href="{{path('security_logout')}}">Déconnexion</a>
