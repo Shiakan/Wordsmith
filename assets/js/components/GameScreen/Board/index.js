@@ -18,6 +18,7 @@ import './board.sass';
  */
 class Board extends React.Component {
   static propTypes = {
+    drawColor: PropTypes.string.isRequired,
     drawing: PropTypes.bool.isRequired,
     eventStream: PropTypes.object.isRequired,
     eventStore: PropTypes.object.isRequired,
@@ -25,6 +26,12 @@ class Board extends React.Component {
 
   componentDidMount() {
     console.log('board loaded');
+  }
+
+  requestAnimationFrame = () => {
+    const { eventStream, drawColor } = this.props;
+    eventStream.changeStrokeColor(drawColor);
+    console.log('event stream? ', eventStream);
   }
 
   render() {
@@ -35,12 +42,17 @@ class Board extends React.Component {
     return (
       <div
         className="board"
+        onClick={this.requestAnimationFrame}
       >
         <Whiteboard
           events={eventStream}
           eventStore={eventStore}
           width="100%"
           height="100%"
+          style={{
+            backgroundColor: 'lightyellow',
+            color: 'blue',
+          }}
         />
       </div>
     );

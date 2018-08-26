@@ -4,7 +4,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { FaAngleDoubleRight, FaAngleDoubleLeft } from 'react-icons/fa';
+import { FaAngleDoubleRight, FaAngleDoubleLeft, FaFeather } from 'react-icons/fa';
+import { CirclePicker } from 'react-color';
+
 /**
  * Local import
 */
@@ -33,6 +35,10 @@ class GameScreen extends React.Component {
     isSlided: PropTypes.bool.isRequired,
     role: PropTypes.string.isRequired,
     shareDrawing: PropTypes.func.isRequired,
+    togglePicker: PropTypes.func.isRequired,
+    onChangeColor: PropTypes.func.isRequired,
+    drawColor: PropTypes.string.isRequired,
+    drawPicker: PropTypes.bool.isRequired,
 
   };
 
@@ -45,10 +51,16 @@ class GameScreen extends React.Component {
     return true;
   }
 
+  changeColor = (color) => {
+    const { onChangeColor, togglePicker } = this.props;
+    onChangeColor(color.hex);
+    togglePicker();
+  }
+
   render() {
     const {
       toggleScreen, isBoard, map, isMap,
-      grid, characters, handleSlide, isSlided, role, shareDrawing,
+      grid, characters, handleSlide, isSlided, role, shareDrawing, drawColor, togglePicker, drawPicker,
     } = this.props;
     const classSwitch = classNames(
       'screen-switch',
@@ -86,12 +98,41 @@ class GameScreen extends React.Component {
               >
             Switch to Map
               </button>
-              <button
-                type="button"
-                className="screen-switch-button"
-                onClick={shareDrawing}
-              >Share Board
-              </button>
+              <div
+                className="screen-switch-board"
+              >
+                <button
+                  type="button"
+                  className="screen-switch-share"
+                  onClick={shareDrawing}
+                >Share Board
+                </button>
+                <FaFeather
+                  className="screen-switch-icon"
+                  style={{ color: drawColor }}
+                  onClick={togglePicker}
+                />
+              </div>
+              {drawPicker
+                && (
+                <div>
+                  <span
+                    className="screen-switch-span"
+                  >
+                    Choose color :
+                  </span>
+                  <CirclePicker
+                    className="screen-switch-picker"
+                    color={drawColor}
+                    circleSize={17}
+                    circleSpacing={8}
+                    width="180px"
+                    onChange={this.changeColor}
+                    triangle="hide"
+                  />
+                </div>
+                )
+              }
             </div>
             ) }
           {isSlided ? (

@@ -1,13 +1,13 @@
-import uuidv4 from 'uuid/v4'; // https://www.npmjs.com/package/uuid
 import { EventStream, EventStore } from '@ohtomi/react-whiteboard';
 /**
  * Initial State
  */
 const initialState = {
-  drawColor: 'black',
+  drawColor: '#125c38',
   drawing: false,
   eventStore: new EventStore(),
   eventStream: new EventStream(),
+  drawPicker: false,
 };
 
 /**
@@ -15,6 +15,8 @@ const initialState = {
  */
 export const SHARE_DRAWING = 'SHARE_DRAWING';
 export const RECEIVE_DRAWING = 'RECEIVE_DRAWING';
+const DRAWING_COLOR = 'DRAWING_COLOR';
+const TOGGLE_DRAW_PICKER = 'TOGGLE_DRAW_PICKER';
 
 
 /**
@@ -36,6 +38,17 @@ const reducer = (state = initialState, action = {}) => {
         eventStore: newEventStore,
       };
     }
+    case DRAWING_COLOR:
+      return {
+        ...state,
+        drawColor: action.value,
+      };
+    case TOGGLE_DRAW_PICKER:
+      return {
+        ...state,
+        drawPicker: !state.drawPicker,
+      };
+
     default:
       return state;
   }
@@ -51,6 +64,15 @@ export const shareDrawing = () => ({
 export const receiveDrawing = drawingStore => ({
   type: RECEIVE_DRAWING,
   drawingStore,
+});
+
+export const drawingColor = value => ({
+  type: DRAWING_COLOR,
+  value,
+});
+
+export const toggleDrawPicker = () => ({
+  type: TOGGLE_DRAW_PICKER,
 });
 /**
  * Selectors

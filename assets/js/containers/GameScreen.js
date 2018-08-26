@@ -13,7 +13,7 @@ import {
   toggleScreen, handleSlide,
 } from '../store/reducers/gameScreen';
 import {
-  shareDrawing,
+  shareDrawing, drawingColor, toggleDrawPicker,
 } from '../store/reducers/board';
 
 
@@ -32,6 +32,8 @@ const mapStateToProps = state => ({
   characters: state.gameScreen.characters,
   isSlided: state.gameScreen.isSlided,
   role: state.user.role,
+  drawColor: state.board.drawColor,
+  drawPicker: state.board.drawPicker,
 });
 
 /* === Actions ===
@@ -45,11 +47,17 @@ const mapDispatchToProps = dispatch => ({
   toggleScreen: () => {
     dispatch(toggleScreen());
   },
+  togglePicker: () => {
+    dispatch(toggleDrawPicker());
+  },
   handleSlide: () => {
     dispatch(handleSlide());
   },
   shareDrawing: () => {
     dispatch(shareDrawing());
+  },
+  onChangeColor: (value) => {
+    dispatch(drawingColor(value));
   },
 });
 

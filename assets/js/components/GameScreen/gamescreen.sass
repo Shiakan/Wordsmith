@@ -53,9 +53,16 @@
         &--active
             transform: translateX(0)
             left: 0
-        // &--notAMj
-        //     padding-right: 5em
-        //     // transition: none
+        &-span
+            margin-left: 1em
+        &-board
+            display: flex
+        &-icon
+            margin-top: .2em
+            font-size: 1.5em
+            display: inline-flex
+        &-picker
+            padding: 1em
         &-form
             margin: .5em 0
         &-button
@@ -64,7 +71,10 @@
             // font-family: $test-font
             // font-size: 1.2em
             border: none
-            display: flex
+            display: inline-flex
+        &-share
+            @extend %click-button
+            margin: .2em 1.1em 1em .8em
             
         &-arrow
             color: $link-color
@@ -74,5 +84,7 @@
             font-size: 1.5em
             cursor: pointer
             &--board
+                z-index: 10
+                position: absolute
                 bottom: .74em
                 left: 7.4em
