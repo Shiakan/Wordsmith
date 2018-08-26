@@ -58,6 +58,11 @@ input {
 .btn-admin {
     display:none;
 }
+.btn-disabled {
+    pointer-events: none;
+    cursor: default;
+    background-color:rgb(70, 70, 70);
+}
 
 .taglist-title {
     font-size:1.3em;
@@ -174,6 +179,10 @@ input {
 }
 .left-side {
     display:none;
+}
+.room-alert {
+    margin:0.7em;
+    text-align:center;
 }
 
 /* Boutons */

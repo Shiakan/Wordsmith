@@ -29,6 +29,9 @@ class Sheet extends React.Component {
 
   componentDidMount() {
     console.log('Sheet loaded');
+    const { userName } = this.props;
+
+    console.log('ICI MARION, USERNAME, ICI', userName);
   }
 
   handleChange = (evt) => {

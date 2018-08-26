@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Entity\Room;
 use App\Entity\User;
 use App\Form\RoomType;
+use App\Form\CharacterNameType;
 use App\Repository\RoomRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -83,23 +84,40 @@ class RoomController extends Controller
     } 
 
     /**
-     * @Route("room/{code}", name="room_show", methods="GET")
+     * @Route("room/{code}", name="room_show", methods="GET|POST")
      */
-    public function show(Room $room, UserInterface $user): Response
+    public function show(Room $room, UserInterface $user, Request $request): Response
     {
         $participants = $room->getParticipants();
 
-        foreach($participants as $participant ) {
+        foreach($participants as $participant) {
             if($participant->getId() == $user->getId() || $room->getDungeonmaster()->getId()  == $user->getId()){
+                if($user->getCharacterProfile()->getCharacterName() == null) {
 
-                return $this->render('room/index.html.twig', [
-                        'room' => $room
+                    $characterProfile = $user->getCharacterProfile();
+                    $form = $this->createForm(CharacterNameType::class, $characterProfile);
+                    $form->handleRequest($request);
+            
+                    if ($form->isSubmitted() && $form->isValid()) {
+                        $this->getDoctrine()->getManager()->flush();
+            
+                        return $this->redirectToRoute('room_show', ['code' => $room->getCode()]);
+                    }
+                    return $this->render('forum/character_profile/edit_name.html.twig', [
+                        'form' => $form->createView(),
+                        'characterProfile' => $characterProfile
                     ]);
+                } else {
+
+                    return $this->render('room/index.html.twig', [
+                            'room' => $room
+                        ]);
+                }
             }
             else{
                 return $this->render('room/error.html.twig');
             }
-        };
+        }
     }
 
     /**

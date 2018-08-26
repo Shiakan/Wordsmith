@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\CharacterProfile;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -17,38 +18,47 @@ class CharacterProfileType extends AbstractType
         $builder
             ->add('characterName', TextType::class, [
                 'required' => false,
-                'label' => 'Nom de votre personnage'
+                'label' => 'Nom de votre personnage',
+                'constraints' => New Length([
+                    'max' => 32,
+                    'maxMessage' => 'Le nom de votre personnage est trop long, il doit faire 24 caractères maximum'
+                ])
             ])
-            ->add('age')
-            ->add('race')
+            ->add('age', TextType::class, [
+                'label' => 'Age',
+                'required'   => false,
+
+            ])
+            ->add('race', TextType::class, [
+                'label' => 'Race',
+                'required'   => false,
+
+            ])
             ->add('class', TextType::class, [
                 'label' => 'Classe',
                 'required'   => false,
-                'empty_data' => ' ',
+
             ])
             ->add('socialCast', TextType::class, [
                 'label' => 'Classe sociale',
                 'required'   => false,
-                'empty_data' => ' ',
             ])
             ->add('localisation')
             ->add('miscellaneous', TextareaType::class, [
                 'label' => 'Faits divers',
                 'required'   => false,
-                'empty_data' => ' ',
             ])
             ->add('link1', TextType::class, [
                 'label' => 'Fiche de présentation',
                 'required'   => false,
-                'empty_data' => ' ',
-                'attr' => [
+                'attr' => array(
                     'placeholder' => 'Insérez le lien vers votre fiche de présentation'
-                    ]
+                    )
+                    
             ])
             ->add('link2', TextType::class, [
                 'label' => 'Relations',
                 'required'   => false,
-                'empty_data' => ' ',
                 'attr' => [
                     'placeholder' => 'Insérez le lien vers votre fiche de relations'
                     ]
@@ -56,7 +66,6 @@ class CharacterProfileType extends AbstractType
             ->add('avatar', TextType::class, [
                 'label' => 'Avatar',
                 'required'   => false,
-                'empty_data' => ' ',
                 'attr' => [
                     'placeholder' => 'Insérez le lien direct vers votre image'
                     ]

@@ -11,9 +11,9 @@ Profil de {{user.username}}
 <div class="wrapper-homepage">
     <div class="container container-width">
         {% if user.id == app.user.id %}
-        <h1>Bienvenue <em>{{ app.user.username }}</em></h1>
+            <h1>Bienvenue <em>{{ app.user.username }}</em></h1>
         {% else %}
-        <h1>Vous etes sur le profil de <em>{{user.username}}</em></h1>
+            <h1>{{user.username}}</h1>
         {% endif %}
 
         <div class="container-profil">
@@ -121,7 +121,10 @@ Profil de {{user.username}}
                     </div>
                     {% if user.id == app.user.id %}
                     <div id="tabs-3">
-                       <div class="profile-title">
+                        <div class="room-alert">
+                            <p>L'accès aux rooms est désactivé sur les écrans inférieurs à 900px de large.</p>
+                        </div>
+                        <div class="profile-title">
                             <h2>J'ai créé les parties</h2>
                         </div>
                         {% for room in rooms %}
@@ -132,7 +135,7 @@ Profil de {{user.username}}
                                 <a class="btn" href="{{ path('room_edit', {'id': room.id}) }}">
                                     <i class="far fa-edit"></i>
                                 </a>                                
-                                <a target="_blank" class="btn" href="{{ path('room_show', {'code': room.code}) }}">
+                                <a target="_blank" class="btn btn-disabled" href="{{ path('room_show', {'code': room.code}) }}">
                                     <i class="fas fa-arrow-right"></i></button>
                                 </a>
                             </div>
@@ -149,7 +152,7 @@ Profil de {{user.username}}
                             <div class="room-content">
                                 <h3>{{ room.name }}</h3>
                                 <div class="room-content-btn">
-                                    <a target="_blank" class="btn" href="{{ path('room_show', {'code': room.code}) }}">
+                                    <a target="_blank" class="btn btn-disabled" href="{{ path('room_show', {'code': room.code}) }}">
                                         <i class="fas fa-arrow-right"></i></button>
                                     </a>
                                 </div>

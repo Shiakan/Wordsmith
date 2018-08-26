@@ -25,7 +25,9 @@ input {
 }
 
 /* PROFIL */
-
+.room-alert {
+    display:none;
+}
 
 /* Codex commentaires */
 .comment-header {

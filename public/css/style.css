@@ -130,13 +130,10 @@ small {
     font-family:'Nunito Sans', sans-serif;
     text-transform:uppercase;
     text-align:center;
-
 }
-/* .form-group {
-    width:90%;
-    margin:0.5em auto;
-} */
-
+::placeholder {
+    color:rgb(100, 100, 100);
+}
 textarea {
     padding:0.5em;
 }
@@ -149,11 +146,9 @@ textarea {
     margin-bottom:0.5em;
     margin-top:0.5em;
 }
-
 .form-error-icon {
     display:none;
 }
-
 .form-error-message {
     display:block;
     color: rgb(218, 57, 57);
@@ -161,16 +156,13 @@ textarea {
     margin-top:0.3em;
     font-size:0.8em;
 }
-
 .container-width label, legend {
     font-size:1em;
 }
-
 fieldset {
     border:none;
     padding:0;
 }
-
 select {
     margin-top:0.5em;
     margin-left:0.4em;
@@ -218,7 +210,6 @@ form button {
     justify-content: center;
     margin-bottom:0.5em;
 }
-
 .move-form {
     /* width:31%;  */
     display:flex;
@@ -227,7 +218,7 @@ form button {
     justify-content: center;
     margin-bottom:0.5em;
 }
-.search-form .form-group, 
+.search-form 
 input {
     display:inline-block;
     width:85%;

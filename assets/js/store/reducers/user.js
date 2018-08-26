@@ -1,10 +1,11 @@
 const rootAnchor = document.getElementById('root');
 
+// (!null(typeof JSON.parse(rootAnchor.dataset.name))) ? JSON.parse(rootAnchor.dataset.name) : JSON.parse(rootAnchor.dataset.username);
 /**
  * Initial State
  */
 const initialState = {
-  userName: rootAnchor.dataset.name,
+  userName: JSON.parse(rootAnchor.dataset.name),
   role: rootAnchor.dataset.role,
   sheetId: rootAnchor.dataset.sheetid,
   roomId: rootAnchor.dataset.room,

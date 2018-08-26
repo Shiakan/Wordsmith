@@ -37,7 +37,15 @@
                 {% endif %}
             </div>
             <div class="thread-author">
-                <a href="{{path('user_profile',{id:thread.author.id})}}" style="color:{{thread.author.characterProfile.groupForum.color}};">{{thread.author.characterProfile.characterName}}</a>
+                
+                <a href="{{path('user_profile',{id:thread.author.id})}}" style="color:{{thread.author.characterProfile.groupForum.color}};">
+                {% if thread.author.characterProfile.characterName != null %}
+                    {{thread.author.characterProfile.characterName}}
+                {% else %}
+                    {{thread.author.username}}
+                {% endif %}
+                </a>
+                
             </div>
             <div class="container thread-statistic">
                 <small>{{thread.posts|length}} Rép.</small>
@@ -45,7 +53,14 @@
             <div class="container thread-last-message">
             {% if thread.lastPost != null %}
                 <small>{{thread.lastPost.createdAt|date('d-m-Y')}}</small>
-                <a href="#">{{thread.lastPost.author.characterProfile.characterName}}</a>
+                    <a href="{{path('user_profile', {id:thread.lastPost.author.id})}}" style="color:{{thread.lastPost.author.characterProfile.groupForum.color}};">
+                    {% if thread.lastPost.author.characterProfile.characterName != null %}
+                        {{thread.lastPost.author.characterProfile.characterName}}
+                    {% else %}
+                        {{thread.lastPost.author.username}}
+                    {% endif %}
+                    </a>
+                
             {% endif %}
             </div>
         </div>

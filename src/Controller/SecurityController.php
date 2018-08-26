@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Rank;
 use App\Entity\Role;
 use App\Entity\User;
+use App\Entity\Group;
 use App\Entity\Thread;
 use App\Form\LoginType;
 use App\Entity\Subcategory;
@@ -131,13 +133,39 @@ class SecurityController extends Controller
     {   
         $characterProfile = new CharacterProfile();
         $charactersheet = new Charactersheet();
+
+        $repositoryRank = $this->getDoctrine()->getRepository(Rank::class);
+        $rank = $repositoryRank->findOneByName('Membre');
+
+        $repositoryGroup = $this->getDoctrine()->getRepository(Group::class);
+        $group = $repositoryGroup->findOneByName('Membre');
+
         $em = $this->getDoctrine()->getManager();
         $characterProfile->setUser($user);
         // On donne un avatar, un groupe et un rang par défaut à chaque nouvel utilisateur
         $characterProfile->setAvatar('https://nsa39.casimages.com/img/2018/08/22/mini_180822112250709313.png');
+        $characterProfile->setRank($rank);
+        $characterProfile->setGroupForum($group);
         $em->persist($characterProfile);
         $em->flush();
         $charactersheet->setUser($user);
+        $charactersheet->setContent(
+            'INFORMATIONS PERSONNELLES'."\n".'Prénom et nom : '."\n".'Age : '."\n".'Race : '."\n".'Sexe : '."\n".'Classe : '."\n".'Classe sociale : '."\n".
+            '_________________________'."\n".
+            'STATISTIQUES'."\n".'Apparence : '."\n".'Constitution : '."\n".'Dextérité : '."\n".'Force : '."\n".'Education : '."\n".'Intelligence : '."\n".'Sagesse'."\n".
+            '_________________________'."\n".
+            'POINTS DE VIE : '."\n".'POINTS D\'ETHER : '."\n".'CORRUPTION : '."\n".
+            '_________________________'."\n".
+            'COMPÉTENCES DE BASE'."\n".'Charisme : '."\n".'Vitalité : '."\n".'Agilité : '."\n".'Puissance : '."\n".'Connaissances : '."\n".'Intuition : '."\n".'Volonté : '."\n".
+            '_________________________'."\n".
+            'COMPÉTENCES DE CLASSE ET BONUS'."\n".
+            '_________________________'."\n".
+            'INVENTAIRE (équipement, armes, etc...)'."\n".'- '."\n".'- '."\n".
+            '_________________________'."\n".
+            'LIVRE DE SORTS'."\n".'- '."\n".'- '."\n".
+            '_________________________'."\n".
+            'ANECDOTES'."\n"
+        );
         $em->persist($charactersheet);
         $em->flush();
 
