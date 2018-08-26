@@ -745,6 +745,7 @@ a.ui-button:active, .ui-button:active,
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    text-align:center;
 }
 .statistic small {
     font-size:0.7em;
