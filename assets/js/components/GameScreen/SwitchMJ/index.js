@@ -35,7 +35,7 @@ class SwitchMJ extends React.Component {
   };
 
   componentDidMount() {
-    console.log('switch MJ loaded');
+    // console.log('switch MJ loaded');
   }
 
   handleChange = (e) => {
@@ -58,7 +58,7 @@ class SwitchMJ extends React.Component {
 
   handleMap = (e) => {
     const { changeMap } = this.props;
-    console.log(e.target.value);
+    // console.log(e.target.value);
     changeMap(e.target.value);
   }
 
@@ -66,7 +66,7 @@ class SwitchMJ extends React.Component {
     const {
       togglePicker, color, toggle, typingName, maps,
     } = this.props;
-    console.log('MAPS :', maps);
+    // console.log('MAPS :', maps);
     return (
       <div className="mjSwitch">
         {toggle

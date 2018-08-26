@@ -37,11 +37,11 @@ class GameScreen extends React.Component {
   };
 
   componentDidMount() {
-    console.log('gameScreen loaded');
+    // console.log('gameScreen loaded');
   }
 
   shouldComponentUpdate = (nextProps, nextState) => {
-    console.log('CSU CSU CSU', nextProps, nextState);
+    // console.log('CSU CSU CSU', nextProps, nextState);
     return true;
   }
 

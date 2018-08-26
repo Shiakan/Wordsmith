@@ -32,7 +32,7 @@ const socketConnect = store => next => (action) => {
   const state = store.getState();
   switch (action.type) {
     case WEBSOCKET_CONNECT:
-      socket.emit('join', state.user, state.gameScreen.characters);
+      socket.emit('join', state.user);
       // store.dispatch(movePlayer());
       // socket = io('87.98.154.146:3000');
       // connexion au WebSocket TODO localhost window.io(adresseIpDuServ:3000)
@@ -44,7 +44,7 @@ const socketConnect = store => next => (action) => {
         store.dispatch(receiveMessage(message));
       });
       socket.on('add_token', (tokenToAdd) => {
-        console.log('token to add :', tokenToAdd);
+        // console.log('token to add :', tokenToAdd);
         store.dispatch(autoAddPlayer(tokenToAdd));
       });
       socket.on('delete_token', (tokenToKill) => {
@@ -57,9 +57,9 @@ const socketConnect = store => next => (action) => {
         console.log('new char received websocket :', newChar);
         store.dispatch(receiveChar(newChar));
       });
-      socket.on('receive_delete', (charToKill) => {
-        console.log('action websocket :', charToKill);
-        store.dispatch(receiveDelete(charToKill));
+      socket.on('receive_delete', (charToDelete) => {
+        console.log('action websocket :', charToDelete);
+        store.dispatch(receiveDelete(charToDelete));
       });
       socket.on('receive_move', (movedChars) => {
         store.dispatch(receiveMove(movedChars));
@@ -152,9 +152,16 @@ const socketConnect = store => next => (action) => {
       break;
 
     case AUTO_PLAYER: {
-      console.log('token reducer', action.char.userName);
+      // let allreadyPlaying = false;
+      // if (allreadyPlaying) {
+      //   const charExisting = state.gameScreen.characters.filter(char => char.name === action.value);
+      //   console.log('existing');
+      //   socket.emit('auto_player', charExisting);
+      // }
+      // console.log('token reducer', action.char.userName);
       const autoChar = {
         id: uuidv4(),
+        userId: state.user.selfId,
         name: state.user.userName,
         color: state.gameScreen.color,
         coordX: state.gameScreen.cptX,
@@ -165,7 +172,10 @@ const socketConnect = store => next => (action) => {
         state.gameScreen.cptX += 70;
       }
       state.gameScreen.cptY += 70;
-      console.log('NEW AUTO CHAR SOCKET :', autoChar);
+      // console.log('NEW AUTO CHAR SOCKET :', autoChar);
+      // allreadyPlaying = true;
+      // console.log('not existing');
+
       socket.emit('auto_player', autoChar);
     }
 
@@ -173,7 +183,9 @@ const socketConnect = store => next => (action) => {
 
     case DELETE_PLAYER: {
       // fixed delete targetting, now with ID instead of name
-      const charToDelete = state.gameScreen.characters.filter(char => char.id === action.value.id);
+      console.log('DELETE_PLAYER param ', action.value);
+
+      const charToDelete = state.gameScreen.characters.filter(char => char.userId === action.value);
       console.log('charlol ', charToDelete);
 
       socket.emit('delete_player', charToDelete);

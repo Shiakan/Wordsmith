@@ -28,7 +28,7 @@ class Sheet extends React.Component {
   }
 
   componentDidMount() {
-    console.log('Sheet loaded');
+    // console.log('Sheet loaded');
   }
 
   handleChange = (evt) => {
@@ -41,7 +41,7 @@ class Sheet extends React.Component {
 
   focusLeave = (evt) => {
     const { sheetUpdate } = this.props;
-    console.log('ON FOCUS OUT', evt.target.value);
+    // console.log('ON FOCUS OUT', evt.target.value);
     sheetUpdate(evt.target.value);
   }
 

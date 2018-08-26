@@ -25,14 +25,14 @@ class Board extends React.Component {
   }
 
   componentDidMount() {
-    console.log('board loaded');
+    // console.log('board loaded');
   }
 
   render() {
     const {
       drawColor, drawing, startDrawing, stopDrawing,
     } = this.props;
-    console.log(drawing ? 'start drawing' : 'stop drawing');
+    // console.log(drawing ? 'start drawing' : 'stop drawing');
     return (
       <div
         className="board"

@@ -28,7 +28,7 @@ class Panel extends React.Component {
   };
 
   componentDidMount() {
-    console.log('Panel loaded');
+    // console.log('Panel loaded');
   }
 
   render() {

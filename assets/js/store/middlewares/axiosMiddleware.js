@@ -21,18 +21,18 @@ const axiosMiddleware = store => next => (action) => {
   switch (action.type) {
     case SHEET_UPDATE:
       if (state.user.tempSheet !== action.value) {
-        console.log('AXIOS TRIGGERED');
+        // console.log('AXIOS TRIGGERED');
         store.dispatch(axiosLoading());
         axios.post(`/charactersheet/${state.user.sheetId}`, action.value)
           .then((response) => {
-            console.log('AXIOS DONE', response);
+            // console.log('AXIOS DONE', response);
             store.dispatch(sheetLoaded());
             setTimeout(() => {
               store.dispatch(axiosLoaded());
             }, 1000);
           })
           .catch((error) => {
-            console.log(error);
+            // console.log(error);
             store.dispatch(sheetFailed());
             setTimeout(() => {
               store.dispatch(axiosLoaded());

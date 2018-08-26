@@ -39,8 +39,8 @@ class Dice extends React.Component {
   }
 
   componentDidMount() {
-    const { role } = this.props;
-    console.log('Dice cDM', role);
+    // const { role } = this.props;
+    // console.log('Dice cDM', role);
   }
 
   roll = (dice) => {
@@ -80,9 +80,9 @@ class Dice extends React.Component {
     const numberOfDices = diceValue.split(/d|D/)[0];
     // After d(or D), you'll find the number of sides for a dice
     const numberOfSides = Number(diceValue.split(/d|D/)[1]);
-    console.log('NUMBER OF SIDES', numberOfSides);
+    // console.log('NUMBER OF SIDES', numberOfSides);
     if (numberOfSides === 20 || numberOfSides === 100) {
-      console.log('SIDES FILTERED', numberOfSides);
+      // console.log('SIDES FILTERED', numberOfSides);
       if (numberOfDices > 1) {
         return 'no';
       }
@@ -108,7 +108,7 @@ class Dice extends React.Component {
     const { rollDice, diceValue } = this.props;
     const rollValue = this.roll(diceValue);
     const critic = this.critic(rollValue, diceValue);
-    console.log(critic, 'CRITIC FUNC');
+    // console.log(critic, 'CRITIC FUNC');
     // console.log(rollDice);
     rollDice(rollValue, critic);
   }

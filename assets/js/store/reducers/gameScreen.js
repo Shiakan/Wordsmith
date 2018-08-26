@@ -18,7 +18,7 @@ const initialState = {
   typingName: '',
   characters: [],
 };
-console.log(initialState.characters);
+// console.log(initialState.characters);
 
 /**
  * Types
@@ -95,7 +95,7 @@ const reducer = (state = initialState, action = {}) => {
       };
 
     case RECEIVE_CHAR:
-      console.log('NEW CHAR REDUCER :', action.newChar);
+      // console.log('NEW CHAR REDUCER :', action.newChar);
 
       return {
         ...state,
@@ -109,9 +109,9 @@ const reducer = (state = initialState, action = {}) => {
       };
 
     case RECEIVE_MOVE: {
-      console.log('receive move action :', action.characters);
+      // console.log('receive move action :', action.characters);
       const filteredChars = state.characters.filter(char => char.name !== action.characters.name);
-      console.log('FILTERED :', filteredChars);
+      // console.log('FILTERED :', filteredChars);
 
       return {
         ...state,
@@ -119,12 +119,14 @@ const reducer = (state = initialState, action = {}) => {
       };
     }
     case RECEIVE_DELETE: {
-      const filteredChars = state.characters.filter(char => char.name !== action.characters[0].name);
-      console.log('character to kill :', action.characters[0].name);
+      console.log('RECEIVE_DELETE', action.characters[0]);
+      console.log('state characters on receive delete', state.characters);
+      const filteredChars = state.characters.filter(char => char.id === action.characters[0].id);
+      console.log('RECEIVE_DELETE reducer :', filteredChars);
 
       return {
         ...state,
-        characters: [...filteredChars],
+        characters: filteredChars,
       };
     }
     default:

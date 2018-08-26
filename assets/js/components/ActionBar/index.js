@@ -25,7 +25,7 @@ class ActionBar extends React.Component {
   };
 
   componentDidMount() {
-    console.log('ActionBar loaded');
+    // console.log('ActionBar loaded');
   }
 
   render() {

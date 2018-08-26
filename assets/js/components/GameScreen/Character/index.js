@@ -33,12 +33,12 @@ class Character extends React.Component {
   }
 
   componentDidMount() {
-    console.log('Character loaded');
+    // console.log('Character loaded');
   }
 
 
   movePlayer = (e) => {
-    console.log(e, 'EEE');
+    console.log('MOVE THIS=>', e.target.id);
     const { movePlayer } = this.props;
     movePlayer(e);
   }
@@ -48,10 +48,10 @@ class Character extends React.Component {
     const {
       name, color, id, deletePlayer, coordX, coordY, userName, role,
     } = this.props;
-    console.log(userName, role);
+    // console.log(userName, role);
     const mjCheck = (role === 'dm');
     const userCheck = (name === userName);
-    console.log('bool :', userCheck);
+    // console.log('bool :', userCheck);
 
     const userClass = classNames(
       'character-cursor',
@@ -79,7 +79,9 @@ class Character extends React.Component {
               && (
               <TiDelete
                 className="character-nickname-delete"
-                onClick={deletePlayer}
+                onClick={() => {
+                  deletePlayer(this.value);
+                }}
               />
               )}
           </div>

@@ -23,7 +23,7 @@ class SwitchMap extends React.Component {
   }
 
   componentDidMount() {
-    console.log('switch map loaded');
+    // console.log('switch map loaded');
   }
 
   render() {

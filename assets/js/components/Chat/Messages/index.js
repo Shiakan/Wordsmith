@@ -40,7 +40,7 @@ class Messages extends React.Component {
 
   render() {
     const { messages, help } = this.props;
-    console.log(messages, 'ALL MESSAGES');
+    // console.log(messages, 'ALL MESSAGES');
     return (
       <div
         ref={(element) => {
@@ -78,7 +78,7 @@ class Messages extends React.Component {
               'message-content-standart': message.critic === 'no',
             },
           );
-          console.log(message, 'MESSAGE');
+          {/* console.log(message, 'MESSAGE'); */}
           return (
             <div className="message" key={message.id}>
               {console.log(message, 'mess in index.js')}

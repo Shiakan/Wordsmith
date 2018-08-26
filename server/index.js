@@ -8,7 +8,6 @@ var socket = require('socket.io');
 var uuidV4 = require('uuid/v4');
 // Local import
 var { Users } = require('./utils/users.js');
-// var { isRealString } = require('./utils/validation.js');
 // Class instanciation
 var users = new Users();
 
@@ -36,7 +35,7 @@ app.use(function(req, res, next) {
 io.on('connection', function(socket) {
   console.log('>> socket.io - connected');
   socket.on('join', function(param, callback) {
-    console.log('>> JOINED <<', param);
+    console.log('>> JOINED <<', param.userName, param, callback);
     socket.join(param.roomId);
     users.removeUser(param.selfId);
     users.addUser(param.selfId, param.userName, param.roomId);
@@ -44,74 +43,74 @@ io.on('connection', function(socket) {
     message.message = 'vient de se connecter';
     message.author = param.userName;
     message.id = uuidV4();
-    io.to(param.roomId).emit('send_message', message);
-    console.log(users);
+    // io.to(param.roomId).emit('send_message', message);
+    console.log('USRS ONLOAD', users);
 
     var tokenToAdd = {};
     tokenToAdd.userName = param.userName,
     io.to(param.roomId).emit('add_token', tokenToAdd);
 
-    socket.on('roll_dice', function(dice) {
-      if (dice.role === 'player' && !isNaN(dice.rolled)) {
-        var message = {};
-        message.dice = dice.rolled;
-        message.author = dice.author;
-        message.id = uuidV4();
-        message.diceValue = dice.diceValue;
-        message.diceCritic = dice.critic;
-        console.log(message, 'DICE IN SERVER')
-        io.to(param.roomId).emit('send_message', message);
-      }
-    });
+    // socket.on('roll_dice', function(dice) {
+    //   if (dice.role === 'player' && !isNaN(dice.rolled)) {
+    //     var message = {};
+    //     message.dice = dice.rolled;
+    //     message.author = dice.author;
+    //     message.id = uuidV4();
+    //     message.diceValue = dice.diceValue;
+    //     message.diceCritic = dice.critic;
+    //     console.log(message, 'DICE IN SERVER')
+    //     // io.to(param.roomId).emit('send_message', message);
+    //   }
+    // });
 
-    socket.on('change_map', function(newMap) {
-      console.log('NEW MAP SERVER', newMap);
-      io.to(param.roomId).emit('receive_map', newMap);
-    });
+    // socket.on('change_map', function(newMap) {
+    //   console.log('NEW MAP SERVER', newMap);
+    //   // io.to(param.roomId).emit('receive_map', newMap);
+    // });
 
     socket.on('auto_player', function(autoChar) {
-      console.log('NEW AUTO CHAR SERVER', autoChar);
+      // console.log('NEW AUTO CHAR SERVER', autoChar);
       io.to(param.roomId).emit('receive_auto', autoChar);
     });
 
-    socket.on('add_player', function(newChar) {
-      console.log('NEW CHAR SERVER', newChar);
-      io.to(param.roomId).emit('receive_add', newChar);
-    });
+    // socket.on('add_player', function(newChar) {
+    //   console.log('NEW CHAR SERVER', newChar);
+    //   // io.to(param.roomId).emit('receive_add', newChar);
+    // });
 
-    socket.on('move_player', function(movedChars) {
-      console.log('RECEIVE MOVE', movedChars);
-      io.to(param.roomId).emit('receive_move', movedChars);
-    });
+    // socket.on('move_player', function(movedChars) {
+    //   console.log('RECEIVE MOVE', movedChars);
+    //   io.to(param.roomId).emit('receive_move', movedChars);
+    // });
 
-    socket.on('share_dice', function(dice) {
-      var message = {};
-      message.diceValue = dice.diceValue;
-      message.dice = dice.rolled;
-      message.author = `[MJ] ${dice.author}`;
-      message.id = uuidV4();
-      if (!isNaN(dice.rolled)) {
-        io.to(param.roomId).emit('send_message', message);
-      }
-    });
+    // socket.on('share_dice', function(dice) {
+    //   var message = {};
+    //   message.diceValue = dice.diceValue;
+    //   message.dice = dice.rolled;
+    //   message.author = `[MJ] ${dice.author}`;
+    //   message.id = uuidV4();
+    //   if (!isNaN(dice.rolled)) {
+    //     // io.to(param.roomId).emit('send_message', message);
+    //   }
+    // });
 
     socket.on('delete_player', function(charToDelete) {
       console.log('TOKEN TO DELETE :', charToDelete);
       io.to(param.roomId).emit('receive_delete', charToDelete);
     });
     
-    socket.on('send_message', function(messageContent) {
-      var message = {};
-      message.message = messageContent.message;
-      if (messageContent.role === 'player') {
-        message.author = `${messageContent.author} :`;
-      } else {
-        message.author = `[MJ] ${messageContent.author} :`;
-      }
-      message.id = uuidV4();
-      console.log(message, 'on send_message');
-      io.to(param.roomId).emit('send_message', message);
-    });
+    // socket.on('send_message', function(messageContent) {
+    //   var message = {};
+    //   message.message = messageContent.message;
+    //   if (messageContent.role === 'player') {
+    //     message.author = `${messageContent.author} :`;
+    //   } else {
+    //     message.author = `[MJ] ${messageContent.author} :`;
+    //   }
+    //   message.id = uuidV4();
+    //   console.log(message, 'on send_message');
+    //   // io.to(param.roomId).emit('send_message', message);
+    // });
 
     socket.on('disconnect', function () {
       console.log('DISCONNECTION')
@@ -120,11 +119,14 @@ io.on('connection', function(socket) {
       message.author = param.userName;
       message.id = uuidV4();
       io.to(param.roomId).emit('send_message', message);
-      var tokenToKill = {};
-      tokenToKill.userName = param.userName,
-      io.to(param.roomId).emit('delete_token', tokenToKill);
+      var test = param.selfId;
+      // var tokenToKill = {};
+      // tokenToKill.name = param.userName,
+      // tokenToKill.id = 'param.selfId',
+      console.log('TOKEN TO KILL', test);
+      io.to(param.roomId).emit('delete_token', test);
       users.removeUser(param.selfId);
-      console.log(users);
+      // console.log(users);
     });
   });
 });
