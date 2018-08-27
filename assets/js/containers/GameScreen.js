@@ -34,6 +34,7 @@ const mapStateToProps = state => ({
   role: state.user.role,
   drawColor: state.board.drawColor,
   drawPicker: state.board.drawPicker,
+  help: state.actionBar.help,
 });
 
 /* === Actions ===

@@ -8,7 +8,6 @@ var socket = require('socket.io');
 var uuidV4 = require('uuid/v4');
 // Local import
 var { Users } = require('./utils/users.js');
-// var { isRealString } = require('./utils/validation.js');
 // Class instanciation
 var users = new Users();
 
@@ -128,6 +127,8 @@ io.on('connection', function(socket) {
       var tokenToKill = {};
       tokenToKill.userName = param.userName,
       io.to(param.roomId).emit('delete_token', tokenToKill);
+      users.removeUser(param.selfId);
+      console.log(users);
     });
   });
 });

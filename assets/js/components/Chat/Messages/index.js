@@ -60,16 +60,13 @@ class Messages extends React.Component {
               border
             >
               <p className="question-text">
-                    TEST2 TEST2
+                    Messagerie
               </p>
               <ul className="question-ul">
-                <li className="question-ul-li">x correspond au nombre de dés à lancer</li>
-                <li className="question-ul-li">D est le séparateur</li>
-                <li className="question-ul-li">y le nombre de face pour les dés à lancer</li>
+                <li className="question-ul-li">Vous pouvez utiliser le chat pour communiquer</li>
+                <li className="question-ul-li">Les lancers de dés s'afficheront ici</li>
+                <li className="question-ul-li">Affiche automatiquement les lancers critiques sur les D20 et D100</li>
               </ul>
-              <p className="question-text">
-                    TEST2 TEST2
-              </p>
             </ReactTooltip>
           </div>
         )}

@@ -8,50 +8,38 @@
  */
 .logo
   // border: 1px solid black
-  text-align: center
+  // text-align: center
   grid-area: l
   background: url(../../assets/img/logoaccident4.png) no-repeat center
   background-size: contain
+  transition: all .2s;
   &:hover
-    animation-name: magicCristal
-    animation-duration: 1.3s
-    animation-fill-mode: forwards
-    animation-timing-function: linear
-    // animation: blur 1s linear forwards;
+    background: url(../../assets/img/meht.png) no-repeat center
+    background-size: contain
 
 .help-over
   animation-name: help-animation
   animation-duration: .2s
   animation-fill-mode: forwards
   animation-timing-function: linear
-  // animation: blur 1s linear forwards;
   position: absolute
-  background-color: rgba(0, 0, 0, .5)
+  background-color: rgba(0, 0, 0, .4)
   z-index: 2002
 
+#kcolconeb
+  background: url(../../assets/img/kcolconebmedium.png) no-repeat center
+  width: 100%
+  height: 100%
+  opacity: .85
   /** KEYFRAMES **/
-@keyframes magicCristal 
-  0%
-  25%
-  50%
-    background: url(../../assets/img/meht.png) no-repeat center
-    background-size: contain
-  75%
-  100% 
-    background: url(../../assets/img/logoaccident4.png) no-repeat center
-    background-size: contain
-
 @keyframes help-animation 
   0%
     width: 1%
     height: 1%
     left: 50%
     top: 50%
-  25%
-  50%
-  75%
-  100% 
-    width: 100%
-    height: 100%
+  100%
+    width: 100vw
+    height: 100vh
     left: 0
     top: 0
