@@ -141,6 +141,9 @@ input {
 }
 
 /* Codex */
+.header-image {
+    display:none;
+}
 
 .content-codex {
     margin-left:9em;

@@ -35,12 +35,12 @@
                             <span class="author-rank">{{post.author.characterProfile.rank}}</span>
                         </div>
 
-                        <div id="blocAVA">
-                            <div class="blocAVA">
-                                <div class="avaPOST">
+                        <div id="container-avatar">
+                            <div class="container-avatar">
+                                <div class="container-image">
                                     <img src="{{ post.author.characterProfile.avatar }}">
                                 </div>
-                                <div class="abtPOST">
+                                <div class="container-about">
                                     <div class="player-info">
                                         <span class="profile-label">Pseudo :</span> {{ post.author.username }}
                                         <span class="profile-label">Date d'inscription :</span> {{post.author.dateInserted|date('d-m-Y')}}

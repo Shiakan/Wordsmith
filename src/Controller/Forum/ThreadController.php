@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use PhpParser\Node\Expr\PostDec;
 
 /**
  * @Route("/forum")
@@ -226,23 +227,54 @@ class ThreadController extends Controller
      */
     public function moveThread(Request $request, Thread $thread): Response 
     {
+        // On récupère les données de l'ancienne sous-catégorie du thread
+        $previousSubcategory = $thread->getSubcategory();
         
+        //On récupère les données de la nouvelle sous-catégorie dans laquelle on veut déplacer le thread
         $data = $request->request->get('subject');
         $subcategoryId = $data['subcategory'];
 
+        //On récupère la sous-catégorie dans laquelle on veut déplacer le thread
         $repository = $this->getDoctrine()->getRepository(Subcategory::class);
-        $subcategory = $repository->findOneById($subcategoryId);
+        $newSubcategory = $repository->findOneById($subcategoryId);
 
+        //On récupère l'ancienne sous-catégorie du thread
+        $formerSubcategory = $repository->findOneById($previousSubcategory);
+
+        // On passe la nouvelle sous-catégorie au thread que l'on déplace
         $em = $this->getDoctrine()->getManager();
-        $thread->setSubcategory($subcategory);
+        $thread->setSubcategory($newSubcategory);
         $em->flush();
 
-        //On passe le dernier post de ce thread à la sous-catégorie dans laquelle on vient de le déplacer
-        $subcategory->setLastPost($thread->getLastPost());
+        //Pour chaque post de ce thread, on lui passe également la nouvelle sous-catégorie
+        $posts = $thread->getPosts();
+        foreach($posts as $post){
+            $post->setSubcategory($newSubcategory);
+        }
         $em->flush();
 
-        //On redirige vers la sous-catégorie
-        return $this->redirectToRoute('forum_subcategory', ['subcategory_slug' => $subcategory->getSlug()]);
+        // On récupère le nombre de threads présents dans l'ancienne sous-catégorie
+        $nbThreads = count($formerSubcategory->getThreads());
+
+        //Si l'ancienne sous-catégorie n'a pas d'autres threads, on lui dit que la colonne "last_post" = null
+        if($nbThreads == 0){
+            $formerSubcategory->setLastPost(null);
+            $em->flush();
+         }else {
+             //Si l'ancienne sous-catégorie a d'autres threads, on va récupérer le post le plus récent parmi ces autres threads,
+             //et on passe à la colonne "last_post" ce post qui est le nouveau post le plus récent
+            $repositoryPost = $this->getDoctrine()->getRepository(Post::class);
+            $newerPost = $repositoryPost->findLastPost($formerSubcategory);
+            $formerSubcategory->setLastPost($newerPost);
+            $em->flush();
+        }
+
+        //On passe le dernier post du thread que l'on vient de déplacer dans la sous-catégorie dans laquelle on vient de le déplacer
+        $newSubcategory->setLastPost($thread->getLastPost());
+        $em->flush();
+
+        //On redirige vers la sous-catégorie dans laquelle on vient de déplacer le thread
+        return $this->redirectToRoute('forum_subcategory', ['subcategory_slug' => $newSubcategory->getSlug()]);
     }
 
     /**

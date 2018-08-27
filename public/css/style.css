@@ -123,8 +123,8 @@ small {
     background-color: #0b0b0b;
 }
  /* FIN BARRE DE DÉFILEMENT */
-/* Formulaires */
 
+/* FORMULAIRES */
 .login-error {
     color: rgb(218, 57, 57);
     font-family:'Nunito Sans', sans-serif;
@@ -239,9 +239,7 @@ input {
     padding:0.2em;
     margin:0;
 }
-
 .search-form button {
-    /* display:inline-block; */
     padding: 0.505em;
     margin-left:-0.315em;
     border-radius: 0 0.3em 0.3em 0;
@@ -251,9 +249,7 @@ input {
     background-color:#125C38;
     font-size:1em;
 }
-
 .move-form .btn-flex {
-    /* display:inline-block; */
     padding: 0.6em;
     margin-left:-0.2em;
     border-radius: 0 0.3em 0.3em 0;
@@ -263,51 +259,14 @@ input {
     background-color:#125C38;
     font-size:1em;
 }
-
 .search-form label {
     display:none;
 }
-
 .search-form button:hover {
     background-color:rgb(15, 49, 33);
     border-color: rgb(15, 49, 33);
 }
 
-/* HEADER  */
-/* Navbar  */
-.fixed-navbar {
-    position:fixed;
-    width: 100%;
-    z-index:1;
-}
-.navbar {
-    font-family: 'Forum', cursive;
-    font-size:1em;
-    padding:0.5em 1em 0 1em;
-    background-color: #0B0B0B;
-    display:flex;
-    justify-content:space-between;
-    border-bottom:1px solid #503415;
-    text-transform:uppercase;
-    letter-spacing:0.075em;
-}
-.navbar ul li {
-    list-style:none;
-    display:inline-block;
-    margin-top:1em;
-}
-.navbar-left ul li {
-    margin-right:0.8em;
-}
-.navbar-right ul li {
-    margin-left:0.8em;
-}
-.logo {
-    height:50px;
-}
-.logo-cristal {
-    height:60px;
-}
 
   /* Codex Navbar */
 .navbar-codex {
@@ -420,14 +379,11 @@ input {
 /* FIN TOUS LES BOUTONS */
 
 /* Codex */
-.header-codex {
-    background-image:url('https://nsa39.casimages.com/img/2018/08/14//180814093858746062.jpg');
-    background-repeat: no-repeat;
-    background-position:center;
-    background-size:100% 100%;
-    margin:1em;
-    height:100%;
+.header-image {
+    width:100%;
+    height:auto;
     border-radius:0.3em;
+    margin-bottom:1em;
 }
 .last-article {
     display:inline;

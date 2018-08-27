@@ -42,6 +42,19 @@ class PostRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+
+    public function findLastPost($subcategory): ?Post
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.subcategory = :subcategory')
+            ->setParameter('subcategory', $subcategory)
+            ->orderBy('p.createdAt', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+    
     
     /**
      * @return Post[] Returns an array of Post objects

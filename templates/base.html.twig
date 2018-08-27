@@ -97,15 +97,16 @@
         </main>
         <footer>
         {% block footer %}
-        <a href="https://twitter.com/KelProjet?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @KelProjet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-            <ul>
-                <li>
-                    <a href="{{path('CGU')}}">CGU</a>
-                </li>
-                <li>
-                    <a href="{{path('about')}}">About</a>
-                </li>
-            </ul>
+        <div class="foot-content">
+            <div>
+                <small>Copyright Wordsmith-2018. Tous droits réservés</small>
+            </div>
+            <a href="{{ path('about') }}">A propos</a>
+            |
+            <a href="{{ path('CGU') }}">Conditions Générales d'UItilisation</a>
+            |
+            <a href='{{path('contact')}}'>Contactez nous</a>
+        </div>
         {% endblock %}
        </footer>
     {% endblock %}
