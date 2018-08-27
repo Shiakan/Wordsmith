@@ -15,10 +15,6 @@ class HasReadThread
      */
     private $id;
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $timestamp;
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="hasReadThreads", cascade={"persist"})
      */
     private $user;
@@ -34,15 +30,6 @@ class HasReadThread
     public function getId()
     {
         return $this->id;
-    }
-    public function getTimestamp(): ?\DateTimeInterface
-    {
-        return $this->timestamp;
-    }
-    public function setTimestamp(\DateTimeInterface $timestamp): self
-    {
-        $this->timestamp = $timestamp;
-        return $this;
     }
     public function getUser(): ?User
     {

@@ -1,12 +1,10 @@
-
 {% extends 'base.html.twig' %}
-
-{% block title %}Mon profil{% endblock %}
+{% block title %}Nom de votre personnage{% endblock %}
 
 {% block main %}
 <div class="wrapper-homepage">
     <div class="container container-width">
-        <h1>{{ user.username }}</h1>
+        <h1>Veuillez renseigner le nom de votre personnage</h1>
         {{ form_start(form) }}
         {{ form_widget(form) }}
         <button class="btn btn-submit" type="submit">Poster</button>

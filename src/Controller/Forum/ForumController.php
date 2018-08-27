@@ -9,6 +9,7 @@ use App\Entity\Subcategory;
 use App\Entity\HasReadThread;
 use App\Entity\HasReadSubcategory;
 use App\Repository\ThreadRepository;
+use App\Repository\SubcategoryRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -30,16 +31,18 @@ class ForumController extends AbstractController
     }
 
     /**
-     * @Route("/forum/subcategory/{id}/page/{page}", name="forum_subcategory", requirements={"page" = "\d+"}, defaults={"page" = 1}, methods="GET|POST")
+     * @Route("/forum/{subcategory_slug}/page/{page}", name="forum_subcategory", requirements={"page" = "\d+"}, defaults={"page" = 1}, methods="GET|POST")
      */
-    public function showSubcategory(Subcategory $subcategory,ThreadRepository $threadRepository , Request $request, $page, UserInterface $user=null)
+    public function showSubcategory($subcategory_slug, SubcategoryRepository $subcategoryRepository, ThreadRepository $threadRepository , Request $request, $page, UserInterface $user=null)
     {
         $limit = 10; //limite de questions par page (pagination)
+
+        $subcategory = $subcategoryRepository->findOneBySlug($subcategory_slug);
         $threads = $threadRepository->findByAll($page,$limit,$subcategory,$user); //requête où on passe la page actuelle, le seeBanned et la limite de questions
         $totalThreads = $threadRepository->findCountMax($subcategory); //requête qui compte le nombre total de questions avec ou sans les banned
         $pageMax = ceil($totalThreads / $limit); // nombre de page max à afficher (sert pour bouton suivant)
-
-        return $this->render('forum/show.html.twig', [
+        // dump($subcategory_slug);die;
+        return $this->render('forum/subcategory_show.html.twig', [
             'subcategory'=> $subcategory,
             'page'=>$page,
             'pageMax'=>$pageMax,

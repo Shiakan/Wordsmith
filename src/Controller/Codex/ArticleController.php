@@ -23,21 +23,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class ArticleController extends Controller
 {
     /**
-     * @Route("/article/show/{id}", name="article_show")
+     * @Route("/{slug}", name="article_show")
      */
     public function show(Article $article, Request $request, ObjectManager $manager, UserInterface $user=null)
-    {
+    {   
+        //On récupère les tags de l'article
         $repositoryTag= $this->getDoctrine()->getRepository(Tag::class);
-
         $tags = $repositoryTag->findByOrderId();
 
+        //On créé le formulaire pour poster un nouveau commentaire
         $comment = new Comment();
         $form = $this->createForm(CommentType::class , $comment);
         $form->handleRequest($request);
-        $comment->setAuthor($user);
+        
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $comment->setArticle($article);
+            $comment->setAuthor($user); //On passe l'auteur du commentaire
+            $comment->setArticle($article); //On passe l'article pour y rattacher le commentaire
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();

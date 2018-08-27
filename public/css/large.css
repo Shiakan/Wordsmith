@@ -15,6 +15,7 @@
     width:49%;
 }
 
+
 /*Changement de sous catégorie*/
 .moveOn{
     display: inline-block;
@@ -32,4 +33,13 @@ text-align: center;
     justify-content: space-between;
     align-items: center;
     margin-bottom:0.6em;
+}
+/* PROFIL */
+
+.container-profil .left-side {
+    width:25%;
+}
+
+.container-profil .right-side {
+    width:75%;
 }

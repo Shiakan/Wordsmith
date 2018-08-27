@@ -49,6 +49,17 @@ class Thread
      * @ORM\OneToMany(targetEntity="App\Entity\HasReadThread", mappedBy="thread")
      */
     private $hasReadThreads;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Post", inversedBy="topic", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $lastPost;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $slug;
     public function __construct()
     {
         $this->posts = new ArrayCollection();
@@ -170,5 +181,29 @@ class Thread
     {
         return $this->title;
         return $this->subtitle;
+    }
+
+    public function getLastPost(): ?Post
+    {
+        return $this->lastPost;
+    }
+
+    public function setLastPost(Post $lastPost): self
+    {
+        $this->lastPost = $lastPost;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 }

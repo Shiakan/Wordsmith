@@ -6,8 +6,8 @@
         {% block stylesheets %}
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
             <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-            <link rel="stylesheet" media="screen and (max-width:789px" href="{{ asset('css/mobile.css') }}">
-            <link rel="stylesheet" media="screen and (min-width:790px" href="{{ asset('css/medium.css') }}">
+            <link rel="stylesheet" media="screen and (max-width:900px" href="{{ asset('css/mobile.css') }}">
+            <link rel="stylesheet" media="screen and (min-width:901px" href="{{ asset('css/medium.css') }}">
             <link rel="stylesheet" media="screen and (min-width:1200px" href="{{ asset('css/large.css') }}">
             <link rel="stylesheet" media="screen and (min-width:1600px" href="{{ asset('css/superlarge.css') }}">
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
@@ -41,7 +41,7 @@
                         {% endif %}
                     </div>
                 </div>
-                <a href="{{ path('homepage') }}"><img class="logo-burger" src="https://nsa39.casimages.com/img/2018/08/12//180812035308814067.png" alt="Logo"></a> 
+                <a href="{{ path('homepage') }}"><img class="logo-burger" src="{{ asset('image/titlelogo.png') }}" alt="Logo"></a> 
             </div>
 
             <div class="fixed-navbar">
@@ -97,15 +97,16 @@
         </main>
         <footer>
         {% block footer %}
-        <a href="https://twitter.com/KelProjet?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @KelProjet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-            <ul>
-                <li>
-                    <a href="{{path('CGU')}}">CGU</a>
-                </li>
-                <li>
-                    <a href="{{path('about')}}">About</a>
-                </li>
-            </ul>
+        <div class="foot-content">
+            <div>
+                <small>Copyright Wordsmith-2018. Tous droits réservés</small>
+            </div>
+            <a href="{{ path('about') }}">A propos</a>
+            |
+            <a href="{{ path('CGU') }}">Conditions Générales d'UItilisation</a>
+            |
+            <a href='{{path('contact')}}'>Contactez nous</a>
+        </div>
         {% endblock %}
        </footer>
     {% endblock %}

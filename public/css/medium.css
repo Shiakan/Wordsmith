@@ -1,3 +1,46 @@
+/* HEADER  */
+/* Navbar  */
+.fixed-navbar {
+    position:fixed;
+    width: 100%;
+    z-index:1;
+}
+.navbar {
+    font-family: 'Forum', cursive;
+    font-size:1em;
+    padding:0.5em 1em 0 1em;
+    background-color: #0B0B0B;
+    display:flex;
+    justify-content:space-between;
+    border-bottom:1px solid #503415;
+    text-transform:uppercase;
+    letter-spacing:0.075em;
+}
+.navbar ul li {
+    list-style:none;
+    display:inline-block;
+    margin-top:1em;
+}
+.navbar-left ul li {
+    margin-right:0.8em;
+}
+.navbar-right ul li {
+    margin-left:0.8em;
+}
+.logo {
+    height:50px;
+}
+.logo-cristal {
+    height:60px;
+}
+/* On fait disparaître le menu burger */
+.logo-burger {
+    display:none;
+}
+.burger-navbar-codex {
+    display:none;
+}
+/* WRAPPERS & CONTAINERS */
 .container-width {
     width:40%;
     margin:0 auto 3.5em;
@@ -5,55 +48,56 @@
 .container-index {
     width:100%;
 }
-
-.logo-burger {
-    display:none;
-}
-
-.burger-navbar-codex {
-    display:none;
-}
 .wrapper {
     width:65%;
 }
 .container-width {
     width:70%;
 }
+
+/* FORMULAIRES */
 .search-form .form-group, 
 input {
     width:85%;
 }
 
+/* PROFIL */
+.room-alert {
+    display:none;
+}
 /* Codex commentaires */
 .comment-header {
     display:flex;
     align-items: center;
 }
-
 .comment-header small {
     margin-left:0.5em;
 }
-
 /*JUMBOTRON FORUM*/
 .jumbotron{
     width: 100%;
-    height: 30vh;
+    height: 10vh;
     background-color: #0D0D0D;
     border:1px solid #503415;
     color: white;
     margin-bottom:1em;
     text-align:center;
 }
-
+.last-message-mobile {
+    display:none;
+}
+.icon-pa-mobile {
+    display:none;
+}
 /* FORUM PROFIL SOUS AVATAR */
-#blocAVA {
+#container-avatar {
     width:200px; 
     height:320px; 
     margin:0.5em auto 0.5em; 
     overflow:hidden;
 
 }
-.blocAVA {
+.container-avatar {
     position:relative; 
     width:200px; 
     height:320px; 
@@ -61,19 +105,19 @@ input {
     border:1px solid #503415;
 }
 /* AVATAR */
-.avaPOST {
+.container-image {
     width:200px; 
     height:320px;
     transition:transform 0.75s linear; 
     -webkit-transition:transform 0.75s linear;
 
 }
-#blocAVA:hover .avaPOST {
+#container-avatar:hover .container-image {
     transform:translateX(200px); 
     -webkit-transform:translateX(200px);
 }
 /* BLOC INFORMATIONS JOUEUR */
-.abtPOST {
+.container-about {
     position:absolute; 
     margin-top:-320px;
     padding:0.5em; 
@@ -85,12 +129,12 @@ input {
     transition:transform 0.75s linear; 
     -webkit-transition:transform 0.75s linear;
 } 
-#blocAVA:hover .abtPOST {
+#container-avatar:hover .container-about {
     transform:translateX(0px); 
     -webkit-transform:translateX(0px);
 }
 /* CONTENU INFORMATIONS JOUEUR */
-.abtPOST div{
+.container-about div{
     font-size:0.8em;
     margin:0.2em auto;
     width:100%;
@@ -100,18 +144,18 @@ input {
     background-color:#0B0B0B;
 }
 /* TITRES INFORMATIONS JOUEUR */
-.abtPOST div span{
+.container-about div span{
     letter-spacing:0.1em;
     text-transform:uppercase; 
     color: #3f7a5d;
     font-family: 'BenchNine', sans-serif;
     font-weight:bold;
 }
-
-#tabs {
-    min-width:35em;
-    min-height:35em;
+.player-info {
+    border-bottom:1px solid #503415;
+    margin-bottom:0.2em;
 }
-#tabs-1, #tabs-2, #tabs-3, #tabs-4 {
-    min-height:35em;
+/* AFFICHAGE SUJET */
+.post-information-mobile {
+    display:none;
 }

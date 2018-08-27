@@ -24,7 +24,10 @@ class RegistrationType extends AbstractType
     {
         $builder
             ->add('username', TextType::class, [
-                'label' => 'Nom de votre personnage',
+                'label' => 'Pseudo',
+                'attr' => [
+                    'placeholder' => 'Votre pseudo'
+                ],
                 'constraints' => [
                     New NotBlank([
                         'message' => 'Veuillez saisir le nom de votre personnage'
@@ -32,8 +35,8 @@ class RegistrationType extends AbstractType
                     New Length([
                         'min' => 3,
                         'max' => 32,
-                        'minMessage' => 'Le nom de votre personnage doit faire au minimum 3 caractères',
-                        'maxMessage' => 'Le nom de votre personnage ne peut pas dépasser 32 caractères'
+                        'minMessage' => 'Votre pseudo doit faire au minimum 3 caractères',
+                        'maxMessage' => 'Votre pseudo ne peut pas dépasser 32 caractères'
                     ])
                 ]
             ])
@@ -83,10 +86,10 @@ class RegistrationType extends AbstractType
                         ],
                         'required' => true,
                         'first_options' => [
-                            'label' => 'Tapez votre mot de passe'
+                            'label' => 'Mot de passe'
                         ],
                         'second_options' => [
-                            'label' => 'Répétez votre mot de passe'
+                            'label' => 'Mot de passe'
                         ],
                         'required' => true 
                         ]);
@@ -102,10 +105,10 @@ class RegistrationType extends AbstractType
                         ],
                         'required' => false,
                         'first_options' => [
-                            'label' => 'Laisser vide si inchangé'
+                            'label' => 'Modifier le mot de passe'
                         ],
                         'second_options' => [
-                            'label' => 'Laisser vide si inchangé'
+                            'label' => 'Répéter le mot de passe'
                         ],
                         'required' => false 
                     ]);

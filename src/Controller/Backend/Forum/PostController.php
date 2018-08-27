@@ -28,6 +28,6 @@ class PostController extends Controller
             $em->flush();
         }
         // On redirige vers la page de la question concernée
-        return $this->redirectToRoute('thread_show', ['id' => $post->getThread()->getId()]);
+        return $this->redirectToRoute('thread_show', ['thread_slug' => $post->getThread()->getSlug()]);
     }
 }
