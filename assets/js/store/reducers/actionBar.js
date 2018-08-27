@@ -39,7 +39,6 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         dice: true,
         sheet: false,
-        help: false,
       };
 
     case SHOW_SHEET:
@@ -47,15 +46,12 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         dice: false,
         sheet: true,
-        help: false,
       };
 
     case SHOW_HELP:
       return {
         ...state,
-        dice: false,
-        sheet: false,
-        help: true,
+        help: !state.help,
       };
 
     default:

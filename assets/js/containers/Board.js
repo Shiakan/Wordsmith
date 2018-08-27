@@ -6,15 +6,12 @@ import { connect } from 'react-redux';
 /**
  * Local import
  */
-import ActionBar from '../components/ActionBar';
+import Board from '../components/GameScreen/Board';
 
 // Action Creators
 import {
-  doSomething,
-  showDice,
-  showSheet,
-  showHelp,
-} from '../store/reducers/actionBar';
+
+} from '../store/reducers/board';
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation
@@ -24,7 +21,14 @@ import {
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
 const mapStateToProps = state => ({
-  help: state.actionBar.help,
+  drawColor: state.board.drawColor,
+  drawing: state.board.drawing,
+  eventStream: state.board.eventStream,
+  eventStore: state.board.eventStore,
+  // color: state.gameScreen.color,
+  // name: state.gameScreen.name,
+  // coordX: state.gameScreen.coordX,
+  // coordY: state.gameScreen.coordY,
 });
 
 /* === Actions ===
@@ -34,29 +38,22 @@ const mapStateToProps = state => ({
  *  - ownProps : les props passées au container
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
-const mapDispatchToProps = dispatch => ({
-  doSomething: () => {
-    dispatch(doSomething());
-  },
-  showDice: () => {
-    dispatch(showDice());
-  },
-  showSheet: () => {
-    dispatch(showSheet());
-  },
-  showHelp: () => {
-    dispatch(showHelp());
-  },
+const mapDispatchToProps = () => ({
 });
 
 // Container
 // connect(Ce dont j'ai besoin)(Qui en a besoin)
-const ActionBarContainer = connect(
+const BoardContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(ActionBar);
+)(Board);
+
+/* 2 temps
+const createContainer = connect(mapStateToProps, mapDispatchToProps);
+const BoardContainer = createContainer(Board);
+*/
 
 /**
  * Export
  */
-export default ActionBarContainer;
+export default BoardContainer;

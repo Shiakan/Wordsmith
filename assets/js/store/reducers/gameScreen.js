@@ -41,6 +41,7 @@ export const AUTO_PLAYER = 'AUTO_PLAYER';
 export const AUTO_RECEIVE = 'AUTO_RECEIVE';
 const UPDATE_CHARS = 'UPDATE_CHARS';
 
+
 /**
  * Traitements
  */
@@ -109,7 +110,9 @@ const reducer = (state = initialState, action = {}) => {
 
     case RECEIVE_MOVE: {
       console.log('receive move action :', action.characters);
-      const filteredChars = state.characters.filter(char => char.name !== action.characters.name);
+      const filteredChars = state.characters.filter(
+        char => char.id !== action.characters.id,
+      );
       console.log('FILTERED :', filteredChars);
 
       return {
@@ -118,12 +121,14 @@ const reducer = (state = initialState, action = {}) => {
       };
     }
     case RECEIVE_DELETE: {
-      const filteredChars = state.characters.filter(char => char.name !== action.characters[0].name);
-      console.log('character to kill :', action.characters[0].name);
+      const remainingChars = state.characters.filter(
+        char => char.id !== action.characters[0].id,
+      );
+      // console.log('character to kill :', action.characters[0].name);
 
       return {
         ...state,
-        characters: [...filteredChars],
+        characters: [...remainingChars],
       };
     }
     default:

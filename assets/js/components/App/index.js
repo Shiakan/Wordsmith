@@ -14,9 +14,9 @@ import GameScreen from '../../containers/GameScreen';
 import Chat from '../Chat';
 import Panel from '../../containers/Panel';
 import Aetherlust from '../Aetherlust';
-import Logo from '../Logo';
+import Logo from '../../containers/Logo';
 import ActionBar from '../../containers/ActionBar';
-import Footer from '../Footer';
+// import Footer from '../Footer';
 
 
 /**
@@ -30,7 +30,7 @@ const App = () => (
     <Aetherlust />
     <Logo />
     <ActionBar />
-    <Footer />
+    {/* <Footer /> */}
   </div>
 );
 

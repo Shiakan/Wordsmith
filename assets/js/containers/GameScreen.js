@@ -12,6 +12,10 @@ import GameScreen from '../components/GameScreen';
 import {
   toggleScreen, handleSlide,
 } from '../store/reducers/gameScreen';
+import {
+  shareDrawing, drawingColor, toggleDrawPicker,
+} from '../store/reducers/board';
+
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation
@@ -28,6 +32,9 @@ const mapStateToProps = state => ({
   characters: state.gameScreen.characters,
   isSlided: state.gameScreen.isSlided,
   role: state.user.role,
+  drawColor: state.board.drawColor,
+  drawPicker: state.board.drawPicker,
+  help: state.actionBar.help,
 });
 
 /* === Actions ===
@@ -41,8 +48,17 @@ const mapDispatchToProps = dispatch => ({
   toggleScreen: () => {
     dispatch(toggleScreen());
   },
+  togglePicker: () => {
+    dispatch(toggleDrawPicker());
+  },
   handleSlide: () => {
     dispatch(handleSlide());
+  },
+  shareDrawing: () => {
+    dispatch(shareDrawing());
+  },
+  onChangeColor: (value) => {
+    dispatch(drawingColor(value));
   },
 });
 

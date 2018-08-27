@@ -4,7 +4,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { FaAngleDoubleRight, FaAngleDoubleLeft } from 'react-icons/fa';
+import { FaAngleDoubleRight, FaAngleDoubleLeft, FaFeather, FaQuestionCircle } from 'react-icons/fa';
+import { CirclePicker } from 'react-color';
+import ReactTooltip from 'react-tooltip';
 /**
  * Local import
 */
@@ -12,6 +14,8 @@ import { FaAngleDoubleRight, FaAngleDoubleLeft } from 'react-icons/fa';
 import Character from '../../containers/Character';
 import SwitchMap from '../../containers/SwitchMap';
 import SwitchMJ from '../../containers/SwitchMJ';
+import Board from '../../containers/Board';
+
 
 // Styles et assets
 import './gamescreen.sass';
@@ -29,7 +33,14 @@ class GameScreen extends React.Component {
     characters: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
     handleSlide: PropTypes.func.isRequired,
     isSlided: PropTypes.bool.isRequired,
+    help: PropTypes.bool.isRequired,
     role: PropTypes.string.isRequired,
+    shareDrawing: PropTypes.func.isRequired,
+    togglePicker: PropTypes.func.isRequired,
+    onChangeColor: PropTypes.func.isRequired,
+    drawColor: PropTypes.string.isRequired,
+    drawPicker: PropTypes.bool.isRequired,
+
   };
 
   componentDidMount() {
@@ -41,10 +52,17 @@ class GameScreen extends React.Component {
     return true;
   }
 
+  changeColor = (color) => {
+    const { onChangeColor, togglePicker } = this.props;
+    onChangeColor(color.hex);
+    togglePicker();
+  }
+
   render() {
     const {
       toggleScreen, isBoard, map, isMap,
-      grid, characters, handleSlide, isSlided, role,
+      grid, characters, handleSlide, isSlided,
+      role, shareDrawing, drawColor, togglePicker, drawPicker, help,
     } = this.props;
     const classSwitch = classNames(
       'screen-switch',
@@ -74,13 +92,50 @@ class GameScreen extends React.Component {
             ) }
           {isBoard
             && (
-            <button
-              type="button"
-              className="screen-switch-button"
-              onClick={toggleScreen}
-            >
+            <div>
+              <button
+                type="button"
+                className="screen-switch-button"
+                onClick={toggleScreen}
+              >
             Switch to Map
-            </button>
+              </button>
+              <div
+                className="screen-switch-board"
+              >
+                <button
+                  type="button"
+                  className="screen-switch-share"
+                  onClick={shareDrawing}
+                >Share Board
+                </button>
+                <FaFeather
+                  className="screen-switch-icon"
+                  style={{ color: drawColor }}
+                  onClick={togglePicker}
+                />
+              </div>
+              {drawPicker
+                && (
+                <div>
+                  <span
+                    className="screen-switch-span"
+                  >
+                    Choose color :
+                  </span>
+                  <CirclePicker
+                    className="screen-switch-picker"
+                    color={drawColor}
+                    circleSize={17}
+                    circleSpacing={8}
+                    width="180px"
+                    onChange={this.changeColor}
+                    triangle="hide"
+                  />
+                </div>
+                )
+              }
+            </div>
             ) }
           {isSlided ? (
             <FaAngleDoubleLeft
@@ -96,6 +151,35 @@ class GameScreen extends React.Component {
         </div>
         {isMap && (
         <div className="screen-map">
+          {help
+              && (
+                <div className="toolTip">
+                  <FaQuestionCircle data-tip="Gamescreen-tooltip" data-for="Gamescreen-tooltip" className="question" />
+                  <ReactTooltip
+                    id="Gamescreen-tooltip"
+                    place="left"
+                    type="dark"
+                    effect="float"
+                    border
+                  >
+                    <p className="question-text">
+                          Déplacements :
+                    </p>
+                    <ul className="question-ul">
+                      <li className="question-ul-li">Vous pouvez déplacez vos pions sur la map pour faire savoir à vos compagnons où vous vous rendez</li>
+                      <li className="question-ul-li">Le Maître du jeu peut déplacer tous les pions</li>
+                    </ul>
+                    <p className="question-text">
+                    Grâce au menu sur la gauche de l'écran :
+                    </p>
+                    <ul className="question-ul">
+                      <li className="question-ul-li">Vous savez qui est présent avec vous dans la partie</li>
+                      <li className="question-ul-li">Vous affichez ou non un quadrillage sur la map</li>
+                      <li className="question-ul-li">Le Maître de jeu peut créer de nouveaux pions et téléporter les joueurs sur une autre carte</li>
+                    </ul>
+                  </ReactTooltip>
+                </div>
+              )}
           {characters.map(character => (
             <Character
               key={character.id}
@@ -111,7 +195,7 @@ class GameScreen extends React.Component {
 
         </div>
         ) }
-        {isBoard && <div className="screen-board">THIS IS THE BOARD</div> }
+        {isBoard && <Board /> }
       </div>
     );
   }

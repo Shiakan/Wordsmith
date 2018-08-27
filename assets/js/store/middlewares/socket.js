@@ -4,10 +4,22 @@ import uuidv4 from 'uuid/v4'; // https://www.npmjs.com/package/uuid
  */
 import io from 'socket.io-client';
 import { WEBSOCKET_CONNECT } from '../reducers/user';
+import { SHARE_DRAWING, receiveDrawing } from '../reducers/board';
 import { ADD_MESSAGE, receiveMessage } from '../reducers/textInput';
 import { ROLL_DICE, SHARE_DICE } from '../reducers/dice';
 import {
-  receiveDelete, autoAddPlayer, deletePlayer, AUTO_PLAYER, MOVE_PLAYER, DELETE_PLAYER, CREATE_PLAYER, CHANGE_MAP, receiveMove, receiveChar, receiveMap, autoReceivePlayer,
+  receiveDelete,
+  autoAddPlayer,
+  deletePlayer,
+  AUTO_PLAYER,
+  MOVE_PLAYER,
+  DELETE_PLAYER,
+  CREATE_PLAYER,
+  CHANGE_MAP,
+  receiveMove,
+  receiveChar,
+  receiveMap,
+  autoReceivePlayer,
 } from '../reducers/gameScreen';
 /**
  * Code
@@ -36,6 +48,10 @@ const socketConnect = store => next => (action) => {
         console.log('token to add :', tokenToAdd);
         store.dispatch(autoAddPlayer(tokenToAdd));
       });
+      socket.on('receive_drawing', (drawingStore) => {
+        console.log('received drawing socket :', drawingStore);
+        store.dispatch(receiveDrawing(drawingStore));
+      });
       socket.on('delete_token', (tokenToKill) => {
         store.dispatch(deletePlayer(tokenToKill));
       });
@@ -60,8 +76,6 @@ const socketConnect = store => next => (action) => {
       break;
 
     case ADD_MESSAGE: {
-      // Je transfère l'objet entier
-      // Découpable par la suite
       console.log(state.user.userName, 'ADD MESSAGE');
       const content = {};
       content.role = state.user.role;
@@ -83,6 +97,16 @@ const socketConnect = store => next => (action) => {
     }
       break;
 
+    case SHARE_DRAWING: {
+      let drawingStore = {};
+      let drawingStream = {};
+      drawingStore = state.board.eventStore;
+      drawingStream = state.board.eventStream;
+      console.log('drawing object socket :', drawingStore.goodEvents, drawingStream);
+      socket.emit('share_drawing', drawingStore.goodEvents);
+    }
+      break;
+
     case SHARE_DICE: {
       console.log(state.user.userName, 'ADD MESSAGE');
       const dice = {};
@@ -94,7 +118,9 @@ const socketConnect = store => next => (action) => {
       break;
 
     case MOVE_PLAYER: {
-      const movedChar = state.gameScreen.characters.filter(char => char.id === action.value.target.id);
+      const movedChar = state.gameScreen.characters.filter(
+        char => char.id === action.value.target.id,
+      );
       const movedChars = state.gameScreen.characters.map((char) => {
         console.log('action.value.target.id', action.value.target.id);
         if (char.id === action.value.target.id) {
@@ -104,7 +130,7 @@ const socketConnect = store => next => (action) => {
           console.log('new coords :', char.coordX, char.coordY);
         }
         return char;
-      }); 
+      });
       console.log('moved char ', movedChar[0]);
       console.log('movedchars ', movedChars);
       socket.emit('move_player', movedChar[0]);
@@ -127,7 +153,15 @@ const socketConnect = store => next => (action) => {
           state.gameScreen.cptX += 70;
         }
         state.gameScreen.cptY += 70;
-        if (newChar.name.length === 0) {
+
+        const compareChars = state.gameScreen.characters.filter(
+          char => char.name.startsWith(newChar.name),
+        );
+        if (compareChars.length >= 1) {
+          newChar.name = `${newChar.name}#${compareChars.length + 1}`;
+          console.log('compare :', compareChars);
+        }
+        if (newChar.name.startsWith('#')) {
           newChar.name = `Opponent#${state.gameScreen.cpt}`;
           state.gameScreen.cpt += 1;
         }
@@ -157,7 +191,7 @@ const socketConnect = store => next => (action) => {
       break;
 
     case DELETE_PLAYER: {
-      const charToDelete = state.gameScreen.characters.filter(char => char.name === action.value.name);
+      const charToDelete = state.gameScreen.characters.filter(char => char.id === action.value.id);
       console.log('charlol ', charToDelete);
 
       socket.emit('delete_player', charToDelete);

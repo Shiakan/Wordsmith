@@ -13,6 +13,7 @@ import sheet from './sheet';
 import textInput from './textInput';
 import messages from './messages';
 import user from './user';
+import board from './board';
 
 
 const reducers = combineReducers({
@@ -23,6 +24,7 @@ const reducers = combineReducers({
   textInput,
   messages,
   user,
+  board,
 });
 
 /**
