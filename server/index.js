@@ -8,7 +8,6 @@ var socket = require('socket.io');
 var uuidV4 = require('uuid/v4');
 // Local import
 var { Users } = require('./utils/users.js');
-// var { isRealString } = require('./utils/validation.js');
 // Class instanciation
 var users = new Users();
 
