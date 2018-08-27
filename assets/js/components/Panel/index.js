@@ -54,13 +54,14 @@ class Panel extends React.Component {
               <ul className="question-ul">
                 <li className="question-ul-li">Tapez 1D20 pour lancer 1 dé à 20 faces</li>
                 <li className="question-ul-li">2D6 pour lancer 2 dés à 6 faces</li>
-                <li className="question-ul-li">le résultat du lancer sera automatiquement partagé dans le chat</li>
+                <li className="question-ul-li">Le résultat du lancer sera automatiquement partagé dans le chat</li>
+                <li className="question-ul-li">Le Maître du jeu choisit ou non de partager son lancer</li>
               </ul>
               <p className="question-text">
                     Fiche personnage
               </p>
               <ul className="question-ul">
-                <li className="question-ul-li">Votre fiche personnage est sauvegardé dès lors que vous cliquez en dehors du texte</li>
+                <li className="question-ul-li">Votre fiche personnage est sauvegardée dès lors que vous cliquez en dehors de la zone de texte</li>
                 <li className="question-ul-li">Vous allez la retrouver dans la prochaine partie à laquelle vous participerez</li>
               </ul>
             </ReactTooltip>

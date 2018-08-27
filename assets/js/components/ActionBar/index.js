@@ -49,7 +49,7 @@ class ActionBar extends React.Component {
               border
             >
               <p className="question-text">
-                    Boutons
+                    Boutons :
               </p>
               <ul className="question-ul">
                 <li className="question-ul-li">Dés affiche l'interface de jets de dés</li>
