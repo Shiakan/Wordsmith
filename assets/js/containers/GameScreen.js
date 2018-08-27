@@ -13,7 +13,7 @@ import {
   toggleScreen, handleSlide,
 } from '../store/reducers/gameScreen';
 import {
-  shareDrawing, drawingColor, toggleDrawPicker,
+  shareDrawing, drawingColor, toggleDrawPicker, resetDrawing,
 } from '../store/reducers/board';
 
 
@@ -56,6 +56,9 @@ const mapDispatchToProps = dispatch => ({
   },
   shareDrawing: () => {
     dispatch(shareDrawing());
+  },
+  resetDrawing: () => {
+    dispatch(resetDrawing());
   },
   onChangeColor: (value) => {
     dispatch(drawingColor(value));

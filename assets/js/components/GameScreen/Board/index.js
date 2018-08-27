@@ -22,6 +22,7 @@ class Board extends React.Component {
     drawing: PropTypes.bool.isRequired,
     eventStream: PropTypes.object.isRequired,
     eventStore: PropTypes.object.isRequired,
+    shareDrawing: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
@@ -36,7 +37,7 @@ class Board extends React.Component {
 
   render() {
     const {
-      drawing, eventStore, eventStream,
+      drawing, eventStore, eventStream, shareDrawing,
     } = this.props;
     console.log(drawing ? 'start drawing' : 'stop drawing');
     return (
@@ -47,6 +48,7 @@ class Board extends React.Component {
         <Whiteboard
           events={eventStream}
           eventStore={eventStore}
+          // onChange={() => {console.log('onchange')}}
           width="100%"
           height="100%"
           style={{

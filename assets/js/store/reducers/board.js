@@ -17,6 +17,7 @@ export const SHARE_DRAWING = 'SHARE_DRAWING';
 export const RECEIVE_DRAWING = 'RECEIVE_DRAWING';
 const DRAWING_COLOR = 'DRAWING_COLOR';
 const TOGGLE_DRAW_PICKER = 'TOGGLE_DRAW_PICKER';
+const RESET_DRAWING = 'RESET_DRAWING';
 
 
 /**
@@ -48,6 +49,12 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         drawPicker: !state.drawPicker,
       };
+    case RESET_DRAWING:
+      return {
+        ...state,
+        eventStore: new EventStore(),
+        eventStream: new EventStream(),
+      };
 
     default:
       return state;
@@ -59,6 +66,10 @@ const reducer = (state = initialState, action = {}) => {
  */
 export const shareDrawing = () => ({
   type: SHARE_DRAWING,
+});
+
+export const resetDrawing = () => ({
+  type: RESET_DRAWING,
 });
 
 export const receiveDrawing = drawingStore => ({
