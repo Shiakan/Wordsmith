@@ -3,7 +3,7 @@ import { EventStream, EventStore } from '@ohtomi/react-whiteboard';
  * Initial State
  */
 const initialState = {
-  drawColor: '#125c38',
+  drawColor: '#f44336',
   drawing: false,
   eventStore: new EventStore(),
   eventStream: new EventStream(),

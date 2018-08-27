@@ -60,7 +60,8 @@ class GameScreen extends React.Component {
   render() {
     const {
       toggleScreen, isBoard, map, isMap,
-      grid, characters, handleSlide, isSlided, role, shareDrawing, drawColor, togglePicker, drawPicker,
+      grid, characters, handleSlide, isSlided,
+      role, shareDrawing, drawColor, togglePicker, drawPicker,
     } = this.props;
     const classSwitch = classNames(
       'screen-switch',
