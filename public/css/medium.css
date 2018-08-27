@@ -1,3 +1,22 @@
+/* HOMEPAGE */
+.centering{
+    margin:5 em auto;
+    display: flex;
+    justify-content: center;
+    width:70%;
+    flex-direction:column;
+}
+.home{
+    font-size: 2em;
+    
+}
+.connexion{
+    font-size: 1em;
+}
+.log-nav {
+    margin-bottom:1em;
+    width:50%;
+}
 /* HEADER  */
 /* Navbar  */
 .fixed-navbar {
@@ -159,3 +178,4 @@ input {
 .post-information-mobile {
     display:none;
 }
+
