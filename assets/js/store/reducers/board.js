@@ -8,6 +8,7 @@ const initialState = {
   eventStore: new EventStore(),
   eventStream: new EventStream(),
   drawPicker: false,
+  boardAvailable: false,
 };
 
 /**
@@ -17,6 +18,9 @@ export const SHARE_DRAWING = 'SHARE_DRAWING';
 export const RECEIVE_DRAWING = 'RECEIVE_DRAWING';
 const DRAWING_COLOR = 'DRAWING_COLOR';
 const TOGGLE_DRAW_PICKER = 'TOGGLE_DRAW_PICKER';
+const RESET_DRAWING = 'RESET_DRAWING';
+export const SEND_RESET = 'SEND_RESET';
+const DISABLE_BUTTON = 'DISABLE_BUTTON';
 
 
 /**
@@ -33,8 +37,11 @@ const reducer = (state = initialState, action = {}) => {
       const newGoodEvents = action.drawingStore;
       const newEventStore = state.eventStore;
       newEventStore.goodEvents = newGoodEvents;
+      console.log('board ?', state.boardAvailable);
+      
       return {
         ...state,
+        boardAvailable: true,
         eventStore: newEventStore,
       };
     }
@@ -47,6 +54,17 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         drawPicker: !state.drawPicker,
+      };
+    case RESET_DRAWING:
+      return {
+        ...state,
+        eventStore: new EventStore(),
+        eventStream: new EventStream(),
+      };
+    case DISABLE_BUTTON:
+      return {
+        ...state,
+        boardAvailable: false,
       };
 
     default:
@@ -61,6 +79,10 @@ export const shareDrawing = () => ({
   type: SHARE_DRAWING,
 });
 
+export const resetDrawing = () => ({
+  type: RESET_DRAWING,
+});
+
 export const receiveDrawing = drawingStore => ({
   type: RECEIVE_DRAWING,
   drawingStore,
@@ -71,8 +93,15 @@ export const drawingColor = value => ({
   value,
 });
 
+export const disableButton = () => ({
+  type: DISABLE_BUTTON,
+})
+
 export const toggleDrawPicker = () => ({
   type: TOGGLE_DRAW_PICKER,
+});
+export const sendReset = () => ({
+  type: SEND_RESET,
 });
 /**
  * Selectors
