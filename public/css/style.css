@@ -138,7 +138,7 @@ small {
 textarea {
     padding:0.5em;
 }
-.form-group label, legend {
+.form-group label {
     font-family: 'Forum', cursive;
     color: #A56E3A;
     display:block;
@@ -146,6 +146,14 @@ textarea {
     text-transform:uppercase;
     margin-bottom:0.5em;
     margin-top:0.5em;
+}
+.form-group legend {
+    font-family: 'Forum', cursive;
+    color: #A56E3A;
+    display:block;
+    font-size:1em;
+    text-transform:uppercase;
+    padding-top:0.5em;
 }
 .form-error-icon {
     display:none;
@@ -157,7 +165,7 @@ textarea {
     margin-top:0.3em;
     font-size:0.8em;
 }
-.container-width label, legend {
+.container-width label {
     font-size:1em;
 }
 fieldset {
@@ -172,6 +180,7 @@ select {
     background-color:#0b0b0b;
     border:1px solid  #503415;
 }
+
 .form-group textarea {
     width:100%;
     height:6em;
@@ -295,7 +304,7 @@ input {
     min-height:100vh;
     margin:auto;
     background-color:#0B0B0B; 
-    padding:2em 1em 5em 1em;
+    padding:2em 1em 6em 1em;
 }
 .wrapper-homepage {
     min-height:100%;
@@ -349,6 +358,7 @@ input {
     padding:0.5em 1em;
     margin-top:0.5em;
     font-size:0.9em;
+    margin-bottom:1em;
 }
 .show {
     color:#125C38;
@@ -890,6 +900,19 @@ a.ui-button:active, .ui-button:active,
     width:40%;
     margin-left:60%;
 }
+#avatar-small {
+    transform-origin: 50% 50%;
+    overflow: hidden;
+    width: 200px;
+    height: 200px;
+    width: 50px;
+    height: 50px;
+    border-radius:50%;
+}
+#avatar-small #image {
+    width: 100%;
+    margin-top:-10px;
+}
 /*
  * Homepage START
  */
@@ -948,6 +971,7 @@ a.ui-button:active, .ui-button:active,
 .logo-rs{
     width:4em;
     height:4em;
+    color:white;
 }
 .logo-place{
     margin: 5em auto 5em;
@@ -958,22 +982,81 @@ a.ui-button:active, .ui-button:active,
 .foot-content{
     text-align: center;
 }
-    /* HOMEPAGE END*/
+/* HOMEPAGE END*/
 
-.thread-moderation {
-    width:40%;
-    margin-left:60%;
+/* ABOUT */
+.about {
+    margin-top:2em;
 }
-#avatar-small {
-    transform-origin: 50% 50%;
-    overflow: hidden;
-    width: 200px;
-    height: 200px;
-    width: 50px;
-    height: 50px;
-    border-radius:50%;
+
+.about h2 {
+    color:#A56E3A;
 }
-#avatar-small #image {
-    width: 100%;
-    margin-top:-10px;
+
+.about p {
+    text-align:justify;
+    margin-bottom:0.5em;
+}
+.about small {
+    text-align:center;
+}
+.who-container-left {
+    border-bottom:1px solid #503415;
+    padding-bottom:0.5em;
+    margin-bottom:0.5em;
+}
+
+.who-container-left h3 {
+    text-align:center;
+    color: #125C38;
+    font-family:'Forum', cursive;
+    text-transform:uppercase;
+    font-size:1.4em;
+}
+.who-container-right h3 {
+    text-align:center;
+    color: #125C38;
+    font-family:'Forum', cursive;
+    text-transform:uppercase;
+    font-size:1.4em;
+}
+
+.who-container-left img {
+    float:left;
+    margin-top:0.3em;
+    margin-right:0.7em;
+    margin-bottom:0.1em;
+}
+.who-container-right {
+    border-bottom:1px solid #503415;
+    padding-bottom:0.5em;
+    margin-bottom:0.5em;
+}
+
+.who-container-right img {
+    float:right;
+    margin-top:0.3em;
+    margin-left:0.7em;
+    margin-bottom:0.1em;
+}
+.logo-about {
+    width:50%;
+    margin:auto;
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+    fill:#A56E3A;
+}
+
+.cgu p {
+    text-align:justify;
+    margin-bottom:0.5em;
+}
+
+.cgu h1 {
+    margin-bottom:0.5em;
+}
+
+.cgu h2 {
+    color: #A56E3A;
 }

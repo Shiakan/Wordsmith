@@ -43,7 +43,7 @@ class ArticleController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();
-            return $this->redirectToRoute('article_show',['id'=>$article->getId()]);
+            return $this->redirectToRoute('article_show',['slug'=>$article->getSlug()]);
         }
         return $this->render('codex/article/show.html.twig', [
             'article'=> $article,

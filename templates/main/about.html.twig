@@ -1,55 +1,79 @@
 {% extends 'base.html.twig' %}
+{% block title %}A propos {% endblock %}
 {% block main %}
-<div class="wrapper">
-    <div class="container">
-        <h1>A propos:</h1>
-            <br>
-            <h2>Pourquoi Aetherlust?</h2>
+<div class="wrapper-homepage">
+    <div class="container container-width">
+        <h1>A propos</h1>
+        <div class="about">
+            <h2>Aetherlust, c'est quoi ?</h2>
                 <p>
-                    Si Aujourd’hui Aetherlust existe, c’est avant tout grâce à notre passion pour le monde du jeu de rôle et les aventures de fantasies. 
-                    Nous avons souhaité partager cette passion aux autres et grâce au génie maléfique de notre dessinatrice et autresse, 
-                    nous avons pu développer un site web complet et une histoire passionnante.
+                    Aetherlust est un jeu de rôle à la fois <strong>textuel</strong> et <strong>plateau</strong>.
+                    Le site se décompose en trois parties : le Codex dans lequel vous retrouverez les règles, l'histoire et les annexes de l'univers, le Forum sur lequel vous pourrez écrire les périples de votre personnage et enfin la Room, où vous pourrez vivre des aventures à plusieurs face à un Maître de Jeu.
                 </p>
-            <br>
-            <h2>Mais du coup, Aetherlust, c'est quoi?</h2>
-                <p>
-                    Aetherlust est donc un jeu de rôle découpé en deux parties: 
-                    D’un côté vous retrouverez sur le forum plein de personnes également passionné par le jeu de rôle et avec qui vous pourrez écrire des aventures pleines de surprises. 
-                    De l’autre, vous pourrez partir avec vos amis sous la direction d’un maître du jeu dans une aventure plateau en ligne, pour visiter les espaces verdoyant de Kel’Nor et 
-                    affronter des dangers que seule votre équipe de braves aventuriers pourraient terrasser.
-                </p>
-            <br>
-            <h2 id="nous">Qu'est ce que Wordsmith?</h2>
-                <p>
-                    Wordsmith est un projet à l’initiative de 4 étudiants de la formation https://oclock.io/ . 
-                    A la fin de nos 4 mois de formation, les formateurs nous ont demandé de former des équipes et c’est tout naturellement que le groupe Wordsmith s’est formé.
-                </p>
-            <br>
-            <h2>Qui sommes nous?</h2>
-                <img src="https://via.placeholder.com/200x300"></img>
-                <p></p>
-                <a></a>
-                <img src="https://via.placeholder.com/200x300"></img>
-                <p></p>
-                <a></a>
-                <img src="https://via.placeholder.com/200x300"></img>
-                <p></p>
-                <a></a>
-                <img src="https://via.placeholder.com/200x300"></img>
-                <p></p>
-                <a></a>
-            <br>
-            <h2>Ou nous suivre?</h2>
-                <p>
-                    Si le développement et les mises à jour de notre site web vous intéressent, n’hésitez pas à suivre notre actualité sur:<br>
 
-                    Twitch:
-                        <a href="https://www.twitch.tv/projet_wordsmith">https://www.twitch.tv/projet_wordsmith</a><br>
-                    Twitter:
-                        <a href="https://twitter.com/ProjetWordsmith">https://twitter.com/ProjetWordsmith</a><br>
-                    Discord:
-                        <a href="https://discord.gg/Q3d7gCD">Clique ici</a>
+            <h2>Qu'est ce que Wordsmith ?</h2>
+                <small>
+                    <strong>Wordsmith :</strong> de word (« mot ») et smith (« forgeron »).
+                </small>
+                <p>
+                    Parce que notre projet ne propose pas seulement un site sur lequel les utilisateurs peuvent vivre des aventures, mais également tout un univers monté de toutes pièces et aussi l'opportunité pour les utilisateurs d'intégrer leurs personnages à l'univers en écrivant leurs aventures, nous avons décidé 
+                    que le projet s'appellerait Wordsmith. 
                 </p>
+                <p>
+                    Wordsmith est un projet à l’initiative de 4 étudiants de la formation <a target="blank" href="https://oclock.io/">O'clock</a>. 
+                    A la fin de nos 4 mois de formation, les formateurs nous ont demandé de former des équipes pour élaborer un projet dans les conditions du réel d'un développeur en entreprise. Puisque nous avions déjà travaillé ensemble lors de la formation, c’est tout naturellement que le groupe Wordsmith s’est formé.
+                </p>
+            <h2 id="nous">Qui sommes-nous ?</h2>
+                <div class="who-container-left">
+                    <h3>Eric Naud ()</h3>
+                    <img src="https://via.placeholder.com/60x60"> 
+                    <p>
+                        Postremo ad id indignitatis est ventum, ut cum peregrini ob formidatam haut ita dudum alimentorum inopiam pellerentur ab urbe praecipites, sectatoribus disciplinarum liberalium inpendio paucis sine respiratione ulla extrusis, tenerentur minimarum adseclae veri, quique id simularunt ad tempus, et tria milia saltatricum ne interpellata quidem cum choris totidemque remanerent magistris.
+                        Auxerunt haec vulgi sordidioris audaciam, quod cum ingravesceret penuria commeatuum, famis et furoris inpulsu Eubuli cuiusdam inter suos clari domum ambitiosam ignibus subditis inflammavit rectoremque ut sibi iudicio imperiali addictum calcibus incessens et pugnis conculcans seminecem laniatu miserando discerpsit. post cuius lacrimosum interitum in unius exitio quisque imaginem periculi sui considerans documento recenti similia formidabat.
+                    </p>
+                </div>
+                <div class="who-container-right">
+                    <h3>Mathieu Nguyen ()</h3>
+                     <img src="https://via.placeholder.com/60x60"> 
+                    <p>
+                        Postremo ad id indignitatis est ventum, ut cum peregrini ob formidatam haut ita dudum alimentorum inopiam pellerentur ab urbe praecipites, sectatoribus disciplinarum liberalium inpendio paucis sine respiratione ulla extrusis, tenerentur minimarum adseclae veri, quique id simularunt ad tempus, et tria milia saltatricum ne interpellata quidem cum choris totidemque remanerent magistris.
+                        Auxerunt haec vulgi sordidioris audaciam, quod cum ingravesceret penuria commeatuum, famis et furoris inpulsu Eubuli cuiusdam inter suos clari domum ambitiosam ignibus subditis inflammavit rectoremque ut sibi iudicio imperiali addictum calcibus incessens et pugnis conculcans seminecem laniatu miserando discerpsit. post cuius lacrimosum interitum in unius exitio quisque imaginem periculi sui considerans documento recenti similia formidabat.
+                    </p>
+                </div>
+                <div class="who-container-left">
+                    <h3>Mathieu Barry (Biblizar)</h3>
+                    <img src="https://via.placeholder.com/60x60"> 
+                    <p>
+                        Postremo ad id indignitatis est ventum, ut cum peregrini ob formidatam haut ita dudum alimentorum inopiam pellerentur ab urbe praecipites, sectatoribus disciplinarum liberalium inpendio paucis sine respiratione ulla extrusis, tenerentur minimarum adseclae veri, quique id simularunt ad tempus, et tria milia saltatricum ne interpellata quidem cum choris totidemque remanerent magistris.
+                        Auxerunt haec vulgi sordidioris audaciam, quod cum ingravesceret penuria commeatuum, famis et furoris inpulsu Eubuli cuiusdam inter suos clari domum ambitiosam ignibus subditis inflammavit rectoremque ut sibi iudicio imperiali addictum calcibus incessens et pugnis conculcans seminecem laniatu miserando discerpsit. post cuius lacrimosum interitum in unius exitio quisque imaginem periculi sui considerans documento recenti similia formidabat.
+                    </p>
+                </div>
+                <div class="who-container-right">
+                    <h3>Marion Job (Moony)</h3>
+                     <img src="https://via.placeholder.com/60x60"> 
+                    <p>
+                        Postremo ad id indignitatis est ventum, ut cum peregrini ob formidatam haut ita dudum alimentorum inopiam pellerentur ab urbe praecipites, sectatoribus disciplinarum liberalium inpendio paucis sine respiratione ulla extrusis, tenerentur minimarum adseclae veri, quique id simularunt ad tempus, et tria milia saltatricum ne interpellata quidem cum choris totidemque remanerent magistris.
+                        Auxerunt haec vulgi sordidioris audaciam, quod cum ingravesceret penuria commeatuum, famis et furoris inpulsu Eubuli cuiusdam inter suos clari domum ambitiosam ignibus subditis inflammavit rectoremque ut sibi iudicio imperiali addictum calcibus incessens et pugnis conculcans seminecem laniatu miserando discerpsit. post cuius lacrimosum interitum in unius exitio quisque imaginem periculi sui considerans documento recenti similia formidabat.
+                    </p>
+                </div>
+
+            <h2>Où nous suivre ?</h2>
+            <p>
+                Si le développement et les mises à jour de notre site web vous intéressent, n’hésitez pas à suivre notre actualité sur :
+
+                <div class="logo-about">
+                    <a target="blank" href="https://discord.gg/Xk8sWJ4">
+                        <img class="logo-rs"src="{{asset('image/Discord-Logo-Black.svg')}}"></img>
+                    </a>
+                    <a target="blank" target="blank" href="https://www.twitch.tv/projet_wordsmith">
+                        <img class="logo-rs" src=" {{asset('image/twitch.svg')}} "></img>
+                    </a>
+                    <a target="blank" href="https://twitter.com/ProjetWordsmith">
+                        <img class="logo-rs" src="{{asset('image/twitter-3.svg')}}"></img>
+                    </a>
+            </div>
+            </p>
+        </div>
     </div>
 </div>
 {% endblock %}
