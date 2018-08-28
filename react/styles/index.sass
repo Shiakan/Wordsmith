@@ -1,0 +1,58 @@
+@import vars
+@import reset
+@import url(https://fonts.googleapis.com/css?family=Acme:regular);
+@import url(https://fonts.googleapis.com/css?family=Fjalla+One:regular);
+@import url(https://fonts.googleapis.com/css?family=BenchNine:300,400,700%27);
+// @import url(https://fonts.googleapis.com/css?family=Forum%27);
+@import url(https://fonts.googleapis.com/css?family=Palanquin:300,400,600%27);
+@import url(https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700%27);
+#root
+  // max-width: 900px
+  width: 100vw
+  height: 100vh
+  font-family: $test-font
+  background: url('https://nsa39.casimages.com/img/2018/08/28//180828111959134810.png') no-repeat
+  background-size: cover
+  display: flex
+
+.question
+  animation-name: question-animation
+  animation-duration: .3s
+  animation-fill-mode: forwards
+  animation-timing-function: ease-in
+  position: absolute
+  font-size: 1.7em
+  color: #9dceb6
+  text-align: start
+  top: 0
+  left: 0
+  z-index: 2004
+  // margin: auto
+  cursor: help
+  &-bg
+  &-text
+    color: #9dceb6
+    z-index: 3000
+    padding: .5em 0
+  &-ul
+    padding: 0 1em
+    z-index: 2003
+    color: $font-color
+    &-li
+      list-style-type: disc
+      padding: .1em 0
+
+.__react_component_tooltip
+  z-index: 2004
+
+  /** KEYFRAMES **/
+@keyframes question-animation 
+  0%
+    opacity: 0
+    transform: scale(0.1)
+  25%
+  50%
+  75%
+  100% 
+    transform: scale(1)
+    opacity: 1

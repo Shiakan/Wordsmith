@@ -88,35 +88,34 @@ class RoomController extends Controller
      */
     public function show(Room $room, UserInterface $user, Request $request): Response
     {
-        $participants = $room->getParticipants();
-
-        foreach($participants as $participant) {
-            if($participant->getId() == $user->getId() || $room->getDungeonmaster()->getId()  == $user->getId()){
-                if($user->getCharacterProfile()->getCharacterName() == null) {
-
-                    $characterProfile = $user->getCharacterProfile();
-                    $form = $this->createForm(CharacterNameType::class, $characterProfile);
-                    $form->handleRequest($request);
-            
-                    if ($form->isSubmitted() && $form->isValid()) {
-                        $this->getDoctrine()->getManager()->flush();
-            
-                        return $this->redirectToRoute('room_show', ['code' => $room->getCode()]);
-                    }
-                    return $this->render('forum/character_profile/edit_name.html.twig', [
-                        'form' => $form->createView(),
-                        'characterProfile' => $characterProfile
-                    ]);
-                } else {
-
-                    return $this->render('room/index.html.twig', [
-                            'room' => $room
-                        ]);
+        // $participants = $room->getParticipants();
+        // On récupère les participants
+        $repository = $this->getDoctrine()->getRepository(User::class);
+        $participant = $repository->findParticipants($room, $user);
+        // dump($participant);die;
+        if($participant !== null || $room->getDungeonmaster()->getId()  == $user->getId()){
+            if($user->getCharacterProfile()->getCharacterName() == null) {
+                $characterProfile = $user->getCharacterProfile();
+                $form = $this->createForm(CharacterNameType::class, $characterProfile);
+                $form->handleRequest($request);
+        
+                if ($form->isSubmitted() && $form->isValid()) {
+                    $this->getDoctrine()->getManager()->flush();
+        
+                    return $this->redirectToRoute('room_show', ['code' => $room->getCode()]);
                 }
+                return $this->render('forum/character_profile/edit_name.html.twig', [
+                    'form' => $form->createView(),
+                    'characterProfile' => $characterProfile
+                ]);
+            } else {
+                return $this->render('room/index.html.twig', [
+                        'room' => $room
+                    ]);
             }
-            else{
-                return $this->render('room/error.html.twig');
-            }
+        }
+        else{
+            return $this->render('room/error.html.twig');
         }
     }
 

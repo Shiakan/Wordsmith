@@ -1,0 +1,85 @@
+/**
+ * Import
+ */
+@import ../../../styles/vars
+
+
+/**
+ * Style
+ */
+.dice
+  display: grid
+  grid-template-columns: 10% 80% 10%
+  grid-template-rows: 15% 25% 55% 5%
+  background: url('https://nsa39.casimages.com/img/2018/08/28/180828112001409300.png') no-repeat
+  background-size: 100% 100%
+  height: 100%
+  &-img
+    margin: auto auto
+    grid-column: 1 / 4
+    grid-row: 2
+    // background: url('https://nsa39.casimages.com/img/2018/08/28//180828112248528392.png') no-repeat
+    height: 85%
+    witdh: 85%
+  &-block
+    grid-area: Dblock
+    grid-column: 2
+    grid-row: 3
+    display: grid
+    grid-template-columns: 20% 50% 30%
+    grid-template-rows: 30% 25% 5% 20% 20%
+    &-result
+      grid-column: 1 / 4 
+      grid-row: 1
+      width: 100%
+      font-style: italic
+    &-share
+      grid-column: 2 / 3
+      grid-row: 4
+      height: 2em
+      @extend %click-button
+      // cursor: crosshair
+    &-form
+      display: flex
+      flex-wrap: nowrap
+      grid-column: 1 / 4
+      grid-row: 2
+    &-input
+      width: 100%
+      margin-top: auto
+    &-roll
+      @extend %click-button
+      height: 2em
+      margin-top: auto
+    &-tooltip
+      font-size: 1.2em
+      margin: auto
+      cursor: help
+      &-error
+        animation-name: toolTipError
+        animation-duration: .7s
+        animation-fill-mode: forwards
+        animation-timing-function: linear
+      &-text
+        padding: .5em 0
+      &-ul
+        padding: 0 1em
+        &-li
+          list-style-type: disc
+          padding: .1em 0
+
+/** KEYFRAMES **/
+@keyframes toolTipError 
+  0%
+    transform: rotate(0deg)
+  25%
+    transform: rotate(-45deg)
+    color: red
+  50%
+    transform: rotate(45deg)
+    // color: black
+  75%
+    transform: rotate(-45deg)
+  100% 
+    transform: rotate(0deg)
+    color: $link-active
