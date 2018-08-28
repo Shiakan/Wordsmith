@@ -6,12 +6,12 @@ import { connect } from 'react-redux';
 /**
  * Local import
  */
-import SwitchMap from '../components/GameScreen/SwitchMap';
+import SwitchMap from 'src/components/GameScreen/SwitchMap';
 
 // Action Creators
 import {
   toggleScreen, toggleGrid,
-} from '../store/reducers/gameScreen';
+} from 'src/store/reducers/gameScreen';
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation

@@ -3,7 +3,6 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactTooltip from 'react-tooltip';
 
 /**
  * Local import
@@ -12,12 +11,18 @@ import ReactTooltip from 'react-tooltip';
 
 // Styles et assets
 import './logo.sass';
+import logoaccident from '../../assets/img/logoaccident4.png';
 
 /**
  * Code
  */
 const Logo = ({ help, showHelp }) => (
-  <div className="logo">
+  <div
+    className="logo"
+    style={{
+      background: logoaccident,
+    }}
+  >
     {help
         && (
         <div onClick={showHelp} className="help-over">

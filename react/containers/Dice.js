@@ -6,11 +6,11 @@ import { connect } from 'react-redux';
 /**
  * Local import
  */
-import Dice from '../components/Panel/Dice';
+import Dice from 'src/components/Panel/Dice';
 
 // Action Creators
 // import { doSomething } from 'src/store/reducer';
-import { rollDice, diceChange, diceShare } from '../store/reducers/dice';
+import { rollDice, diceChange, diceShare } from 'src/store/reducers/dice';
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation

@@ -17,10 +17,10 @@ import ReactTooltip from 'react-tooltip';
  * Local import
 */
 // Composants
-import Character from '../../containers/Character';
-import SwitchMap from '../../containers/SwitchMap';
-import SwitchMJ from '../../containers/SwitchMJ';
-import Board from '../../containers/Board';
+import Character from 'src/containers/Character';
+import SwitchMap from 'src/containers/SwitchMap';
+import SwitchMJ from 'src/containers/SwitchMJ';
+import Board from 'src/containers/Board';
 
 
 // Styles et assets

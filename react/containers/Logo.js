@@ -6,10 +6,9 @@ import { connect } from 'react-redux';
 /**
  * Local import
  */
-import Logo from '../components/Logo';
-import { showHelp } from '../store/reducers/actionBar';
+import Logo from 'src/components/Logo';
+import { showHelp } from 'src/store/reducers/actionBar';
 // Action Creators
-// import { doSomething } from 'src/store/reducer';
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation

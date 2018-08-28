@@ -6,12 +6,12 @@ import { connect } from 'react-redux';
 /**
  * Local import
  */
-import Character from '../components/GameScreen/Character';
+import Character from 'src/components/GameScreen/Character';
 
 // Action Creators
 import {
   movePlayer, deletePlayer,
-} from '../store/reducers/gameScreen';
+} from 'src/store/reducers/gameScreen';
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation

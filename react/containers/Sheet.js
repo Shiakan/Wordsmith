@@ -6,11 +6,11 @@ import { connect } from 'react-redux';
 /**
  * Local import
  */
-import Sheet from '../components/Panel/Sheet';
+import Sheet from 'src/components/Panel/Sheet';
 
 // Action Creators
 // import { doSomething } from '../store/reducer';
-import { sheetChange, sheetUpdate } from '../store/reducers/user';
+import { sheetChange, sheetUpdate } from 'src/store/reducers/user';
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation

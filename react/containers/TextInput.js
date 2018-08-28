@@ -6,10 +6,10 @@ import { connect } from 'react-redux';
 /**
  * Local import
  */
-import TextInput from '../components/Chat/TextInput';
+import TextInput from 'src/components/Chat/TextInput';
 
 // Action Creators
-import { changeInput, addMessage } from '../store/reducers/textInput';
+import { changeInput, addMessage } from 'src/store/reducers/textInput';
 
 /* === State (données) === */
 const mapStateToProps = state => ({

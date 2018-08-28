@@ -6,8 +6,8 @@ import React from 'react';
 /**
  * Local import
  */
-import TextInput from '../../containers/TextInput';
-import Messages from '../../containers/Messages';
+import TextInput from 'src/containers/TextInput';
+import Messages from 'src/containers/Messages';
 // Composants
 
 // Styles et assets

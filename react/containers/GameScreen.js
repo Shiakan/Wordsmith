@@ -6,15 +6,15 @@ import { connect } from 'react-redux';
 /**
  * Local import
  */
-import GameScreen from '../components/GameScreen';
+import GameScreen from 'src/components/GameScreen';
 
 // Action Creators
 import {
   toggleScreen, handleSlide,
-} from '../store/reducers/gameScreen';
+} from 'src/store/reducers/gameScreen';
 import {
   shareDrawing, drawingColor, toggleDrawPicker, sendReset,
-} from '../store/reducers/board';
+} from 'src/store/reducers/board';
 
 
 /* === State (données) ===

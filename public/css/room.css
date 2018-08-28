@@ -34,5 +34,6 @@
 }
  /* FIN BARRE DE DÉFILEMENT */
 #body {
-    background-color: #0b0b0b;
+    /* background-color: #0b0b0b; */
+    background: url(./image/background.png) no-repeat;
 }

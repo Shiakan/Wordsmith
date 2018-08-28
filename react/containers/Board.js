@@ -6,12 +6,12 @@ import { connect } from 'react-redux';
 /**
  * Local import
  */
-import Board from '../components/GameScreen/Board';
+import Board from 'src/components/GameScreen/Board';
 
 // Action Creators
 import {
   shareDrawing,
-} from '../store/reducers/board';
+} from 'src/store/reducers/board';
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation

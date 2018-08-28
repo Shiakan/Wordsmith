@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 /**
  * Local import
  */
-import ActionBar from '../components/ActionBar';
+import ActionBar from 'src/components/ActionBar';
 
 // Action Creators
 import {
@@ -14,7 +14,7 @@ import {
   showDice,
   showSheet,
   showHelp,
-} from '../store/reducers/actionBar';
+} from 'src/store/reducers/actionBar';
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation

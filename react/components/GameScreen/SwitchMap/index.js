@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 
+import Switch from '@material-ui/core/Switch';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 /**
  * Local import
  */
@@ -17,6 +19,12 @@ import './switchmap.sass';
 /**
  * Code
  */
+const theme = createMuiTheme({
+  palette: {
+    primary: { main: '#3f7a5d' },
+  },
+});
+
 class SwitchMap extends React.Component {
   static propTypes = {
     toggleScreen: PropTypes.func.isRequired,
@@ -63,21 +71,18 @@ class SwitchMap extends React.Component {
               </button>
           )
         }
-        <label
-          className="mapSwitch-label"
-          htmlFor="check"
-          id="box"
-        >
-          <input
+        <MuiThemeProvider theme={theme}>
+          <Switch
             type="checkbox"
             id="check"
             name="check"
+            color="primary"
             className="mapSwitch-checkbox"
             onChange={toggleGrid}
             checked={grid}
           />
           <span>Quadrillage</span>
-        </label>
+        </MuiThemeProvider>
       </form>
     );
   }

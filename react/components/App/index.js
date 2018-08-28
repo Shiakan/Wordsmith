@@ -11,11 +11,11 @@ import React from 'react';
 // Styles et assets
 import './app.sass';
 import GameScreen from '../../containers/GameScreen';
-import Chat from '../Chat';
 import Panel from '../../containers/Panel';
-import Aetherlust from '../Aetherlust';
 import Logo from '../../containers/Logo';
 import ActionBar from '../../containers/ActionBar';
+import Chat from '../Chat';
+import Aetherlust from '../Aetherlust';
 // import Footer from '../Footer';
 
 

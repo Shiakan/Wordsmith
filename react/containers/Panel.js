@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 /**
  * Local import
  */
-import Panel from '../components/Panel';
+import Panel from 'src/components/Panel';
 
 // Action Creators
 // import { doSomething } from 'src/store/reducer';

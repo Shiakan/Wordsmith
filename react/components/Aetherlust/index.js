@@ -10,6 +10,7 @@ import React from 'react';
 
 // Styles et assets
 import './aetherlust.sass';
+// import bigtitle from '../../assets/img/bigtitle2.png';
 
 /**
  * Code

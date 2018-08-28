@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 /**
  * Local import
  */
-import Messages from '../components/Chat/Messages';
+import Messages from 'src/components/Chat/Messages';
 
 // Action Creators
 

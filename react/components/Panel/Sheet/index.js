@@ -12,6 +12,7 @@ import { FaHourglassEnd, FaCheck, FaTimes } from 'react-icons/fa/';
 
 // Styles et assets
 import './sheet.sass';
+import parchment from 'src/assets/img/parchment3.png';
 
 /**
  * Code
@@ -57,7 +58,7 @@ class Sheet extends React.Component {
       showRequestStatus,
     } = this.props;
     return (
-      <div className="sheet">
+      <div className="sheet" background={parchment}>
         <div className="sheet-axios">
           {showRequestStatus
           && (

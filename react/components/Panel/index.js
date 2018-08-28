@@ -10,8 +10,8 @@ import ReactTooltip from 'react-tooltip';
  * Local import
  */
 // Composants
-import Dice from '../../containers/Dice';
-import Sheet from '../../containers/Sheet';
+import Dice from 'src/containers/Dice';
+import Sheet from 'src/containers/Sheet';
 // import Help from './Help';
 
 // Styles et assets
