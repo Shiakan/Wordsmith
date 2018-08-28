@@ -4,7 +4,13 @@ import uuidv4 from 'uuid/v4'; // https://www.npmjs.com/package/uuid
  */
 import io from 'socket.io-client';
 import { WEBSOCKET_CONNECT } from '../reducers/user';
-import { SHARE_DRAWING, SEND_RESET, receiveDrawing, resetDrawing, disableButton } from '../reducers/board';
+import {
+  SHARE_DRAWING,
+  SEND_RESET,
+  receiveDrawing,
+  resetDrawing,
+  disableButton,
+} from '../reducers/board';
 import { ADD_MESSAGE, receiveMessage } from '../reducers/textInput';
 import { ROLL_DICE, SHARE_DICE } from '../reducers/dice';
 import {
@@ -25,7 +31,7 @@ import {
 /**
  * Code
  */
-const socket = io('localhost:3000');
+const socket = io('95.142.161.160:3000');
 
 /**
  * Middleware
