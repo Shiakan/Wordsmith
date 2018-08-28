@@ -948,6 +948,7 @@ a.ui-button:active, .ui-button:active,
 .logo-rs{
     width:4em;
     height:4em;
+    color: white;
 }
 .logo-place{
     margin: 5em auto 5em;
