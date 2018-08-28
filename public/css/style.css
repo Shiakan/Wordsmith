@@ -959,7 +959,11 @@ a.ui-button:active, .ui-button:active,
     text-align: center;
 }
     /* HOMEPAGE END*/
-
+    /* CGU START */
+.cgu-container p{
+    margin-top: 1em;
+}
+    /* CGU END */
 .thread-moderation {
     width:40%;
     margin-left:60%;
