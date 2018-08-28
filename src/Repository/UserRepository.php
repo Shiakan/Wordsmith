@@ -38,7 +38,7 @@ class UserRepository extends ServiceEntityRepository
         ;
         return $qb;
     }
-         /**
+    /**
     * @return Integer
     */
     public function findCountMax()
@@ -52,7 +52,7 @@ class UserRepository extends ServiceEntityRepository
         ;
         return $qb;
     }
-       /**
+    /**
      * @return User[] Returns an array of User objects
      */
     public function findBySearch($username)
@@ -63,6 +63,17 @@ class UserRepository extends ServiceEntityRepository
             ->orderBy('u.dateInserted', 'DESC')
             ->getQuery()
             ->getResult()
+        ;
+    }
+
+    public function findParticipants($room, $user): ?User
+    {
+        return $this->createQueryBuilder('u')
+            ->where(':room MEMBER OF u.playerRooms')
+            ->andWhere('u.id = :userId')
+            ->setParameters(array("room" => $room, "userId" => $user))
+            ->getQuery()
+            ->getOneOrNullResult()
         ;
     }
     /*
