@@ -1,4 +1,4 @@
- body {
+body {
     height: 91vh;
     width:194vh; 
 }
@@ -57,7 +57,10 @@
     display: inline-block;
     margin-top:0.4em;
     padding:0.5em 1em;
-    
+}
+.dropright{
+    margin-top: 0.6em;
+    margin-bottom: 2.4em;
 }
 
 .actions {

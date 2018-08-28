@@ -81,7 +81,7 @@ class SwitchMap extends React.Component {
             onChange={toggleGrid}
             checked={grid}
           />
-          <span>Quadrillage</span>
+          <span className="spanGrid">Quadrillage</span>
         </MuiThemeProvider>
       </form>
     );

@@ -11,7 +11,6 @@ import PropTypes from 'prop-types';
 
 // Styles et assets
 import './logo.sass';
-import logoaccident from '../../assets/img/logoaccident4.png';
 
 /**
  * Code
@@ -19,9 +18,6 @@ import logoaccident from '../../assets/img/logoaccident4.png';
 const Logo = ({ help, showHelp }) => (
   <div
     className="logo"
-    style={{
-      background: logoaccident,
-    }}
   >
     {help
         && (

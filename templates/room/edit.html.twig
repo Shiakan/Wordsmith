@@ -1,13 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Room{% endblock %}
+{% block title %}Editer la Room{% endblock %}
 
 {% block main %}
-    <h1>Edit Room</h1>
+    <div class="wrapper-homepage">
+        <div class="container container-width">
 
-    {{ include('room/_form.html.twig', {'button_label': 'Update'}) }}
+        <h1>Editer la Room</h1>
 
-    <a href="{{ path('room_index') }}">back to list</a>
+        {{ include('room/_form.html.twig', {'button_label': 'Update'}) }}
 
-    {{ include('room/_delete_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}
