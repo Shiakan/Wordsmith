@@ -19,7 +19,17 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
-
+   
+    public function findParticipants($room, $user): ?User
+    {
+        return $this->createQueryBuilder('u')
+            ->where(':room MEMBER OF u.playerRooms')
+            ->andWhere('u.id = :userId')
+            ->setParameters(array("room" => $room, "userId" => $user))
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
     /**
      * @return User[] Returns an array of User objects
      */

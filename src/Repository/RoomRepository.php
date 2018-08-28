@@ -36,23 +36,25 @@ class RoomRepository extends ServiceEntityRepository
     }
     */
 
+    /**
+    * @return Room[] Returns an array of Room objects
+    */
+    // public function findParticipants($room)
+    // {
+    //     return $this->createQueryBuilder('r')
+    //         ->select('r.participants')
+    //         ->leftJoin('r.participants', 'u')
+    //         ->where('r.id = :roomId')
+    //         ->setParameters(array('roomId' => $room))
+    //         ->getQuery()
+    //         ->getResult()
+    //     ;
+    // }
     
-    public function findParticipantByRoom($room, $user): ?Room
-    {
-        return $this->createQueryBuilder('r')
-            ->leftJoin('r.user', 'u')
-            ->where('r.user = :user')
-            ->andWhere('r.id = :roomId')
-            ->setParameters(array('roomId' => $room, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    
-        /**
-         * @return Room[] Returns an array of Room objects
-         */
-        public function findByAll($page,$limit)
+    /**
+     * @return Room[] Returns an array of Room objects
+     */
+    public function findByAll($page,$limit)
     {
          $offset = ($page == 0)? 0 : ($page-1) * $limit;
 

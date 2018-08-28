@@ -5,7 +5,7 @@ Encore
   // directory where compiled assets will be stored
   .setOutputPath('public/build/')
   // public path used by the web server to access the output path
-  .setPublicPath('/build')
+  .setPublicPath('/public/build')
   // only needed for CDN's or sub-directory deploy
   // .setManifestKeyPrefix('build/')
   /*
@@ -28,9 +28,10 @@ Encore
       * list of features, see:
       * https://symfony.com/doc/current/frontend.html#adding-more-features
       */
-  .cleanupOutputBeforeBuild()
   .enableBuildNotifications()
   .enableSourceMaps(!Encore.isProduction())
+     
+  .cleanupOutputBeforeBuild()
   // enables hashed filenames (e.g. app.abc123.css)
   .enableVersioning(Encore.isProduction())
 
