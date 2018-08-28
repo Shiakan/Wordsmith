@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller; //Namespace du Controller 
 
+/* LISTE DES USE DEBUT */
 use App\Entity\Rank;
 use App\Entity\Role;
 use App\Entity\User;
@@ -22,20 +23,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class SecurityController extends Controller
+/* LISTE DES USE FIN */
+class SecurityController extends Controller 
 {
     /**
      * @Route("/inscription", name="security_registration")
      */
-    public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder, \Swift_Mailer $mailer)
+    public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder, \Swift_Mailer $mailer) /* Fonction d'inscription de l'utilisateur */
     {   
-        $user = new User();
+        $user = new User(); //On instancie un nouvel utilisateur
         // On récupère le rôle 'membre' pour le donner automatiquement à chaque nouvel inscrit
         $code = 'ROLE_USER';
-        $repository = $this->getDoctrine()->getRepository(Role::class);
-        $roleUser = $repository->findOneByCode($code);
+        $repository = $this->getDoctrine()->getRepository(Role::class); //On va chercher l'entité Role
+        $roleUser = $repository->findOneByCode($code); //Et on définie le role de l'utilisateur comme étant celui qui correspond au code qu'on a passé au dessus
 
-        $form = $this->createForm(RegistrationType::class, $user);
+        $form = $this->createForm(RegistrationType::class, $user);//Création du form
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){ //Si le form est valide et envoyé alors
             $hash = $encoder->encodePassword($user, $user->getPassword());  //On encode le mot de passe
@@ -61,35 +63,35 @@ class SecurityController extends Controller
             //On envoie le mail
             $mailer->send($message);
             
-            $this->createHasReadThread($user);
-            $this->createHasReadSubcategory($user);
+            $this->createHasReadThread($user); //On appelle la fonction hasReadThread du dessous et on passe en paramètre l'utilisateur
+            $this->createHasReadSubcategory($user); //On appelle la fonction hasReadsubcategory du dessous et on passe en paramètre l'utilisateur
             // On redirige vers le login
             return $this->redirectToRoute('security_login');
         }
-        return $this->render('security/inscription.html.twig', [
-            'form' => $form->createView()
+        return $this->render('security/inscription.html.twig', [ //On retourne le fichier twig d'inscription
+            'form' => $form->createView() //On envoie à la vue le formulaire 
         ]);
     }
 
-    public function createHasReadSubcategory($user) {
+    public function createHasReadSubcategory($user) { //Fonction permettant d'utiliser la table hasReadSubcategory
         
-        $repository = $this->getDoctrine()->getRepository(Subcategory::class);
-        $subcategories = $repository->findAll();
+        $repository = $this->getDoctrine()->getRepository(Subcategory::class); //On va chercher l'entité
+        $subcategories = $repository->findAll(); //On récupère toutes les catégories
 
-        foreach($subcategories as $subcategory) {
-            $hasReadSubcategory = new HasReadSubcategory();
+        foreach($subcategories as $subcategory) { //Pour chaques subcatégory
+            $hasReadSubcategory = new HasReadSubcategory(); //On créé une nouvelle instance de hasReadSubcategory
             $manager = $this->getDoctrine()->getManager();
-            $hasReadSubcategory->setSubcategory($subcategory);
-            $hasReadSubcategory->setUser($user);
-            $hasReadSubcategory->setThreadCount(count($subcategory->getThreads()));
-            $hasReadSubcategory->setPostCount(count($subcategory->getPosts()));
+            $hasReadSubcategory->setSubcategory($subcategory);//On lui set la sous catégorie concerné
+            $hasReadSubcategory->setUser($user); //l'utilisateur passé en paramètre
+            $hasReadSubcategory->setThreadCount(count($subcategory->getThreads())); //On lui set le nombre de threads dans cette sous catégorie
+            $hasReadSubcategory->setPostCount(count($subcategory->getPosts()));//Ainsi que le nombre de poste
             $manager->persist($hasReadSubcategory);
         }
         
         $manager->flush(); //Persist objects that did not make up an entire batch
     }
 
-    public function createHasReadThread($user) {
+    public function createHasReadThread($user) {//Même logique que pour la fonction HasReadSubcategory
         
         $repository = $this->getDoctrine()->getRepository(Thread::class);
         $threads = $repository->findAll();
@@ -109,13 +111,13 @@ class SecurityController extends Controller
       /**
      * @Route("/login", name="security_login")
      */
-    public function login(Request $request, AuthenticationUtils $authenticationUtils)
+    public function login(Request $request, AuthenticationUtils $authenticationUtils)//Fonction de connexion d'un utilisateur
     {   
-        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            $this->addFlash('warning', 'Vous êtes déjà connecté');
-            return $this->redirectToRoute('homepage');
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) { //On vérifie si l'utilisateur n'est pas déjà connecté
+            $this->addFlash('warning', 'Vous êtes déjà connecté');//Si c'est le cas on lmui envoie un message d'erreure
+            return $this->redirectToRoute('homepage');//Et on le redirige vers la homepage
         } 
-        else {
+        else {//Sinon
             $authenticationUtils = $this->get('security.authentication_utils');
             $defaultData = array('username' => $authenticationUtils->getLastUsername());
             $form = $this->createForm(LoginType::class, $defaultData);
@@ -129,10 +131,10 @@ class SecurityController extends Controller
             );
         }
     }
-    public function createSheets($user)
+    public function createSheets($user)//On crée une fiche de personnage à l'utilisateur
     {   
-        $characterProfile = new CharacterProfile();
-        $charactersheet = new Charactersheet();
+        $characterProfile = new CharacterProfile(); //Avec une nouvelle instance de character porofil
+        $charactersheet = new Charactersheet();//Et de character sheet
 
         $repositoryRank = $this->getDoctrine()->getRepository(Rank::class);
         $rank = $repositoryRank->findOneByName('Membre');
@@ -143,13 +145,13 @@ class SecurityController extends Controller
         $em = $this->getDoctrine()->getManager();
         $characterProfile->setUser($user);
         // On donne un avatar, un groupe et un rang par défaut à chaque nouvel utilisateur
-        $characterProfile->setAvatar('https://nsa39.casimages.com/img/2018/08/22/mini_180822112250709313.png');
-        $characterProfile->setRank($rank);
-        $characterProfile->setGroupForum($group);
-        $em->persist($characterProfile);
+        $characterProfile->setAvatar('https://nsa39.casimages.com/img/2018/08/22/mini_180822112250709313.png'); //On set un avatar par défaut
+        $characterProfile->setRank($rank); //On lui set le rang membre définie au dessus
+        $characterProfile->setGroupForum($group); //Pareil pour group
+        $em->persist($characterProfile); //Persit character profile
         $em->flush();
-        $charactersheet->setUser($user);
-        $charactersheet->setContent(
+        $charactersheet->setUser($user);//On set le user de cette nouvelle instance de character sheet
+        $charactersheet->setContent(//On en définie le contenue
             'INFORMATIONS PERSONNELLES'."\n".'Prénom et nom : '."\n".'Age : '."\n".'Race : '."\n".'Sexe : '."\n".'Classe : '."\n".'Classe sociale : '."\n".
             '_________________________'."\n".
             'STATISTIQUES'."\n".'Apparence : '."\n".'Constitution : '."\n".'Dextérité : '."\n".'Force : '."\n".'Education : '."\n".'Intelligence : '."\n".'Sagesse'."\n".
@@ -166,7 +168,7 @@ class SecurityController extends Controller
             '_________________________'."\n".
             'ANECDOTES'."\n"
         );
-        $em->persist($charactersheet);
+        $em->persist($charactersheet);//On persist character sheet
         $em->flush();
 
     }

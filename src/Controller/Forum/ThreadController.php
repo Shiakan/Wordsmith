@@ -30,14 +30,14 @@ class ThreadController extends Controller
      */
     public function index(ThreadRepository $threadRepository): Response
     {
-        return $this->render('forum/thread/index.html.twig', ['threads' => $threadRepository->findAll()]);
+        return $this->render('forum/thread/index.html.twig', ['threads' => $threadRepository->findAll()]); //On envoie à la vue le tableau contenant tout les threads 
     }
     /**
      * @Route("/thread/{subcategory_id}/new", name="thread_new", methods="GET|POST")
      */
-    public function new(Request $request, UserInterface $user=null, $subcategory_id, Slugger $slugger): Response
+    public function new(Request $request, UserInterface $user=null, $subcategory_id, Slugger $slugger): Response //Création d'un nouveau thread
     {   
-        $thread = new Thread();
+        $thread = new Thread(); //On crée une nouvelle instance de Thread
         
         // On récupère la sous-catégorie dans laquelle l'utilisateur poste son sujet
         $repository = $this->getDoctrine()->getRepository(Subcategory::class);
@@ -145,12 +145,12 @@ class ThreadController extends Controller
         $this->hasReadThread($thread, $user);
         $this->hasReadSubcategory($thread->getSubcategory(), $user);
         
-        return $this->render('forum/thread/show.html.twig', [
-            'thread' => $thread,
-            'page'=>$page,
-            'pageMax'=>$pageMax,
-            'posts'=>$posts,
-            'form' => $form->createView() ]);
+        return $this->render('forum/thread/show.html.twig', [ //On appelle le fichier twig show qui corrspond à la fonction
+            'thread' => $thread, //On lui passe la variable thread
+            'page'=>$page, //la variable page pour la pagination
+            'pageMax'=>$pageMax,//La variable page Max pour la pagination
+            'posts'=>$posts, //La variables contenant tout les posts du thread
+            'form' => $form->createView() ]); //Le form pour changer de sujet
     }
 
     public function hasReadThread($thread, $user)
