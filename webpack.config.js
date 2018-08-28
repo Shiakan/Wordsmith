@@ -1,50 +1,134 @@
-const Encore = require('@symfony/webpack-encore');
+// Node import
+const path = require('path');
 
-Encore
-  .configureRuntimeEnvironment('dev-server')
-  // directory where compiled assets will be stored
-  .setOutputPath('public/build/')
-  // public path used by the web server to access the output path
-  .setPublicPath('/build')
-  // only needed for CDN's or sub-directory deploy
-  // .setManifestKeyPrefix('build/')
-  /*
-      * ENTRY CONFIG
-      *
-      * Add 1 entry for each "page" of your app
-      * (including one that's included on every page - e.g. "app")
-      *
-      * Each entry will result in one JavaScript file (e.g. app.js)
-      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
-      */
-  .addEntry('app', './assets/js/index.js')
-  .addStyleEntry('main', './assets/js/styles/index.sass')
-  // .addEntry('page2', './assets/js/page2.js')
+// Plugins de traitement pour dist/
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+// const HtmlWebPackPlugin = require('html-webpack-plugin');
 
-  /*
-      * FEATURE CONFIG
-      *
-      * Enable & configure other features below. For a full
-      * list of features, see:
-      * https://symfony.com/doc/current/frontend.html#adding-more-features
-      */
-  .cleanupOutputBeforeBuild()
-  .enableBuildNotifications()
-  .enableSourceMaps(!Encore.isProduction())
-  // enables hashed filenames (e.g. app.abc123.css)
-  .enableVersioning(Encore.isProduction())
+// Config pour le devServer
+const host = 'localhost';
+const port = 8080;
 
-  // enables Sass/SCSS support
-  .enableSassLoader()
-// uncomment if you use TypeScript
-// .enableTypeScriptLoader()
+const devMode = process.env.NODE_ENV !== 'production';
 
-// uncomment if you're having problems with a jQuery plugin
-// .autoProvidejQuery()
-// first, install any presets you want to use (e.g. yarn add babel-preset-es2017)
-// then, modify the default Babel configuration
-
-// Allow to use React
-  .enableReactPreset();
-
-module.exports = Encore.getWebpackConfig();
+// Config de Webpack
+module.exports = {
+  // Passe le build par dèfaut en développement
+  mode: 'development',
+  // Expose le dossier src/ pour les imports
+  resolve: {
+    alias: {
+      src: path.resolve(__dirname, 'react/'),
+    },
+  },
+  // Points d'entrée pour le travail de Webpack
+  entry: {
+    app: [
+      // Styles
+      './react/styles/index.sass',
+      // JS
+      './react/index.js',
+    ],
+  },
+  // Sortie
+  output: {
+    // Nom du bundle
+    filename: 'app.js',
+    // Nom du bundle vendors si l'option d'optimisation / splitChunks est activée
+    chunkFilename: 'vendors.js',
+    // Cible des bundles
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
+  },
+  // Optimisation pour le build
+  optimization: {
+    // Code spliting
+    splitChunks: {
+      chunks: 'all',
+    },
+    // Minification
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: false, // passer à true pour JS source maps
+      }),
+      new OptimizeCSSAssetsPlugin({}),
+    ],
+  },
+  // Modules
+  module: {
+    rules: [
+      // JS
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [
+          // babel avec une option de cache
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true,
+            },
+          },
+        ],
+      },
+      // CSS / SASS / SCSS
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          // style-loader ou fichier
+          devMode ? 'style-loader'
+            : MiniCssExtractPlugin.loader,
+          // Chargement du CSS
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [require('autoprefixer')],
+              sourceMap: true,
+            },
+          },
+          // SASS
+          'sass-loader',
+        ],
+      },
+      // Images
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              outputPath: 'assets/',
+            },
+          },
+        ],
+      },
+    ],
+  },
+  devServer: {
+    overlay: true, // Overlay navigateur si erreurs de build
+    stats: 'minimal', // Infos en console limitées
+    progress: true, // progression du build en console
+    inline: true, // Rechargement du navigateur en cas de changement
+    open: true, // on ouvre le navigateur
+    historyApiFallback: true,
+    host,
+    port,
+  },
+  plugins: [
+    // Permet de prendre le index.html de src comme base pour le fichier de dist/
+    // new HtmlWebPackPlugin({
+    //   template: './index.html',
+    //   filename: './index.html',
+    // }),
+    // Permet d'exporter les styles CSS dans un fichier css de dist/
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
+  ],
+};

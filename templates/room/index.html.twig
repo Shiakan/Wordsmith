@@ -14,9 +14,10 @@
   id="root"></div>
 {% block stylesheets %}
    <link rel="stylesheet" href="{{ asset('css/room.css') }}">
-   <link rel="stylesheet" href="{{ asset('build/main.css') }}">      
+   {# <link rel="stylesheet" href="{{ asset('build/main.css') }}">       #}
    <link rel="stylesheet" href="{{ asset('build/app.css') }}">      
 {% endblock %}
 {% block javascripts %}
-  <script src="{{ asset('build/app.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('build/app.js') }}"></script>
+  <script type="text/javascript" >console.log('hello')</script>
 {% endblock %}

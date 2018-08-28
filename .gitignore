@@ -18,6 +18,7 @@
 
 ###> symfony/webpack-encore-pack ###
 /node_modules/
+/react/node_modules/
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-pack ###
