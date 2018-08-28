@@ -4,7 +4,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { FaAngleDoubleRight, FaAngleDoubleLeft, FaFeather, FaQuestionCircle } from 'react-icons/fa';
+import {
+  FaAngleDoubleRight,
+  FaAngleDoubleLeft,
+  FaPalette,
+  FaQuestionCircle,
+  FaTimesCircle,
+} from 'react-icons/fa';
 import { CirclePicker } from 'react-color';
 import ReactTooltip from 'react-tooltip';
 /**
@@ -40,7 +46,7 @@ class GameScreen extends React.Component {
     onChangeColor: PropTypes.func.isRequired,
     drawColor: PropTypes.string.isRequired,
     drawPicker: PropTypes.bool.isRequired,
-
+    sendReset: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
@@ -62,7 +68,7 @@ class GameScreen extends React.Component {
     const {
       toggleScreen, isBoard, map, isMap,
       grid, characters, handleSlide, isSlided,
-      role, shareDrawing, drawColor, togglePicker, drawPicker, help,
+      role, shareDrawing, drawColor, togglePicker, drawPicker, help, sendReset,
     } = this.props;
     const classSwitch = classNames(
       'screen-switch',
@@ -100,21 +106,32 @@ class GameScreen extends React.Component {
               >
             Switch to Map
               </button>
-              <div
-                className="screen-switch-board"
-              >
-                <button
-                  type="button"
-                  className="screen-switch-share"
-                  onClick={shareDrawing}
-                >Share Board
-                </button>
-                <FaFeather
-                  className="screen-switch-icon"
-                  style={{ color: drawColor }}
-                  onClick={togglePicker}
-                />
-              </div>
+              {role === 'dm'
+                && (
+                  <div
+                    className="screen-switch-board"
+                  >
+                    <button
+                      type="button"
+                      className="screen-switch-share"
+                      onClick={shareDrawing}
+                    >Share Board
+                    </button>
+                    <div className="screen-switch-icons">
+                      <FaPalette
+                        className="screen-switch-icon"
+                        style={{ color: drawColor }}
+                        onClick={togglePicker}
+                      />
+                      <FaTimesCircle
+                        onClick={sendReset}
+                        style={{ color: drawColor }}
+                        className="screen-switch-icon"
+                      />
+                    </div>
+                  </div>
+                )
+              }
               {drawPicker
                 && (
                 <div>

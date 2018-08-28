@@ -4,7 +4,7 @@ import uuidv4 from 'uuid/v4'; // https://www.npmjs.com/package/uuid
  */
 import io from 'socket.io-client';
 import { WEBSOCKET_CONNECT } from '../reducers/user';
-import { SHARE_DRAWING, receiveDrawing } from '../reducers/board';
+import { SHARE_DRAWING, SEND_RESET, receiveDrawing, resetDrawing, disableButton } from '../reducers/board';
 import { ADD_MESSAGE, receiveMessage } from '../reducers/textInput';
 import { ROLL_DICE, SHARE_DICE } from '../reducers/dice';
 import {
@@ -20,6 +20,7 @@ import {
   receiveChar,
   receiveMap,
   autoReceivePlayer,
+  leaveBoard,
 } from '../reducers/gameScreen';
 /**
  * Code
@@ -71,6 +72,11 @@ const socketConnect = store => next => (action) => {
       });
       socket.on('receive_map', (newMap) => {
         store.dispatch(receiveMap(newMap));
+      });
+      socket.on('reset_drawing', () => {
+        store.dispatch(resetDrawing());
+        store.dispatch(leaveBoard());
+        store.dispatch(disableButton());
       });
 
       break;
@@ -171,7 +177,6 @@ const socketConnect = store => next => (action) => {
       break;
 
     case AUTO_PLAYER: {
-      console.log('token reducer', action.char.userName);
       const autoChar = {
         id: uuidv4(),
         name: state.user.userName,
@@ -185,6 +190,8 @@ const socketConnect = store => next => (action) => {
       }
       state.gameScreen.cptY += 70;
       console.log('NEW AUTO CHAR SOCKET :', autoChar);
+      // const charCompare = state.gameScreen.characters.filter(char => char.name === state.user.userName);
+      // console.log('char compare', charCompare);
       socket.emit('auto_player', autoChar);
     }
 
@@ -203,6 +210,10 @@ const socketConnect = store => next => (action) => {
       socket.emit('change_map', action.value);
       break;
 
+    case SEND_RESET:
+      console.log('sending reset socket');
+      socket.emit('send_reset');
+      break;
     default:
   }
 

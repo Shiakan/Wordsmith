@@ -23,6 +23,7 @@ import {
 const mapStateToProps = state => ({
   grid: state.gameScreen.grid,
   role: state.user.role,
+  boardAvailable: state.board.boardAvailable,
 });
 
 /* === Actions ===

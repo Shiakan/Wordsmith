@@ -40,7 +40,7 @@ export const CHANGE_MAP = 'CHANGE_MAP';
 export const AUTO_PLAYER = 'AUTO_PLAYER';
 export const AUTO_RECEIVE = 'AUTO_RECEIVE';
 const UPDATE_CHARS = 'UPDATE_CHARS';
-
+const LEAVE_BOARD = 'LEAVE_BOARD';
 
 /**
  * Traitements
@@ -88,12 +88,19 @@ const reducer = (state = initialState, action = {}) => {
         map: action.newMap,
       };
 
-    case AUTO_RECEIVE:
+    case AUTO_RECEIVE: {
+      console.log('state characters :', state.characters);
+      console.log('auto char :', action.autoChar);
+      const
+        duplicateCheck = state.characters.filter(
+          char => char.name !== action.autoChar.name,
+        );
+
       return {
         ...state,
-        characters: [...state.characters, action.autoChar],
+        characters: [...duplicateCheck, action.autoChar],
       };
-
+    }
     case RECEIVE_CHAR:
       console.log('NEW CHAR REDUCER :', action.newChar);
 
@@ -131,6 +138,12 @@ const reducer = (state = initialState, action = {}) => {
         characters: [...remainingChars],
       };
     }
+    case LEAVE_BOARD:
+      return {
+        ...state,
+        isBoard: false,
+        isMap: true,
+      };
     default:
       return state;
   }
@@ -218,6 +231,10 @@ export const handleSlide = () => ({
 export const changeMap = value => ({
   type: CHANGE_MAP,
   value,
+});
+
+export const leaveBoard = () => ({
+  type: LEAVE_BOARD,
 });
 
 /**

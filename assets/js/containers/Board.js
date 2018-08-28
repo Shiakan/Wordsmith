@@ -10,7 +10,7 @@ import Board from '../components/GameScreen/Board';
 
 // Action Creators
 import {
-
+  shareDrawing,
 } from '../store/reducers/board';
 
 /* === State (données) ===
@@ -25,6 +25,8 @@ const mapStateToProps = state => ({
   drawing: state.board.drawing,
   eventStream: state.board.eventStream,
   eventStore: state.board.eventStore,
+  boardAvailable: state.board.boardAvailable,
+  role: state.user.role,
   // color: state.gameScreen.color,
   // name: state.gameScreen.name,
   // coordX: state.gameScreen.coordX,
@@ -38,7 +40,10 @@ const mapStateToProps = state => ({
  *  - ownProps : les props passées au container
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
-const mapDispatchToProps = () => ({
+const mapDispatchToProps = dispatch => ({
+  shareDrawing: () => {
+    dispatch(shareDrawing());
+  },
 });
 
 // Container
