@@ -20,7 +20,6 @@ import { websocketConnect } from './store/reducers/user';
 const rootComponent = (
   <Provider store={store}>
     <App />
-    <div>COUCOU</div>
   </Provider>
 );
 

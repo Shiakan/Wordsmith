@@ -10,13 +10,13 @@ import React from 'react';
 
 // Styles et assets
 import './aetherlust.sass';
-import bigtitle from 'src/assets/img/bigtitle2.png';
+// import bigtitle from '../../assets/img/bigtitle2.png';
 
 /**
  * Code
  */
 const Aetherlust = () => (
-  <div className="aether" background={bigtitle} />
+  <div className="aether" />
 );
 
 /**

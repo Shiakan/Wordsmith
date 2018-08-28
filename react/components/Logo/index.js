@@ -11,13 +11,18 @@ import PropTypes from 'prop-types';
 
 // Styles et assets
 import './logo.sass';
-import logoaccident from 'src/assets/img/logoaccident4.png';
+import logoaccident from '../../assets/img/logoaccident4.png';
 
 /**
  * Code
  */
 const Logo = ({ help, showHelp }) => (
-  <div className="logo" background={logoaccident}>
+  <div
+    className="logo"
+    style={{
+      background: logoaccident,
+    }}
+  >
     {help
         && (
         <div onClick={showHelp} className="help-over">

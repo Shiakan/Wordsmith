@@ -10,13 +10,12 @@ import React from 'react';
 
 // Styles et assets
 import './help.sass';
-import parchment from 'src/assets/img/parchment3.png';
 
 /**
  * Code
  */
 const Help = () => (
-  <div className="help" background={parchment}>
+  <div className="help">
     <p className="help-title">Vous trouverez toute l'aide necessaire ici</p>
     <div className="help-body">
       <p className="help-body-nav"> En cliquant <a className="help-body-link" href="#testLink">ici</a>, la navigation sera plus rapide.</p>

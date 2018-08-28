@@ -12,7 +12,6 @@ import ReactTooltip from 'react-tooltip';
 
 // Styles et assets
 import './actionbar.sass';
-import table from '../../assets/img/table2.png';
 
 /**
  * Code
@@ -61,7 +60,7 @@ class ActionBar extends React.Component {
           </div>
         )}
         <FaUserTie className="actionBar-mj" />
-        <div className="actionBar-table" background={table}>
+        <div className="actionBar-table">
           <button onClick={showDice} type="button" className="actionBar-table-dice">DÉS</button>
           <button onClick={showSheet} type="button" className="actionBar-table-sheet">FICHE</button>
           <button onClick={showHelp} type="button" className="actionBar-table-help">HELP</button>

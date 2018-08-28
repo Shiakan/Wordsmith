@@ -10,8 +10,6 @@ import TextField from '@material-ui/core/TextField';
 /**
  * Local import
  */
-import dicePng from 'src/assets/img/d20.png';
-import parchment from 'src/assets/img/parchment3.png';
 
 // Composants
 
@@ -140,10 +138,10 @@ class Dice extends React.Component {
       },
     );
     return (
-      <div className="dice" background={parchment}>
-        <div
+      <div className="dice">
+        <img
           className="dice-img"
-          background={dicePng}
+          src="https://nsa39.casimages.com/img/2018/08/28//180828112248528392.png"
           alt="some roleplay dices"
         />
         <div className="dice-block">

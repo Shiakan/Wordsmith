@@ -10,12 +10,12 @@ import React from 'react';
 
 // Styles et assets
 import './app.sass';
-import GameScreen from 'src/containers/GameScreen';
-import Panel from 'src/containers/Panel';
-import Logo from 'src/containers/Logo';
-import ActionBar from 'src/containers/ActionBar';
-import Chat from 'src/components/Chat';
-import Aetherlust from 'src/components/Aetherlust';
+import GameScreen from '../../containers/GameScreen';
+import Panel from '../../containers/Panel';
+import Logo from '../../containers/Logo';
+import ActionBar from '../../containers/ActionBar';
+import Chat from '../Chat';
+import Aetherlust from '../Aetherlust';
 // import Footer from '../Footer';
 
 
