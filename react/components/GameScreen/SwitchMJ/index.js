@@ -82,6 +82,7 @@ class SwitchMJ extends React.Component {
           )}
         <form className="mjSwitch-form" onSubmit={this.handleSubmit}>
           <button
+            className="mjSwitch-form-pick"
             type="button"
             style={{ backgroundColor: color }}
             onClick={togglePicker}
