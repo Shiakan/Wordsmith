@@ -88,12 +88,19 @@ const reducer = (state = initialState, action = {}) => {
         map: action.newMap,
       };
 
-    case AUTO_RECEIVE:
+    case AUTO_RECEIVE: {
+      console.log('state characters :', state.characters);
+      console.log('auto char :', action.autoChar);
+      const
+        duplicateCheck = state.characters.filter(
+          char => char.name !== action.autoChar.name,
+        );
+
       return {
         ...state,
-        characters: [...state.characters, action.autoChar],
+        characters: [...duplicateCheck, action.autoChar],
       };
-
+    }
     case RECEIVE_CHAR:
       console.log('NEW CHAR REDUCER :', action.newChar);
 

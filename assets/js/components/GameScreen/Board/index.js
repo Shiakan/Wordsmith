@@ -22,28 +22,35 @@ class Board extends React.Component {
     drawing: PropTypes.bool.isRequired,
     eventStream: PropTypes.object.isRequired,
     eventStore: PropTypes.object.isRequired,
-    shareDrawing: PropTypes.func.isRequired,
+    // shareDrawing: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
     console.log('board loaded');
   }
 
-  requestAnimationFrame = () => {
+  requestColorChange = () => {
     const { eventStream, drawColor } = this.props;
     eventStream.changeStrokeColor(drawColor);
     console.log('event stream? ', eventStream);
   }
 
+  // requestUndoChange = () => {
+  //   const { eventStream, eventStore } = this.props;
+  //   eventStream.undo();
+  //   console.log('event stream? ', eventStream);
+  //   console.log('event store? ', eventStore);
+  // }
+
   render() {
     const {
-      drawing, eventStore, eventStream, shareDrawing,
+      drawing, eventStore, eventStream,
     } = this.props;
     console.log(drawing ? 'start drawing' : 'stop drawing');
     return (
       <div
         className="board"
-        onClick={this.requestAnimationFrame}
+        onClick={this.requestColorChange}
       >
         <Whiteboard
           events={eventStream}

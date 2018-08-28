@@ -171,7 +171,6 @@ const socketConnect = store => next => (action) => {
       break;
 
     case AUTO_PLAYER: {
-      console.log('token reducer', action.char.userName);
       const autoChar = {
         id: uuidv4(),
         name: state.user.userName,
@@ -185,6 +184,8 @@ const socketConnect = store => next => (action) => {
       }
       state.gameScreen.cptY += 70;
       console.log('NEW AUTO CHAR SOCKET :', autoChar);
+      // const charCompare = state.gameScreen.characters.filter(char => char.name === state.user.userName);
+      // console.log('char compare', charCompare);
       socket.emit('auto_player', autoChar);
     }
 
