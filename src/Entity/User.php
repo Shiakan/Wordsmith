@@ -44,8 +44,12 @@ class User implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private $isActive;
+
     /**
      * @ORM\Column(type="date")
+     *  
+     * @Assert\LessThan("-16 years",
+     * message="Vous devez avoir au minimum 16 ans pour vous inscrire !")
      */
     private $birthdate;
     /**

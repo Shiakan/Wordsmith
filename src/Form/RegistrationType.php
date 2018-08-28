@@ -25,9 +25,6 @@ class RegistrationType extends AbstractType
         $builder
             ->add('username', TextType::class, [
                 'label' => 'Pseudo',
-                'attr' => [
-                    'placeholder' => 'Votre pseudo'
-                ],
                 'constraints' => [
                     New NotBlank([
                         'message' => 'Veuillez saisir le nom de votre personnage'
@@ -42,6 +39,8 @@ class RegistrationType extends AbstractType
             ])
             ->add('birthdate', BirthdayType::class, [
                 'label' => 'Date de naissance',
+                'widget' => 'choice',
+                'years' => range(date('Y'), date('Y')-70),
                 'constraints' => [
                     New NotBlank([
                         'message' => 'Veuillez entrer votre date de naissance'
