@@ -4,6 +4,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Whiteboard } from '@ohtomi/react-whiteboard';
+import classNames from 'classnames';
+
 
 /**
  * Local import
@@ -22,7 +24,7 @@ class Board extends React.Component {
     drawing: PropTypes.bool.isRequired,
     eventStream: PropTypes.object.isRequired,
     eventStore: PropTypes.object.isRequired,
-    // shareDrawing: PropTypes.func.isRequired,
+    role: PropTypes.string.isRequired,
   }
 
   componentDidMount() {
@@ -44,12 +46,18 @@ class Board extends React.Component {
 
   render() {
     const {
-      drawing, eventStore, eventStream,
+      drawing, eventStore, eventStream, role,
     } = this.props;
+    const classSwitch = classNames(
+      'board',
+      {
+        'board--notAMj': role !== 'dm',
+      },
+    );
     console.log(drawing ? 'start drawing' : 'stop drawing');
     return (
       <div
-        className="board"
+        className={classSwitch}
         onClick={this.requestColorChange}
       >
         <Whiteboard

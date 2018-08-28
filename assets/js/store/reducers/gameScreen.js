@@ -40,7 +40,7 @@ export const CHANGE_MAP = 'CHANGE_MAP';
 export const AUTO_PLAYER = 'AUTO_PLAYER';
 export const AUTO_RECEIVE = 'AUTO_RECEIVE';
 const UPDATE_CHARS = 'UPDATE_CHARS';
-
+const LEAVE_BOARD = 'LEAVE_BOARD';
 
 /**
  * Traitements
@@ -138,6 +138,12 @@ const reducer = (state = initialState, action = {}) => {
         characters: [...remainingChars],
       };
     }
+    case LEAVE_BOARD:
+      return {
+        ...state,
+        isBoard: false,
+        isMap: true,
+      };
     default:
       return state;
   }
@@ -225,6 +231,10 @@ export const handleSlide = () => ({
 export const changeMap = value => ({
   type: CHANGE_MAP,
   value,
+});
+
+export const leaveBoard = () => ({
+  type: LEAVE_BOARD,
 });
 
 /**

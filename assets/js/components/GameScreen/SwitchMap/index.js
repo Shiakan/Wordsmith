@@ -3,6 +3,8 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
+
 
 /**
  * Local import
@@ -20,6 +22,8 @@ class SwitchMap extends React.Component {
     toggleScreen: PropTypes.func.isRequired,
     toggleGrid: PropTypes.func.isRequired,
     grid: PropTypes.bool.isRequired,
+    role: PropTypes.string.isRequired,
+    boardAvailable: PropTypes.bool.isRequired,
   }
 
   componentDidMount() {
@@ -27,16 +31,38 @@ class SwitchMap extends React.Component {
   }
 
   render() {
-    const { toggleScreen, toggleGrid, grid } = this.props;
+    const {
+      toggleScreen, toggleGrid, grid, role, boardAvailable,
+    } = this.props;
+    const classSwitch = classNames(
+      'mapSwitch-button',
+      {
+        'mapSwitch-button--notAMj': role !== 'dm',
+      },
+    );
     return (
       <form className="mapSwitch">
-        <button
-          type="button"
-          className="mapSwitch-button"
-          onClick={toggleScreen}
-        >
-        Switch to Board
-        </button>
+        {boardAvailable
+          ? (
+            console.log('board true'),
+              <button
+                type="button"
+                className={classSwitch}
+                onClick={toggleScreen}
+              >Switch to Board
+              </button>
+          )
+          : (
+            console.log('board false'),
+              <button
+                type="button"
+                disabled={role !== 'dm'}
+                className={classSwitch}
+                onClick={toggleScreen}
+              >Switch to Board
+              </button>
+          )
+        }
         <label
           className="mapSwitch-label"
           htmlFor="check"

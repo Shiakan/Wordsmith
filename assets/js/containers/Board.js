@@ -25,6 +25,8 @@ const mapStateToProps = state => ({
   drawing: state.board.drawing,
   eventStream: state.board.eventStream,
   eventStore: state.board.eventStore,
+  boardAvailable: state.board.boardAvailable,
+  role: state.user.role,
   // color: state.gameScreen.color,
   // name: state.gameScreen.name,
   // coordX: state.gameScreen.coordX,

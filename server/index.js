@@ -103,6 +103,11 @@ io.on('connection', function(socket) {
       console.log('TOKEN TO DELETE :', charToDelete);
       io.to(param.roomId).emit('receive_delete', charToDelete);
     });
+
+    socket.on('send_reset', function() {
+      console.log('reset drawing');
+      io.to(param.roomId).emit('reset_drawing');
+    });
     
     socket.on('send_message', function(messageContent) {
       var message = {};
