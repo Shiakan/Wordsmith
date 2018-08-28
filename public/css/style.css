@@ -12,6 +12,7 @@
 }
 body {
     background-image: url('../image/background.png');
+    background-size: cover;
     background-repeat:no-repeat;
     background-attachment:fixed;
     background-color:#0B0B0B;
@@ -896,62 +897,67 @@ a.ui-button:active, .ui-button:active,
     height: 100vh;
  }
 
-    .log-nav{
-     display: flex;
-     justify-content: space-evenly;
-     margin-bottom: 3em;
-     background-color: rgba(0, 0, 0, 0.233);
-    }
-    .ul-li-home{
-        display: inline;
-        margin: 1em;
-        padding-right: -50%;
-        font-size: 2em;
-        flex-wrap: wrap;
-    }
-    .nav-wrap{
-        display: flex;
-        justify-content: space-evenly;
-        padding: 1em;
-        background-color: rgba(0, 0, 0, 0.233); 
- }
-    .ul-li-connexion{
-     display: inline-block;
-     margin-right: 1em;
-     padding: 1em;
-     font-size: 1.2em;
- }
-    .logo-center{
-     display: flex;
-     justify-content: center;
- }
-    .centering{
-     display: flex;
-     justify-content: center;
- }
-    .content{
-     width: 50%;
-     text-align: center;
-     margin-left: auto;
-     margin-right: auto;
-     margin-top: 5em;
-     font-size: 1.2em;
- }
-    .logo-rs{
-     width:4em;
-     height:4em;
-     margin-left:2em;
- }
-    .logo-place{
-     display: flex;
-     justify-content: center;
-     margin-right: 1%; 
-     margin-top:5em;
-     margin-bottom: 5em;
- } 
-    .foot-content{
-     text-align: center;
- }
+.log-nav{
+    margin-bottom: 4em;
+    background-color: rgba(0, 0, 0, 0.233);
+    width:50%;
+    margin:auto;
+}
+.log-nav ul {
+    display:flex;
+    justify-content: space-evenly;
+}
+.home{
+    display: inline;
+    padding-right: -50%;
+    font-size: 2.3em;
+}
+.connexion{
+    display: inline-block;
+    padding: 1em;
+    font-size: 1.3em;
+    text-transform:uppercase;
+}
+.nav-wrap{
+    padding: 1em;
+    background-color: rgba(0, 0, 0, 0.233); 
+}
+.nav-wrap ul {
+    display:flex;
+    justify-content: space-evenly;
+}
+.logo-homepage {
+    margin-top:5em;
+    display:block;
+    margin:auto;
+}
+.centering{
+    margin:5em auto 0;
+    display: flex;
+    justify-content: center;
+    width:50%;
+    flex-direction:column;
+}
+.content{
+    width: 50%;
+    text-align: center;
+    margin:auto;
+    margin-top: 3.5em;
+    font-size: 1.2em;
+}
+.logo-rs{
+    width:4em;
+    height:4em;
+}
+.logo-place{
+    margin: 5em auto 5em;
+    width:50%;
+    display: flex;
+    justify-content: space-evenly;
+} 
+.foot-content{
+    text-align: center;
+}
     /* HOMEPAGE END*/
 
 .thread-moderation {

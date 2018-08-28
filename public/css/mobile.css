@@ -5,7 +5,37 @@ h1 {
 h2 {
     font-size:1.2em;
 }
+/* HOMEPAGE */
+.centering {
+    width:80%;
+}
+.logo-homepage {
+    margin-top:5em;
+    width:100%;
+}
+.log-nav {
+    width:90%;
+    margin-bottom:2em;
+}
+.log-nav ul {
+    flex-direction:column;
+    align-items:center;
+}
+.logo-place {
+    width:70%;
+}
+.logo-rs {
+    width:3em;
+    height:3em;
+}
+.nav-wrap ul {
+    flex-direction:column;
+    align-items:center;
+}
 
+.content {
+    width:90%;
+}
 /* FORMULAIRES */
 
 .search-form .form-group, 
