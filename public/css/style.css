@@ -501,14 +501,14 @@ form button {
     text-align:right;
 }
 
-.avatar-small-codex {
+.ava-small-codex {
     transform-origin: 50% 50%;
     overflow: hidden;
     width: 30px;
     height: 30px;
     border-radius:50%;
 }
-.avatar-small-codex .image {
+.ava-small-codex .image-ava {
     width: 100%;
     margin-top:-10px;
 }
@@ -908,7 +908,7 @@ a.ui-button:active, .ui-button:active,
     width:40%;
     margin-left:60%;
 }
-.avatar-small {
+.ava-small {
     transform-origin: 50% 50%;
     overflow: hidden;
     width: 200px;
@@ -917,7 +917,7 @@ a.ui-button:active, .ui-button:active,
     height: 50px;
     border-radius:50%;
 }
-.avatar-small .image {
+.ava-small .image-ava {
     width: 100%;
     margin-top:-10px;
 }

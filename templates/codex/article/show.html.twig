@@ -27,8 +27,8 @@
             {% if comment.status == true %}
                 <div class="comment">
                     <div class="comment-header">
-                        <div id="avatar-small-codex">
-                            <img src="{{comment.author.characterProfile.avatar}}" id="image">
+                        <div class="ava-small-codex">
+                            <img src="{{comment.author.characterProfile.avatar}}" class="image-ava">
                         </div>
                         <h4>{{comment.author.username}}</h4> <small>Posté le {{comment.dateInserted|date("d/m/Y")}}</small> 
                         {% if is_granted('ROLE_MODERATOR') %}
@@ -40,8 +40,8 @@
             {% elseif comment.status == false and is_granted('ROLE_MODERATOR') %}
                  <div class="comment comment-hidden">
                     <div class="comment-header">
-                        <div id="avatar-small">
-                            <img src="{{comment.author.characterProfile.avatar}}" id="image">
+                        <div class="ava-small">
+                            <img src="{{comment.author.characterProfile.avatar}}" class="image-ava">
                         </div>
                         <h4>{{comment.author.username}}</h4> <small>Posté le {{comment.dateInserted|date("d/m/Y")}}</small> 
                         {% if is_granted('ROLE_MODERATOR') %}

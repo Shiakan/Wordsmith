@@ -325,7 +325,7 @@ input {
     align-items: center;
     justify-content: center;
 }
-.avatar-small-mobile {
+.ava-small-mobile {
     transform-origin: 50% 50%;
     overflow: hidden;
     width: 30px;
@@ -333,7 +333,7 @@ input {
     border-radius:50%;
     margin-right:0.5em;
 }
-.avatar-small-mobile .image {
+.ava-small-mobile .image-ava {
     width: 100%;
     margin-top:-10px;
 }
