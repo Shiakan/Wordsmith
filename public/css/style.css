@@ -28,6 +28,7 @@ body {
 }
 main {
     width:100%;
+    min-height:100vh;
 }
 a {
     font-family: 'Forum', cursive;
@@ -126,6 +127,7 @@ small {
  /* FIN BARRE DE DÉFILEMENT */
 
 /* FORMULAIRES */
+
 .login-error {
     color: rgb(218, 57, 57);
     font-family:'Nunito Sans', sans-serif;
@@ -191,9 +193,11 @@ select {
 }
 .form-group input {
     padding:0.5em;
-    width:100%;
+    display:inline-block;
+    /* width:85%; */
     color:#BDBDBD;
     background-color:#0b0b0b;
+    border-radius: 0.3em;
     border:1px solid  #503415;
 }
 form button {
@@ -222,19 +226,11 @@ form button {
     margin-bottom:0.5em;
 }
 .move-form {
-    /* width:31%;  */
     display:flex;
     flex-flow:row wrap;
     align-items: center;
     justify-content: center;
     margin-bottom:0.5em;
-}
-.search-form .form-group,
-input {
-    display:inline-block;
-    width:85%;
-    border-color:#125C38;
-    border-radius: 0.3em;
 }
 
 .move-form .form-group {
@@ -252,7 +248,7 @@ input {
 .search-form button {
     padding: 0.505em;
     margin-left:-0.315em;
-    border-radius: 0 0.3em 0.3em 0;
+    border-radius: .3em;
     border-width: 1px 1px 1px 0;
     border-style: solid;
     border-color: #125C38;
@@ -275,6 +271,13 @@ input {
 .search-form button:hover {
     background-color:rgb(15, 49, 33);
     border-color: rgb(15, 49, 33);
+}
+.form-control {
+    width:100%;
+}
+
+.search-input {
+    width:85%;
 }
 
 
@@ -449,6 +452,11 @@ input {
     margin-bottom:1.5em;
 }
 
+.taglist-title {
+    margin-bottom:1em;
+    margin-top:1em;
+}
+
 /* Commentaires Codex */
 .container-comment h2 {
     border-bottom:1px solid  #503415;
@@ -493,14 +501,14 @@ input {
     text-align:right;
 }
 
-#avatar-small-codex {
+.avatar-small-codex {
     transform-origin: 50% 50%;
     overflow: hidden;
     width: 30px;
     height: 30px;
     border-radius:50%;
 }
-#avatar-small-codex #image {
+.avatar-small-codex #image {
     width: 100%;
     margin-top:-10px;
 }
@@ -900,7 +908,7 @@ a.ui-button:active, .ui-button:active,
     width:40%;
     margin-left:60%;
 }
-#avatar-small {
+.avatar-small {
     transform-origin: 50% 50%;
     overflow: hidden;
     width: 200px;
@@ -909,7 +917,7 @@ a.ui-button:active, .ui-button:active,
     height: 50px;
     border-radius:50%;
 }
-#avatar-small #image {
+.avatar-small .image {
     width: 100%;
     margin-top:-10px;
 }
@@ -968,16 +976,17 @@ a.ui-button:active, .ui-button:active,
     margin-top: 3.5em;
     font-size: 1.2em;
 }
-.logo-rs{
-    width:4em;
-    height:4em;
-    color:white;
+.logo-rs {
+    width:3em;
+    height:3em;
+    color:rgba(189, 189, 189, 0.664);
 }
 .logo-place{
     margin: 5em auto 5em;
-    width:50%;
+    width:30%;
     display: flex;
     justify-content: space-evenly;
+
 } 
 .foot-content{
     text-align: center;

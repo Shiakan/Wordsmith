@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
+{% block title %}Contactez-nous{% endblock %}
 {% block main %}
-    <div class='wrapper'>
-        <div class='container'>
-            <h1>Contacté nous</h1>
+    <div class="wrapper-homepage">
+        <div class="container container-width">
+            <h1>Contactez-nous</h1>
             {{form_start(form)}}
             {{form_widget(form)}}
-            <button class="btn btn-success">{{ button_label|default('Envoyer') }}</button>
+            <button class="btn btn-return">{{ button_label|default('Envoyer') }}</button>
             {{form_end(form)}}
         </div>
     </div>

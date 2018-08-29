@@ -14,6 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -91,8 +92,15 @@ class UserType extends AbstractType
             ->add('isActive', CheckboxType::class, [
                 'label' => 'Utilisateur actif'
             ])
-            ->add('birthdate', DateType::class, [
-                'label' => 'Date de naissance'
+            ->add('birthdate', BirthdayType::class, [
+                'label' => 'Date de naissance',
+                'widget' => 'choice',
+                'years' => range(date('Y'), date('Y')-70),
+                'constraints' => [
+                    New NotBlank([
+                        'message' => 'Veuillez entrer votre date de naissance'
+                    ])
+                ]
             ])
             ->add('role')
         ;

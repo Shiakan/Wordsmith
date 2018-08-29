@@ -16,7 +16,8 @@ class SearchingType extends AbstractType
             ->add('title', SearchType::class,[
                 'label'=>' ',
                 'attr' => [
-                    'placeholder' => 'Rechercher un article'
+                    'placeholder' => 'Rechercher un article',
+                    'class' => "search-input"
                 ]
             ])
         ;

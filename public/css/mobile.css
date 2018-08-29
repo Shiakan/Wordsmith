@@ -40,7 +40,7 @@ h2 {
 
 .search-form .form-group, 
 input { 
-    width:90%;
+    width:85%;
 }
 .fixed-navbar {
     display:none;
@@ -325,7 +325,7 @@ input {
     align-items: center;
     justify-content: center;
 }
-#avatar-small-mobile {
+.avatar-small-mobile {
     transform-origin: 50% 50%;
     overflow: hidden;
     width: 30px;
@@ -333,7 +333,7 @@ input {
     border-radius:50%;
     margin-right:0.5em;
 }
-#avatar-small-mobile #image {
+.avatar-small-mobile .image {
     width: 100%;
     margin-top:-10px;
 }

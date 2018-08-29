@@ -1,10 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-{% if user.id == app.user.id %}
-Mon profil
-{% endif %}
-Profil de {{user.username}}
+    {% if user.id == app.user.id %}
+        Mon profil
+    {% else %}
+        Profil de {{user.username}}
+    {% endif %}
 {% endblock %}
 
 {% block main %}

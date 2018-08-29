@@ -1,0 +1,6 @@
+{
+  "public/build/app.js": "http://localhost:8080/public/build/app.js",
+  "public/build/app.css": "http://localhost:8080/public/build/app.css",
+  "public/build/main.css": "http://localhost:8080/public/build/main.css",
+  "public/build/images/d20.png": "http://localhost:8080/public/build/images/d20.ba817d78.png"
+}

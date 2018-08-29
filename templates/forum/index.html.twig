@@ -68,8 +68,8 @@
 
                 <div class="container last-message">
                 {% if subcategory.lastPost != null %}
-                    <div id="avatar-small">
-                        <img src="{{subcategory.lastPost.author.characterProfile.avatar}}" id="image">
+                    <div class="avatar-small">
+                        <img src="{{subcategory.lastPost.author.characterProfile.avatar}}" class="image">
                     </div>
                     <a class="post-link" href="{{path('thread_show', {'thread_slug': subcategory.lastPost.thread.slug })}}">{{subcategory.lastPost.thread.title|slice(0,15)}}...</a>
                     <small>{{subcategory.lastPost.createdAt|date('d-m-Y')}} à {{subcategory.lastPost.createdAt|date('H:i')}}</small>
@@ -115,8 +115,8 @@
 
                 <div class="container last-message">
                 {% if subcategory.lastPost != null %}
-                    <div id="avatar-small">
-                        <img src="{{subcategory.lastPost.author.characterProfile.avatar}}" id="image">
+                    <div class="avatar-small">
+                        <img src="{{subcategory.lastPost.author.characterProfile.avatar}}" class="image">
                     </div>
                     <a class="post-link" href="{{path('thread_show', {'thread_slug': subcategory.lastPost.thread.slug })}}">{{subcategory.lastPost.thread.title|slice(0,15)}}...</a>
                     <small>{{subcategory.lastPost.createdAt|date('d-m-Y')}} à {{subcategory.lastPost.createdAt|date('H:i')}}</small>

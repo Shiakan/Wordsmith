@@ -78,8 +78,8 @@
                             </div>
                             <div class="post-information-mobile">
                                 <div class="mobile-information">
-                                    <div id="avatar-small-mobile">
-                                        <img src="{{post.author.characterProfile.avatar}}" id="image">
+                                    <div class="avatar-small-mobile">
+                                        <img src="{{post.author.characterProfile.avatar}}" class="image">
                                     </div>
                                     <small>
                                         posté par 
@@ -160,15 +160,43 @@
                                         {% endif %}
                                     {% endif %}
                                     {% if is_granted('ROLE_MODERATOR') %}
+                                        <a title="Masquer le post" class="btn-mod" href="{{path('hide_post', {'id' : post.id }) }}"><i class="far fa-eye-slash"></i></a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="post-information-mobile">
+                                <div class="mobile-information">
+                                    <div class="avatar-small-mobile">
+                                        <img src="{{post.author.characterProfile.avatar}}" class="image">
+                                    </div>
+                                    <small>
+                                        posté par 
+                                        <a href="{{path('user_profile',{id:post.author.id})}}" style="color:{{post.author.characterProfile.groupForum.color}};">
+                                            {% if post.author.characterProfile.characterName != null %}
+                                                {{ post.author.characterProfile.characterName }}
+                                            {% else %}
+                                                {{ post.author.username }}
+                                            {% endif %}
+                                        </a> 
+                                        le {{ post.createdAt|date('d-m-Y') }} à {{ post.createdAt|date('H:i') }}
+                                    </small>
+                                </div>
+
+                                <div class="post-action">
+                                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                        {% if (app.user.id == post.author.id) or (is_granted('ROLE_MODERATOR')) %}
+                                            <a class="link-post-action" href="{{path('post_edit', {'id' : post.id})}}">éditer</a>
+                                        {% endif %}
+                                    {% endif %}
+                                    {% if is_granted('ROLE_MODERATOR') %}
                                         <a title="Afficher le post" class="btn-mod show" href="{{path('hide_post', {'id' : post.id }) }}"><i class="far fa-eye"></i></a>
                                     {% endif %}
                                 </div>
                             </div>
-                            <strong>Post désactivé.</strong>
                             {{ post.content|raw }}
                         </div>
                     </div>
-                </div>
+                </div>                                        
             {% endif %}
         {% endfor %}
     </div>
