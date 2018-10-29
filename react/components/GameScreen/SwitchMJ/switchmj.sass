@@ -1,0 +1,49 @@
+/**
+ * Import
+ */
+@import ../../../styles/vars
+
+/**
+ * Styles
+ */
+.mjSwitch
+        color: $font-color
+        background-color: $bg-color-container
+        position: relative
+        margin: auto
+        display: inline-block
+        padding: .3em
+        &-picker
+            padding-bottom: 1em
+        &-form
+            background-color: $bg-color-block
+            display: flex
+            &-input
+                padding: .5em
+                font-family: $test-font
+                color: $font-color
+                background-color: $bg-color-block
+                border: 1px solid $border-color
+                &:focus
+                    border: 1px solid $link-active
+                    &> .mjSwitch-form-button
+                        border: 1px solid $link-active
+            &-button
+                background-color: $bg-color-block
+                color: $font-color-italic
+                font-weight: bold
+                border: 1px solid $border-color
+        &-mapForm
+            margin: .5em .1em
+            color: $link-color
+            &-select
+                text-transform: capitalize
+                margin-left: .3em
+                padding: .5em
+                font-family: $test-font
+                color: $font-color
+                background-color: $bg-color-block
+                border: 1px solid $border-color
+
+.mjSwitch-pick
+    border: none

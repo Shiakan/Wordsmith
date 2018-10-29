@@ -1,0 +1,32 @@
+/**
+ * Import
+ */
+@import ../../../styles/vars
+
+/**
+ * Style
+ */
+.help
+  display: grid
+  grid-template-columns: 10% 80% 10%
+  grid-template-rows: 10% auto 58% 15%
+  background: no-repeat
+  height: 100%
+  witdh: 100%
+  background: url('https://nsa39.casimages.com/img/2018/08/28/180828112001409300.png') no-repeat
+  background-size: 100% 100%
+  &-title
+    grid-column: 2 / 3
+    grid-row: 2
+    margin: auto auto
+  &-body
+    grid-column: 2 / 3
+    grid-row: 3
+    overflow: auto
+    &-link
+      color: blue
+      text-decoration: underline
+    &-nav
+    &-ol
+      &-li
+        padding: .5em 0

@@ -1,0 +1,26 @@
+@import ../../../styles/_vars
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+
+.messages
+  height: 100%
+  width: 100%
+  overflow: auto
+  // background-color: white
+  background-color: rgba(117, 190, 218, .1)
+  position: relative
+
+.message
+  overflow-wrap: break-word;
+  margin: .5em 1em
+  font-style: italic
+  &-content
+    color: white
+    &-success
+      color: lighten(green, 30%)
+      &::after
+        content: ' (Réussite critique)'
+    &-failed
+      color: red
+      &::after
+        content: ' (Echec critique)'
+ 
